@@ -1,0 +1,3058 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    150823,       3050]
+NotebookOptionsPosition[    149817,       3025]
+NotebookOutlinePosition[    150352,       3043]
+CellTagsIndexPosition[    150309,       3040]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["", "InitializationSection",ExpressionUUID->"5c4c682b-b9aa-48c7-b197-3725ed2fb80c"],
+
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<MaTeX`\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"planckConstant", " ", "=", " ", 
+   RowBox[{"6.62606896", " ", "*", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "34"}]]}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"J", "*", "s"}], " ", "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"speedOfLight", " ", "=", " ", "299792458"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"m", "/", "s"}], " ", "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"boltzmannConstant", " ", "=", " ", 
+   RowBox[{"1.3806504", " ", "*", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "23"}]]}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"J", "/", "K"}], " ", "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"BValue", " ", "=", " ", "10.59341"}], " ", 
+  RowBox[{"(*", " ", 
+   SuperscriptBox["cm", 
+    RowBox[{"-", "1", " "}]], "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]Value", " ", "=", " ", "0.30718"}], " ", 
+  RowBox[{"(*", " ", 
+   SuperscriptBox["cm", 
+    RowBox[{"-", "1", " "}]], "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DValue", " ", "=", " ", 
+   RowBox[{"5.3194", " ", "*", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "4"}]]}]}], " ", 
+  RowBox[{"(*", " ", 
+   SuperscriptBox["cm", 
+    RowBox[{"-", "1", " "}]], "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Omega]e\[Chi]eValue", " ", "=", " ", "52.8186"}], " ", 
+  RowBox[{"(*", " ", 
+   SuperscriptBox["cm", 
+    RowBox[{"-", "1", " "}]], "*)"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Omega]eValue", " ", "=", " ", "2990.946"}], " ", 
+   RowBox[{"(*", " ", 
+    SuperscriptBox["cm", 
+     RowBox[{"-", "1"}]], " ", "*)"}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"constants", " ", "for", " ", 
+      SuperscriptBox["HCl", "35"], " ", "from", " ", 
+      RowBox[{"http", ":"}]}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"webbook", ".", "nist", ".", "gov"}], "/", "cgi"}], "/", 
+      RowBox[{"cbook", ".", 
+       RowBox[{"cgi", "?", "ID"}]}]}]}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"C7647010", "&"}], "Units"}], "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"SI", "&"}], "Mask"}], "=", 
+      RowBox[{
+      "1000", "#", "Diatomic", " ", "and", " ", "from", " ", "Herzberg", " ", 
+       
+       RowBox[{"vol", ".", " ", "IV"}]}]}]}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"rotationalEnergy", "[", " ", 
+    RowBox[{"v_", ",", " ", "J_"}], " ", "]"}], " ", ":=", " ", 
+   RowBox[{"planckConstant", " ", "*", " ", "speedOfLight", " ", "*", " ", 
+    RowBox[{"(", "  ", 
+     RowBox[{
+      RowBox[{"BValue", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", "J", " ", "*", " ", 
+       
+       RowBox[{"(", " ", 
+        RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "-", " ", 
+      RowBox[{"\[Alpha]Value", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"v", " ", "+", " ", 
+         FractionBox["1", "2"]}], " ", ")"}], " ", "*", " ", "J", " ", "*", 
+       " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "-", " ", 
+      RowBox[{"DValue", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", 
+       SuperscriptBox["J", "2"], " ", "*", " ", 
+       SuperscriptBox[
+        RowBox[{"(", " ", 
+         RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}], "2"]}]}], " ", 
+     ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"rovibEnergy", "[", " ", 
+    RowBox[{"v_", ",", " ", "J_"}], " ", "]"}], " ", ":=", "  ", 
+   RowBox[{"planckConstant", " ", "*", " ", "speedOfLight", " ", "*", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Omega]eValue", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"v", " ", "+", " ", 
+         FractionBox["1", "2"]}], " ", ")"}]}], " ", "-", " ", 
+      RowBox[{"\[Omega]e\[Chi]eValue", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", 
+       SuperscriptBox[
+        RowBox[{"(", " ", 
+         RowBox[{"v", " ", "+", " ", 
+          FractionBox["1", "2"]}], " ", ")"}], "2"]}], " ", "+", " ", 
+      RowBox[{"BValue", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", "J", " ", "*", " ", 
+       
+       RowBox[{"(", " ", 
+        RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "-", " ", 
+      RowBox[{"\[Alpha]Value", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"v", " ", "+", " ", 
+         FractionBox["1", "2"]}], " ", ")"}], " ", "*", " ", "J", " ", "*", 
+       " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "-", " ", 
+      RowBox[{"DValue", " ", "*", " ", "100", " ", 
+       RowBox[{"(*", " ", 
+        SuperscriptBox["meter", 
+         RowBox[{"-", "1"}]], " ", "*)"}], " ", "*", " ", 
+       SuperscriptBox["J", "2"], " ", "*", " ", 
+       SuperscriptBox[
+        RowBox[{"(", " ", 
+         RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}], "2"]}]}], " ", 
+     ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"deltaERbranch", "[", " ", "J_", " ", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"rovibEnergy", "[", " ", 
+     RowBox[{"1", ",", " ", 
+      RowBox[{"J", " ", "+", " ", "1"}]}], " ", "]"}], " ", "-", " ", 
+    RowBox[{"rovibEnergy", "[", " ", 
+     RowBox[{"0", ",", " ", "J"}], " ", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"deltaEPbranch", "[", " ", "J_", " ", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"rovibEnergy", "[", " ", 
+     RowBox[{"1", ",", " ", 
+      RowBox[{"J", " ", "-", " ", "1"}]}], " ", "]"}], " ", "-", " ", 
+    RowBox[{"rovibEnergy", "[", " ", 
+     RowBox[{"0", ",", " ", "J"}], " ", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Qrot", "[", " ", 
+    RowBox[{"v_", ",", " ", "T_"}], " ", "]"}], " ", ":=", " ", 
+   RowBox[{"Sum", "[", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{"2", " ", "*", " ", "Js"}], " ", "+", " ", "1"}], " ", ")"}], 
+      " ", "*", " ", 
+      RowBox[{"Exp", "[", " ", 
+       FractionBox[
+        RowBox[{"-", 
+         RowBox[{"rotationalEnergy", "[", " ", 
+          RowBox[{"v", ",", " ", "Js"}], " ", "]"}]}], 
+        RowBox[{"boltzmannConstant", " ", "*", " ", "T"}]], " ", "]"}]}], ",",
+      " ", 
+     RowBox[{"{", " ", 
+      RowBox[{"Js", ",", " ", "0", ",", " ", "20", ",", "1"}], " ", "}"}]}], 
+    " ", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"population", "[", " ", 
+    RowBox[{"v_", ",", " ", "J_", ",", " ", "T_"}], "  ", "]"}], " ", ":=", 
+   "  ", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"Exp", "[", " ", 
+      FractionBox[
+       RowBox[{"-", 
+        RowBox[{"rotationalEnergy", "[", " ", 
+         RowBox[{"v", ",", " ", "J"}], " ", "]"}]}], 
+       RowBox[{"boltzmannConstant", " ", "*", " ", "T"}]], " ", "]"}], 
+     "   "}], 
+    RowBox[{"Qrot", "[", " ", 
+     RowBox[{"v", ",", " ", "T"}], "]"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SVibRot", "[", " ", 
+    RowBox[{"v_", ",", " ", "J_"}], " ", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"\[Omega]eValue", " ", "*", " ", 
+     RowBox[{"(", " ", 
+      RowBox[{"v", " ", "+", " ", 
+       FractionBox["1", "2"]}], " ", ")"}]}], " ", "-", " ", 
+    RowBox[{"\[Omega]e\[Chi]eValue", " ", "*", " ", 
+     SuperscriptBox[
+      RowBox[{"(", " ", 
+       RowBox[{"v", " ", "+", " ", 
+        FractionBox["1", "2"]}], " ", ")"}], "2"]}], " ", "+", " ", 
+    RowBox[{"BValue", " ", "*", " ", "J", " ", "*", " ", 
+     RowBox[{"(", " ", 
+      RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "-", " ", 
+    RowBox[{"\[Alpha]Value", " ", "*", " ", 
+     RowBox[{"(", " ", 
+      RowBox[{"v", " ", "+", " ", 
+       FractionBox["1", "2"]}], " ", ")"}], " ", "*", " ", "J", " ", "*", " ", 
+     RowBox[{"(", " ", 
+      RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "-", " ", 
+    RowBox[{"DValue", " ", "*", " ", 
+     SuperscriptBox["J", "2"], " ", "*", " ", 
+     SuperscriptBox[
+      RowBox[{"(", " ", 
+       RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}], "2"]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PBranchBand", "[", " ", 
+    RowBox[{"v_", ",", " ", "J_", ",", " ", "T_"}], " ", "]"}], " ", ":=", 
+   " ", 
+   RowBox[{"Simplify", "[", " ", 
+    RowBox[{
+     RowBox[{"SVibRot", "[", " ", 
+      RowBox[{
+       RowBox[{"(", " ", 
+        RowBox[{"v", " ", "+", " ", "1"}], " ", ")"}], ",", " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"J", " ", "-", " ", "1"}], " ", ")"}]}], " ", "]"}], " ", "-",
+      " ", 
+     RowBox[{"SVibRot", "[", " ", 
+      RowBox[{"v", ",", " ", "J"}], " ", "]"}]}], " ", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RBranchBand", "[", " ", 
+    RowBox[{"v_", ",", " ", "J_", ",", " ", "T_"}], " ", "]"}], " ", ":=", 
+   " ", 
+   RowBox[{"Simplify", "[", " ", 
+    RowBox[{
+     RowBox[{"SVibRot", "[", " ", 
+      RowBox[{
+       RowBox[{"(", " ", 
+        RowBox[{"v", " ", "+", " ", "1"}], " ", ")"}], ",", " ", 
+       RowBox[{"(", " ", 
+        RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}]}], " ", "]"}], " ", "-",
+      " ", 
+     RowBox[{"SVibRot", "[", " ", 
+      RowBox[{"v", ",", " ", "J"}], " ", "]"}]}], " ", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PBranchBandSpec", "[", " ", 
+    RowBox[{"v_", ",", " ", "T_", ",", " ", "x_"}], " ", "]"}], " ", ":=", 
+   " ", 
+   RowBox[{"Sum", "[", " ", 
+    RowBox[{
+     RowBox[{"J", " ", "*", "  ", 
+      RowBox[{"population", "[", " ", 
+       RowBox[{"v", ",", " ", "J", ",", " ", "T"}], " ", "]"}], " ", "*", " ", 
+      RowBox[{"PDF", "[", " ", 
+       RowBox[{
+        RowBox[{"NormalDistribution", "[", " ", 
+         RowBox[{
+          RowBox[{"PBranchBand", "[", " ", 
+           RowBox[{"v", ",", " ", "J", ",", " ", "T"}], "  ", "]"}], ",", " ",
+           "0.8"}], " ", "]"}], ",", " ", "x"}], " ", "]"}]}], ",", " ", 
+     RowBox[{"{", " ", 
+      RowBox[{"J", ",", " ", "1", ",", " ", "20", ",", " ", "1"}], " ", 
+      "}"}]}], " ", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RBranchBandSpec", "[", " ", 
+    RowBox[{"v_", ",", "  ", "T_", ",", " ", "x_"}], " ", "]"}], " ", ":=", 
+   " ", 
+   RowBox[{"Sum", "[", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{"J", " ", "+", " ", "1"}], " ", ")"}], "*", "  ", 
+      RowBox[{"population", "[", " ", 
+       RowBox[{"v", ",", " ", "J", ",", " ", "T"}], "  ", "]"}], " ", "*", 
+      " ", 
+      RowBox[{"PDF", "[", " ", 
+       RowBox[{
+        RowBox[{"NormalDistribution", "[", " ", 
+         RowBox[{
+          RowBox[{"RBranchBand", "[", " ", 
+           RowBox[{"v", ",", " ", "J", ",", " ", "T"}], "  ", "]"}], ",", 
+          "  ", "0.8"}], "]"}], ",", " ", "x"}], " ", "]"}]}], ",", " ", 
+     RowBox[{"{", " ", 
+      RowBox[{"J", ",", " ", "0", ",", " ", "20", ",", " ", "1"}], " ", 
+      "}"}]}], " ", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ELevelDiagramFrameLabels", " ", ":=", " ", 
+  RowBox[{"{", " ", 
+   RowBox[{
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"0", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+      "\"\<\>\""}], " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"tick", " ", "mark", " ", "but", " ", "no", " ", "label"}], " ",
+       "*)"}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"0", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+      "\"\<\>\""}], " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"tick", " ", "mark"}], ",", " ", 
+       RowBox[{"but", " ", "no", " ", "label"}]}], " ", "*)"}], " ", "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "2"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "3"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "4"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "5"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "6"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "7"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "8"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", " ", 
+    RowBox[{"SetPrecision", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"rovibEnergy", "[", " ", 
+        RowBox[{"0", ",", " ", "9"}], " ", "]"}], " ", "*", " ", 
+       SuperscriptBox["10", "20"]}], ",", " ", "3"}], " ", "]"}], ",", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", 
+          RowBox[{"20", " "}]]}], "-", " ", "2.5"}], " ", ")"}], ",", " ", 
+      "\"\<\>\""}], " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"tick", " ", "mark", " ", "but", " ", "no", " ", "label"}], " ",
+       "*)"}], " ", "}"}], ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", 
+          RowBox[{"20", " "}]]}], "-", " ", "2.5"}], " ", ")"}], ",", " ", 
+      "\"\<\>\""}], " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"tick", " ", "mark"}], ",", " ", 
+       RowBox[{"but", " ", "no", " ", "label"}]}], " ", "*)"}], " ", "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "2"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"8.80", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "3"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"8.92", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "4"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", 
+          RowBox[{"20", " "}]]}], "-", " ", "2.5"}], " ", ")"}], ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"9.08", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "5"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"9.28", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "6"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"9.52", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "7"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"9.80", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "8"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"10.1", ",", " ", "3"}], " ", "]"}]}], " ", "}"}], ",", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"rovibEnergy", "[", " ", 
+          RowBox[{"1", ",", " ", "9"}], " ", "]"}], " ", "*", " ", 
+         SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", ")"}], 
+      ",", " ", 
+      RowBox[{"SetPrecision", "[", " ", 
+       RowBox[{"10.5", ",", " ", "3"}], " ", "]"}]}], " ", "}"}]}], " ", 
+   "}"}]}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.4754250910874043`*^9, 3.475425141946754*^9}, {
+   3.4837127338852654`*^9, 3.483712747623706*^9}, {3.4837169971518803`*^9, 
+   3.483717092662446*^9}, {3.483717150965702*^9, 3.483717181554739*^9}, {
+   3.483717213746402*^9, 3.4837172931501293`*^9}, {3.483719483666003*^9, 
+   3.483719484451476*^9}, {3.483719920178588*^9, 3.483719926561468*^9}, {
+   3.483720585556237*^9, 3.483720590714637*^9}, {3.483796616787527*^9, 
+   3.4837966245597267`*^9}, {3.483819797610311*^9, 3.483819797677828*^9}, {
+   3.483875641990638*^9, 3.483875658402413*^9}, {3.4838756912021008`*^9, 
+   3.48387575769096*^9}, {3.4838949145124083`*^9, 3.483894964844084*^9}, {
+   3.4839663527361526`*^9, 3.4839664483409863`*^9}, {3.483966688981015*^9, 
+   3.483966743924636*^9}, {3.4839667964808817`*^9, 3.483966863259212*^9}, {
+   3.483966897934621*^9, 3.4839670324537153`*^9}, {3.483987373673922*^9, 
+   3.483987478754519*^9}, {3.483987511745693*^9, 3.4839875507604523`*^9}, {
+   3.483987583352453*^9, 3.4839876183819923`*^9}, {3.483987688261764*^9, 
+   3.483987688962962*^9}, {3.483987720600111*^9, 3.483987726535043*^9}, {
+   3.483987858669443*^9, 3.483987936096566*^9}, {3.4839880741573067`*^9, 
+   3.48398810567343*^9}, {3.483988141456745*^9, 3.4839882229014187`*^9}, {
+   3.4839883531630907`*^9, 3.4839883759419737`*^9}, {3.4839884775508966`*^9, 
+   3.483988477940618*^9}, {3.483989317908697*^9, 3.483989321341436*^9}, {
+   3.483989885187145*^9, 3.483989885606453*^9}, {3.483990719114965*^9, 
+   3.48399072204532*^9}, {3.483990758386544*^9, 3.483990762040403*^9}, {
+   3.4839909828042603`*^9, 3.483990987296801*^9}, {3.484590082431131*^9, 
+   3.4845901714562387`*^9}, {3.484590217549534*^9, 3.4845904343628693`*^9}, {
+   3.48466519547507*^9, 3.484665309510911*^9}, {3.484671971257801*^9, 
+   3.484671973750594*^9}, {3.48491849347546*^9, 3.484918501510393*^9}, {
+   3.4849185948066597`*^9, 3.4849186036447563`*^9}, {3.484918954822896*^9, 
+   3.484918964055087*^9}, {3.484923018266692*^9, 3.484923175292944*^9}, {
+   3.48502296406221*^9, 3.485022970114271*^9}, {3.485023149932023*^9, 
+   3.4850232225128813`*^9}, {3.48502326810754*^9, 3.485023310061849*^9}, {
+   3.485023343252355*^9, 3.485023380503146*^9}, 3.4850234269595547`*^9, {
+   3.48502346124959*^9, 3.485023481454564*^9}, {3.485023517392229*^9, 
+   3.485023525514517*^9}, {3.485023890674444*^9, 3.4850239185416603`*^9}, {
+   3.485024127134778*^9, 3.48502414816403*^9}, {3.485024182842743*^9, 
+   3.485024183444392*^9}, {3.485024888281013*^9, 3.485024888746023*^9}, {
+   3.485025324692609*^9, 3.485025343509903*^9}, {3.4850875272834682`*^9, 
+   3.4850875448072243`*^9}, {3.485274269859273*^9, 3.4852742781090975`*^9}, {
+   3.760282090496915*^9, 3.760282105788932*^9}, 3.760360532133174*^9},
+ CellLabel->"In[22]:=",
+ CellID->1344195678,ExpressionUUID->"3a585fdc-1bda-4e42-9b5d-6670e5dd5fce"],
+
+Cell["", "ManipulateSection",ExpressionUUID->"0856d56c-1dde-4d0a-921e-afa979066c8f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", " ", 
+     RowBox[{"constant", " ", "=", " ", 
+      RowBox[{"FindRoot", "[", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sum", "[", " ", 
+          RowBox[{
+           RowBox[{"c", " ", "*", "  ", 
+            RowBox[{"population", "[", "  ", 
+             RowBox[{"0", ",", " ", "J", ",", " ", "200"}], " ", "]"}], " ", 
+            "*", " ", 
+            RowBox[{"(", " ", 
+             RowBox[{
+              RowBox[{"2", " ", "*", " ", "J"}], " ", "+", " ", "1"}], " ", 
+             ")"}]}], ",", " ", 
+           RowBox[{"{", " ", 
+            RowBox[{"J", ",", " ", "0", ",", " ", "20"}], " ", "}"}]}], " ", 
+          "]"}], " ", "\[Equal]", " ", "1"}], ",", " ", 
+        RowBox[{"{", " ", 
+         RowBox[{"c", ",", " ", "1"}], " ", "}"}]}], " ", "]"}]}], " ", ")"}],
+     ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"GraphicsGrid", "[", " ", 
+     RowBox[{
+      RowBox[{"{", " ", 
+       RowBox[{
+        RowBox[{"{", " ", "\[IndentingNewLine]", 
+         RowBox[{"Show", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+           "Graphics", "[", " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"energy", " ", "level", " ", "diagram", " ", "lines"}], 
+             " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Table", "[", " ", 
+              RowBox[{
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"Thickness", "[", "0.0015", "]"}], ",", 
+                 RowBox[{"Line", "[", " ", 
+                  RowBox[{"{", " ", 
+                   RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{"2670", ",", " ", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "J"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{"3070", ",", "  ", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "J"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}]}], " ", "}"}], 
+                  " ", "]"}], ",", " ", 
+                 RowBox[{"Line", "[", " ", 
+                  RowBox[{"{", " ", 
+                   RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{"2670", ",", " ", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "J"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{"3070", ",", "  ", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "J"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+                "}"}], ",", 
+               RowBox[{"{", " ", 
+                RowBox[{"J", ",", " ", "0", ",", " ", "9"}], " ", "}"}]}], 
+              " ", "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Frame", " ", "\[Rule]", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{
+               "True", ",", " ", "True", ",", " ", "False", ",", " ", 
+                "False"}], " ", "}"}]}], ",", " ", 
+             RowBox[{"ImageSize", " ", "\[Rule]", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{"450", ",", " ", "375"}], " ", "}"}]}], ",", 
+             RowBox[{"AspectRatio", " ", "\[Rule]", " ", "Full"}], ",", 
+             RowBox[{"PlotRange", " ", "\[Rule]", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{
+                RowBox[{"{", " ", 
+                 RowBox[{"2620", ",", " ", "3120"}], " ", "}"}], ",", " ", 
+                RowBox[{"{", " ", 
+                 RowBox[{"2.70", ",", " ", "8.1"}], " ", "}"}]}], " ", 
+               "}"}]}], ",", " ", 
+             RowBox[{"FrameTicksStyle", " ", "\[Rule]", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{
+                RowBox[{"Opacity", "[", "0", "]"}], " ", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                  RowBox[{
+                  "need", " ", "invisible", " ", "ticks", " ", "on", " ", 
+                   "this", " ", "axis", " ", "in", " ", "order", " ", "to", 
+                   " ", "keep", " ", "the", " ", "scale", " ", "of", " ", 
+                   "the", " ", "x"}], "-", 
+                  RowBox[{
+                  "axes", " ", "the", " ", "same", " ", "between", " ", "the",
+                    " ", "two", " ", "images"}]}], " ", "*)"}], ",", 
+                RowBox[{"Directive", "[", " ", "9.5", " ", "]"}], ",", "None",
+                 ",", " ", "None"}], " ", "}"}]}], ",", "\[IndentingNewLine]", 
+             RowBox[{"FrameTicks", " ", "\[Rule]", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{"True", ",", "ELevelDiagramFrameLabels", " ", 
+                RowBox[{"(*", " ", 
+                 RowBox[{
+                 "Frame", " ", "tick", " ", "labels", " ", "only", " ", "at", 
+                  " ", "the", " ", "positions", " ", "of", " ", "the", " ", 
+                  "quantized", " ", "energy", " ", "levels"}], " ", "*)"}], 
+                ",", " ", "False", ",", " ", "False"}], " ", "}"}]}], " ", 
+             ",", " ", 
+             RowBox[{"FrameLabel", " ", "\[Rule]", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{
+                RowBox[{"Style", "[", " ", 
+                 RowBox[{"\"\<\>\"", " ", ",", " ", "12"}], " ", "]"}], ",", 
+                " ", 
+                RowBox[{"Style", "[", " ", 
+                 RowBox[{
+                 "\"\<Energy (\!\(\*SuperscriptBox[\(10\), \(-20\)]\) \
+joule)\>\"", ",", " ", "12"}], " ", "]"}]}], " ", "}"}]}]}], " ", "]"}], ",", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "tick", " ", "labels", " ", "for", " ", "the", " ", "four", " ", 
+             "that", " ", 
+             RowBox[{"wouldn", "'"}], "t", " ", "fit", " ", "with", " ", 
+             "the", " ", "other", " ", "labels"}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{
+             RowBox[{"Text", "[", " ", 
+              RowBox[{
+               RowBox[{"Style", "[", " ", 
+                RowBox[{
+                 RowBox[{"StringForm", "[", " ", "\"\<2.94\>\"", " ", "]"}], 
+                 ",", " ", "Gray", ",", "9.5"}], " ", "]"}], ",", 
+               RowBox[{"{", " ", 
+                RowBox[{"2600", ",", " ", "2.76"}], " ", "}"}]}], " ", "]"}], 
+             ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", " ", "0"}], " ", "}"}]}], " ", "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"2610", ",", " ", "2.76"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"2620", ",", " ", 
+                   RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}]}], " ", "}"}], 
+               " ", "]"}], ",", "Gray"}], " ", "}"}], " ", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{
+             RowBox[{"Text", "[", " ", 
+              RowBox[{
+               RowBox[{"Style", "[", " ", 
+                RowBox[{
+                 RowBox[{"StringForm", "[", " ", "\"\<2.99\>\"", " ", "]"}], 
+                 ",", "Gray", ",", " ", "9.5"}], " ", "]"}], ",", 
+               RowBox[{"{", " ", 
+                RowBox[{"2600", ",", " ", "2.91"}], " ", "}"}]}], " ", "]"}], 
+             ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", " ", "0"}], " ", "}"}]}], " ", "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"2610", ",", " ", "2.91"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"2620", ",", " ", 
+                   RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}]}], " ", "}"}], 
+               " ", "]"}], ",", "Gray"}], " ", "}"}], " ", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{
+             RowBox[{"Text", "[", " ", 
+              RowBox[{
+               RowBox[{"Style", "[", " ", 
+                RowBox[{
+                 RowBox[{"StringForm", "[", " ", "\"\<8.68\>\"", " ", "]"}], 
+                 ",", "Gray", ",", " ", "9.5"}], " ", "]"}], ",", 
+               RowBox[{"{", " ", 
+                RowBox[{"2600", ",", " ", "5.99"}], " ", "}"}]}], " ", "]"}], 
+             ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", " ", "0"}], " ", "}"}]}], " ", "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"2610", ",", " ", "5.99"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"2620", ",", " ", 
+                   RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", "2.5"}], " ", 
+                    ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}], " ", ",", 
+              "Gray"}], "}"}], " ", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{
+             RowBox[{"Text", "[", " ", 
+              RowBox[{
+               RowBox[{"Style", "[", " ", 
+                RowBox[{
+                 RowBox[{"StringForm", "[", " ", "\"\<8.72\>\"", " ", "]"}], 
+                 ",", "Gray", ",", " ", "9.5"}], " ", "]"}], ",", 
+               RowBox[{"{", " ", 
+                RowBox[{"2600", ",", " ", "6.14"}], " ", "}"}]}], " ", "]"}], 
+             ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", " ", "0"}], " ", "}"}]}], " ", "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"2610", ",", " ", "6.14"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"2620", ",", " ", 
+                   RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", "2.5"}], " ", 
+                    ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}], " ", ",", 
+              "Gray"}], "}"}], " ", "]"}], ",", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             RowBox[{
+             "Indicates", " ", "a", " ", "break", " ", "in", " ", "the", " ", 
+              "y"}], "-", 
+             RowBox[{"axis", " ", "scale"}]}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{
+                RowBox[{
+                "StringForm", "[", " ", "\"\<\[TildeTilde]\>\"", " ", "]"}], 
+                ",", " ", "20"}], " ", "]"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"2620", ",", " ", "5.49"}], " ", "}"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"0", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "Quantum", " ", "number", " ", "labeling", " ", "for", " ", 
+             "energy", " ", "level", " ", "diagram"}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"ToExpression", "[", 
+                RowBox[{
+                "\"\<J'' = \\\\, 9 \>\"", ",", "TeXForm", ",", "HoldForm"}], 
+                "]"}], "]"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"3115", ",", " ", 
+                RowBox[{
+                 RowBox[{"rovibEnergy", "[", " ", 
+                  RowBox[{"0", ",", " ", "9"}], " ", "]"}], " ", "*", " ", 
+                 SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Table", "[", " ", 
+            RowBox[{
+             RowBox[{"Graphics", "[", " ", 
+              RowBox[{"Text", "[", " ", 
+               RowBox[{
+                RowBox[{"Style", "[", " ", 
+                 RowBox[{
+                  RowBox[{"StringForm", "[", " ", 
+                   RowBox[{"\"\<``\>\"", ",", " ", 
+                    RowBox[{"NumberForm", "[", " ", 
+                    RowBox[{"JLabel", ",", " ", "1"}], " ", "]"}]}], " ", 
+                   "]"}], ",", " ", "10"}], " ", "]"}], ",", 
+                RowBox[{"{", " ", 
+                 RowBox[{"3115", ",", " ", 
+                  RowBox[{
+                   RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "JLabel"}], " ", "]"}], " ", "*", 
+                   " ", 
+                   SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                RowBox[{"{", " ", 
+                 RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+              "]"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"JLabel", ",", " ", "8", ",", "2", ",", 
+               RowBox[{"-", "1"}]}], " ", "}"}]}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{
+                RowBox[{"StringForm", "[", " ", "\"\<1\>\"", " ", "]"}], ",", 
+                " ", "10"}], " ", "]"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"3115", ",", " ", "2.93"}], " ", "}"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"3105", ",", " ", "2.93"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"3072", ",", " ", 
+                   RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}]}], " ", "}"}], 
+               " ", "]"}]}], " ", "}"}], " ", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{
+                RowBox[{"StringForm", "[", " ", "\"\<0\>\"", " ", "]"}], ",", 
+                " ", "10"}], " ", "]"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"3115", ",", " ", "2.79"}], " ", "}"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"3105", ",", " ", "2.79"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"3072", ",", " ", 
+                   RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}]}], " ", "}"}], 
+               " ", "]"}]}], " ", "}"}], " ", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"ToExpression", "[", 
+                RowBox[{
+                "\"\<J' = \\\\, 9\>\"", ",", "TeXForm", ",", "HoldForm"}], 
+                "]"}], "]"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"3115", ",", " ", 
+                RowBox[{"(", " ", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "9"}], " ", "]"}], " ", "*", " ", 
+                   SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ", 
+                 ")"}]}], " ", "}"}], ",", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Table", "[", " ", 
+            RowBox[{
+             RowBox[{"Graphics", "[", " ", 
+              RowBox[{"Text", "[", " ", 
+               RowBox[{
+                RowBox[{"Style", "[", " ", 
+                 RowBox[{
+                  RowBox[{"StringForm", "[", " ", 
+                   RowBox[{"\"\<``\>\"", ",", " ", 
+                    RowBox[{"NumberForm", "[", " ", 
+                    RowBox[{"JLabel", ",", " ", "1"}], " ", "]"}]}], " ", 
+                   "]"}], ",", " ", "10"}], " ", "]"}], ",", 
+                RowBox[{"{", " ", 
+                 RowBox[{"3115", ",", " ", 
+                  RowBox[{"(", " ", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "JLabel"}], " ", "]"}], " ", "*", 
+                    " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", "2.5"}], " ", 
+                   ")"}]}], " ", "}"}], ",", " ", 
+                RowBox[{"{", " ", 
+                 RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+              "]"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"JLabel", ",", " ", "8", ",", "2", ",", 
+               RowBox[{"-", "1"}]}], " ", "}"}]}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{
+                RowBox[{"StringForm", "[", " ", "\"\<1\>\"", " ", "]"}], ",", 
+                " ", "10"}], " ", "]"}], ",", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{"3115", ",", " ", "6.16"}], " ", "}"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"3105", ",", " ", "6.16"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"3072", ",", " ", 
+                   RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", "2.5"}], " ", 
+                    ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+             "}"}], " ", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Text", "[", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{
+                RowBox[{"StringForm", "[", " ", "\"\<0\>\"", " ", "]"}], ",", 
+                " ", "10"}], " ", "]"}], ",", " ", 
+              RowBox[{"{", " ", 
+               RowBox[{"3115", ",", " ", "6.02"}], " ", "}"}], ",", 
+              RowBox[{"{", " ", 
+               RowBox[{"1", ",", " ", "0"}], " ", "}"}]}], " ", "]"}], " ", 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", " ", 
+              RowBox[{"Line", "[", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"3105", ",", " ", "6.02"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", 
+                  RowBox[{"3072", ",", " ", 
+                   RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", "2.5"}], " ", 
+                    ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+             "}"}], " ", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Rotate", "[", 
+             RowBox[{
+              RowBox[{"Text", "[", " ", 
+               RowBox[{
+                RowBox[{"Style", "[", " ", 
+                 RowBox[{
+                  RowBox[{"ToExpression", "[", 
+                   RowBox[{
+                   "\"\<v'' = 0\>\"", ",", "TeXForm", ",", "HoldForm"}], 
+                   "]"}], ",", 
+                  RowBox[{
+                  "FontFamily", "\[Rule]", "\"\<Century Schoolbook\>\""}]}], 
+                 "]"}], ",", 
+                RowBox[{"{", " ", 
+                 RowBox[{"2645", ",", " ", "3.9559"}], " ", "}"}], ",", " ", 
+                RowBox[{"{", " ", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], ",", " ", "0"}], " ", "}"}]}], " ", 
+               "]"}], " ", ",", 
+              RowBox[{"90", " ", "Degree"}]}], "]"}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Graphics", "[", " ", 
+            RowBox[{"Rotate", "[", 
+             RowBox[{
+              RowBox[{"Text", "[", " ", 
+               RowBox[{
+                RowBox[{"Style", "[", " ", 
+                 RowBox[{
+                  RowBox[{"ToExpression", "[", 
+                   RowBox[{
+                   "\"\<v' = 1\>\"", ",", "TeXForm", ",", "HoldForm"}], "]"}],
+                   ",", 
+                  RowBox[{
+                  "FontFamily", "\[Rule]", "\"\<Century Schoolbook\>\""}]}], 
+                 "]"}], ",", 
+                RowBox[{"{", " ", 
+                 RowBox[{"2645", ",", " ", "7.16"}], " ", "}"}], ",", " ", 
+                RowBox[{"{", " ", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], ",", " ", "0"}], " ", "}"}]}], " ", 
+               "]"}], ",", 
+              RowBox[{"90", " ", "Degree"}]}], "]"}], " ", "]"}], ",", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             RowBox[{"Arrows", " ", "for", " ", "rotation"}], "-", 
+             RowBox[{"vibration", " ", "transitions"}]}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ShowAll", " ", "\[Equal]", " ", "True"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"{", " ", 
+              RowBox[{
+               RowBox[{"Table", "[", " ", 
+                RowBox[{
+                 RowBox[{"Graphics", "[", " ", 
+                  RowBox[{"{", " ", 
+                   RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "0.04", "]"}], ",", " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.24", ",", " ", "0.35", ",", " ", "0.67"}], " ",
+                     "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground"}], " ", "]"}], " ", "*", 
+                    " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", 
+                    RowBox[{"Jground", " ", "-", " ", "1"}]}], " ", "]"}], 
+                    " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+                   "}"}], " ", "]"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"Jground", ",", " ", "1", ",", " ", "8"}], " ", 
+                  "}"}]}], " ", "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", " ", 
+                RowBox[{
+                 RowBox[{"Graphics", "[", " ", 
+                  RowBox[{"{", " ", 
+                   RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "0.04", " ", "]"}], ",", 
+                    " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground"}], " ", "]"}], " ", "*", 
+                    " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", 
+                    RowBox[{"Jground", " ", "+", " ", "1"}]}], " ", "]"}], 
+                    " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+                   "}"}], " ", "]"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"Jground", ",", " ", "0", ",", " ", "8"}], " ", 
+                  "}"}]}], " ", "]"}]}], " ", "}"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"{", " ", 
+              RowBox[{"If", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"Jdprime", " ", "\[Equal]", " ", "0"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"{", " ", 
+                 RowBox[{"Graphics", "[", " ", 
+                  RowBox[{"{", " ", 
+                   RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "0.04", " ", "]"}], ",", 
+                    " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "125"}], " ", "]"}],
+                     ",", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "0"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "125"}], " ", "]"}],
+                     ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", "1"}], " ", "]"}], " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+                   "}"}], " ", "]"}], " ", "}"}], ",", "\[IndentingNewLine]", 
+                
+                RowBox[{"{", " ", 
+                 RowBox[{
+                  RowBox[{"Graphics", "[", " ", 
+                   RowBox[{"{", " ", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "0.04", " ", "]"}], ",", 
+                    " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.24", ",", " ", "0.35", ",", " ", "0.67"}], " ",
+                     "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime"}], " ", "]"}], " ", "*", 
+                    " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", 
+                    RowBox[{"Jdprime", " ", "-", " ", "1"}]}], " ", "]"}], 
+                    " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], "}"}]}], " ", "}"}], " ", "]"}]}], " ", "}"}], 
+                   " ", "]"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"Graphics", "[", " ", 
+                   RowBox[{"{", " ", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "0.04", " ", "]"}], ",", 
+                    " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime"}], " ", "]"}], " ", "*", 
+                    " ", 
+                    SuperscriptBox["10", "20"]}]}], " ", "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "125"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"rovibEnergy", "[", " ", 
+                    RowBox[{"1", ",", " ", 
+                    RowBox[{"Jdprime", " ", "+", " ", "1"}]}], " ", "]"}], 
+                    " ", "*", " ", 
+                    SuperscriptBox["10", "20"]}], " ", "-", " ", "2.5"}], " ",
+                     ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+                    "}"}], " ", "]"}]}], " ", "}"}]}], " ", 
+               "\[IndentingNewLine]", "]"}], " ", "}"}]}], " ", "]"}]}], " ", 
+          "]"}], "\[IndentingNewLine]", "}"}], " ", ",", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"Rovibronic", " ", "spectrum", " ", "of", " ", 
+          SuperscriptBox["H", "35"], "Cl"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", " ", 
+         RowBox[{"Show", "[", "\[IndentingNewLine]", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"Evaluate", "[", " ", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", " ", 
+                  RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], " ", 
+                 "*", " ", 
+                 RowBox[{"(", " ", 
+                  RowBox[{
+                   RowBox[{"PBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", " ", "200", ",", " ", "x"}], " ", "]"}],
+                    "  ", "+", " ", 
+                   RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", " ", "x"}], " ", "]"}]}], 
+                  " ", ")"}]}], ",", " ", 
+                RowBox[{"{", " ", 
+                 RowBox[{"x", ",", " ", "2670", ",", " ", "3070"}], " ", 
+                 "}"}]}], " ", "]"}], ",", " ", 
+              RowBox[{"Frame", " ", "\[Rule]", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                "True", ",", " ", "True", ",", " ", "False", ",", " ", 
+                 "False"}], " ", "}"}]}], ",", " ", 
+              RowBox[{"FrameLabel", " ", "\[Rule]", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"Style", "[", " ", 
+                  RowBox[{
+                  "\"\<Wavenumber (\!\(\*SuperscriptBox[\(cm\), \
+\(-1\)]\))\>\"", ",", " ", "12"}], " ", "]"}], ",", " ", 
+                 RowBox[{"Style", "[", " ", 
+                  RowBox[{"\"\<Absorbance\>\"", ",", " ", "12"}], " ", 
+                  "]"}]}], " ", "}"}]}], ",", " ", 
+              RowBox[{"FrameTicksStyle", " ", "\[Rule]", " ", 
+               RowBox[{"Directive", "[", " ", "9.5", " ", "]"}]}], ",", 
+              RowBox[{"FrameTicks", " ", "\[Rule]", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                "True", ",", " ", "True", ",", " ", "False", ",", " ", 
+                 "False"}], " ", "}"}]}], ",", "  ", 
+              RowBox[{"AxesOrigin", " ", "\[Rule]", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{"2620", ",", " ", "0"}], " ", "}"}]}], ",", "  ", 
+              RowBox[{"PlotRange", " ", "\[Rule]", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"{", " ", 
+                  RowBox[{"2620", ",", " ", "3120"}], " ", "}"}], ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{
+                   RowBox[{"-", "0.009"}], ",", " ", "0.145"}], " ", "}"}]}], 
+                " ", "}"}]}], ",", " ", 
+              RowBox[{"PerformanceGoal", " ", "\[Rule]", "\"\<Quality\>\""}], 
+              ",", " ", 
+              RowBox[{"ImageSize", " ", "\[Rule]", " ", 
+               RowBox[{"{", " ", 
+                RowBox[{"450", ",", " ", "200"}], " ", "}"}]}], ",", " ", 
+              RowBox[{"AspectRatio", " ", "\[Rule]", " ", "Full"}], ",", " ", 
+              
+              RowBox[{"PlotStyle", " ", "\[Rule]", 
+               RowBox[{"Directive", "[", " ", 
+                RowBox[{
+                 RowBox[{"Thickness", "[", " ", "0.0015", " ", "]"}], ",", 
+                 " ", "Black"}], " ", "]"}]}]}], " ", "]"}], ",", 
+            "\[IndentingNewLine]", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{
+             "Arrows", " ", "pointing", " ", "to", " ", "the", " ", "line", 
+              " ", "of", " ", "interest", " ", 
+              RowBox[{"(", 
+               RowBox[{
+               "to", " ", "correlate", " ", "spectrum", " ", "to", " ", 
+                "energy", " ", "level", " ", "diagram"}], ")"}]}], " ", 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"{", " ", 
+             RowBox[{"If", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"ShowAll", " ", "\[Equal]", " ", "True"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"{", " ", 
+                RowBox[{
+                 RowBox[{"Table", "[", " ", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "Medium", " ", "]"}], ",", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.24", ",", " ", "0.35", ",", " ", "0.67"}], " ",
+                     "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"PBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", "0.05"}], " ", ")"}]}], 
+                    " ", "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"PBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", " ", 
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", "0.01"}], " ", ")"}]}], 
+                    " ", "}"}]}], " ", "}"}], " ", "]"}], ",", " ", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Rotate", "[", 
+                    RowBox[{
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<P(\>\"", ",", "Jground", ",", "\"\<)\>\""}], 
+                    "}"}], "]"}], ",", 
+                    RowBox[{"FontSize", "\[Rule]", "12"}], ",", 
+                    RowBox[{
+                    "FontFamily", "\[Rule]", "\"\<STIX Two Text\>\""}]}], 
+                    "]"}], ",", 
+                    RowBox[{"{", "  ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"PBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", "0.062"}], " ", ")"}]}], 
+                    " ", "}"}]}], "]"}], ",", 
+                    RowBox[{"90", " ", "Degree"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], "\[IndentingNewLine]", 
+                    "]"}], ",", " ", "\[IndentingNewLine]", 
+                   RowBox[{"{", " ", 
+                    RowBox[{"Jground", ",", " ", "1", ",", " ", "8"}], " ", 
+                    "}"}]}], " ", "]"}], ",", "\[IndentingNewLine]", 
+                 RowBox[{"Table", "[", " ", "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"Graphics", "[", " ", "\[IndentingNewLine]", 
+                    RowBox[{"{", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "Medium", " ", "]"}], ",",
+                     " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], " ", 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", "0.05"}], " ", ")"}]}], 
+                    "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", " ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", "0.01"}], " ", ")"}]}], 
+                    " ", "}"}]}], " ", "}"}], " ", "]"}], " ", ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Rotate", "[", 
+                    RowBox[{
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    "\"\<R(\>\"", " ", ",", "Jground", " ", ",", 
+                    "\"\<)\>\""}], "}"}], "]"}], ",", 
+                    RowBox[{"FontSize", "\[Rule]", "12"}], ",", 
+                    RowBox[{
+                    "FontFamily", "\[Rule]", "\"\<STIX Two Text\>\""}]}], 
+                    "]"}], ",", 
+                    RowBox[{"{", "  ", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jground", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", "0.062"}], " ", ")"}]}], 
+                    " ", "}"}]}], "]"}], ",", 
+                    RowBox[{"90", " ", "Degree"}]}], "]"}]}], 
+                    "\[IndentingNewLine]", "}"}], " ", "\[IndentingNewLine]", 
+                    "]"}], ",", " ", 
+                   RowBox[{"{", " ", 
+                    RowBox[{"Jground", ",", " ", "0", ",", " ", "8"}], " ", 
+                    "}"}]}], " ", "]"}]}], " ", "\[IndentingNewLine]", "}"}], 
+               ",", "\[IndentingNewLine]", 
+               RowBox[{"{", " ", 
+                RowBox[{"If", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Jdprime", " ", "\[Equal]", " ", "0"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"{", " ", 
+                   RowBox[{"Graphics", "[", " ", "\[IndentingNewLine]", 
+                    RowBox[{"{", " ", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "Medium", " ", "]"}], ",",
+                     " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], " ", 
+                    "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "200"}], " ", "]"}],
+                     ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "200"}], " ", 
+                    "]"}]}], "  ", "]"}]}], " ", "+", " ", "0.05"}], " ", 
+                    ")"}]}], "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "200"}], " ", "]"}],
+                     ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", " ", "0.01"}], " ", 
+                    ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], "}"}], 
+                    " ", "\[IndentingNewLine]", "]"}], " ", "}"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"{", " ", 
+                   RowBox[{
+                    RowBox[{"Graphics", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "Medium", " ", "]"}], ",",
+                     " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}]}], "  ", "]"}]}], " ", "+", " ", "0.05"}], " ", 
+                    ")"}]}], "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"RBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"RBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], " ", "+", " ", "0.01"}], " ", 
+                    ")"}]}], " ", "}"}]}], " ", "}"}], " ", "]"}]}], " ", 
+                    "}"}], " ", "]"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"Graphics", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{"Thick", ",", " ", 
+                    RowBox[{"Arrowheads", "[", " ", "Medium", " ", "]"}], ",",
+                     " ", 
+                    RowBox[{"RGBColor", "[", " ", 
+                    RowBox[{"0.24", ",", " ", "0.35", ",", " ", "0.67"}], " ",
+                     "]"}], ",", 
+                    RowBox[{"Arrow", "[", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"PBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}]}], "  ", "]"}]}], " ", "+", " ", "0.05"}], " ", 
+                    ")"}]}], "}"}], ",", " ", 
+                    RowBox[{"{", " ", 
+                    RowBox[{
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}], ",", 
+                    RowBox[{"(", " ", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", " ", 
+                    RowBox[{"c", " ", "/.", " ", "constant"}], " ", ")"}], 
+                    " ", "*", " ", 
+                    RowBox[{"PBranchBandSpec", "[", " ", 
+                    RowBox[{"0", ",", "200", ",", "  ", 
+                    RowBox[{"PBranchBand", "[", " ", 
+                    RowBox[{"0", ",", " ", "Jdprime", ",", " ", "200"}], " ", 
+                    "]"}]}], " ", "]"}]}], "+", "0.01"}], ")"}]}], " ", 
+                    "}"}]}], " ", "}"}], " ", "]"}]}], " ", "}"}], " ", 
+                    "]"}]}], " ", "}"}]}], " ", "]"}], " ", "}"}]}], " ", 
+              "]"}], " ", "}"}]}], " ", "}"}], " ", "]"}], " ", 
+         "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "}"}], ",", 
+      " ", 
+      RowBox[{"Spacings", " ", "\[Rule]", " ", 
+       RowBox[{"{", " ", 
+        RowBox[{"0", ",", " ", 
+         RowBox[{"-", "110"}]}], " ", "}"}]}]}], "  ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "brings", " ", "the", " ", "two", " ", "images", " ", "closer", " ", 
+       "together"}], " ", "*)"}], "\[IndentingNewLine]", "]"}]}], ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", "\"\<ground state quantum number\>\"", " ", "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", " ", 
+      RowBox[{"Jdprime", ",", " ", "0", ",", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<J\>\"", ",", " ", "Italic"}], "]"}], "''"}]}], "}"}], 
+     ",", " ", "0", ",", "8", ",", "1", ",", " ", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Tiny"}], ",", " ", 
+     RowBox[{"Enabled", " ", "\[Rule]", " ", 
+      RowBox[{"ShowAll", " ", "\[Equal]", " ", "False"}]}], ",", " ", 
+     RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], 
+   ",", " ", "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", "\"\<view all transitions\>\"", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ShowAll", ",", " ", "True", ",", " ", "\"\<\>\""}], " ", "}"}],
+      ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", " ", "True"}], "}"}], ",", " ", 
+     RowBox[{"ControlType", " ", "\[Rule]", " ", "Checkbox"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", " ", "\"\<color code:\>\"", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", " ", 
+    RowBox[{
+     RowBox[{"Row", "[", " ", 
+      RowBox[{"{", " ", 
+       RowBox[{"\"\<  \>\"", ",", 
+        RowBox[{"Style", "[", " ", 
+         RowBox[{"\"\<P\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+        "\"\< branch (\[CapitalDelta]\>\"", ",", " ", 
+        RowBox[{"Style", "[", " ", 
+         RowBox[{"\"\<J\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+        "\"\< = -1)\>\""}], " ", "}"}], " ", "]"}], " ", ",", " ", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"0.24", ",", " ", "0.35", ",", " ", "0.67"}], "]"}]}], " ", 
+    "]"}], " ", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", " ", 
+    RowBox[{
+     RowBox[{"Row", "[", " ", 
+      RowBox[{"{", " ", 
+       RowBox[{"\"\<  \>\"", ",", 
+        RowBox[{"Style", "[", " ", 
+         RowBox[{"\"\<R\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+        "\"\< branch (\[CapitalDelta]\>\"", ",", " ", 
+        RowBox[{"Style", "[", " ", 
+         RowBox[{"\"\<J\>\"", ",", " ", "Italic"}], " ", "]"}], ",", " ", 
+        "\"\< = +1)\>\""}], " ", "}"}], " ", "]"}], ",", " ", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"0.19", ",", " ", "0.5", ",", " ", "0.08"}], "]"}]}], " ", 
+    "]"}], " ", ",", "\[IndentingNewLine]", "Delimiter", ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Dynamic", " ", "calculation", " ", "of", " ", "\[CapitalDelta]E", " ", 
+     "of", " ", "the", " ", "transition", " ", "and", " ", "the", " ", 
+     "corresponding", " ", "line", " ", "position"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", " ", 
+     RowBox[{
+      RowBox[{"ShowAll", " ", "\[Equal]", " ", "False"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", " ", 
+       RowBox[{
+        RowBox[{"Jdprime", " ", "\[Equal]", " ", "0"}], " ", ",", " ", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Column", "[", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<P\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+              " ", "\"\< branch transition energy\>\""}], " ", "}"}], " ", 
+            "]"}], ",", " ", "\[IndentingNewLine]", "\"\<  no transition\>\"",
+            ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<\\n\>\"", ",", " ", 
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<R\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+              " ", "\"\< branch transition energy\>\""}], " ", "}"}], " ", 
+            "]"}], ",", " ", 
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<  \[CapitalDelta]\>\"", ",", " ", 
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<E\>\"", ",", "Italic"}], "  ", "]"}], ",", 
+              "\"\< = \>\"", ",", " ", 
+              RowBox[{"SetPrecision", "[", " ", 
+               RowBox[{
+                RowBox[{"deltaERbranch", "[", " ", "Jdprime", " ", "]"}], ",",
+                 "5"}], " ", "]"}], ",", "\"\< joule\>\""}], " ", "}"}], " ", 
+            "]"}], ",", " ", 
+           RowBox[{"Row", "[", "  ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<       = \>\"", ",", " ", 
+              RowBox[{"SetPrecision", "[", " ", 
+               RowBox[{
+                FractionBox[
+                 RowBox[{"deltaERbranch", "[", " ", "Jdprime", " ", "]"}], 
+                 RowBox[{
+                 "planckConstant", " ", "*", " ", "speedOfLight", " ", "*", 
+                  " ", "100"}]], ",", " ", "5"}], " ", "]"}], ",", " ", 
+              "\"\< \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)\>\""}], " ", "}"}],
+             " ", "]"}]}], " ", "}"}], " ", "]"}], ",", "  ", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Column", "[", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<P\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+              "\"\< branch transition energy\>\""}], " ", "}"}], " ", "]"}], 
+           ",", 
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", 
+             RowBox[{"\"\<  \[CapitalDelta]\>\"", ",", " ", 
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<E\>\"", ",", "Italic"}], " ", "]"}], ",", 
+              "\"\< = \>\"", ",", " ", 
+              RowBox[{"SetPrecision", "[", " ", 
+               RowBox[{
+                RowBox[{"deltaEPbranch", "[", " ", "Jdprime", " ", "]"}], ",",
+                 " ", "5"}], " ", "]"}], ",", " ", "\"\< joule\>\""}], " ", 
+             "}"}], " ", "]"}], ",", " ", 
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<       = \>\"", ",", " ", 
+              RowBox[{"SetPrecision", "[", " ", 
+               RowBox[{
+                FractionBox[
+                 RowBox[{"deltaEPbranch", "[", " ", "Jdprime", " ", "]"}], 
+                 RowBox[{
+                 "planckConstant", " ", "*", " ", "speedOfLight", " ", "*", 
+                  " ", "100"}]], ",", " ", "5"}], " ", "]"}], ",", " ", 
+              "\"\< \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)\>\""}], " ", "}"}],
+             " ", "]"}], ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<\\n\>\"", ",", " ", 
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<R\>\"", ",", " ", "Italic"}], " ", "]"}], ",", 
+              " ", "\"\< branch transition energy\>\""}], " ", "}"}], " ", 
+            "]"}], ",", " ", 
+           RowBox[{"Row", "[", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<  \[CapitalDelta]\>\"", ",", " ", 
+              RowBox[{"Style", "[", " ", 
+               RowBox[{"\"\<E\>\"", ",", "Italic"}], " ", "]"}], ",", 
+              "\"\< = \>\"", ",", " ", 
+              RowBox[{"SetPrecision", "[", " ", 
+               RowBox[{
+                RowBox[{"deltaERbranch", "[", " ", "Jdprime", " ", "]"}], ",",
+                 "5"}], " ", "]"}], ",", "\"\< joule\>\""}], " ", "}"}], " ", 
+            "]"}], ",", " ", 
+           RowBox[{"Row", "[", "  ", 
+            RowBox[{"{", " ", 
+             RowBox[{"\"\<       = \>\"", ",", " ", 
+              RowBox[{"SetPrecision", "[", " ", 
+               RowBox[{
+                FractionBox[
+                 RowBox[{"deltaERbranch", "[", " ", "Jdprime", "]"}], 
+                 RowBox[{
+                 "planckConstant", " ", "*", " ", "speedOfLight", " ", "*", 
+                  " ", "100"}]], ",", " ", "5"}], " ", "]"}], ",", " ", 
+              "\"\< \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)\>\""}], " ", "}"}],
+             " ", "]"}]}], " ", "}"}], " ", "]"}]}], " ", "]"}], ",", " ", 
+      RowBox[{"Style", "[", "\"\<\>\"", "]"}]}], " ", "]"}], " ", 
+    "\[IndentingNewLine]", "]"}], ",", " ", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", " ", "\[Rule]", " ", "Left"}], ",", " ", 
+   RowBox[{"SaveDefinitions", " ", "\[Rule]", "  ", "True"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.46747817486381*^9, 3.4674782201493053`*^9}, {
+   3.467478283677211*^9, 3.4674783574878902`*^9}, {3.467478407172722*^9, 
+   3.467478420059836*^9}, {3.467478469208798*^9, 3.467478488231224*^9}, {
+   3.467478519985736*^9, 3.4674785201562843`*^9}, {3.4674785580357533`*^9, 
+   3.467478572257451*^9}, {3.467479327472445*^9, 3.4674793606076117`*^9}, 
+   3.4674795313011713`*^9, {3.467480196564206*^9, 3.4674801977968884`*^9}, {
+   3.46748065404854*^9, 3.4674809365383463`*^9}, 3.467480995455886*^9, {
+   3.467481133820608*^9, 3.467481142446072*^9}, {3.46748118817773*^9, 
+   3.46748121773449*^9}, {3.467481248328724*^9, 3.467481248610446*^9}, {
+   3.467481309028247*^9, 3.467481344128306*^9}, {3.467481588688717*^9, 
+   3.467481589318692*^9}, {3.467481650286571*^9, 3.46748165044239*^9}, {
+   3.4674819547722387`*^9, 3.467481960674099*^9}, {3.4674819943070593`*^9, 
+   3.467482056200161*^9}, {3.4674820913076887`*^9, 3.467482091642693*^9}, {
+   3.4686106981069736`*^9, 3.4686107034370527`*^9}, {3.468611024212008*^9, 
+   3.468611036472897*^9}, {3.468611243997813*^9, 3.468611379469055*^9}, {
+   3.4686129697561493`*^9, 3.468613047003158*^9}, {3.468613092409693*^9, 
+   3.468613092687297*^9}, {3.468613123467723*^9, 3.468613152508792*^9}, {
+   3.468613201039454*^9, 3.468613263216036*^9}, {3.4686132970797787`*^9, 
+   3.468613497620368*^9}, {3.473001233027595*^9, 3.47300125018644*^9}, {
+   3.473001292439424*^9, 3.473001365511923*^9}, {3.473001557027706*^9, 
+   3.473001840719996*^9}, {3.473002152957614*^9, 3.473002153204081*^9}, {
+   3.4730022159961033`*^9, 3.473002247672636*^9}, {3.4730048808779373`*^9, 
+   3.47300493254596*^9}, {3.473005032423571*^9, 3.473005093760771*^9}, {
+   3.473005125381188*^9, 3.473005125548523*^9}, {3.4730052304865923`*^9, 
+   3.473005353130876*^9}, {3.473005387240773*^9, 3.473005409373242*^9}, {
+   3.473005451996449*^9, 3.4730054848495693`*^9}, {3.473005516559568*^9, 
+   3.4730055693780127`*^9}, {3.4730058037551613`*^9, 3.473005879592327*^9}, {
+   3.473005975542161*^9, 3.473005983827681*^9}, {3.4730060177319183`*^9, 
+   3.4730060882284718`*^9}, {3.4730061242864943`*^9, 3.47300613205122*^9}, {
+   3.473006191227915*^9, 3.473006261416626*^9}, 3.473006364768607*^9, {
+   3.4730064268772583`*^9, 3.473006455470313*^9}, {3.473006611752561*^9, 
+   3.473006701542494*^9}, {3.473007305038937*^9, 3.473007361653796*^9}, {
+   3.473007513352273*^9, 3.4730075289348803`*^9}, {3.473007728059141*^9, 
+   3.473007892313204*^9}, {3.4734316027606087`*^9, 3.473431679607051*^9}, {
+   3.473431710656179*^9, 3.4734317807638283`*^9}, {3.473431818346871*^9, 
+   3.47343183761383*^9}, {3.4734318874599648`*^9, 3.4734319331508303`*^9}, {
+   3.473432357156196*^9, 3.473432365464794*^9}, {3.473432746482703*^9, 
+   3.4734327983227777`*^9}, {3.473432922058373*^9, 3.473432927661427*^9}, {
+   3.4734331471910954`*^9, 3.4734332201624317`*^9}, {3.4734332597820272`*^9, 
+   3.473433331153221*^9}, {3.47343338180268*^9, 3.4734335145081882`*^9}, {
+   3.4734335467315474`*^9, 3.473433812054558*^9}, {3.473434021934774*^9, 
+   3.4734341544670553`*^9}, {3.473434219059948*^9, 3.473434284018364*^9}, {
+   3.47343432364093*^9, 3.473434328715239*^9}, {3.473434403140048*^9, 
+   3.473434430108492*^9}, {3.473434482655505*^9, 3.473434538089019*^9}, {
+   3.473434679551302*^9, 3.473434685898101*^9}, {3.473434726856827*^9, 
+   3.47343472979821*^9}, {3.473434762650159*^9, 3.473434814916905*^9}, {
+   3.473434849574643*^9, 3.4734348533998747`*^9}, {3.4734349286845703`*^9, 
+   3.4734349338822107`*^9}, {3.473434970511571*^9, 3.473434989874069*^9}, {
+   3.473435138771433*^9, 3.473435164977816*^9}, {3.473435197802636*^9, 
+   3.473435198820084*^9}, {3.47343539295198*^9, 3.473435450508541*^9}, {
+   3.473435495845166*^9, 3.4734356826106167`*^9}, 3.473435714890646*^9, {
+   3.4734357692408457`*^9, 3.473435786524766*^9}, {3.473436166018918*^9, 
+   3.473436188681851*^9}, {3.473604724432509*^9, 3.473604732665935*^9}, {
+   3.4736047806350393`*^9, 3.473604825824942*^9}, {3.47360487034299*^9, 
+   3.4736048764980783`*^9}, {3.473605063632247*^9, 3.4736050790908537`*^9}, {
+   3.473605340472722*^9, 3.473605655980735*^9}, {3.473605741218696*^9, 
+   3.4736057774430943`*^9}, {3.473605817537999*^9, 3.4736058563573713`*^9}, {
+   3.473605889151794*^9, 3.473606557011652*^9}, {3.473606600205245*^9, 
+   3.4736066260400133`*^9}, {3.4736066567259617`*^9, 3.47360695892432*^9}, {
+   3.4736078280952873`*^9, 3.4736078375193653`*^9}, {3.473607882848975*^9, 
+   3.473607956719215*^9}, {3.4736081085140343`*^9, 3.4736082254786043`*^9}, {
+   3.473608259960363*^9, 3.4736083663416157`*^9}, {3.473608500931443*^9, 
+   3.473608557242916*^9}, {3.473608616747177*^9, 3.473608617386009*^9}, {
+   3.473608710753436*^9, 3.473608897621868*^9}, {3.4736089662194967`*^9, 
+   3.473609051110766*^9}, {3.4736091876682653`*^9, 3.4736091917720327`*^9}, {
+   3.473609720542474*^9, 3.473609736514586*^9}, {3.473609948724429*^9, 
+   3.4736100857496147`*^9}, {3.473610133454669*^9, 3.473610136775506*^9}, {
+   3.473610259496773*^9, 3.473610325952005*^9}, {3.473610369043795*^9, 
+   3.473610471816393*^9}, {3.473610635222848*^9, 3.4736106685385923`*^9}, {
+   3.473610866649908*^9, 3.473610969996437*^9}, {3.473611056993331*^9, 
+   3.473611077810079*^9}, {3.473611117429147*^9, 3.473611126471306*^9}, {
+   3.473611156634198*^9, 3.4736112691127*^9}, {3.4736113032112837`*^9, 
+   3.473611474903679*^9}, {3.473611543377037*^9, 3.4736115879534893`*^9}, {
+   3.473611626139948*^9, 3.473611644387842*^9}, {3.473611715480856*^9, 
+   3.473611829752672*^9}, {3.473611862200186*^9, 3.4736118974895697`*^9}, {
+   3.474212275646008*^9, 3.474212460412486*^9}, {3.474212535199288*^9, 
+   3.4742126581524878`*^9}, {3.474212705523993*^9, 3.47421274726962*^9}, 
+   3.474212878558221*^9, {3.474212929534631*^9, 3.4742130092057877`*^9}, {
+   3.4742131250087843`*^9, 3.474213175386238*^9}, {3.4742132679158697`*^9, 
+   3.474213278488448*^9}, {3.474213325549384*^9, 3.474213381491377*^9}, {
+   3.474213459303467*^9, 3.474213534928338*^9}, {3.474214282795923*^9, 
+   3.474214459697658*^9}, {3.474214733338476*^9, 3.474214733811264*^9}, {
+   3.47421478344908*^9, 3.474214783719521*^9}, {3.474214825002962*^9, 
+   3.4742148332197104`*^9}, {3.4742148845155163`*^9, 
+   3.4742148891866426`*^9}, {3.474214980650536*^9, 3.474214995014195*^9}, {
+   3.474215064590947*^9, 3.4742151022549877`*^9}, {3.474817142479931*^9, 
+   3.4748171837211943`*^9}, {3.474817258954646*^9, 3.474817335785252*^9}, {
+   3.474817612153433*^9, 3.474817642174541*^9}, {3.4748176771748457`*^9, 
+   3.4748177240523453`*^9}, {3.4748177799061337`*^9, 3.474817780530806*^9}, {
+   3.474817874721425*^9, 3.474817875951819*^9}, {3.474817912755979*^9, 
+   3.474817939951757*^9}, {3.4748179978094378`*^9, 3.474818057083969*^9}, {
+   3.4748181000744047`*^9, 3.474818227012824*^9}, {3.4748182587648993`*^9, 
+   3.474818298442649*^9}, {3.474819244821753*^9, 3.474819259087055*^9}, {
+   3.474819289446516*^9, 3.474819313890794*^9}, {3.4748193741582327`*^9, 
+   3.474819392760715*^9}, {3.474819438008926*^9, 3.474819578274994*^9}, {
+   3.474819667106799*^9, 3.474819705488432*^9}, {3.47481978760359*^9, 
+   3.4748199158808727`*^9}, {3.4748201433971663`*^9, 3.474820238131266*^9}, {
+   3.4748202767446423`*^9, 3.474820496774472*^9}, {3.474820531287043*^9, 
+   3.4748205410595903`*^9}, 3.474820589631672*^9, {3.474820672853499*^9, 
+   3.474820704609428*^9}, {3.4748207386330423`*^9, 3.47482074314998*^9}, {
+   3.4748208017852383`*^9, 3.474820860084752*^9}, {3.474820892701725*^9, 
+   3.4748208988037987`*^9}, {3.474820951282446*^9, 3.474820991299967*^9}, {
+   3.474821021713717*^9, 3.474821098447515*^9}, {3.4748211301180058`*^9, 
+   3.4748211344779053`*^9}, {3.4748211843903303`*^9, 3.47482122759929*^9}, {
+   3.474821267557414*^9, 3.474821268084359*^9}, {3.4748213068713703`*^9, 
+   3.474821440392168*^9}, {3.474821509035768*^9, 3.474821520394014*^9}, {
+   3.474821574836639*^9, 3.474821612691284*^9}, {3.474821675113544*^9, 
+   3.4748216764748907`*^9}, {3.474821713158153*^9, 3.474821727905796*^9}, {
+   3.474821770587826*^9, 3.474821770761598*^9}, {3.474821818825315*^9, 
+   3.474821856947679*^9}, {3.4748219388687887`*^9, 3.4748219793406878`*^9}, {
+   3.47482201277897*^9, 3.474822013022745*^9}, {3.474822143694228*^9, 
+   3.474822152555559*^9}, {3.4748221850341053`*^9, 3.474822321730459*^9}, {
+   3.474822357561407*^9, 3.474822367444446*^9}, {3.474822408136235*^9, 
+   3.4748225124889174`*^9}, {3.474822548727725*^9, 3.47482255244337*^9}, {
+   3.474822602594377*^9, 3.474822668423483*^9}, {3.47482283323944*^9, 
+   3.4748228476641493`*^9}, {3.475419902033869*^9, 3.475419905637312*^9}, {
+   3.475419948742433*^9, 3.475420055172738*^9}, {3.475420097258958*^9, 
+   3.4754201218833838`*^9}, {3.47542015521392*^9, 3.475420159853491*^9}, {
+   3.475420197677381*^9, 3.4754202194866734`*^9}, {3.475420272839964*^9, 
+   3.475420307295143*^9}, 3.475420369679735*^9, {3.4754204515566483`*^9, 
+   3.475420502664772*^9}, {3.47542054667369*^9, 3.4754207023481407`*^9}, {
+   3.475420891939704*^9, 3.475420929425709*^9}, {3.475420964873559*^9, 
+   3.475420973852078*^9}, {3.475421012306863*^9, 3.475421068652481*^9}, {
+   3.475421137913403*^9, 3.475421200258697*^9}, {3.4754212628171*^9, 
+   3.4754213168655043`*^9}, {3.4754213674801817`*^9, 3.475421368010556*^9}, {
+   3.475421575726356*^9, 3.47542166472326*^9}, {3.47542169894066*^9, 
+   3.4754217723906717`*^9}, {3.475421815430479*^9, 3.475421866362267*^9}, {
+   3.4754218977239847`*^9, 3.4754219881101027`*^9}, {3.47542293254355*^9, 
+   3.475422935542103*^9}, {3.475423560750619*^9, 3.4754235648922777`*^9}, {
+   3.475424909584737*^9, 3.475424914535866*^9}, {3.475425072959009*^9, 
+   3.475425077620738*^9}, {3.475425174706193*^9, 3.475425278981639*^9}, {
+   3.475425386859828*^9, 3.475425389682716*^9}, {3.475425465123616*^9, 
+   3.475425537056572*^9}, {3.475425574776742*^9, 3.4754256280160007`*^9}, {
+   3.475425685084351*^9, 3.475425687382226*^9}, {3.475425765840328*^9, 
+   3.475425818869464*^9}, {3.475425849372674*^9, 3.475425880749509*^9}, {
+   3.475425927233355*^9, 3.475425954120328*^9}, {3.475425998263441*^9, 
+   3.475426009348723*^9}, {3.475426086098977*^9, 3.4754261092870407`*^9}, {
+   3.47542621949719*^9, 3.475426264664196*^9}, {3.475426351521366*^9, 
+   3.475426351921838*^9}, {3.483717343021311*^9, 3.4837173584503183`*^9}, {
+   3.4837173895546837`*^9, 3.4837173908064213`*^9}, {3.483717423276881*^9, 
+   3.48371742584136*^9}, {3.483718093072158*^9, 3.48371813977428*^9}, {
+   3.483718170963565*^9, 3.483718385781253*^9}, {3.4837184287629213`*^9, 
+   3.483718567944788*^9}, {3.4837186318713083`*^9, 3.483718776856868*^9}, {
+   3.483718822099847*^9, 3.4837188739442167`*^9}, {3.4837189259192553`*^9, 
+   3.483718935049778*^9}, {3.483719052131072*^9, 3.483719112290429*^9}, {
+   3.48372113262647*^9, 3.4837211805177298`*^9}, {3.483721278369452*^9, 
+   3.4837213399623003`*^9}, {3.4837213753195667`*^9, 3.483721405032241*^9}, {
+   3.483721454082588*^9, 3.483721538755726*^9}, {3.4837216379870863`*^9, 
+   3.483721682884584*^9}, {3.483798882504985*^9, 3.483798882938339*^9}, {
+   3.483798923351963*^9, 3.483798928221366*^9}, {3.483810126443844*^9, 
+   3.483810156314597*^9}, {3.483810206632715*^9, 3.483810233112423*^9}, {
+   3.48381028984937*^9, 3.483810323127637*^9}, {3.483810393777871*^9, 
+   3.483810489525949*^9}, {3.483810542904014*^9, 3.483810605932095*^9}, {
+   3.483810729715313*^9, 3.483810827264748*^9}, {3.48381085993908*^9, 
+   3.483810898809058*^9}, {3.48381095342566*^9, 3.4838110491627893`*^9}, {
+   3.483811119295664*^9, 3.4838111679933147`*^9}, {3.483811202229466*^9, 
+   3.4838112279845123`*^9}, {3.483811303478231*^9, 3.483811337677264*^9}, {
+   3.483811412557947*^9, 3.48381142279274*^9}, {3.4838114705807467`*^9, 
+   3.4838115804592657`*^9}, {3.4838116298769836`*^9, 3.483811633245809*^9}, {
+   3.4838116740032597`*^9, 3.483811775566901*^9}, {3.483811842729104*^9, 
+   3.483811879243527*^9}, {3.4838119589493637`*^9, 3.483811959146469*^9}, {
+   3.48381202734122*^9, 3.4838120568713217`*^9}, {3.483812088663134*^9, 
+   3.483812089371807*^9}, {3.483812153812212*^9, 3.4838121635611897`*^9}, {
+   3.48381221057093*^9, 3.4838122656306973`*^9}, {3.483812360669804*^9, 
+   3.483812381611614*^9}, {3.483812476464798*^9, 3.4838124885429583`*^9}, {
+   3.483812550543309*^9, 3.48381262417743*^9}, {3.483812734876752*^9, 
+   3.4838127833278713`*^9}, {3.4838128432711563`*^9, 3.483812903243445*^9}, {
+   3.483813177304842*^9, 3.483813266339178*^9}, {3.4838133111537533`*^9, 
+   3.483813344504724*^9}, {3.483813465340781*^9, 3.4838134658755713`*^9}, {
+   3.483813511277569*^9, 3.483813511490752*^9}, {3.483813587270302*^9, 
+   3.483813648552416*^9}, {3.483813697596014*^9, 3.483813741033147*^9}, {
+   3.4838138072336493`*^9, 3.483813820032428*^9}, {3.483813873217959*^9, 
+   3.483813897053493*^9}, {3.483813967107545*^9, 3.483813984303769*^9}, {
+   3.483814038689507*^9, 3.483814111430031*^9}, {3.483814142542307*^9, 
+   3.4838142120199947`*^9}, {3.483814252900672*^9, 3.483814331856867*^9}, {
+   3.48381436328342*^9, 3.483814363544449*^9}, {3.4838144462311974`*^9, 
+   3.4838144707748117`*^9}, {3.48381451986322*^9, 3.4838145200911922`*^9}, {
+   3.4838168064287643`*^9, 3.483816831281417*^9}, {3.4838168728942213`*^9, 
+   3.483816891231676*^9}, {3.483816956763102*^9, 3.4838169739193277`*^9}, {
+   3.483817053289402*^9, 3.483817112822434*^9}, {3.483817167670354*^9, 
+   3.483817231537046*^9}, {3.48381726260937*^9, 3.4838172870506144`*^9}, {
+   3.483817341151515*^9, 3.4838173634269648`*^9}, {3.483817402499651*^9, 
+   3.483817408691511*^9}, {3.483817795587121*^9, 3.4838178058582172`*^9}, {
+   3.4838178795611486`*^9, 3.483817915796735*^9}, {3.483817959388156*^9, 
+   3.483818023040395*^9}, {3.483818091476182*^9, 3.483818111582477*^9}, {
+   3.483818142574996*^9, 3.4838181521981087`*^9}, {3.483818271405612*^9, 
+   3.483818271954154*^9}, {3.483818316083068*^9, 3.4838183495292177`*^9}, {
+   3.483818396457955*^9, 3.483818407166593*^9}, 3.483819765190846*^9, {
+   3.48381981530377*^9, 3.4838198294741573`*^9}, {3.4838198978206663`*^9, 
+   3.4838199184346733`*^9}, {3.483819977997308*^9, 3.483820563489724*^9}, {
+   3.483820598742008*^9, 3.4838207050524063`*^9}, {3.483820760188397*^9, 
+   3.4838207810901337`*^9}, {3.4838327263946238`*^9, 
+   3.4838327267544327`*^9}, {3.483832797178101*^9, 3.483832801913218*^9}, {
+   3.483832996444463*^9, 3.48383302222185*^9}, {3.483837279736554*^9, 
+   3.4838373218052807`*^9}, {3.48383737683703*^9, 3.4838374045802526`*^9}, 
+   3.483837864030648*^9, 3.483837910777247*^9, {3.483837943336001*^9, 
+   3.483837950287486*^9}, {3.483837990481472*^9, 3.483838020067539*^9}, {
+   3.483838062154023*^9, 3.483838092666753*^9}, {3.483838167812707*^9, 
+   3.4838382040479918`*^9}, {3.483838903466261*^9, 3.483838934082218*^9}, 
+   3.483838970606411*^9, {3.483839014014285*^9, 3.4838391212515182`*^9}, {
+   3.483839199476359*^9, 3.4838392094881363`*^9}, {3.483839315912166*^9, 
+   3.483839450162942*^9}, {3.483839492028948*^9, 3.483839495135236*^9}, {
+   3.483839553911869*^9, 3.483839592929166*^9}, {3.483839646196155*^9, 
+   3.48383964983393*^9}, {3.483839805260201*^9, 3.483839831940894*^9}, {
+   3.4838398664572887`*^9, 3.48383989198918*^9}, {3.4838399295826387`*^9, 
+   3.483839967599038*^9}, {3.483840061605259*^9, 3.483840079593869*^9}, {
+   3.483840195521966*^9, 3.483840199166428*^9}, {3.483840335291801*^9, 
+   3.483840335697176*^9}, 3.483840404758738*^9, {3.483840470149715*^9, 
+   3.4838404934914083`*^9}, {3.48384055056404*^9, 3.483840554413065*^9}, {
+   3.4838405905296793`*^9, 3.483840596406698*^9}, {3.483875370949381*^9, 
+   3.483875376673255*^9}, {3.483875422914155*^9, 3.4838754245761023`*^9}, {
+   3.48387583739465*^9, 3.4838758526153107`*^9}, {3.483876341305201*^9, 
+   3.483876358638241*^9}, {3.483876877299687*^9, 3.48387690193099*^9}, {
+   3.483876937456718*^9, 3.483876937622168*^9}, {3.483877401247056*^9, 
+   3.483877401780463*^9}, {3.4838862343761063`*^9, 3.483886234804348*^9}, {
+   3.48388626831609*^9, 3.483886344788434*^9}, {3.4838864057151403`*^9, 
+   3.483886474531168*^9}, {3.483886772952281*^9, 3.483886868630669*^9}, {
+   3.483886966127576*^9, 3.483886967971793*^9}, {3.48388732186919*^9, 
+   3.4838874210349607`*^9}, {3.483887597928988*^9, 3.483887812547742*^9}, {
+   3.4838878673591757`*^9, 3.4838883553444357`*^9}, {3.483888387634124*^9, 
+   3.48388841420017*^9}, {3.483888469047441*^9, 3.483888660031082*^9}, {
+   3.483888694173273*^9, 3.483889236007121*^9}, {3.483894316689741*^9, 
+   3.4838944123612547`*^9}, {3.483894729834777*^9, 3.483894740326476*^9}, {
+   3.4838948010857887`*^9, 3.483894835031349*^9}, {3.483895500027779*^9, 
+   3.483895545507975*^9}, {3.483896084402396*^9, 3.483896110742598*^9}, {
+   3.483897141952839*^9, 3.4838971428652163`*^9}, {3.483897199901239*^9, 
+   3.483897225487568*^9}, {3.4838974046338167`*^9, 3.483897418584907*^9}, {
+   3.483899004126998*^9, 3.4838990053512278`*^9}, {3.483899052001842*^9, 
+   3.483899084342729*^9}, {3.483899185929352*^9, 3.4838992265974083`*^9}, {
+   3.48389935958521*^9, 3.48389942373096*^9}, {3.483899475445965*^9, 
+   3.483899545021216*^9}, {3.483899576347333*^9, 3.4838996335455103`*^9}, {
+   3.483899802594966*^9, 3.483899860389352*^9}, {3.483900044543013*^9, 
+   3.483900117468651*^9}, {3.483900150558166*^9, 3.483900151108582*^9}, 
+   3.4839001896033792`*^9, {3.483900229316362*^9, 3.48390023992098*^9}, {
+   3.483900296159853*^9, 3.48390031955698*^9}, {3.483900506016801*^9, 
+   3.483900507287038*^9}, {3.483900543472424*^9, 3.483900544957985*^9}, {
+   3.483900588560515*^9, 3.483900642906905*^9}, {3.4839006855310707`*^9, 
+   3.483900713489326*^9}, {3.483900762652663*^9, 3.483900786815618*^9}, {
+   3.483900836801059*^9, 3.48390086689953*^9}, {3.483900965942934*^9, 
+   3.4839010222844467`*^9}, {3.483901064295615*^9, 3.48390109298798*^9}, {
+   3.4839011467615433`*^9, 3.483901252161922*^9}, {3.4839014229692163`*^9, 
+   3.4839014934918127`*^9}, {3.483901526900857*^9, 3.483901552166648*^9}, {
+   3.4839016047289124`*^9, 3.4839016076855793`*^9}, {3.4839016520238028`*^9, 
+   3.483901674349238*^9}, {3.483901716310019*^9, 3.483901756870006*^9}, {
+   3.483901787267049*^9, 3.48390181851151*^9}, {3.4839018777130623`*^9, 
+   3.4839018779554853`*^9}, {3.483901908051869*^9, 3.483901908603181*^9}, {
+   3.483901946886862*^9, 3.4839019597930517`*^9}, {3.4839019952718554`*^9, 
+   3.483902043033456*^9}, {3.4839021837966957`*^9, 3.483902226781103*^9}, {
+   3.483902260001463*^9, 3.483902266055332*^9}, {3.483902296798448*^9, 
+   3.4839023155227833`*^9}, {3.4839023498906384`*^9, 3.483902451734818*^9}, {
+   3.483902485263197*^9, 3.483902485859379*^9}, {3.48390256329897*^9, 
+   3.4839025636721087`*^9}, {3.483902602747081*^9, 3.4839026032724524`*^9}, {
+   3.48390268304119*^9, 3.4839026936524687`*^9}, {3.483902727563607*^9, 
+   3.483902736641892*^9}, {3.483902771646591*^9, 3.4839027835590878`*^9}, {
+   3.483902818574793*^9, 3.483902851456586*^9}, 3.483902882377153*^9, {
+   3.4839670489886427`*^9, 3.483967103390383*^9}, {3.4839671626359262`*^9, 
+   3.483967349720652*^9}, {3.483967389754488*^9, 3.4839677168634863`*^9}, {
+   3.48396780826046*^9, 3.483967979191883*^9}, {3.4839680145920963`*^9, 
+   3.4839680780108232`*^9}, {3.483968117897958*^9, 3.483968141202821*^9}, {
+   3.483968191629716*^9, 3.483968431427711*^9}, {3.4839685802867203`*^9, 
+   3.483968786828375*^9}, {3.483968824057108*^9, 3.483968847029249*^9}, {
+   3.4839688802330914`*^9, 3.483968976584641*^9}, {3.4839695696169367`*^9, 
+   3.483969577705821*^9}, {3.4839696671955547`*^9, 3.483969693791389*^9}, {
+   3.4839698688282843`*^9, 3.4839698692655287`*^9}, {3.483969906480053*^9, 
+   3.483969939574369*^9}, {3.483970312897862*^9, 3.483970362586235*^9}, {
+   3.483970557789693*^9, 3.483970646199449*^9}, {3.483972281073492*^9, 
+   3.483972281805292*^9}, {3.48397233257694*^9, 3.483972374078002*^9}, {
+   3.483972717451325*^9, 3.4839727195328627`*^9}, {3.483972829340376*^9, 
+   3.4839729613531647`*^9}, {3.483975969289077*^9, 3.483976006517065*^9}, {
+   3.483976435969624*^9, 3.483976456553467*^9}, {3.483979887783551*^9, 
+   3.483979926724922*^9}, {3.483979962246101*^9, 3.4839799756038322`*^9}, {
+   3.483980037647532*^9, 3.483980410950564*^9}, {3.483980542544054*^9, 
+   3.483981112316999*^9}, {3.48398115554218*^9, 3.4839811818040133`*^9}, {
+   3.4839812179476347`*^9, 3.48398121846626*^9}, {3.483981256108755*^9, 
+   3.48398130184934*^9}, {3.483981332186701*^9, 3.483981332340136*^9}, {
+   3.483981389183769*^9, 3.483981407243052*^9}, {3.483981456404942*^9, 
+   3.4839817901341953`*^9}, {3.483981848567185*^9, 3.483981855997045*^9}, {
+   3.4839818865997066`*^9, 3.483982203439234*^9}, {3.483982248170306*^9, 
+   3.4839822839417677`*^9}, {3.483982386231285*^9, 3.483982386494445*^9}, {
+   3.4839824354737997`*^9, 3.483982604358733*^9}, {3.483982636769734*^9, 
+   3.483982636990975*^9}, {3.483982677398097*^9, 3.4839827290273046`*^9}, {
+   3.483982765377514*^9, 3.4839828146159573`*^9}, {3.483982848034471*^9, 
+   3.4839830058355837`*^9}, {3.4839830707802753`*^9, 3.483983090939476*^9}, {
+   3.483983135848419*^9, 3.4839831698914013`*^9}, {3.4839832094814243`*^9, 
+   3.483983239086463*^9}, {3.483983287509287*^9, 3.483983376158113*^9}, {
+   3.483983422752276*^9, 3.483983444915184*^9}, {3.4839834985382433`*^9, 
+   3.48398365594722*^9}, {3.483983722452631*^9, 3.4839838841125*^9}, {
+   3.48398391479265*^9, 3.483984092399528*^9}, {3.483984122848946*^9, 
+   3.4839841582578382`*^9}, {3.4839841896267014`*^9, 
+   3.4839842026577787`*^9}, {3.4839842476698837`*^9, 
+   3.4839842583617697`*^9}, {3.4839843121955547`*^9, 
+   3.4839843976679487`*^9}, {3.483984640262313*^9, 3.4839846815929193`*^9}, {
+   3.483984714929483*^9, 3.483984745106472*^9}, {3.4839848189323053`*^9, 
+   3.4839848967644453`*^9}, {3.483984968269709*^9, 3.483985146766852*^9}, {
+   3.483985196441597*^9, 3.4839853504430513`*^9}, {3.483985393195919*^9, 
+   3.483985402644039*^9}, {3.483985454423706*^9, 3.483985616851719*^9}, {
+   3.483985651579267*^9, 3.483985652075985*^9}, {3.483985777001987*^9, 
+   3.483985791677188*^9}, {3.483985838405046*^9, 3.4839859017440653`*^9}, {
+   3.483986166743842*^9, 3.4839862079481573`*^9}, {3.483986383128086*^9, 
+   3.483986407351222*^9}, {3.4839869944531097`*^9, 3.483987158729807*^9}, {
+   3.483987190781913*^9, 3.4839871946989717`*^9}, {3.483987258496529*^9, 
+   3.483987320946867*^9}, 3.4839873603581133`*^9, {3.483987632095697*^9, 
+   3.483987666361142*^9}, {3.483987751389567*^9, 3.4839877567928667`*^9}, {
+   3.483987789068681*^9, 3.483987793093974*^9}, {3.483988566686324*^9, 
+   3.483988574713252*^9}, {3.483988604734329*^9, 3.4839886498318987`*^9}, {
+   3.483988685303933*^9, 3.483988737556738*^9}, {3.4839889490997753`*^9, 
+   3.483989052506467*^9}, {3.4839891363373957`*^9, 3.48398916342794*^9}, {
+   3.4839892499311323`*^9, 3.483989262404513*^9}, {3.4839893098825417`*^9, 
+   3.483989310384521*^9}, {3.4839893466753893`*^9, 3.483989376173081*^9}, {
+   3.483989802750766*^9, 3.483989863198821*^9}, {3.483990110342166*^9, 
+   3.483990183720633*^9}, {3.4839906426904716`*^9, 3.4839906539106607`*^9}, {
+   3.483990706960854*^9, 3.483990707447837*^9}, 3.483990780835614*^9, {
+   3.48399081491203*^9, 3.483990846558282*^9}, {3.483990878417293*^9, 
+   3.483990955091091*^9}, {3.483991003914654*^9, 3.483991031552278*^9}, {
+   3.483991062884864*^9, 3.48399107184125*^9}, {3.483991231894747*^9, 
+   3.483991310131462*^9}, {3.4839914479355917`*^9, 3.48399146812955*^9}, {
+   3.483991533943712*^9, 3.483991579719818*^9}, {3.483991860576642*^9, 
+   3.483991896613329*^9}, {3.484413761975307*^9, 3.484413783435711*^9}, {
+   3.484661824088079*^9, 3.48466182796347*^9}, {3.4846618698446617`*^9, 
+   3.484661977958296*^9}, {3.4846620121946707`*^9, 3.4846620667509937`*^9}, {
+   3.484662168152718*^9, 3.484662266318358*^9}, {3.4846623009488792`*^9, 
+   3.484662388526784*^9}, {3.4846624215372562`*^9, 3.484662565155979*^9}, {
+   3.484662599093945*^9, 3.484662720926264*^9}, {3.484662815861183*^9, 
+   3.484662856404772*^9}, {3.48466290357718*^9, 3.484663169712142*^9}, {
+   3.484663224359559*^9, 3.484663259102985*^9}, {3.484663319171815*^9, 
+   3.484663356239256*^9}, {3.484663851212749*^9, 3.484663932316311*^9}, {
+   3.4846640341586018`*^9, 3.484664051916049*^9}, {3.4846640927989073`*^9, 
+   3.48466413855293*^9}, {3.484664180385832*^9, 3.484664448989484*^9}, {
+   3.484664592534725*^9, 3.4846647507663593`*^9}, {3.484664844010921*^9, 
+   3.4846648491245813`*^9}, {3.484664901463559*^9, 3.4846649100372047`*^9}, {
+   3.484664974604105*^9, 3.484664996161132*^9}, {3.484665060968396*^9, 
+   3.484665061269693*^9}, {3.484665104801762*^9, 3.4846651059342318`*^9}, {
+   3.484665322493124*^9, 3.484665506038046*^9}, {3.484666346281703*^9, 
+   3.4846664512036858`*^9}, {3.484666494217689*^9, 3.484666663453973*^9}, {
+   3.48466669695301*^9, 3.48466684759153*^9}, {3.484666886435253*^9, 
+   3.484666971167816*^9}, {3.484667001603012*^9, 3.4846670150156193`*^9}, {
+   3.484667065097969*^9, 3.484667088787497*^9}, {3.48466713960513*^9, 
+   3.484667159530411*^9}, {3.484667198655724*^9, 3.4846672097653627`*^9}, {
+   3.484667253880034*^9, 3.484667279468417*^9}, {3.484667420820904*^9, 
+   3.484667487317486*^9}, 3.484667766893778*^9, {3.484667840785472*^9, 
+   3.484667841668077*^9}, {3.484667911472418*^9, 3.4846679219127407`*^9}, {
+   3.484667952356257*^9, 3.484667956872756*^9}, {3.484668077857688*^9, 
+   3.484668218269878*^9}, {3.484668340363628*^9, 3.484668403741804*^9}, {
+   3.484668435154814*^9, 3.4846684379375687`*^9}, 3.484668475723311*^9, {
+   3.484668523624069*^9, 3.4846686376676073`*^9}, {3.4846686917194977`*^9, 
+   3.4846687015818853`*^9}, {3.4846687423374968`*^9, 
+   3.4846688302467403`*^9}, {3.484919381854846*^9, 3.484919439713387*^9}, {
+   3.484919514141728*^9, 3.4849196362281933`*^9}, 3.484919679098626*^9, {
+   3.484919720470497*^9, 3.484919726646043*^9}, 3.48491977062215*^9, {
+   3.4849198068405647`*^9, 3.4849198204855423`*^9}, {3.484919881910822*^9, 
+   3.48492030593751*^9}, {3.484920357644371*^9, 3.484920366983761*^9}, {
+   3.484920417101211*^9, 3.48492062903786*^9}, {3.48492066358609*^9, 
+   3.4849207054087057`*^9}, {3.484920743873343*^9, 3.4849209834084*^9}, {
+   3.484921128402103*^9, 3.484921172791108*^9}, {3.484921237259349*^9, 
+   3.484921293276688*^9}, {3.484921438257203*^9, 3.484921448014409*^9}, {
+   3.4849214833787527`*^9, 3.4849214855004663`*^9}, {3.484921515828272*^9, 
+   3.4849216460562277`*^9}, {3.484921727239691*^9, 3.484921770367071*^9}, {
+   3.4849218004014893`*^9, 3.4849218741193027`*^9}, {3.484922394775614*^9, 
+   3.484922430911872*^9}, {3.484922477950076*^9, 3.4849224804186077`*^9}, {
+   3.484922585571587*^9, 3.484922588191766*^9}, {3.484922741702669*^9, 
+   3.484922772440522*^9}, {3.484922953966996*^9, 3.4849229545158253`*^9}, {
+   3.48492320167478*^9, 3.484923232732399*^9}, {3.4849233472844143`*^9, 
+   3.484923379666534*^9}, {3.484923411085353*^9, 3.484923512696487*^9}, 
+   3.484923617339881*^9, {3.484923660230237*^9, 3.484923681635866*^9}, {
+   3.484923938530451*^9, 3.4849240020738983`*^9}, {3.48492655245656*^9, 
+   3.4849265756131887`*^9}, {3.48493584940735*^9, 3.484935855868935*^9}, {
+   3.484935913813442*^9, 3.4849359691644087`*^9}, {3.484936065835137*^9, 
+   3.484936090459483*^9}, {3.484936133041203*^9, 3.484936139653854*^9}, {
+   3.484936479710299*^9, 3.484936510170714*^9}, {3.4849365486085176`*^9, 
+   3.484936580669468*^9}, 3.4849367308381977`*^9, {3.4849368338329773`*^9, 
+   3.484936837813966*^9}, {3.484936896178753*^9, 3.484936983897421*^9}, {
+   3.484937023904751*^9, 3.4849371065344067`*^9}, {3.484937275693622*^9, 
+   3.484937279435882*^9}, {3.484937316543153*^9, 3.484937358917452*^9}, {
+   3.484937413268999*^9, 3.484937460714753*^9}, {3.484937989983715*^9, 
+   3.484937998034882*^9}, {3.484938091708537*^9, 3.48493815221071*^9}, {
+   3.484938631843251*^9, 3.484938789158777*^9}, {3.484938830476879*^9, 
+   3.484938925183201*^9}, {3.48493896413765*^9, 3.484939000959812*^9}, {
+   3.484939087118203*^9, 3.48493913295795*^9}, {3.4849392184098873`*^9, 
+   3.484939224252863*^9}, {3.484939299139813*^9, 3.484939342897163*^9}, {
+   3.4849393785257893`*^9, 3.484939387961884*^9}, {3.484939422098556*^9, 
+   3.484939463108198*^9}, {3.484939494361369*^9, 3.484939502388473*^9}, {
+   3.485000582652204*^9, 3.4850006981115923`*^9}, 3.485000834960824*^9, {
+   3.485000905650962*^9, 3.485000906711812*^9}, 3.4850078321696587`*^9, {
+   3.485023031599777*^9, 3.485023032037979*^9}, {3.48502310128618*^9, 
+   3.485023116950878*^9}, {3.485023331177927*^9, 3.485023331649229*^9}, {
+   3.485023560283946*^9, 3.485023651295164*^9}, {3.485023724162504*^9, 
+   3.4850237893303013`*^9}, {3.4850239377171993`*^9, 
+   3.4850239506051817`*^9}, {3.485024006673481*^9, 3.4850241025489264`*^9}, {
+   3.485024210226462*^9, 3.4850244526863403`*^9}, {3.485024488594116*^9, 
+   3.485024533427384*^9}, {3.485024679635193*^9, 3.485024876085403*^9}, {
+   3.485024912765334*^9, 3.4850249517631283`*^9}, {3.485024994574374*^9, 
+   3.485024994840995*^9}, {3.4850250363299227`*^9, 3.485025081659793*^9}, {
+   3.485025219895645*^9, 3.485025220300907*^9}, {3.485025297373364*^9, 
+   3.485025301291291*^9}, {3.485025463063483*^9, 3.485025594523076*^9}, {
+   3.485025625496378*^9, 3.485025661929267*^9}, {3.4850257001509733`*^9, 
+   3.485025836230155*^9}, {3.485025872853437*^9, 3.485025925689003*^9}, {
+   3.485025966742756*^9, 3.485025974874833*^9}, {3.485026008596938*^9, 
+   3.4850260321470423`*^9}, {3.4850260702555933`*^9, 
+   3.4850261011871243`*^9}, {3.485026138297655*^9, 3.485026140812106*^9}, {
+   3.485026312085742*^9, 3.48502631635574*^9}, {3.485026530778678*^9, 
+   3.485026551521188*^9}, {3.485026600074768*^9, 3.485026618172408*^9}, {
+   3.485026692738989*^9, 3.485026758617881*^9}, {3.485026828678179*^9, 
+   3.485026836561866*^9}, {3.485088761839192*^9, 3.485088860338646*^9}, {
+   3.485090295053693*^9, 3.485090403519579*^9}, 3.4852743080980964`*^9, {
+   3.485606861678114*^9, 3.4856068773498883`*^9}, {3.4856069118184175`*^9, 
+   3.485607022130212*^9}, {3.485607067895544*^9, 3.4856070959578643`*^9}, {
+   3.4856071498637695`*^9, 3.4856071878322763`*^9}, {3.485607218410206*^9, 
+   3.4856072625192986`*^9}, {3.487433569798436*^9, 3.4874335719092093`*^9}, {
+   3.4874338288940687`*^9, 3.487433829771022*^9}, {3.4874413536260605`*^9, 
+   3.48744135668858*^9}, {3.760276488719283*^9, 3.760276492675289*^9}, {
+   3.760276543627617*^9, 3.760276546101725*^9}, {3.760276797173683*^9, 
+   3.760276828965022*^9}, {3.760276874345366*^9, 3.760276878057021*^9}, {
+   3.760276944045096*^9, 3.760276944431995*^9}, {3.760277169170273*^9, 
+   3.760277205562132*^9}, {3.7602772738927097`*^9, 3.7602772995408077`*^9}, {
+   3.760277371880508*^9, 3.760277451641982*^9}, {3.760277559543058*^9, 
+   3.760277622575959*^9}, {3.760277800133412*^9, 3.760277851363957*^9}, {
+   3.760277896107287*^9, 3.7602779379782467`*^9}, {3.760277988975381*^9, 
+   3.76027800002348*^9}, {3.76027804980837*^9, 3.760278077771935*^9}, {
+   3.760278178562757*^9, 3.760278179330927*^9}, 3.760278420328637*^9, 
+   3.760278451621251*^9, {3.7602786722308197`*^9, 3.760278735769457*^9}, {
+   3.7602787667482853`*^9, 3.7602788002345533`*^9}, {3.7602788718070602`*^9, 
+   3.760278873973035*^9}, {3.760278909634871*^9, 3.760278917905018*^9}, {
+   3.7602792402747307`*^9, 3.760279336178821*^9}, {3.7602799863039*^9, 
+   3.7602799946249733`*^9}, 3.760280034112656*^9, {3.760280195958675*^9, 
+   3.7602802641896133`*^9}, {3.7602802975223007`*^9, 3.760280430911126*^9}, {
+   3.7602807219448147`*^9, 3.760280771453117*^9}, {3.760282064697294*^9, 
+   3.760282067945798*^9}, {3.760282142908646*^9, 3.760282147573504*^9}, {
+   3.760282196149963*^9, 3.7602822336147633`*^9}, {3.760282294182734*^9, 
+   3.76028229936791*^9}, {3.760285636385043*^9, 3.7602856744894247`*^9}, {
+   3.76028574751857*^9, 3.7602857988465033`*^9}, {3.7602859030336113`*^9, 
+   3.760285936626001*^9}, {3.760285976694726*^9, 3.760285992716631*^9}, {
+   3.760286067986663*^9, 3.760286072306184*^9}, {3.7602862267729607`*^9, 
+   3.760286230734275*^9}, 3.7602862636763363`*^9, {3.7602863285913057`*^9, 
+   3.7602863745212517`*^9}, {3.760286417585149*^9, 3.760286429748371*^9}, {
+   3.760286470321458*^9, 3.760286525954858*^9}, {3.760286572626666*^9, 
+   3.760286583863415*^9}, {3.760359491681706*^9, 3.760359506575282*^9}, {
+   3.760359543983005*^9, 3.760359550425795*^9}, {3.760359615831506*^9, 
+   3.760359635726057*^9}, {3.760359711844448*^9, 3.7603597838763313`*^9}, {
+   3.760359821681325*^9, 3.760359880813067*^9}, {3.7603601226288033`*^9, 
+   3.760360147230221*^9}, {3.760360191322809*^9, 3.7603603499272623`*^9}, {
+   3.760361007240584*^9, 3.760361020302615*^9}, {3.760361096287388*^9, 
+   3.760361187119007*^9}, 3.760361641284688*^9, {3.760361813180007*^9, 
+   3.760361813799314*^9}},
+ CellLabel->"In[44]:=",
+ CellID->791049518,ExpressionUUID->"62ee39bd-7145-48e4-a5dd-957f760e2eee"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Jdprime$$ = 0, $CellContext`ShowAll$$ = 
+    True, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["ground state quantum number"]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Jdprime$$], 0, 
+       Derivative[2][
+        Style["J", Italic]]}, 0, 8, 1}, {
+      Hold[
+       Style["view all transitions"]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`ShowAll$$], True, ""}, {False, True}}, {
+      Hold[
+       Style["color code:"]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style[
+        Row[{"  ", 
+          Style["P", Italic], " branch (\[CapitalDelta]", 
+          Style["J", Italic], " = -1)"}], 
+        RGBColor[0.24, 0.35, 0.67]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style[
+        Row[{"  ", 
+          Style["R", Italic], " branch (\[CapitalDelta]", 
+          Style["J", Italic], " = +1)"}], 
+        RGBColor[0.19, 0.5, 0.08]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Dynamic[
+        If[$CellContext`ShowAll$$ == False, 
+         If[$CellContext`Jdprime$$ == 0, 
+          Column[{
+            Row[{
+              Style["P", Italic], " branch transition energy"}], 
+            "  no transition", 
+            Row[{"\n", 
+              Style["R", Italic], " branch transition energy"}], 
+            Row[{"  \[CapitalDelta]", 
+              Style["E", Italic], " = ", 
+              SetPrecision[
+               $CellContext`deltaERbranch[$CellContext`Jdprime$$], 5], 
+              " joule"}], 
+            Row[{"       = ", 
+              
+              SetPrecision[$CellContext`deltaERbranch[$CellContext`Jdprime$$]/\
+($CellContext`planckConstant $CellContext`speedOfLight 100), 5], 
+              " \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)"}]}], 
+          Column[{
+            Row[{
+              Style["P", Italic], " branch transition energy"}], 
+            Row[{"  \[CapitalDelta]", 
+              Style["E", Italic], " = ", 
+              SetPrecision[
+               $CellContext`deltaEPbranch[$CellContext`Jdprime$$], 5], 
+              " joule"}], 
+            Row[{"       = ", 
+              
+              SetPrecision[$CellContext`deltaEPbranch[$CellContext`Jdprime$$]/\
+($CellContext`planckConstant $CellContext`speedOfLight 100), 5], 
+              " \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)"}], 
+            Row[{"\n", 
+              Style["R", Italic], " branch transition energy"}], 
+            Row[{"  \[CapitalDelta]", 
+              Style["E", Italic], " = ", 
+              SetPrecision[
+               $CellContext`deltaERbranch[$CellContext`Jdprime$$], 5], 
+              " joule"}], 
+            Row[{"       = ", 
+              
+              SetPrecision[$CellContext`deltaERbranch[$CellContext`Jdprime$$]/\
+($CellContext`planckConstant $CellContext`speedOfLight 100), 5], 
+              " \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)"}]}]], 
+         Style[""]]]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    462., {269., 273.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`Jdprime$5697$$ = 
+    0, $CellContext`ShowAll$5698$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Jdprime$$ = 0, $CellContext`ShowAll$$ = 
+        True}, "ControllerVariables" :> {
+        Hold[$CellContext`Jdprime$$, $CellContext`Jdprime$5697$$, 0], 
+        Hold[$CellContext`ShowAll$$, $CellContext`ShowAll$5698$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`constant = 
+        FindRoot[
+         Sum[$CellContext`c $CellContext`population[0, $CellContext`J, 200] (
+             2 $CellContext`J + 1), {$CellContext`J, 0, 20}] == 
+          1, {$CellContext`c, 1}]; GraphicsGrid[{{
+           Show[
+            Graphics[
+             Table[{
+               Thickness[0.0015], 
+               
+               Line[{{2670, $CellContext`rovibEnergy[0, $CellContext`J] 
+                  10^20}, {
+                 3070, $CellContext`rovibEnergy[0, $CellContext`J] 10^20}}], 
+               
+               Line[{{2670, $CellContext`rovibEnergy[1, $CellContext`J] 10^20 - 
+                  2.5}, {3070, $CellContext`rovibEnergy[1, $CellContext`J] 
+                   10^20 - 2.5}}]}, {$CellContext`J, 0, 9}], 
+             Frame -> {True, True, False, False}, ImageSize -> {450, 375}, 
+             AspectRatio -> Full, PlotRange -> {{2620, 3120}, {2.7, 8.1}}, 
+             FrameTicksStyle -> {
+               Opacity[0], 
+               Directive[9.5], None, None}, 
+             FrameTicks -> {
+              True, $CellContext`ELevelDiagramFrameLabels, False, False}, 
+             FrameLabel -> {
+               Style["", 12], 
+               Style[
+               "Energy (\!\(\*SuperscriptBox[\(10\), \(-20\)]\) joule)", 
+                12]}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["2.94"], Gray, 9.5], {2600, 2.76}], {-1, 0}], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{2610, 2.76}, {
+                2620, $CellContext`rovibEnergy[0, 0] 10^20}}], Gray}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["2.99"], Gray, 9.5], {2600, 2.91}], {-1, 0}], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{2610, 2.91}, {
+                2620, $CellContext`rovibEnergy[0, 1] 10^20}}], Gray}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["8.68"], Gray, 9.5], {2600, 5.99}], {-1, 0}], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{2610, 5.99}, {
+                2620, $CellContext`rovibEnergy[1, 0] 10^20 - 2.5}}], Gray}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["8.72"], Gray, 9.5], {2600, 6.14}], {-1, 0}], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{2610, 6.14}, {
+                2620, $CellContext`rovibEnergy[1, 1] 10^20 - 2.5}}], Gray}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["\[TildeTilde]"], 20], {2620, 5.49}, {0, 0}]], 
+            Graphics[
+             Text[
+              Style[
+               ToExpression["J'' = \\, 9 ", TeXForm, HoldForm]], {
+              3115, $CellContext`rovibEnergy[0, 9] 10^20}, {1, 0}]], 
+            Table[
+             Graphics[
+              Text[
+               Style[
+                StringForm["``", 
+                 NumberForm[$CellContext`JLabel, 1]], 10], {
+               3115, $CellContext`rovibEnergy[0, $CellContext`JLabel] 
+                10^20}, {1, 0}]], {$CellContext`JLabel, 8, 2, -1}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["1"], 10], {3115, 2.93}, {1, 0}]], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{3105, 2.93}, {
+                3072, $CellContext`rovibEnergy[0, 1] 10^20}}]}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["0"], 10], {3115, 2.79}, {1, 0}]], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{3105, 2.79}, {
+                3072, $CellContext`rovibEnergy[0, 0] 10^20}}]}], 
+            Graphics[
+             Text[
+              Style[
+               ToExpression["J' = \\, 9", TeXForm, HoldForm]], {
+              3115, $CellContext`rovibEnergy[1, 9] 10^20 - 2.5}, {1, 0}]], 
+            Table[
+             Graphics[
+              Text[
+               Style[
+                StringForm["``", 
+                 NumberForm[$CellContext`JLabel, 1]], 10], {
+               3115, $CellContext`rovibEnergy[1, $CellContext`JLabel] 10^20 - 
+                2.5}, {1, 0}]], {$CellContext`JLabel, 8, 2, -1}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["1"], 10], {3115, 6.16}, {1, 0}]], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{3105, 6.16}, {
+                3072, $CellContext`rovibEnergy[1, 1] 10^20 - 2.5}}]}], 
+            Graphics[
+             Text[
+              Style[
+               StringForm["0"], 10], {3115, 6.02}, {1, 0}]], 
+            Graphics[{
+              Thickness[0.0015], 
+              
+              Line[{{3105, 6.02}, {
+                3072, $CellContext`rovibEnergy[1, 0] 10^20 - 2.5}}]}], 
+            Graphics[
+             Rotate[
+              Text[
+               Style[
+                ToExpression["v'' = 0", TeXForm, HoldForm], FontFamily -> 
+                "Century Schoolbook"], {2645, 3.9559}, {-1, 0}], 90 Degree]], 
+            
+            Graphics[
+             Rotate[
+              Text[
+               Style[
+                ToExpression["v' = 1", TeXForm, HoldForm], FontFamily -> 
+                "Century Schoolbook"], {2645, 7.16}, {-1, 0}], 90 Degree]], 
+            If[$CellContext`ShowAll$$ == True, {
+              Table[
+               Graphics[{Thick, 
+                 Arrowheads[0.04], 
+                 RGBColor[0.24, 0.35, 0.67], 
+                 Arrow[{{
+                    $CellContext`PBranchBand[
+                    0, $CellContext`Jground, 125], $CellContext`rovibEnergy[
+                    0, $CellContext`Jground] 10^20}, {
+                    $CellContext`PBranchBand[
+                    0, $CellContext`Jground, 
+                    125], $CellContext`rovibEnergy[
+                    1, $CellContext`Jground - 1] 10^20 - 
+                    2.5}}]}], {$CellContext`Jground, 1, 8}], 
+              Table[
+               Graphics[{Thick, 
+                 Arrowheads[0.04], 
+                 RGBColor[0.19, 0.5, 0.08], 
+                 Arrow[{{
+                    $CellContext`RBranchBand[
+                    0, $CellContext`Jground, 125], $CellContext`rovibEnergy[
+                    0, $CellContext`Jground] 10^20}, {
+                    $CellContext`RBranchBand[
+                    0, $CellContext`Jground, 
+                    125], $CellContext`rovibEnergy[
+                    1, $CellContext`Jground + 1] 10^20 - 
+                    2.5}}]}], {$CellContext`Jground, 0, 8}]}, {
+              If[$CellContext`Jdprime$$ == 0, {
+                Graphics[{Thick, 
+                  Arrowheads[0.04], 
+                  RGBColor[0.19, 0.5, 0.08], 
+                  Arrow[{{
+                    $CellContext`RBranchBand[
+                    0, 0, 125], $CellContext`rovibEnergy[0, 0] 10^20}, {
+                    $CellContext`RBranchBand[
+                    0, 0, 125], $CellContext`rovibEnergy[1, 1] 10^20 - 
+                    2.5}}]}]}, {
+                Graphics[{Thick, 
+                  Arrowheads[0.04], 
+                  RGBColor[0.24, 0.35, 0.67], 
+                  Arrow[{{
+                    $CellContext`PBranchBand[
+                    0, $CellContext`Jdprime$$, 125], $CellContext`rovibEnergy[
+                    0, $CellContext`Jdprime$$] 10^20}, {
+                    $CellContext`PBranchBand[
+                    0, $CellContext`Jdprime$$, 
+                    125], $CellContext`rovibEnergy[
+                    1, $CellContext`Jdprime$$ - 1] 10^20 - 2.5}}]}], 
+                Graphics[{Thick, 
+                  Arrowheads[0.04], 
+                  RGBColor[0.19, 0.5, 0.08], 
+                  Arrow[{{
+                    $CellContext`RBranchBand[
+                    0, $CellContext`Jdprime$$, 125], $CellContext`rovibEnergy[
+                    0, $CellContext`Jdprime$$] 10^20}, {
+                    $CellContext`RBranchBand[
+                    0, $CellContext`Jdprime$$, 
+                    125], $CellContext`rovibEnergy[
+                    1, $CellContext`Jdprime$$ + 1] 10^20 - 2.5}}]}]}]}]]}, {
+           Show[{
+             Plot[
+              Evaluate[
+              ReplaceAll[$CellContext`c, $CellContext`constant] \
+($CellContext`PBranchBandSpec[
+                 0, 200, $CellContext`x] + $CellContext`RBranchBandSpec[
+                 0, 200, $CellContext`x]), {$CellContext`x, 2670, 3070}], 
+              Frame -> {True, True, False, False}, FrameLabel -> {
+                Style[
+                "Wavenumber (\!\(\*SuperscriptBox[\(cm\), \(-1\)]\))", 12], 
+                Style["Absorbance", 12]}, FrameTicksStyle -> Directive[9.5], 
+              FrameTicks -> {True, True, False, False}, 
+              AxesOrigin -> {2620, 0}, 
+              PlotRange -> {{2620, 3120}, {-0.009, 0.145}}, PerformanceGoal -> 
+              "Quality", ImageSize -> {450, 200}, AspectRatio -> Full, 
+              PlotStyle -> Directive[
+                Thickness[0.0015], Black]], {
+              If[$CellContext`ShowAll$$ == True, {
+                Table[
+                 Graphics[{Thick, 
+                   Arrowheads[Medium], 
+                   RGBColor[0.24, 0.35, 0.67], 
+                   Arrow[{{
+                    $CellContext`PBranchBand[0, $CellContext`Jground, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`PBranchBandSpec[0, 200, 
+                    $CellContext`PBranchBand[0, $CellContext`Jground, 200]] + 
+                    0.05}, {
+                    $CellContext`PBranchBand[0, $CellContext`Jground, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`PBranchBandSpec[0, 200, 
+                    $CellContext`PBranchBand[0, $CellContext`Jground, 200]] + 
+                    0.01}}], 
+                   Rotate[
+                    Text[
+                    Style[
+                    Row[{"P(", $CellContext`Jground, ")"}], FontSize -> 12, 
+                    FontFamily -> "STIX Two Text"], {
+                    $CellContext`PBranchBand[0, $CellContext`Jground, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`PBranchBandSpec[0, 200, 
+                    $CellContext`PBranchBand[0, $CellContext`Jground, 200]] + 
+                    0.062}], 90 Degree]}], {$CellContext`Jground, 1, 8}], 
+                Table[
+                 Graphics[{Thick, 
+                   Arrowheads[Medium], 
+                   RGBColor[0.19, 0.5, 0.08], 
+                   Arrow[{{
+                    $CellContext`RBranchBand[0, $CellContext`Jground, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, $CellContext`Jground, 200]] + 
+                    0.05}, {
+                    $CellContext`RBranchBand[0, $CellContext`Jground, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, $CellContext`Jground, 200]] + 
+                    0.01}}], 
+                   Rotate[
+                    Text[
+                    Style[
+                    Row[{"R(", $CellContext`Jground, ")"}], FontSize -> 12, 
+                    FontFamily -> "STIX Two Text"], {
+                    $CellContext`RBranchBand[0, $CellContext`Jground, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, $CellContext`Jground, 200]] + 
+                    0.062}], 90 Degree]}], {$CellContext`Jground, 0, 8}]}, {
+                If[$CellContext`Jdprime$$ == 0, {
+                  Graphics[{Thick, 
+                    Arrowheads[Medium], 
+                    RGBColor[0.19, 0.5, 0.08], 
+                    Arrow[{{
+                    $CellContext`RBranchBand[0, 0, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, 0, 200]] + 0.05}, {
+                    $CellContext`RBranchBand[0, 0, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, 0, 200]] + 0.01}}]}]}, {
+                  Graphics[{Thick, 
+                    Arrowheads[Medium], 
+                    RGBColor[0.19, 0.5, 0.08], 
+                    Arrow[{{
+                    $CellContext`RBranchBand[0, $CellContext`Jdprime$$, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, $CellContext`Jdprime$$, 200]] + 
+                    0.05}, {
+                    $CellContext`RBranchBand[0, $CellContext`Jdprime$$, 200], 
+                    
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`RBranchBandSpec[0, 200, 
+                    $CellContext`RBranchBand[0, $CellContext`Jdprime$$, 200]] + 
+                    0.01}}]}], 
+                  Graphics[{Thick, 
+                    Arrowheads[Medium], 
+                    RGBColor[0.24, 0.35, 0.67], 
+                    Arrow[{{
+                    $CellContext`PBranchBand[0, $CellContext`Jdprime$$, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`PBranchBandSpec[0, 200, 
+                    $CellContext`PBranchBand[0, $CellContext`Jdprime$$, 200]] + 
+                    0.05}, {
+                    $CellContext`PBranchBand[0, $CellContext`Jdprime$$, 200], 
+                    ReplaceAll[$CellContext`c, $CellContext`constant] \
+$CellContext`PBranchBandSpec[0, 200, 
+                    $CellContext`PBranchBand[0, $CellContext`Jdprime$$, 200]] + 
+                    0.01}}]}]}]}]}}]}}, Spacings -> {0, -110}]), 
+      "Specifications" :> {
+        Style["ground state quantum number"], {{$CellContext`Jdprime$$, 0, 
+          Derivative[2][
+           Style["J", Italic]]}, 0, 8, 1, ImageSize -> Tiny, Enabled -> 
+         Dynamic[$CellContext`ShowAll$$ == False], Appearance -> "Labeled"}, 
+        Delimiter, 
+        Style[
+        "view all transitions"], {{$CellContext`ShowAll$$, True, ""}, {
+         False, True}, ControlType -> Checkbox}, Delimiter, 
+        Style["color code:"], 
+        Style[
+         Row[{"  ", 
+           Style["P", Italic], " branch (\[CapitalDelta]", 
+           Style["J", Italic], " = -1)"}], 
+         RGBColor[0.24, 0.35, 0.67]], 
+        Style[
+         Row[{"  ", 
+           Style["R", Italic], " branch (\[CapitalDelta]", 
+           Style["J", Italic], " = +1)"}], 
+         RGBColor[0.19, 0.5, 0.08]], Delimiter, 
+        Dynamic[
+         If[$CellContext`ShowAll$$ == False, 
+          If[$CellContext`Jdprime$$ == 0, 
+           Column[{
+             Row[{
+               Style["P", Italic], " branch transition energy"}], 
+             "  no transition", 
+             Row[{"\n", 
+               Style["R", Italic], " branch transition energy"}], 
+             Row[{"  \[CapitalDelta]", 
+               Style["E", Italic], " = ", 
+               SetPrecision[
+                $CellContext`deltaERbranch[$CellContext`Jdprime$$], 5], 
+               " joule"}], 
+             Row[{"       = ", 
+               
+               SetPrecision[$CellContext`deltaERbranch[$CellContext`Jdprime$$]\
+/($CellContext`planckConstant $CellContext`speedOfLight 100), 5], 
+               " \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)"}]}], 
+           Column[{
+             Row[{
+               Style["P", Italic], " branch transition energy"}], 
+             Row[{"  \[CapitalDelta]", 
+               Style["E", Italic], " = ", 
+               SetPrecision[
+                $CellContext`deltaEPbranch[$CellContext`Jdprime$$], 5], 
+               " joule"}], 
+             Row[{"       = ", 
+               
+               SetPrecision[$CellContext`deltaEPbranch[$CellContext`Jdprime$$]\
+/($CellContext`planckConstant $CellContext`speedOfLight 100), 5], 
+               " \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)"}], 
+             Row[{"\n", 
+               Style["R", Italic], " branch transition energy"}], 
+             Row[{"  \[CapitalDelta]", 
+               Style["E", Italic], " = ", 
+               SetPrecision[
+                $CellContext`deltaERbranch[$CellContext`Jdprime$$], 5], 
+               " joule"}], 
+             Row[{"       = ", 
+               
+               SetPrecision[$CellContext`deltaERbranch[$CellContext`Jdprime$$]\
+/($CellContext`planckConstant $CellContext`speedOfLight 100), 5], 
+               " \!\(\*SuperscriptBox[\(cm\), \(-1\)]\)"}]}]], 
+          Style[""]]]}, "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{646., {298., 304.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`population[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`J, 
+          Blank[]], 
+         Pattern[$CellContext`T, 
+          Blank[]]] := 
+       Exp[-($CellContext`rotationalEnergy[$CellContext`v, \
+$CellContext`J]/($CellContext`boltzmannConstant \
+$CellContext`T))]/$CellContext`Qrot[$CellContext`v, $CellContext`T], \
+$CellContext`rotationalEnergy[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`J, 
+          
+          Blank[]]] := $CellContext`planckConstant $CellContext`speedOfLight \
+($CellContext`BValue 
+          100 $CellContext`J ($CellContext`J + 
+           1) - $CellContext`\[Alpha]Value 
+         100 ($CellContext`v + 1/2) $CellContext`J ($CellContext`J + 
+          1) - $CellContext`DValue 
+         100 $CellContext`J^2 ($CellContext`J + 
+           1)^2), $CellContext`planckConstant = 
+       6.6260689600000005`*^-34, $CellContext`speedOfLight = 
+       299792458, $CellContext`BValue = 10.59341, $CellContext`\[Alpha]Value = 
+       0.30718, $CellContext`DValue = 
+       0.0005319400000000001, $CellContext`boltzmannConstant = 
+       1.3806504*^-23, $CellContext`Qrot[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`T, 
+          Blank[]]] := 
+       Sum[(2 $CellContext`Js + 1) 
+         Exp[-($CellContext`rotationalEnergy[$CellContext`v, \
+$CellContext`Js]/($CellContext`boltzmannConstant $CellContext`T))], \
+{$CellContext`Js, 0, 20, 1}], $CellContext`rovibEnergy[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`J, 
+          
+          Blank[]]] := $CellContext`planckConstant $CellContext`speedOfLight \
+($CellContext`\[Omega]eValue 
+          100 ($CellContext`v + 1/2) - $CellContext`\[Omega]e\[Chi]eValue 
+         100 ($CellContext`v + 1/2)^2 + $CellContext`BValue 
+          100 $CellContext`J ($CellContext`J + 
+           1) - $CellContext`\[Alpha]Value 
+         100 ($CellContext`v + 1/2) $CellContext`J ($CellContext`J + 
+          1) - $CellContext`DValue 
+         100 $CellContext`J^2 ($CellContext`J + 
+           1)^2), $CellContext`\[Omega]eValue = 
+       2990.946, $CellContext`\[Omega]e\[Chi]eValue = 
+       52.8186, $CellContext`ELevelDiagramFrameLabels := {{
+          SetPrecision[$CellContext`rovibEnergy[0, 0] 10^20, 3], ""}, {
+          SetPrecision[$CellContext`rovibEnergy[0, 1] 10^20, 3], ""}, 
+         SetPrecision[$CellContext`rovibEnergy[0, 2] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 3] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 4] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 5] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 6] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 7] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 8] 10^20, 3], 
+         SetPrecision[$CellContext`rovibEnergy[0, 9] 10^20, 
+          3], {$CellContext`rovibEnergy[1, 0] 10^20 - 2.5, 
+          ""}, {$CellContext`rovibEnergy[1, 1] 10^20 - 2.5, 
+          ""}, {$CellContext`rovibEnergy[1, 2] 10^20 - 2.5, 
+          SetPrecision[8.8, 3]}, {$CellContext`rovibEnergy[1, 3] 10^20 - 2.5, 
+          
+          SetPrecision[8.92, 3]}, {$CellContext`rovibEnergy[1, 4] 10^20 - 2.5, 
+          SetPrecision[9.08, 3]}, {$CellContext`rovibEnergy[1, 5] 10^20 - 2.5, 
+          SetPrecision[9.28, 3]}, {$CellContext`rovibEnergy[1, 6] 10^20 - 2.5, 
+          SetPrecision[9.52, 3]}, {$CellContext`rovibEnergy[1, 7] 10^20 - 2.5, 
+          SetPrecision[9.8, 3]}, {$CellContext`rovibEnergy[1, 8] 10^20 - 2.5, 
+          
+          SetPrecision[10.1, 3]}, {$CellContext`rovibEnergy[1, 9] 10^20 - 2.5, 
+          SetPrecision[10.5, 3]}}, $CellContext`PBranchBand[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`J, 
+          Blank[]], 
+         Pattern[$CellContext`T, 
+          Blank[]]] := 
+       Simplify[$CellContext`SVibRot[$CellContext`v + 1, $CellContext`J - 
+           1] - $CellContext`SVibRot[$CellContext`v, $CellContext`J]], \
+$CellContext`SVibRot[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`J, 
+          Blank[]]] := $CellContext`\[Omega]eValue ($CellContext`v + 
+          1/2) - $CellContext`\[Omega]e\[Chi]eValue ($CellContext`v + 
+          1/2)^2 + $CellContext`BValue $CellContext`J ($CellContext`J + 
+          1) - $CellContext`\[Alpha]Value ($CellContext`v + 
+         1/2) $CellContext`J ($CellContext`J + 
+         1) - $CellContext`DValue $CellContext`J^2 ($CellContext`J + 
+          1)^2, $CellContext`RBranchBand[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`J, 
+          Blank[]], 
+         Pattern[$CellContext`T, 
+          Blank[]]] := 
+       Simplify[$CellContext`SVibRot[$CellContext`v + 1, $CellContext`J + 
+           1] - $CellContext`SVibRot[$CellContext`v, $CellContext`J]], \
+$CellContext`PBranchBandSpec[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`T, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]]] := 
+       Sum[$CellContext`J $CellContext`population[$CellContext`v, \
+$CellContext`J, $CellContext`T] PDF[
+           NormalDistribution[
+            $CellContext`PBranchBand[$CellContext`v, $CellContext`J, \
+$CellContext`T], 0.8], $CellContext`x], {$CellContext`J, 1, 20, 
+          1}], $CellContext`RBranchBandSpec[
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`T, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]]] := 
+       Sum[($CellContext`J + 
+          1) $CellContext`population[$CellContext`v, $CellContext`J, \
+$CellContext`T] PDF[
+           NormalDistribution[
+            $CellContext`RBranchBand[$CellContext`v, $CellContext`J, \
+$CellContext`T], 0.8], $CellContext`x], {$CellContext`J, 0, 20, 1}], 
+       Attributes[Derivative] = {
+        NHoldAll, ReadProtected}, $CellContext`deltaERbranch[
+         Pattern[$CellContext`J, 
+          Blank[]]] := $CellContext`rovibEnergy[
+         1, $CellContext`J + 1] - $CellContext`rovibEnergy[
+        0, $CellContext`J], $CellContext`deltaEPbranch[
+         Pattern[$CellContext`J, 
+          Blank[]]] := $CellContext`rovibEnergy[
+         1, $CellContext`J - 1] - $CellContext`rovibEnergy[
+        0, $CellContext`J]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.760286486666895*^9, {3.760286528618849*^9, 3.760286541145309*^9}, {
+   3.7602865909734383`*^9, 3.760286607105295*^9}, 3.760286843268237*^9, 
+   3.7602868764617443`*^9, 3.760359514560293*^9, 3.760359644683126*^9, 
+   3.760359740686027*^9, 3.760359786089233*^9, {3.76035989232393*^9, 
+   3.760359894118032*^9}, {3.7603601531710167`*^9, 3.760360154876626*^9}, {
+   3.760360237124674*^9, 3.760360238672196*^9}, {3.760360541482615*^9, 
+   3.760360548501534*^9}, 3.7603609531501503`*^9, {3.7603610243390102`*^9, 
+   3.760361072337775*^9}, 3.760361195460568*^9, {3.760361607351966*^9, 
+   3.760361610047594*^9}, 3.7603616479996862`*^9, {3.7603618151564302`*^9, 
+   3.760361834836916*^9}},
+ CellLabel->"Out[44]=",ExpressionUUID->"114ad954-7f4b-4d76-923b-aa65a2ffe6d4"]
+}, Open  ]]
+},
+WindowSize->{1099, 961},
+WindowMargins->{{183, Automatic}, {Automatic, 168}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
+StyleDefinitions->FrontEnd`FileName[{$RootDirectory, "Users", "mskblackbelt", 
+   "Library", "Mathematica", "SystemFiles", "FrontEnd", "StyleSheets"}, 
+  "NonBreakingDefault.nb", CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 88, 0, 20, "InitializationSection",ExpressionUUID->"5c4c682b-b9aa-48c7-b197-3725ed2fb80c"],
+Cell[649, 22, 22257, 548, 1133, "Input",ExpressionUUID->"3a585fdc-1bda-4e42-9b5d-6670e5dd5fce",
+ InitializationCell->True,
+ CellID->1344195678],
+Cell[22909, 572, 84, 0, 20, "ManipulateSection",ExpressionUUID->"0856d56c-1dde-4d0a-921e-afa979066c8f"],
+Cell[CellGroupData[{
+Cell[23018, 576, 98150, 1816, 3590, "Input",ExpressionUUID->"62ee39bd-7145-48e4-a5dd-957f760e2eee",
+ CellID->791049518],
+Cell[121171, 2394, 28630, 628, 655, "Output",ExpressionUUID->"114ad954-7f4b-4d76-923b-aa65a2ffe6d4"]
+}, Open  ]]
+}
+]
+*)
+
