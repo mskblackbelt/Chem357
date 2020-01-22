@@ -23,31 +23,20 @@ Chemistry 357 is a physical chemistry laboratory course. By the end of this cour
 
 : This course is intended to help you grow as a scientist by: 
 : 
-1. exposing you to a variety of modeling and characterization techniques, and
-2. guiding you towards the development of better reasoning and critical thinking skills for problem solving.
+1. exposing you to a variety of chemical modeling and characterization techniques, and
+2. guiding your development of better reasoning and critical thinking skills for problem solving.
 
-Books
+Course Materials
 : 
 **Required:** One carbon copy laboratory notebook (available in the Hunter College bookstore). 
-You do not need to buy a textbook for this class. I will provide handouts or post the relevant material on Blackboard for you. You should print out each lab and _must_ complete a summary of the lab procedure in your notebook before you come to class. 
+There is no textbook for this course. I will provide handouts or post the relevant material on Blackboard for you. You should print out each lab and _must_ complete a summary of the lab procedure in your notebook before you come to class. 
 
 : 
 If you are interested in purchasing a physical laboratory book (entirely optional), many of our experiments will be modified from the standard physical chemistry laboratory lab manual by Garland, Nibler, and Shoemaker: _Experiments in Physical Chemistry,_ 7th Ed., 2003, McGraw-Hill, New York, NY.
- 
-Grading
-: 
-Your grade for this course will be based on the following factors:
-: 
-- Attendance and participation in each and every laboratory period (40%)
-- A series of laboratory assignments (lab reports) to be completed at home. (60%)
-	- Pre-lab preparation (10% of each lab report)
-
-: 
-Lab writeups for are due at the start of the class period following the completion lab. Writeups should be clear, concise evaluations of the experiment, including any observations, experimental procedures, instrumental methods and instrumentation used, computational methods and results, and any additional analyses you performed.  
 
 Web site
 : 
-As part of the course we will be using [Blackboard](https://bbhosted.cuny.edu).  Instructions on how to access the course website on Blackboard can be found at: <http://bb.hunter.cuny.edu>. In addition to instructions for individual labs, announcements and additional resources will occasionally be posted on Blackboard. 
+Instructions on how to access the course website on Blackboard can be found on the [Hunter College BlackBoard Announcement page][bb-announce]. In addition to instructions for individual labs, announcements and additional resources will occasionally be posted on Blackboard. 
 
 Attendance and Tardiness
 : 
@@ -55,12 +44,33 @@ Your attendance in each and every lab is mandatory. There will be no makeup labs
 
 Lab Safety
 :
-- First and foremost you will be _**required**_ to wear safety goggles at _**all**_ times when in the laboratory. If you are caught without safety glasses on more than one occasion you will be asked to leave the lab.
+- First and foremost you will be **required** to wear safety goggles at **all** times when in the laboratory. If you are caught without safety glasses on more than one occasion you will be asked to leave the lab.
 - Open-toed shoes are not permitted in the laboratory.
 - No food or drink is allowed in the laboratory at any time.
-- Do not sniff or taste _**any**_ of the chemicals you will be using.
+- Do not sniff or taste **any** of the chemicals you will be using.
 - Toxic substances must be used only under the hood. You will be responsible for looking up and understanding the MSDS of **all** chemicals used in the laboratory.
 - All cell phones, pagers, CD players, MP3 players, etc. must be turned off (or at least on silent) while in the laboratory.
+
+Grading
+: 
+Your grade for this course will be based on the following factors:
+: 
+- Attendance and participation in every laboratory period (**40%** of semester grade)
+- A series of laboratory summaries (5) to be completed at home (**20%** of semester grade)
+	- Pre-lab preparation (10% of each lab report)
+	- Summaries should include Procedure, Results/Discussion, and Appendix sections (60 points total)
+- A series of laboratory assignments (lab reports, 3) to be completed at home. (**30%** of semester grade)
+	- Pre-lab preparation (10% of each lab report)
+	- Lab reports should be written in the style of *The Journal of Physical Chemistry A* (JPCA). If you are unfamiliar with this style, please look up a few articles in a recent issue to familiarize yourself with the format. The [Information for Authors][jpca-auth-info] page and [Author Guidelines][jpca-auth-guide] (specifically the author guidelines section on *Manuscript Text Components*) may be helpful if you aren't sure how to structure a manuscript. Templates (MS Word and LaTeX) are available for download on the course Blackboard page. 
+- A final group presentation based on one of the labs performed during the semester. More details will be given later in the semester. (**10%** of semester grade)
+: 
+Pre-lab preparation is worth 10% of the grade for each summary or report. Summaries are due one week after the completion of the lab, while full reports are due two weeks after completing the lab. Write-ups should be clear, concise evaluations of the experiment, including any observations, experimental procedures, instrumental methods and instrumentation used, computational methods and results, and any additional analyses you performed. Please see the JPCA author guidelines for details on these sections. 
+:
+The table below shows which sections should be included in each assignment and how many points each section is worth. 
+<!--BREAK-->
+{{Lab report rubric.md}}
+
+<!--BREAK--> 
 
 Academic Integrity Statement
 : 
@@ -73,19 +83,16 @@ ADA Statement
 : 
 In compliance with the ADA and with Section 504 of the Rehabilitation Act, Hunter College is committed to ensuring educational access and accommodations for all its registered students. Hunter College’s students with disabilities and medical conditions are encouraged to register with the Office of AccessABILITY for assistance and accommodation. For information and appointment contact the Office of AccessABILITY (located in room E1214) or call 212-772-4857 or VRS 646-755-3129.
 
-<!--BREAK-->
-
 Hunter College Policy on Sexual Misconduct
 : 
 In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirms the prohibition of any sexual misconduct, which includes sexual violence, sexual harassment, and gender-based harassment retaliation against students, employees, or visitors, as well as certain intimate relationships. Students who have experienced any form of sexual violence on or off campus (including CUNY-sponsored trips and events) are entitled to the rights outlined in the Bill of Rights for Hunter College.
 
 : 
 1. Sexual Violence: Students are strongly encouraged to immediately report the incident by calling 911, contacting NYPD Special Victims Division Hotline (646-610-7272) or their local police precinct, or contacting the College's Public Safety Office (212-772-4444).
-2. All Other Forms of Sexual Misconduct: Students are also encouraged to contact the College's Title IX Campus Coordinator, Dean John Rose ([jtrose@hunter.cuny.edu](mailto:jtrose@hunter.cuny.edu) or 212-650-3262) or Colleen Barry ([colleen.barry@hunter.cuny.edu](mailto:colleen.barry@hunter.cuny.edu) or 212-772-4534) and seek complimentary services through the Counseling and Wellness Services Office, Hunter East 1123.  
-CUNY Policy on Sexual Misconduct Link: <http://www.cuny.edu/about/administration/offices/la/Policy-on-Sexual-Misconduct-12-1-14-with-links.pdf>
+2. All Other Forms of Sexual Misconduct: Students are also encouraged to contact the College's Title IX Campus Coordinator, Dean John Rose (<jtrose@hunter.cuny.edu>, 212-650-3262) or Colleen Barry (<colleen.barry@hunter.cuny.edu>, 212-772-4534) and seek complimentary services through the Counseling and Wellness Services Office, Hunter East 1123.  For more information, view the [CUNY Policy on Sexual Misconduct][cuny-harassment]. 
 
 <!-- BREAK -->
-## Schedule of Laboratory Experiments ##
+## Course Schedule ##
 
 | Week	| Date 	| Groups 1 & 2 	| Groups 3 & 4	| 
 | :-------	| :------	|  ---------	| -----------	| 
@@ -104,7 +111,7 @@ CUNY Policy on Sexual Misconduct Link: <http://www.cuny.edu/about/administration
 | 13			| 	5/4 	| Final Presentations 						| Final Presentations | 
 | 14			| 	5/11 	| Checkout 									| Checkout | 
 
-## Brief Description of Each Laboratory Experiment: ##
+## Description of Experiments ##
 
 1.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction 
 : In this two-week experiment, you will determine the rate constant and collision diameter for a diffusion-controlled reaction using fluorescence quenching.
@@ -131,6 +138,10 @@ CUNY Policy on Sexual Misconduct Link: <http://www.cuny.edu/about/administration
 :**Instrumentation used:** UV-Vis, Fluorimeter
 
 7.	Final Presentations
-: Each group will be assigned a lab from the semester to create a detailed presentation for their instructors and classmates. Presentations will be given in class at the end of the semester. 
+: Each group will be assigned a lab from the semester. Groups will create a detailed presentation related to the lab for their instructor and classmates. Presentations will be given at the end of the semester. 
 
 
+[bb-announce]: http://bb.hunter.cuny.edu
+[jpca-auth-info]: https://pubs.acs.org/page/jpcafh/submission/authors.html
+[jpca-auth-guide]: https://publish.acs.org/publish/author_guidelines?coden=jpcafh
+[cuny-harassment]: http://www.cuny.edu/about/administration/offices/la/Policy-on-Sexual-Misconduct-12-1-14-with-links.pdf
