@@ -1,0 +1,40 @@
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+% \RequirePackage[cache=false]{minted}
+\input{header.tex}
+% \tcbuselibrary{minted}
+\usepackage[bibstyle=numeric,citestyle=numeric-comp,sortcites,sorting=none,defernumbers=true]{biblatex}
+\addbibresource{prop_err.bib}
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+
+\title{Introduction to Error Analysis}
+
+\author{Dustin Wheeler}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	\noindent
+	In this exercise, students will be introduced to basic concepts in scientific error analysis and the propagation of error in calculations. 
+	Upon completion, you should be familiar with the sources of experimental error, be able to track the impact of those errors through a series of calculations, and accurately report the uncertainty in your final reported values.\thanks{Transcribed (with corrections) from \cite{AuthorA}} 
+\end{abstract}
+
+\section{Introduction} % (fold)
+\label{sec:intro}
+
+This exercise assumes that the reader is familiar with the concepts of \emph{significant figures} and \emph{accuracy} and \emph{precision} as they apply to experimental results. 
+Additionally, the reader should be comfortable with introductory statistical analysis, simple algebra, and derivatives. 
+
+
+
+% section intro (end)
+
+\nocite{*}
+\printbibliography[category=cited]% default title for `article` class: "References"
+
+\printbibliography[title={Further Reading},notcategory=cited]
+
+\end{document}
