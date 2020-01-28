@@ -19,12 +19,12 @@ Email: <dustin.wheeler@hunter.cuny.edu>
 
 Course goal
 : 
-Chemistry 357 is a physical chemistry laboratory course. By the end of this course, you will have experience with the a number of techniques related to kinetics and quantum chemical phenomena. You will learn a variety of instrumental and computational techniques designed to help you understand fundamental chemical processes.  
+Chemistry 357 is a laboratory course in physical chemistry. By the end of this course, you will have experience with a  variety of instrumental and computational techniques designed to help you understand fundamental processes  related to kinetics and quantum chemical phenomena.  
 
 : This course is intended to help you grow as a scientist by: 
 : 
 1. exposing you to a variety of chemical modeling and characterization techniques, and
-2. guiding your development of better reasoning and critical thinking skills for problem solving.
+2. developing your reasoning and critical thinking skills for better problem solving.
 
 Course Materials
 : 
@@ -59,7 +59,7 @@ Your grade for this course will be based on the following factors:
 - A series of laboratory summaries (5) to be completed at home (**20%** of semester grade)
 	- Pre-lab preparation (10% of each lab report)
 	- Summaries should include Procedure, Results/Discussion, and Appendix sections (60 points total)
-- A series of laboratory assignments (lab reports, 3) to be completed at home. (**30%** of semester grade)
+- A series of laboratory reports (3) to be completed at home (**30%** of semester grade)
 	- Pre-lab preparation (10% of each lab report)
 	- Lab reports should be written in the style of *The Journal of Physical Chemistry A* (JPCA). If you are unfamiliar with this style, please look up a few articles in a recent issue to familiarize yourself with the format. The [Information for Authors][jpca-auth-info] page and [Author Guidelines][jpca-auth-guide] (specifically the author guidelines section on *Manuscript Text Components*) may be helpful if you aren't sure how to structure a manuscript. Templates (MS Word and LaTeX) are available for download on the course Blackboard page. 
 - A final group presentation based on one of the labs performed during the semester. More details will be given later in the semester. (**10%** of semester grade)
@@ -113,31 +113,40 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 
 ## Description of Experiments ##
 
-1.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction 
+1.	Introduction to Data Analysis and Plotting (Summary)
+: This one-week exercise will give you an introduction to basic plotting techniques and show you how to work with data in a variety of digital formats. 
+: **Instrumentation used:** Microsoft Excel
+
+2.	Introduction to Error Analysis (Summary)
+: This one week exercise will guide you through the principles of error analysis, propagation of error, and probability distributions. 
+: **Instrumentation used:** None
+
+3.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction (Summary)
 : In this two-week experiment, you will determine the rate constant and collision diameter for a diffusion-controlled reaction using fluorescence quenching.
 :**Instrumentation used:** Fluorimeter
 
-2.	Polymers - Molecular Weight and Monomer Linkage Properties of Poly(vinyl alcohol) 
+<!--BREAK-->
+4.	Polymers - Molecular Weight and Monomer Linkage Properties of Poly(vinyl alcohol) (Summary)
 : Using a viscometer, you will determine the average molecular weight of a polymer chain and the fraction of head-to-head monomer linkages in the polymer.
 :**Instrumentation used:** Ostwald viscometer
 
-3.	NMR - Determination of Keto-Enol Equilibrium Constants via NMR Spectroscopy
+5.	NMR - Determination of Keto-Enol Equilibrium Constants via NMR Spectroscopy (Report)
 : Using nuclear magnetic resonance spectroscopy, you will determine the equilibrium composition of various keto-enol mixtures. By investigating a series of concentrations, you will determine the equilibrium constant for the conversion. 
 :**Instrumentation used:** NMR spectrometer, GaussView6
 
-4.	Introduction to Computation Chemistry
+6.	Introduction to Computation Chemistry (Summary)
 : This lab will serve to introduce you to the Linux operating system and Unix command line, after which you will learn to run some rudimentary quantum calculations using the Gaussian computational chemistry software package.
 :**Instrumentation used:** Command line shell, Python, Gaussian16, GaussView6 
 
-5.	HCl/DCl - Vibrational-Rotational Spectra of HCl and DCl 
+7.	HCl/DCl - Vibrational-Rotational Spectra of HCl and DCl (Report)
 : In this two-week experiment you will synthesize a gaseous mixture of hydrogen chloride and deuterium chloride to be analyzed using the FTIR spectrometer. You will then perform basic computations on the two molecules using the collected data. 
 :**Instrumentation used:** FTIR, Gaussian16
 
-6. FRET - Emission Spectroscopy: Biophysics and Förster Resonance Energy Transfer (FRET)
+8. FRET - Emission Spectroscopy: Biophysics and Förster Resonance Energy Transfer (FRET) (Report)
 : In this two-week experiment, you will learn about quenching via Förster Resonance Energy Transfer, determine the free energy of unfolding a protein, and determine intramolecular distances in the partially-unfolded and fully-folded structures. 
 :**Instrumentation used:** UV-Vis, Fluorimeter
 
-7.	Final Presentations
+9.	Final Presentations
 : Each group will be assigned a lab from the semester. Groups will create a detailed presentation related to the lab for their instructor and classmates. Presentations will be given at the end of the semester. 
 
 

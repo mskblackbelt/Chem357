@@ -1,5 +1,5 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
-\RequirePackage[cache=false]{minted}
+\RequirePackage{minted}
 \input{header.tex}
 \usepackage{menukeys}
 \tcbuselibrary{minted}
@@ -77,17 +77,18 @@ Here are the important parts of a plot, along with a brief description and guide
 \label{basic-plotting-and-linear-fits}
 
 Your first task is to take the data in the file \texttt{data.txt} and import it into a new Excel workbook. 
-Begin by downloading the input files from the \Verb{Plotting} folder on Blackboard. 
-This folder contains a few datasets in some plain-text formats. 
+Begin by downloading the input files from the \Verb{Plotting Tutorial} folder on Blackboard. 
+This folder contains a few datasets in various formats. 
 The file extension doesn't always tell you what type of information is in a file and can sometimes
 lead you astray. 
 For this exercise, the file \texttt{data.txt} contains a set of ``tab-delimited'' data, meaning that the values in a row are separated by tab characters. 
 Another common format is ``comma-delimited'' or ``comma-separated'' data, such as the dataset in \Verb{anscombe.csv}. 
 You will find that different instruments have different defaults for exporting data, but these two are the most common.
+Sometimes, a \Verb{.dat} extension might be used for a plain-text file to indicate `data' regardless of the format or delimiter type. 
 
 Open up a new Excel workbook and save it to a safe location (if this is a lab computer, your best bet is to save directly to your own flash drive). 
 In the workbook, pull in the data from \Verb{data.txt} by selecting the \textbf{Data} tab in the Ribbon and clicking on \textbf{From Text} (see \cref{fig:import_data}). 
-On a Mac, you can also select \textbf{File → Import} in the menu bar.
+On a Mac, you can also select \textbf{File \blacktriangleright Import} in the menu bar.
 
 \begin{figure}[ht]
 	\centering
@@ -142,7 +143,7 @@ Excel has a function called \href{https://support.office.com/en-us/article/LINES
 which calculates descriptive statistics on a line using a linear least-squares method to find the best fit. 
 Examples can be seen on the linked page, but we will run through the simplest example, a straight line.
 
-Return to your data spreadsheet and highlight a \( 2 \times 5  \) grid of cells (the cells directly under or adjacent to your dataset will do). 
+Return to your data spreadsheet and highlight a \( 2 \times 5  \) grid of empty cells (the cells directly under or adjacent to your dataset will do). 
 Begin typing the following (your keystrokes will automatically go into the upper left cell):
 
 \tcbset{
@@ -158,7 +159,7 @@ Begin typing the following (your keystrokes will automatically go into the upper
 \end{tcblisting}
 
 Excel will pop up a hint telling you what information needs to be entered next. 
-The first range should be your \( y \)-values (cells \textbf{B2} through \textbf{B22}), the second range is your \( x \)-values (\textbf{A2} through \textbf{A22}).
+The first range should be your \( y \)-values (cells \textbf{B2} through \textbf{B22}), while the second range is your \( x \)-values (\textbf{A2} through \textbf{A22}).
 The third and fourth arguments are optional. 
 Setting the third argument to \Verb{TRUE} will tell the function to calculate a \( y \)-intercept value, while an entry of \Verb{FALSE} will set the intercept equal to zero. 
 The fourth argument toggles additional regression statistics using \Verb{TRUE} or \Verb{FALSE}. 
@@ -203,10 +204,10 @@ This data was taken from \href{https://doi.org/10.1080/00031305.1973.10478966}{a
 \section{Column Manipulation and Plotting Spectra} % (fold)
 \label{column-manipulation-and-plotting-spectra}
 
-From the set of input files you downloaded from Blackboard, open the file labeled \Verb{FTIR_UVVis_template.xltx}. 
-Copy the data from the FTIR sheet and paste it into your plotting document in a new sheet called ``FTIR''. 
+From the set of input files you downloaded from Blackboard, open the file labeled \Verb{FTIR_UVVis_template.xltx}.\footnote{This template is handy to keep around for future work.} 
+Copy the data from the FTIR sheet and paste it into your plotting document in a new sheet called \textbf{FTIR}. 
 Once you have this data in a sheet, insert a new row at the top of the data (for column labels) and a new column between columns \textbf{A} and \textbf{B}. 
-Label column \textbf{A} ``Wavenumber (\si{\cm^{-1}})'', column \textbf{B} as ``Wavelength (\si{\um})'', column \textbf{C} as ``\% Transmission'', and column \textbf{D} as ``Absorbance''.\footnote{What are the relevant units for \%T and A?}
+Label column \textbf{A} ``Wavenumber (\si{\cm^{-1}})'', the new column \textbf{B} as ``Wavelength (\si{\um})'', column \textbf{C} as ``\% Transmission'', and column \textbf{D} as ``Absorbance''.\footnote{What are the relevant units for \%T and A?}
 
 You will be automatically filling in values for columns \textbf{B} and \textbf{D} based on the data in \textbf{A} and \textbf{C}. 
 Click on cell \textbf{B2} and enter the following:
@@ -217,7 +218,7 @@ minted language=vbscript}
 \end{tcblisting}
 
 This is a conversion from wavenumber to wavelength. 
-You should be able to derive this equation quickly on your own…
+You should be able to derive this equation quickly on your own…\footnote{Hint: label the units and work through the dimensional analysis.}
 
 Click on cell \textbf{B2}. 
 You can perform this next step in two ways. 
