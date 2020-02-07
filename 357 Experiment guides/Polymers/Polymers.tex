@@ -14,11 +14,6 @@
 
 \author{Dustin Wheeler}
 
-%\date{28 March 2010} % without \date command, current date is supplied
-
-%\geometry{showframe} % display margins for debugging page layout
-
-
 \begin{document}
 
 \maketitle% this prints the handout title, author, and date
@@ -669,6 +664,11 @@ As previously stated, your lab report should consist of the following parts:
 \nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
-\printbibliography[title={Further Reading},notcategory=cited]
+\printbibliography[
+title={Further Reading},
+notcategory=cited,
+resetnumbers,
+prefixnumbers={F},
+]
 
 \end{document}

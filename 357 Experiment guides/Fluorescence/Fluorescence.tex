@@ -4,7 +4,15 @@
 	\DeclareSIUnit\erg{erg}
 	\DeclareSIUnit\psig{psig}
 
-\usepackage[bibstyle=numeric,citestyle=numeric-comp,sortcites,sorting=none,defernumbers=true]{biblatex}
+\usepackage[
+	bibstyle=numeric,
+	citestyle=numeric-comp,
+	sortcites,
+	sorting=none,
+	defernumbers=true,
+	backend=biber,
+	]
+	{biblatex}
 \addbibresource{fluor.bib}
 	\DeclareBibliographyCategory{cited}
 	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
@@ -25,7 +33,7 @@ The objective of this lab is to determine the rate constant and collision diamet
 %\printclassoptions
 
 
-\section{Introduction} % (fold)
+\section{Introduction test} % (fold)
 \label{sec:intro}
 
 In this experiment, you will study a very fast bimolecular reaction between two different species in solution. 
@@ -185,12 +193,13 @@ This approach, developed by Einstein using Stokes's law, allows the diffusion co
 	\label{eq:rateapprox}
 \end{equation}
 where \( \overline{R} = k_B N_A \) is the ideal gas constant.%
-\sidenote{This is the \emph{only} equation in which \( \overline{R} \) refers to the gas constant. 
+\sidenote{Note the distinction between \( \overline{R} \) and \( R \). 
+\( \overline{R} \) appears \emph{only} in this equation and refers to the gas constant. 
 Everywhere else, \( R \) is the summed ``collision radii'' of the interacting species. 
 It is this collision radius that we are trying to find in this experiment, along with the rate constant \( k_1 \). 
 Also, keep in mind that \cref{eq:rateapprox} represents and \emph{alternative} method for estimating the diffusion rate constant, \( k_1 \), based on bulk parameters of the solvent, rather than detailed knowledge of the molecular parameters \( R \) and \( D \).}
 \Cref{eq:rateapprox}, which is often referred to as the Stokes-Einstein-Smoluchowski (SES) equation, holds when the reactants \ch{A} and \ch{B} are different and their sizes are larger than that of the solvent molecules. 
-The indicated units are obtained if \( \overline{R} \) and \( \eta \) are expressed in SI units, such that \( \overline{R} = \SI{8.314}{\kJ \per \mol \per \K} \) and \( \eta = \si[inter-unit-product=\ensuremath{{}\cdot{}}]{\Pa \s} \).
+The indicated units are obtained if \( \overline{R} \) and \( \eta \) are expressed in SI units, such that \( \overline{R} = \SI{8.314}{\kJ \per \mol \per \K} \) and \( \eta \) is in \si[inter-unit-product=\ensuremath{{}\!\cdot\!{}}]{\Pa \s}.
 % section mass_trans (end)
 
 \section{Fluorescence Quenching} % (fold)
@@ -446,7 +455,6 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 Your lab report should consist of the following parts:
 \begin{description}
 	\item[Title, Author and Date]
-	\item[Introduction and Objective] A paragraph describing what we hope to find in this experiment, and how.
 	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
 	\item[Results and Discussion] This should include the following:
 	\begin{enumerate}
@@ -470,13 +478,15 @@ Your lab report should consist of the following parts:
 		Since the observed collision radius, \( R \), should be the sum of these two radii, do your experimental values make sense?
 		\item Answer any four of the questions in the section ``Questions and Further Thoughts''. This should not be a separate section, but should instead be included organically in the discussion as a way of filling it out.\sidenote{Do \textbf{not} submit a lab report with a section labeled ``Answers to Further Questions'', or some such nonsense… 
 		Your goal is to present a lab report akin to those presented in scientific journals. 
-		If you're not familiar with the style, skim the latest issue of \emph{J. Am. Chem. Soc.} or \emph{J. Chem. Phys.}}
+		If you're not familiar with the style, skim the latest issue of \emph{J. Chem. Phys.}}
 	\end{enumerate}
-	\item[Conclusion]
 	\item[References]
 	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
 	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
 \end{description}
+
+\noindent You do \emph{not} need to include uncertainty calculations for this lab. 
+
 % section lab_report_guidelines (end)
 
 
@@ -484,7 +494,12 @@ Your lab report should consist of the following parts:
 \nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
-\printbibliography[title={Further Reading},notcategory=cited]
+\printbibliography[
+title={Further Reading},
+notcategory=cited,
+resetnumbers,
+prefixnumbers={F},
+]
 
 
 \end{document}
