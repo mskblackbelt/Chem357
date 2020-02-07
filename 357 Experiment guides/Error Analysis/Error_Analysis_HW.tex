@@ -62,7 +62,7 @@ tick label style={font=\Large}
 \label{sec:homework_problems_error_propagation}
 
 \begin{enumerate}
-	\item In each of the following cases, determine the answer and its error, assuming that the errors to the relevant quantities involved in the calculation are uncorrelated (\emph{i.e.,} the errors add in quadrature).\marginnote{This problem is from \autocite{lyons1991data}.}
+	\item In each of the following cases, determine the answer and its error, assuming that the errors to the relevant quantities involved in the calculation are uncorrelated (\emph{i.e.,} the errors add in quadrature).\marginnote{This problem is from \textcite{lyons1991data}.}
 	\begin{enumerate}
 		\item Determine the distance between the points \( \br{\num{0.0(2)}, \num{0.0(3)}} \) and \( \br{\num{3.0(3)}, \num{4.0(2)}} \), and the angle that the line joining them makes with the \( x \) axis. 
 		\item The number, \( N \), of particles surviving a distance, \( x \), in a medium is given by \[ 
@@ -81,13 +81,13 @@ tick label style={font=\Large}
 			\item \( x = \SI{4.0(1)}{\m} \)?
 		\end{enumerate}
 		
-		% \item The molar specific heat, \( c_{\textsc{m}} \), of a metal at low temperature, \( T \), is given by \[
-		% 	c_{\textsc{m}} = a T + b T^3 \, .
-		% \]
-		% If \( a = \SI{1.35(5)}{\mJ\per\mol\K^2} \), \( b = \SI{0.021(1)}{\mJ\per\mol\K^4} \), and \( T = \SI{5.0(5)}{\K} \), what is the value of \( c_{\textsc{m}} \)?
+		\item The molar specific heat, \( c_{\textsc{m}} \), of a metal at low temperature, \( T \), is given by \[
+			c_{\textsc{m}} = a T + b T^3 \, .
+		\]
+		If \( a = \SI{1.35(5)}{\mJ\per\mol\K^2} \), \( b = \SI{0.021(1)}{\mJ\per\mol\K^4} \), and \( T = \SI{5.0(5)}{\K} \), what is the value of \( c_{\textsc{m}} \)?
 	\end{enumerate}
 	
-	\item\marginnote{The following problems come from \autocite{taylor1997error}.} Evaluate each of the following:
+	\item\marginnote{The following problems come from \textcite{taylor1997error}.} Evaluate each of the following:
 	\begin{enumerate}
 		\item \( \br{\num{5.6(7)} + \num{3.70(3)}} \)
 		
@@ -110,7 +110,7 @@ tick label style={font=\Large}
 			m &= \SI{18(1)}{\g} 
 		\end{align*}
 	\begin{enumerate}
-		\item Use the provisional rules (3.4 and 3.8 in the text) to compute the following quantities with their absolute and relative uncertainties (assuming the errors are correlated, \emph{i.e., not} independent and random):
+		\item Use the provisional rules (eqs. 3.4 and 3.8 in the text) to compute the following quantities with their absolute and relative uncertainties (assuming the errors are correlated, \emph{i.e., not} independent and random):
 		\begin{enumerate}
 			\item \( a + b + c \)
 			\item \( a + b - c \)
@@ -211,15 +211,15 @@ tick label style={font=\Large}
 	\item If you measure two independent variables as \[
 		x = \num{6.0(1)} \quad \text{and} \quad y = \num{3.0(1)} \, ,
 	\]
-	and use these values to calculate \( q = xy + x^2/y \), what will be your answer and its uncertainty?\footnote{You must use the general rule (3.47 in \autocite{taylor1997error} to find \( \delta q \). To simplify your calculation, do it first by finding the two separate contributions \( \delta q_x \) and \( \delta q_y \) as defined in rules 3.50 and 3.51, then combine them inquadrature.}
+	and use these values to calculate \( q = xy + x^2/y \), what will be your answer and its uncertainty?\marginnote[-4\baselineskip]{You must use the general rule (eq. 3.47 in \textcite{taylor1997error} to find \( \delta q \). To simplify your calculation, do it first by finding the two separate contributions \( \delta q_x \) and \( \delta q_y \) as defined in rules 3.50 and 3.51, then combine them inquadrature.}
 	
-	\item If an object is placed at a distance \( p \) from a lens and an image is formed at a distance \( q \) from the lens, the lens's focal length can be found as\sidenote{This equation follows from the ``lens equation'', \( 1/f = (1/p) + (1/q) \).} 
+	\item If an object is placed at a distance \( p \) from a lens and an image is formed at a distance \( q \) from the lens, the lens's focal length can be found as\sidenote{This equation follows from the \emph{lens equation}, \( 1/f = (1/p) + (1/q) \).} 
 	\begin{equation}
 		f = \frac{pq}{p + q} \, . 
 		\label[equation]{eq:lens}
 	\end{equation}
 	\begin{enumerate}
-		\item \label[problem]{prob:lens_a} Use the general rule (3.47) to derive a formula for the uncertainty \( \delta f \) in terms of \( p \), \( q \), and their uncertainties. 
+		\item \label[problem]{prob:lens_a} Use the general rule (eq. 3.47) to derive a formula for the uncertainty \( \delta f \) in terms of \( p \), \( q \), and their uncertainties. 
 		
 		\item Starting from \cref{eq:lens} directly, you cannot find \( \delta f \) in steps because \( p \) and \( q \) both appear in numerator and denominator. Show, however, that \( f \) can be rewritten as \[
 			f = \frac{1}{1/p + 1/q} \, .
@@ -231,10 +231,10 @@ tick label style={font=\Large}
 
 % section homework_problems_error_propagation (end)
 
-% \nocite{*}
+\nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
-% \printbibliography[
+\printbibliography[
 title={Further Reading},
 notcategory=cited,
 resetnumbers,

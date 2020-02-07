@@ -20,7 +20,7 @@
 
 \begin{abstract}
 \noindent
-The objective of this lab is to determine the viscosity-average molecular weight of poly(vinyl alcohol) (PVOH) and the fraction of ``head-to-head'' monomer linkages in the polymer.\thanks{Transcribed (with corrections) from \cite{halpern97}} % Most of text available at https://books.google.com/books?id=Pe0J-vDm_TMC&pg=PT392
+The objective of this lab is to determine the viscosity-average molecular weight of poly(vinyl alcohol) (PVOH) and the fraction of ``head-to-head'' monomer linkages in the polymer.\thanks{Transcribed (with corrections) from \textcite{halpern97}.} % Most of text available at https://books.google.com/books?id=Pe0J-vDm_TMC&pg=PT392
 \end{abstract}
 
 \section{Introduction} % (fold)
@@ -91,7 +91,7 @@ Fluids that behave according to \cref{eq:layer_flow} are called Newtonian fluids
 Cases of non-laminar, or non-Newtonian flow (at ordinary temperatures and pressures) are unusual but not uncommon (\emph{e.g.,} ``silly putty'').
 Materials whose viscosity decreases at high shear rates (\emph{e.g.,} paints that ``thin out'' as they are applied with a brush but then stiffen when quiescent) are examples of non-Newtonian fluids.
 
-With respect to this experiment, a useful application of \cref{eq:layer_flow} to the case of mass transport through a circular tube of small internal diameter was derived by Poiseuille (1844):
+With respect to this experiment, a useful application of \cref{eq:layer_flow} to the case of mass transport through a circular tube of small internal diameter was derived by French physicist Jean Léonard Marie Poiseuille in 1844:
 \begin{equation}
 	\dv{V}{t} = \frac{\pi r^4 \Delta P}{8 \eta L} \, ,
 	\label{eq:tube_flow}
@@ -100,10 +100,10 @@ where \( \dv*{V}{t} \) is the volume flow rate of the liquid emerging from the t
 \( \Delta P \) is the pressure difference across the ends of the tube and is the driving force for the bulk flow. 
 \Cref{eq:tube_flow} assumes that the flow rate is slow and uniform. 
 The viscosity coefficient, \( \eta \), is called the poise in recognition of Poiseuille, and has cgs units. 
-Thus one poise, \si{\poise}, is \SI{1}{\g \per \cm \per \s} (or \si{\dyne \s}). 
+Thus one poise, \si{\poise}, is \SI{1}{\g \per \cm \per \s}, or \SI{1}{\dyne \s}. 
 For many common liquids at room temperature, viscosities are about \SIrange{0.002}{0.04}{\poise}. 
 For convenience, the centipoise (\si{\centi\poise}, \SI{1e-2}{\poise}), is often used to report viscosity. 
-In SI units, the viscosity coefficient is \si{\kg \per\m \per\s} (or \si{\Pa \s}). 
+In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa \s}. 
 \( \SI{1e3}{\Pa} = \SI{1}{\centi\poise} \).
 
 
@@ -147,7 +147,7 @@ In SI units, the viscosity coefficient is \si{\kg \per\m \per\s} (or \si{\Pa \s}
 \label{sub:temperature_dependence_of_viscosity}
 
 It is found that over a reasonably wide temperature range, the viscosity of a pure liquid increases exponentially with the inverse absolute temperature.
-This relationship was first expressed quantitatively by Arrheius (1912):\sidenote{Arrhenius is also associated with a similar equation that expresses the temperature dependence of a rate constant.}
+This relationship was first expressed quantitatively by Swedish physicist and chemist Svante Arrhenius in 1912\sidenote[][-2\baselineskip]{Arrhenius is more famously associated with a similar equation that expresses the temperature dependence of a rate constant.}:
 \begin{equation}
 	\eta = A \exp\br{\frac{E_\eta}{R T}} \, ,
 	\label{eq:arrhenius_visc}
@@ -220,7 +220,7 @@ Because this correction is usually less than \SI{1}{\percent} of the quantity \(
 One of the fundamental molecular properties used to characterize a polymer is its molecular weight. Many of the physical characteristics of polymeric materials can be associated with the shape and weight distribution of the polymer. Some experimental techniques used to obtain this information are viscosity, osmotic pressure, and light scattering measurements. These measurements are made not on the polymer itself but on solutions containing the dissolved polymer. Because the viscosity and osmotic pressure of these solutions depend systematically on the concentration of polymer, they are called \emph{colligative properties}. 
 
 We seek a relationship between the viscosity of a solution containing a dissolved high molecular weight polymer and some molecular weight property of the polymer itself. 
-A significant contribution to this field was made by Einstein,\cite{einstein06} who showed that the \emph{fractional change} in the viscosity of a solution---relative to the pure solvent---is related to the fraction of the total volume of solution occupied by the solute, in this case the polymer. 
+A significant contribution to this field was made by \textcite{einstein06}, who showed that the \emph{fractional change} in the viscosity of a solution---relative to the pure solvent---is related to the fraction of the total volume of solution occupied by the solute, in this case the polymer. 
 It is assumed that the solute has simple spherical geometry. 
 Thus the relevant equation is
 \begin{equation}
@@ -258,7 +258,7 @@ This concentration dependence is observed to follow the relation
 	\frac{\eta_\mtext{sp}}{c_m} = [\eta] + k_\mtext{Hug} [\eta]^2 c_m + k' c_m^2 \, ,
 	\label{eq:conc_dep}
 \end{equation}
-where \( k_\mtext{Hug} \), known as the Huggins constant, has a value of about \num{2} for rigid, uncharged spheres, and about \num{0.35} for flexible polymers in a ``good'' solvent.\cite{tanford61} 
+where \( k_\mtext{Hug} \), known as the Huggins constant, has a value of about \num{2} for rigid, uncharged spheres, and about \num{0.35} for flexible polymers in a ``good'' solvent.\autocite{tanford61} 
 The higher-order term in \( c_m \) in \cref{eq:conc_dep} can often be neglected. 
 From \cref{eq:frac_visc3} we can see that the ratio \( \eta_\mtext{sp}/c_m \) is not a colligative quantity; it is equal to an intrinsic property of the solute itself, namely, \( 10 \pi R^3 / 3 m \). 
 The intrinsic viscosity has dimensions of \si{\cm\cubed \per\g} and is perhaps analogous to a molar volume. 
@@ -334,7 +334,7 @@ If we substitute the radius of gyration for the unique-valued radius \( R \) in 
 where \( M \), the molecular weight (along with \( N_A \)) replaces the molecular mass, \( m \).
 
 If we now assume that the linear chain polymer is constructed of \( N \) monomer units linked together in such a way that \emph{each} link is rotationally flexible, or unhindered (freely jointed chain), it can be demonstrated that the radius of gyration is proportional to the square root of the number of links in the polymer chain; thus \( R_g \propto \sqrt{N} \). 
-This important conclusion is developed through the application of statistical mechanics to polymers.\cite{halpern97} Thus
+This important conclusion is developed through the application of statistical mechanics to polymers.\autocite{halpern97} Thus
 \begin{equation}
 	[\eta] = K' \sqrt{M} \, ,
 	\label{eq:staud_ind3}
@@ -410,9 +410,9 @@ This volume cannot be occupied because the segments of the polymer avoid each ot
 			{\( K \)}										&	{\( a \)}	&	{Molecular Weight Range}		&	Source										\\
 			{(\si{\cm\cubed \per \g})}	&						&	{(\si{\kilo\pascal})}				&														\\
 			\midrule
-			0.020												&	0.76			&	\numrange{6}{210}						&	{\cite{flory48,flory50}}	\\
-			0.30												&	0.50			&	\numrange{9}{170}						&	{\cite{dialer52}}				\\
-			0.14												&	0.6				&	\numrange{10}{70}						&	{\cite{dieu54}}					\\
+			0.020												&	0.76			&	\numrange{6}{210}						&	{\autocite{flory48,flory50}}	\\
+			0.30												&	0.50			&	\numrange{9}{170}						&	{\autocite{dialer52}}				\\
+			0.14												&	0.6				&	\numrange{10}{70}						&	{\autocite{dieu54}}					\\
 			\bottomrule
 		\end{tabular}
 	\caption{Mark-Houwink parameters for PVOH in water at \SI{25}{\celsius}.}
@@ -427,7 +427,7 @@ A more general relationship between the intrinsic viscosity and molecular weight
 where \( K \) and \( a \) are parameters that depend on the particular polymer, the solvent medium, and the temperature. 
 Typically, \( a \) ranges between \numrange{0.5}{0.8}.\sidenote{See \cref{eq:staud_ind3}} 
 The Mark-Houwink parameters are obtained from log-log plots of \( [\eta] \) vs. \( M \) for a series of monodisperse polymers. 
-Agreement between \( K \) and \( a \) values obtained by different workers is often apparently poor.\cite{immergut75} 
+Agreement between \( K \) and \( a \) values obtained by different workers is often apparently poor.\autocite{immergut75} 
 For example, for PVOH in water at \SI{25}{\celsius}, the following parameters showing in \cref{tab:pvoh_mh_param} have been reported. 
 
 We can obtain the molecular weight in explicit form from \cref{eq:mark_houwink}:
@@ -444,13 +444,13 @@ Statistically, this quantity is different from the \emph{number-average} molecul
 \end{equation}
 where \( f_i \) is the fraction of polymers having molecular weight \( M_i \); the sum in \cref{eq:num_avg_weight} extends (in theory) from \num{0} to \( \infty \). 
 
-Flory and others\cite{schaefgen48} have shown that the relationship between \( M_v \) and \( M_n \) is
+\textcite{schaefgen48} have shown that the relationship between \( M_v \) and \( M_n \) is
 \begin{equation}
 	\frac{M_v}{M_n} = \br{\br{1 + a} \Gamma\br{1 + a}}^{1/a} \, ,
 	\label{eq:mol_weight_ratio}
 \end{equation}
 where \( a \) is the same parameter used in \cref{eq:mark_houwink} and \( \Gamma \) denotes the \emph{gamma function}, whos value (for a given \( a \)) can be obtained from mathematical tables. 
-For example, for \( a = 0.76 \) (for PVOH in water at \SI{25}{\celsius}),\cite{flory48} the ratio in \cref{eq:mol_weight_ratio} is 
+For example, for \( a = 0.76 \) (for PVOH in water at \SI{25}{\celsius}),\autocite{flory48} the ratio in \cref{eq:mol_weight_ratio} is 
 \begin{equation}
 	\frac{M_v}{M_n} \equiv S = 1.89 \, .
 	\label{eq:mol_weight_ratio_ex}
@@ -649,12 +649,10 @@ Temperature control for each of these measurements is important.
 As previously stated, your lab report should consist of the following parts:
 \begin{description}
 	\item[Title, Author and Date]
-	\item[Introduction and Objective] A paragraph describing what we hope to find in this experiment, and how.
 	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
-	\item[Results and Discussion] This should include answers to the questions in the section ``Questions and Further Thoughts''. This should not be a separate section, but should instead be included organically in the discussion as a way of filling it out.
-	\item[Conclusion]
+	\item[Results and Discussion] This should include answers to the questions in the section ``Questions and Further Thoughts''. This should not be a separate section, but should instead be included organically in the discussion as a way of filling it out. You should include any experimental uncertainties and report the uncertainty in your final values. Calculations of uncertainties (including propagation of error) should be included in your supporting materials. 
 	\item[References]
-	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
+	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand (scanned or photographed copies are fine, so long as they are legible). 
 	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
 \end{description}
 % section lab_report_guidelines (end)
