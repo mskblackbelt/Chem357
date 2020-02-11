@@ -4,18 +4,42 @@
 	\DeclareSIUnit\erg{erg}
 	\DeclareSIUnit\psig{psig}
 
-\usepackage[
-	bibstyle=numeric,
-	citestyle=numeric-comp,
-	sortcites,
-	sorting=none,
-	defernumbers=true,
-	backend=biber,
-	]
-	{biblatex}
-\addbibresource{fluor.bib}
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[%
+	bibstyle=numeric,%
+	citestyle=numeric-comp,%
+	sortcites,%
+	sorting=none,%
+	defernumbers=true%
+	]{biblatex}
+	\addbibresource{../pchem_bib.bib}
+
+%% TODO: Troubleshoot this section… useful to only maintain one bibliography.
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{
+	  \maps[datatype=bibtex]{
+	    \map{
+	      \step[nocited, final]
+	      \step[fieldsource=keywords, notmatch=fluorescence, final]
+	      \step[entrynull]
+	    }
+	  }
+	}
+	
+	% Add a section for cited bibliography entries. At the end, 
+	% create a second bibliography for uncited items.
 	\DeclareBibliographyCategory{cited}
 	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	% Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{
+		% do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{The Kinetics of a Diffusion-Controlled Reaction}
 
@@ -491,15 +515,14 @@ Your lab report should consist of the following parts:
 
 
 \nocite{*}
-
 \printbibliography[category=cited]% default title for `article` class: "References"
 
 \printbibliography[
-title={Further Reading},
-notcategory=cited,
-resetnumbers,
-prefixnumbers={F},
-]
+	title={Further Reading},
+	resetnumbers,
+	prefixnumbers={F},
+	notcategory=cited,
+	]
 
 
 \end{document}

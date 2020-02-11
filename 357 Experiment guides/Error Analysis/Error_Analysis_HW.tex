@@ -21,18 +21,19 @@ tick label style={font=\Large}
 	sorting=none,%
 	defernumbers=true%
 	]{biblatex}
+	\addbibresource{../pchem_bib.bib}
 
 %% TODO: Troubleshoot this section… useful to only maintain one bibliography.
-	% % Filter bibliography file to only include entries matching keyword.
-	% \DeclareSourcemap{
-	%   \maps[datatype=bibtex]{
-	%     \map{
-	%       \step[cited, final]
-	%       \step[fieldsource=keywords, match=errors, final]
-	%       \step[entrynull]
-	%     }
-	%   }
-	% }
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{
+	  \maps[datatype=bibtex]{
+	    \map{
+	      \step[nocited, final]
+	      \step[fieldsource=keywords, notmatch=errors, final]
+	      \step[entrynull]
+	    }
+	  }
+	}
 	
 	% Add a section for cited bibliography entries. At the end, 
 	% create a second bibliography for uncited items.
@@ -47,7 +48,6 @@ tick label style={font=\Large}
 			\clearfield{url}
 		}%
 	}
-	\addbibresource{prop_err.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Introduction to Error Analysis}
@@ -211,7 +211,7 @@ tick label style={font=\Large}
 	\item If you measure two independent variables as \[
 		x = \num{6.0(1)} \quad \text{and} \quad y = \num{3.0(1)} \, ,
 	\]
-	and use these values to calculate \( q = xy + x^2/y \), what will be your answer and its uncertainty?\marginnote[-4\baselineskip]{You must use the general rule (eq. 3.47 in \textcite{taylor1997error} to find \( \delta q \). To simplify your calculation, do it first by finding the two separate contributions \( \delta q_x \) and \( \delta q_y \) as defined in rules 3.50 and 3.51, then combine them inquadrature.}
+	and use these values to calculate \( q = xy + x^2/y \), what will be your answer and its uncertainty?\marginnote[-4\baselineskip]{You must use the general rule (eq. 3.47 in \textcite{taylor1997error} to find \( \delta q \). To simplify your calculation, do it first by finding the two separate contributions \( \delta q_x \) and \( \delta q_y \) as defined in rules 3.50 and 3.51, then combine them in quadrature.}
 	
 	\item If an object is placed at a distance \( p \) from a lens and an image is formed at a distance \( q \) from the lens, the lens's focal length can be found as\sidenote{This equation follows from the \emph{lens equation}, \( 1/f = (1/p) + (1/q) \).} 
 	\begin{equation}
@@ -235,10 +235,10 @@ tick label style={font=\Large}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
 \printbibliography[
-title={Further Reading},
-notcategory=cited,
-resetnumbers,
-prefixnumbers={F},
-]
+	title={Further Reading},
+	resetnumbers,
+	prefixnumbers={F},
+	notcategory=cited,
+	]
 
 \end{document}

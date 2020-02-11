@@ -4,6 +4,43 @@
 \usepackage{menukeys}
 \tcbuselibrary{minted}
 
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[%
+	bibstyle=numeric,%
+	citestyle=numeric-comp,%
+	sortcites,%
+	sorting=none,%
+	defernumbers=true%
+	]{biblatex}
+	\addbibresource{../pchem_bib.bib}
+
+%% TODO: Troubleshoot this section… useful to only maintain one bibliography.
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{
+	  \maps[datatype=bibtex]{
+	    \map{
+	      \step[nocited, final]
+	      \step[fieldsource=keywords, notmatch=data, final]
+	      \step[entrynull]
+	    }
+	  }
+	}
+	
+	% Add a section for cited bibliography entries. At the end, 
+	% create a second bibliography for uncited items.
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	% Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{
+		% do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \title{Introduction to Data Analysis and Plotting with \\ Microsoft Excel}
 
 \author{Dustin Wheeler}

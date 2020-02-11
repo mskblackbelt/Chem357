@@ -11,18 +11,19 @@
 	sorting=none,%
 	defernumbers=true%
 	]{biblatex}
+	\addbibresource{../pchem_bib.bib}
 
 %% TODO: Troubleshoot this section… useful to only maintain one bibliography.
-	% % Filter bibliography file to only include entries matching keyword.
-	% \DeclareSourcemap{
-	%   \maps[datatype=bibtex]{
-	%     \map{
-	%       \step[cited, final]
-	%       \step[fieldsource=keywords, match=errors, final]
-	%       \step[entrynull]
-	%     }
-	%   }
-	% }
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{
+	  \maps[datatype=bibtex]{
+	    \map{
+	      \step[nocited, final]
+	      \step[fieldsource=keywords, notmatch=errors, final]
+	      \step[entrynull]
+	    }
+	  }
+	}
 	
 	% Add a section for cited bibliography entries. At the end, 
 	% create a second bibliography for uncited items.
@@ -37,7 +38,6 @@
 			\clearfield{url}
 		}%
 	}
-	\addbibresource{prop_err.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Introduction to Error Analysis}
@@ -119,12 +119,21 @@ This gives us a single value to use for our estimate, but no indication of the u
 The next value we can compute is how far each of our measurements varies from the mean, or the \emph{variance}. 
 The variance is calculated by averaging the square of the distance from each measurement to the mean, shown in \cref{eq:var}. 
 \begin{equation}
-	\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}{\br{x_i - \overline{x}}^2}
+	s^2 = \frac{1}{n-1}\sum_{i=1}^{n}{\br{x_i - \overline{x}}^2}
 	\label{eq:var}
 \end{equation}
 
+Notice that this equation references the \emph{squared} distance from the mean. 
+This is done to prevent errors in the positive direction from canceling out errors in the negative direction.\footnote{Notice that it is also scaled by \( \br{n-1} \), rather than by \( n \). This is because the definition for \( \overline{x} \) is already an estimation, so the value for \( s^2 \) is contains some bias based on our sampling of the data. The only way to remove this bias is to know the \emph{true} value of the unknown, \( \mu \), based on every possible sample, to calculate \( sigma \), the \emph{true} variance. This is generally unrealistic, so we use \( \overline{x} \) and scale \( s^2 \) by \( \br{n-1} \).}
+But we'd really like a direct measurement of the deviation from the mean, rather than the squared variance. 
+The definition for variance, \( \sigma^2 \), gives a hint to what a definition for the variance might be. 
+In \cref{eq:stdev}, we see the traditional definition for \emph{standard deviation}. 
+\begin{equation}
+	s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}{\br{x_i - \overline{x}}^2}}
+	\label{eq:stdev}
+\end{equation}
 
-
+121111`111````````````````````````'''''''''''''''''''''''''
 % subsection statistical_analysis_of_multiple_measurements (end)
 
 \subsection{Sources of Uncertainty} % (fold)
@@ -181,10 +190,10 @@ Simple calculations (rate, area)
 \printbibliography[category=cited]% default title for `article` class: "References"
 
 \printbibliography[
-title={Further Reading},
-notcategory=cited,
-resetnumbers,
-prefixnumbers={F},
-]
-
+	title={Further Reading},
+	resetnumbers,
+	prefixnumbers={F},
+	notcategory=cited,
+	]
+	
 \end{document}
