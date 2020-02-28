@@ -57,7 +57,7 @@ The objective of this lab is to determine the rate constant and collision diamet
 %\printclassoptions
 
 
-\section{Introduction test} % (fold)
+\section{Introduction} % (fold)
 \label{sec:intro}
 
 In this experiment, you will study a very fast bimolecular reaction between two different species in solution. 
@@ -146,7 +146,7 @@ If we assume \( D \) to be independent of \( x \), we may substitute the express
 	\br{\dv{C}{t}}_x = D \br{\dv[2]{C}{x}}_t \, .
 	\label{eq:fickBa}
 \end{equation}
-Because we are concerned with ta three-dimensional and isotropic space, \emph{i.e.,} equal forces in all directions, we can write Fick's second law in a more general form as 
+Because we are concerned with a three-dimensional and isotropic space, \emph{i.e.,} equal forces in all directions, we can write Fick's second law in a more general form as 
 \begin{equation}
 	\br{\dv{C}{t}}_{x, y, z} = D \br{\laplacian{C}}_t \, ,
 	\label{eq:fickBb}
@@ -162,7 +162,7 @@ We are interested in solving \cref{eq:fickBb} with the boundary conditions
 \end{align*}
 where \( r = \sqrt{x^2 + y^2 + z^2} \), and \( C_0 \) denotes the \emph{bulk} concentration. 
 
-The first boundary condition states that initially the bulk concentration prevails throughout the system; the second says that even after the reaction starts \( (t > 0) \), the concentration very far away from the reactant is constant, \emph{i.e.,} the bulk concentration, \( C_0 \); and the third indicates that the reactant concentration is zero at a distance equal to the sum of the reactant collision radii. 
+The first boundary condition states that, initially, the bulk concentration prevails throughout the system; the second says that, even after the reaction starts \( (t > 0) \), the concentration very far away from the reactant, \emph{i.e.,} the bulk concentration, \( C_0 \), is constant; and the third indicates that the reactant concentration is zero at a distance equal to the sum of the reactant collision radii. 
 Note that the diffusion coefficient, \( D \), contained in \cref{eq:fickA,eq:fickBa,eq:fickBb} is the sum of the individual diffusion coefficients of the reactants, \( D_{\ch{A}} + D_{\ch{B}} \). 
 This expression essentially allows the motion of one of the reactants to be considered relative to the other. 
 
@@ -172,9 +172,9 @@ The solution of Fick's second law for this set of boundary conditions (first ren
 \end{equation}
 in which \( \erfc \) is the \emph{co-error function},
 \[
-	\erfc(x) \equiv 1 - \frac{2}{\pi}\int_0^x \exp\br{ -y^2 } \dd{y}
+	\erfc(x) \equiv 1 - \frac{2}{\pi}\int_0^x \exp\br{ -y^2 } \dd{y} \, .
 \]
-the time dependence of the reactant at the reaction boundary \( r = R \) becomes expressible in terms of the flux of reactant, \( J_R \), or its rate of transport across a hypothetical spherical surface with radius \( R \). 
+The time dependence of the reactant at the reaction boundary \( r = R \) becomes expressible in terms of the flux of reactant, \( J_R \), or its rate of transport across a hypothetical spherical surface with radius \( R \). 
 Thus
 \begin{equation}
 	J_R = 4\pi R D N_A C_0 \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{molecules \per \s}
@@ -189,18 +189,19 @@ This can be seen mathematically in that time is represented in \cref{eq:rxnbound
 Because \( J_R \) represents the rate of passage of one of the reactants (having a bulk concentration \( C_0 \) in \si{\Molar}) through a spherical reaction surface with the other reactant at the center, the rate of the reaction represented by \cref{eq:rxn_scheme} is merely \( J_R \) itself. 
 Hence, the bimolecular, diffusion-controlled rate constant \( k_1 \) is \( J_R/C_0 \),
 \begin{equation}
-	k_1 = 4\pi R D N_A \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{\per\Molar \per\s} \, .
+	k_1 = \frac{4\pi R D}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{\per\Molar \per\s} \, .
 	\label{eq:rateconst1}
 \end{equation}
-The units shown pertain if \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively. 
+The units shown pertain if \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively.\sidenote[][-5\baselineskip]{
+To convert from \si{molecules} to \si{\Molar}, we need to acount for the number of particles in a \si{mole} (Avogadro's number) and convert from our molecular length units (\si{\cm}) to proper volume units. It's useful to know that \( \SI{1}{\L} =\SI{1}{\dm\cubed} \).} 
 This rate constant is not a true \emph{constant}, however, because of the transient term. 
-However, as \( t \) becomes large enough, 
+However, as \( t \) becomes large enough,
 \begin{equation}
-	\lim_{t \to \infty} k_1 = 4\pi R D \qquad \si{\per\Molar \per\s} \, ,
+	\lim_{t \to \infty} k_1 = \frac{4\pi R D}{1000} \qquad \si{\per\Molar \per\s} \, ,
 	\label{eq:rateconst2}
 \end{equation}
 and \cref{eq:rateconst2} can be used to determine the diffusion-controlled rate constant if the mutual diffusion constant \( (D_A + D_B) \) and collision radii \( (R_A + R_B) \) are known.%
-\sidenote[][-2.0in]{An important consideration in \cref{eq:rateconst1,eq:rateconst2} is the time dependence of \( k_1 \). 
+\sidenote[][-7\baselineskip]{An important consideration in \cref{eq:rateconst1,eq:rateconst2} is the time dependence of \( k_1 \). 
 We do not typically think of rate constants as changing in time, but \cref{eq:rateconst1} contains a \emph{transient term}, \( R/\sqrt{\pi D t} \). 
 Remember that the diffusion, or movement of the molecules through the solvent, is the slow step of this reaction and is rate determining. 
 However, at the very beginning there will be some fraction of molecules that are already close enough together to react without needing to diffuse. 
@@ -209,11 +210,10 @@ As these pairs react, this population is depleted, leaving behind reactants that
 Thus, the transient term dies out and the reaction finally reaches a purely diffusion controlled regime, described by the rate constant in \cref{eq:rateconst2}.}
 We emphasize again that the units of \( k_1 \) presented above are \si{\per\Molar \per \s}, if \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively. 
 
-
 Often, however, \( R \) and \( D \) are not known, and an indirect method is used to estimate \( k_1 \). 
 This approach, developed by Einstein using Stokes's law, allows the diffusion coefficient to be expressed in terms of a bulk property, the solvent viscosity, \( \eta \). Thus
 \begin{equation}
-	k \simeq \frac{8 \overline{R} T}{3 \eta} \qquad \si{\per\Molar \per \s} \, ,
+	k \simeq \frac{8 \overline{R} T}{3000 \eta} \qquad \si{\per\Molar \per \s} \, ,
 	\label{eq:rateapprox}
 \end{equation}
 where \( \overline{R} = k_B N_A \) is the ideal gas constant.%
@@ -299,9 +299,7 @@ Alternatively, if the process is known to be diffusion-controlled, and if \( k_1
 This is a case in which a dynamic property (a rate constant) can be obtained from a static experiment (\( I_0)/I \) measurements). 
 
 
-The S-V relation can be expressed in terms of the diffusion-controlled rate constant that contains the transient term, \emph{e.g.,} \cref{eq:rateconst1}. 
-The time dependence was treated by \textcite{ware66}, who applied \cref{eq:rateconst1} to the condition pertinent to this experiment, namely, that the system is considered to be suddenly exposed to a steady-state excitation source, called a step function (see \cref{fig:step_func} and Further Readings). 
-\begin{marginfigure}[-1.0in]
+\begin{marginfigure}[-3\baselineskip]
 	\centering
 	\begin{tikzpicture}
 			\draw[->, thick] (-1.2, 0) -- (2.2,0) node[below] {$t$} -- (2.5,0);
@@ -314,6 +312,8 @@ The time dependence was treated by \textcite{ware66}, who applied \cref{eq:ratec
 	\caption{A ``step excitation'' function (known in mathematics as a ``Heaviside function''). At time \( t = 0 \), absorbing radiation is suddenly ``switched on.''}
 	\label{fig:step_func}
 \end{marginfigure}
+The S-V relation can be expressed in terms of the diffusion-controlled rate constant that contains the transient term, \emph{e.g.,} \cref{eq:rateconst1}. 
+The time dependence was treated by \textcite{ware66}, who applied \cref{eq:rateconst1} to the condition pertinent to this experiment, namely, that the system is considered to be suddenly exposed to a steady-state excitation source, called a step function (see \cref{fig:step_func} and Further Readings). 
 In this case, the S-V equation becomes more complicated:
 \begin{equation}
 	\frac{I_0}{I} = \frac{1 + (4 \pi R D N_A) \ch{[Q]} \tau_0}{Y} \, ,
@@ -326,10 +326,9 @@ where
 \end{equation}
 in which 
 \begin{align*}
-	a &= \frac{1}{\tau_0} + 4 \pi R D N_A \ch{[Q]} \, ,\\
-	b &= 4 R^2 \sqrt{\pi D} N_A \ch{[Q]}\, .
+	a &= \frac{1}{\tau_0} + \frac{4 \pi R D N_A}{1000} \ch{[Q]} \qquad \si{\per\s} \, ,\\
+	b &= \frac{4 \sqrt{\pi D} R^2 N_A}{1000} \ch{[Q]} \qquad \si{\per\sqrt{\s}}\, .
 \end{align*}
-
 If \( Y = 1 \), \cref{eq:sv_step_rel} reduces to \cref{eq:sv_rel},%
 \sidenote{\Cref{eq:sv_step_rel} describes a curved line due to the transient effects that take place very soon after the light source is switched on. 
 However, this may cause some confusion, because our Stern-Volmer plots do not involve a time variable. How can the transient effects account for this curvature, if there is no explicit time dependence?
