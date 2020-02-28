@@ -5,6 +5,7 @@
 	\DeclareSIUnit\dalton{Da}
 	\DeclareSIUnit\dyne{dyn}
 
+
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[%
 	bibstyle=numeric,%
@@ -65,16 +66,11 @@ Viscosity therefore can be used as an empirical index in quality- control applic
 Another motivation for measuring viscosity is to determine a fundamental and intrinsic property of a liquid (as a solvent medium): the rate of mass transport, or diffusion, within the medium. 
 In this application, for example, viscosity data can provide important information about chemical reaction kinetics. 
 
-Considered macroscopically, viscosity is a frictional force that arises from the directed motion of molecules past each other in the liquid state. 
-From a microscopic viewpoint, viscosity reflects the energetics of molecular association in the liquid state because in order for a liquid to flow, a force must be applied to overcome the attractive forces between the molecules. 
-These forces are appreciable; they are manifest, for example, as latent heat of vaporization and surface tension. 
-The mathematical treatment of viscosity is best introduced by looking at \cref{fig:viscous_flow}.
-
-\begin{figure}
+\begin{figure}[b]
 	\centering
 	\begin{tikzpicture}[scale=1.5]
-		\draw[thick]	(-2,0)	--	(4.6,0);
-		\draw[thick]	(-2,3.2)	--	(4.6,3.2);
+		\draw[thick]	(-2,0.15)	--	(4.6,0.15);
+		\draw[thick]	(-2,2.8)	--	(4.6,2.8);
 	
 		\node	(A)	at	(0,2.5)	{};
 			\node	(B)	at	(1,2.5)	{};
@@ -91,7 +87,7 @@ The mathematical treatment of viscosity is best introduced by looking at \cref{f
 		
 		% Draw axes, arrows
 		\draw[thick,->]	(-1.8,0.5)	--	(-1.8,1.5) node[left]{$z$}	--	(-1.8,2.5);
-		\draw[thick,->]	(-1,-0.15)	--	(1,-0.15) node[below]{$x$}	--	(3,-0.15);
+		\draw[thick,->]	(-1,0)	--	(1,0) node[below]{$x$}	--	(3,0);
 		\draw[<-]	(I)	--	(J);
 		\draw[->]	(J)	--	(K);
 		\draw[very thick,->]	(C)	--	(2.8,2.0) node[right]{$v_x + \dd{v_x}$};
@@ -109,6 +105,10 @@ The mathematical treatment of viscosity is best introduced by looking at \cref{f
 	\caption{In viscous flow, a sheet of fluid having cross-sectional area \( \dd{A} \) is subjected to a force that causes it to move faster by an amount \( \dd{V} \) than an equivalent, adjacent sheet separated by a distance \( \dd{z} \). 
 	The planes of the sheets are normal to the flow direction.}
 \end{figure}
+Considered macroscopically, viscosity is a frictional force that arises from the directed motion of molecules past each other in the liquid state. 
+From a microscopic viewpoint, viscosity reflects the energetics of molecular association in the liquid state because in order for a liquid to flow, a force must be applied to overcome the attractive forces between the molecules. 
+These forces are appreciable; they are manifest, for example, as latent heat of vaporization and surface tension. 
+The mathematical treatment of viscosity is best introduced by looking at \cref{fig:viscous_flow}.
 
 A liquid is presumed to be flowing smoothly in the \( x \)-direction. 
 Imagine that the liquid is composed of sheets of infinitesimal cross section \( \dd{A} \) that are oriented in the \emph{x-y} plane, and that each sheet flows tangentially to its surface area, in the positive \( x \)-direction. 
@@ -134,9 +134,9 @@ where \( \dv*{V}{t} \) is the volume flow rate of the liquid emerging from the t
 The viscosity coefficient, \( \eta \), is called the poise in recognition of Poiseuille, and has cgs units. 
 Thus one poise, \si{\poise}, is \SI{1}{\g \per \cm \per \s}, or \SI{1}{\dyne \s}. 
 For many common liquids at room temperature, viscosities are about \SIrange{0.002}{0.04}{\poise}. 
-For convenience, the centipoise (\si{\centi\poise}, \SI{1e-2}{\poise}), is often used to report viscosity. 
+For convenience, the centipoise (\si{\centi\poise}, \SI{e-2}{\poise}), is often used to report viscosity. 
 In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa \s}. 
-\( \SI{1e3}{\Pa} = \SI{1}{\centi\poise} \).
+\( \SI{1e-3}{\Pa} = \SI{1}{\centi\poise} \).
 
 
 %% The following sections are unecessary if the mixture-of-liquids experiments are skipped. 
@@ -179,7 +179,7 @@ In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa 
 \label{sub:temperature_dependence_of_viscosity}
 
 It is found that over a reasonably wide temperature range, the viscosity of a pure liquid increases exponentially with the inverse absolute temperature.
-This relationship was first expressed quantitatively by Swedish physicist and chemist Svante Arrhenius in 1912\sidenote[][-2\baselineskip]{Arrhenius is more famously associated with a similar equation that expresses the temperature dependence of a rate constant.}:
+This relationship was first expressed quantitatively by Swedish physicist and chemist Svante Arrhenius in 1912:\sidenote[][-2\baselineskip]{Arrhenius is more famously associated with a similar equation that expresses the temperature dependence of a rate constant.}
 \begin{equation}
 	\eta = A \exp\br{\frac{E_\eta}{R T}} \, ,
 	\label{eq:arrhenius_visc}
@@ -317,10 +317,6 @@ Although in theory a polydisperse polymer can be fractionated into groups that h
 Measurements on raw, polydisperse polymer solutions provide information that is averaged over the molecular weights (and sizes) of the polymer. 
 Such is the case in viscosity measurements.
 
-In order to apply \cref{eq:staud_ind1} to a system that is composed of a high molecular weight polydisperse polymer, a statistically averaged form of the molecular ``radius'' has to be used. 
-In this experiment, the polymer studied---like many others---is a \emph{linear} chain system, which means that the macromolecule is formed from a large number of monomer units in such a way that monomers add to the developing polymer chain without branching. 
-Although the molecule is called a ``linear'' chain, its geometry surely does not resemble a straight-line assembly of monomer units. 
-Rather, it is coiled up and adopts an overall shape that is approximately spherical. It may be thought to resemble a loosely tangled ball of yarn. See \cref{fig:poly_ball}.
 \begin{marginfigure}
 	\begin{tikzpicture}
 	  \def\InnerRadius{0.2cm}
@@ -344,6 +340,10 @@ Rather, it is coiled up and adopts an overall shape that is approximately spheri
 	\caption{Schematic diagram of a linear chain polymer in a random-coil configuration.}
 	\label{fig:poly_ball}
 \end{marginfigure}
+In order to apply \cref{eq:staud_ind1} to a system that is composed of a high molecular weight polydisperse polymer, a statistically averaged form of the molecular ``radius'' has to be used. 
+In this experiment, the polymer studied---like many others---is a \emph{linear} chain system, which means that the macromolecule is formed from a large number of monomer units in such a way that monomers add to the developing polymer chain without branching. 
+Although the molecule is called a ``linear'' chain, its geometry surely does not resemble a straight-line assembly of monomer units. 
+Rather, it is coiled up and adopts an overall shape that is approximately spherical. It may be thought to resemble a loosely tangled ball of yarn, illustrated in \cref{fig:poly_ball}.
 This so-called random coil is not a static structure but continually undergoes contortional motion as the different segments go through various conformational transitions. 
 On a time- averaged basis, however, we can define a statistical radius called the \emph{radius of gyration}, \( R_g \). 
 This characteristic property is expressed quantitatively as
@@ -434,7 +434,7 @@ Another important consideration we have ignored thus far in the discussion is ca
 This is the effective space that is inaccessible to a random coil or freely jointed chain. 
 This volume cannot be occupied because the segments of the polymer avoid each other as they become too close during the twisting and turning that the polymer undergoes. 
 
-\begin{table}
+\begin{table}[hb]
 	\centering
 	\sisetup{table-number-alignment = center}
 		\begin{tabular}{SSSr}%
@@ -457,7 +457,7 @@ A more general relationship between the intrinsic viscosity and molecular weight
 	\label{eq:mark_houwink}
 \end{equation}
 where \( K \) and \( a \) are parameters that depend on the particular polymer, the solvent medium, and the temperature. 
-Typically, \( a \) ranges between \numrange{0.5}{0.8}.\sidenote{See \cref{eq:staud_ind3}} 
+Typically, \( a \) ranges from \numrange{0.5}{0.8}.\sidenote{See \cref{eq:staud_ind3}} 
 The Mark-Houwink parameters are obtained from log-log plots of \( [\eta] \) vs. \( M \) for a series of monodisperse polymers. 
 Agreement between \( K \) and \( a \) values obtained by different workers is often apparently poor.\autocite{immergut75} 
 For example, for PVOH in water at \SI{25}{\celsius}, the following parameters showing in \cref{tab:pvoh_mh_param} have been reported. 
@@ -478,10 +478,10 @@ where \( f_i \) is the fraction of polymers having molecular weight \( M_i \); t
 
 \textcite{schaefgen48} have shown that the relationship between \( M_v \) and \( M_n \) is
 \begin{equation}
-	\frac{M_v}{M_n} = \br{\br{1 + a} \Gamma\br{1 + a}}^{1/a} \, ,
+	\frac{M_v}{M_n} = \br{\br{1 + a} \GammaFunc{1 + a}}^{1/a} \, ,
 	\label{eq:mol_weight_ratio}
 \end{equation}
-where \( a \) is the same parameter used in \cref{eq:mark_houwink} and \( \Gamma \) denotes the \emph{gamma function}, whos value (for a given \( a \)) can be obtained from mathematical tables. 
+where \( a \) is the same parameter used in \cref{eq:mark_houwink} and \( \GammaFunc{x} \) denotes the \emph{gamma function}, whose value (for a given \( x \)) can be obtained from mathematical tables. 
 For example, for \( a = 0.76 \) (for PVOH in water at \SI{25}{\celsius}),\autocite{flory48} the ratio in \cref{eq:mol_weight_ratio} is 
 \begin{equation}
 	\frac{M_v}{M_n} \equiv S = 1.89 \, .
@@ -539,6 +539,9 @@ The presence of 1,2-diol structures in the polymer can be conveniently distingui
 The 1,2-diol is specifically cleaved (and oxidized) using periodic acid, \ch{HIO4}. 
 Actually, the reagent used is the periodate anion (from \ch{KIO4}), which hydrolyzed in water to form \ch{HIO4}.
 The reaction is shown in \cref{fig:diol_cleavage}. 
+Hence, treatment of a PVOH sample with \ch{KIO4} will split the polymer wherever a 1,2-diol structure exists. 
+This results in a decreases in the (average) molecular weight of the polymer, and this change can be detected via viscosity measurements. 
+\setchemfig{atom style={scale=0.80}}
 \begin{figure}[htb]
 	\subfloat{
 		\schemestart
@@ -553,8 +556,6 @@ The reaction is shown in \cref{fig:diol_cleavage}.
 	\caption{Mechanism for cleavage of a vicinal diol.}
 	\label{fig:diol_cleavage}
 \end{figure}
-Hence, treatment of a PVOH sample with \ch{KIO4} will split the polymer wherever a 1,2-diol structure exists. 
-This results in a decreases in the (average) molecular weight of the polymer, and this change can be detected via viscosity measurements. 
 
 If we assume that the cleavage reaction is \SI{100}{\percent} effective (so that all the 1,2-diol linkages are cleaved), the increase in the number of solute molecules in the solution after treatment with \ch{KIO4} divided by the total number of monomer units represented in the polymer sample is equal to the ratio of 1,2-diol structures to the total 1,2-diol \emph{and} 1,3-diol arrangements in the system. 
 This ratio, which is defined here as \( f \), can be expressed as
