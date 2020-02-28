@@ -1,0 +1,484 @@
+\documentclass[nobib,nofonts,nols,nohyper,draft]{tufte-handout}
+\input{header.tex}
+	\DeclareSIUnit\gauss{G}
+	\usechemmodule{thermodynamics}\usechemmodule{polymers}
+	\setchemfig{atom style={scale=0.80}}
+
+\newcommand\namebond[4][5pt]{\chemmove{\path(#2)--(#3)node[midway,sloped,yshift=#1]{#4};}}
+\newcommand{\headercell}[1]{\multicolumn{2}{c}{\bfseries #1}}
+\RenewChemIUPAC\ortho{\emph{ortho}}
+\RenewChemIUPAC\meta{\emph{meta}}
+\RenewChemIUPAC\para{\emph{para}}
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[%
+	bibstyle=numeric,%
+	citestyle=numeric-comp,%
+	sortcites,%
+	sorting=none,%
+	defernumbers=true%
+	]{biblatex}
+	\addbibresource{../pchem_bib.bib}
+
+%% TODO: Troubleshoot this section… useful to only maintain one bibliography.
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{
+	  \maps[datatype=bibtex]{
+	    \map{
+	      \step[nocited, final]
+	      \step[fieldsource=keywords, notmatch=nmr, final]
+	      \step[entrynull]
+	    }
+	  }
+	}
+	
+	% Add a section for cited bibliography entries. At the end, 
+	% create a second bibliography for uncited items.
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	% Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{
+		% do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{NMR Determination of Keto--Enol Equilibrium Constants}
+
+\author{Dustin Wheeler}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+In this experiment, proton nuclear magnetic resonance (\NMR*) spectroscopy is used in evaluating the equilibrium compositions of various keto--enol mixtures. 
+Chemical shifts and spin-spin splitting patterns are employed to assign the spectral features to specific protons, and the integrated intensities are used to yield a quantitative measure of the relative amounts of the keto and enol forms. 
+Solvent effects on the chemical shifts and on the equilibrium constant are investigated for one or more \iupac{\b-diketones} and \iupac{\b-ketoesters}. 
+\thanks{Transcribed (with corrections) from \textcite{nibler14}.}
+\end{abstract}
+
+%\printclassoptions
+
+\section{Theory} % (fold)
+\label{sec:theory}
+
+\subsection{Magnetic Moments} % (fold)
+\label{sub:magnetic_moments}
+
+% \begin{marginfigure}
+%   \centering
+%    \def\svgwidth{0.9\textwidth}
+%    \input{figures/Zeeman_level_splitting_quad.pdf_tex}
+%   \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
+%   \label{fig:quad_splitting}
+% \end{marginfigure}
+The magnetic moment of a nucleus with nuclear spin quantum number \( I \) is 
+\begin{equation}
+	\mu = g_N \mu_N \sqrt{I \br{I+1}} \, ,
+	\label{eq:mag_mom}
+\end{equation}
+where \( g_N \) is the nuclear \( g \) factor (\num{5.5856} for a proton) and \( \mu_N = e h / \br{4 \pi m_\mtext{p}} \) is the nuclear magneton.
+Substitution of the charge \( e \) and mass of a proton, \( m_\mtext{p} \), gives the value of \SI{5.051e-27}{\joule\per\tesla} for \( \mu_N \). 
+The symbol \( \mu_N \) is the unit of nuclear magnetic moment and is smaller than the electronic Bohr magneton (\( \mu_B \)) by the electron-to-proton mass ratio (\num{\sim1800}). 
+
+The nuclear moment will interact with a local \emph{magnetic induction} (flux density)\sidenote{
+The vector quantity \( \vb{B} \) is called either the \emph{magnetic induction} or the \emph{magnetic flux density}, although the term \emph{magnetic field strength} is more commonly used.
+Unfortunately, the name \emph{magnetic field strength} was given to \( \vb{H} \) at a time when \( \vb{H} \) was considered to be the fundamental magnetic-field vector.
+It is now known that \( \vb{B} \) is the fundamental vector (analogous to \( \vb{E} \), the electric-field vector).
+To add to the confusion, \( \vb{B} = \vb{H} \) in a vacuum when CGS units are used.
+In the internationally-recognized SI system, \( \vb{B} = \mu_0 \vb{H} \) in a vacuum, and the vacuum permeability \( \mu_0 = \SI{4\pi e-7}{\henry\per\m} \).
+In SI units, \( \vb{B} \) is expressed in tesla (\( \SI{1}{\tesla} = \SI{1}{\weber\per\meter\squared} = \SI{1e4}{\gauss}\)) and \( \vb{H} \) is expressed in \si{\A\per\m}.
+In many texts, \( \vb{B} \) is loosely called the \emph{magnetic field}.
+}, 
+\( B_\mtext{loc} \), to cause an energy change (the Zeeman effect)
+\begin{equation}
+	E_\mtext{Zeeman} = -g_N \mu_N M_I B_\mtext{loc} \, .
+	\label{eq:zeeman_energy}
+\end{equation}
+Here, \( M_I \) is the quantum number measuring the component of nuclear spin angular momentum (and magnetic moment) along the field direction, which can have values of \( -I, -I+1, \ldots, +I \). 
+The effect of the field is thus to break the \( 2I + 1 \) degeneracy and to produce energy levels whose spacing increases linearly with \( B_\mtext{loc} \) (or \( B \)), as shown in \cref{fig:quad_splitting}. 
+Transitions among these levels can be produced by electromagnetic radiation, provided that the selection rule \( \Delta M_I = \pm 1 \) is satisfied. 
+In this case, the resonant frequency is given by 
+\begin{equation}
+	\nu = \frac{\Delta E_\mtext{Zeeman}}{h} = \frac{g_N\mu_N}{h} B_\mtext{loc}\, .
+	\label{eq:res_freq}
+\end{equation}
+For protons, \( \nu (\si{\Hz}) = \num{4.26e7} B_\mtext{loc} (\si{\tesla}) \). For typical fields of \SIrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region. 
+In practice, values of\( B_0 \), the external applied field, are chosen to fix \( \nu \) to some convenient value (\emph{e.g.,} \SIlist{60;100;200}{\MHz}). 
+
+% subsection magnetic_moments (end)
+
+\subsection{Chemical Shifts} % (fold)
+\label{sub:chemical_shifts}
+
+\Cref{eq:zeeman_energy} gives the energy energy levels of a nucleus in the presence of an external applied field. 
+The term \( B_\mtext{loc} \) is the magnetic induction (\emph{local field}) at the nucleus. 
+
+In general, the local induction \( B_\mtext{loc} \) at the nucleus will differ from the externally applied induction \( B_0 \) because of the magnetization \( M \) that is induced by \( B_0 \):
+\begin{equation}
+	B_\mtext{loc} = B_0 + \mu_0 M = \br{1 + \chi} B \, ,
+	\label{eq:b_loc}
+\end{equation}
+where \( \mu_0 \) is the vacuum permeability and \( \chi \) is the (dimensionless) volume susceptibility, the magnetic analog of dielectric polarizability. 
+
+As most organic compounds are diamagnetic, only the diamagnetic contribution to the susceptibility is important in determining the resonance condition for a given nucleus. 
+The diamagnetic contribution arises because the orbital motion of the electrons is altered by the presence of \( B_0 \) so that there is a net orbiting of electrons about the field lines. 
+This circulating charge in turn generates a magnetic induction, \( B_d \), which is proportional and directly opposed to the external field, \( B_0 \). 
+Thus, \( B_\mtext{loc} \) equals \( B_0 + B_d \), with
+\begin{equation}
+	B_d = \chi B_0 = -\sigma B_0 \, ,
+	\label{eq:B_dia}
+\end{equation}
+where \( \sigma \) is a positive constant called the \emph{shielding constant}. 
+The resonant frequency of nucleus \( i \) becomes 
+\begin{equation}
+	\nu_i = \frac{g_N \mu_N}{h} B_{i, \mtext{loc}} = \frac{g_N \mu_N}{h} B_0 \br{1 - \sigma} \, .
+	\label{eq:chem_shift}
+\end{equation} 
+The diamagnetic shielding constant, \( \sigma \), is generally quite small (\num{\sim e-5}) and increases as the electron density around the nucleus is increased. 
+Changes in the local induction (\( B_\mtext{loc} = B_0 \br{1 - \sigma} \)), and thus changes in \( \nu \), of a few parts per million (\si{\ppm}) are typical when the chemical environment about a nucleus is changed. 
+The chemical shift in \si{ppm} of a nucleus \( i \) relative to a reference nucleus \( r \) is defined by 
+\begin{equation}
+	\delta_{i} \equiv 
+		\frac{\nu_{i}-\nu_\mtext{ref}}{\nu_\mtext{ref}} \times 10^6 = 
+		\frac{\sigma_\mtext{ref} - \sigma_i}{1 - \sigma_\mtext{ref}} \times 10^6 \simeq 
+		\br{\sigma_\mtext{ref} - \sigma_i} \times 10^6 \, .
+		\label{eq:chem_shift_delta}
+\end{equation}
+Here, the definition is based on the resonant frequencies for a fixed external induction (field) \( B_0 \). 
+
+Tetramethylsilane (TMS) is usually used as the proton reference, since it is chemically inert and its 12 equivalent protons give a single transition at a frequency \( \nu_\mtext{ref} \), lower than the frequency \( \nu_i \) found in most organic compounds. 
+Thus \( \delta \) is generally positive and increases when substituents are added that attract electrons and thereby reduce the shielding about the proton. 
+This shielding arises because the electrons near the proton are induced to circulate by the applied field \( B_0 \), shown in \cref{fig:shielding}. 
+This electron current produces a secondary field that \emph{opposes} the external field and thus reduces the local field at the nucleus. 
+As a result, resonance at a fixed field, such as \SI{9.4}{\tesla}, requires a higher frequency for protons with greater shielding. 
+This shielding effect is generally restricted to electrons localized on the nucleus of interest, since random tumbling of molecules causes the effect of secondary fields due to electrons associated with neighboring nuclei to average to zero. 
+Nuclei such as \ch{^{19}F}, \ch{^{13}C}, and \ch{^{11}B} have more local electrons than hydrogen, hence their chemical shift ranges are much larger. 
+
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{lS@{\hspace{3em}}lS} 
+		\toprule
+		\headercell{\ch{CH3} protons}	&	\headercell{Acetylenic protons} \\
+		\ch{(CH3)4Si}	&	0.0	&	\ch{HOCH2C+CH}	& 2.33 \\
+		\ch{(CH3)4C} & 0.92 & \ch{ClCH2C+CH} & 2.40 \\
+		\ch{CH3CH2OH} & 1.17 & \ch{CH2COC+CH} & 3.17\\
+		\ch{CH3COCH3} & 2.07 & \headercell{Olefinic protons}\\
+		\ch{CH3OH} & 3.38 & \ch{(CH3)2C=CH2} & 4.6 \\
+		\ch{CH3F} & 4.30 & \iupac{Cyclohexene} & 5.57 \\
+		\headercell{\ch{CH2} protons} & \ch{CH2CH=CHCHO} & 6.05 \\
+		\iupac{Cyclopropane} & 0.22 & \ch{Cl2C=CHCl} & 6.45 \\
+		\ch{CH3(CH2)4CH3} & 1.25 & \headercell{Aromatic protons} \\
+		\ch{(CH3CH2)2CO} & 2.39 & \iupac{Benzene} & 7.27 \\
+		\ch{CH3COCH2COOCH3} & 3.48 & \ch{C6H5CN} & 7.54 \\
+		\ch{CH3CH2OH} & 3.59 & \iupac{Naphthalene} & 7.73 \\
+		\headercell{\ch{CH} protons} & \iupac{\a-Pyridine} & 8.50 \\
+		\iupac{Bicyclo[2.2.1]heptane} & 2.19 & \headercell{Aldehydic protons} \\
+		\iupac{Chlorocyclopropane} & 2.95 & \ch{CH3OCHO} & 8.03 \\
+		\ch{(CH3)2CHOH} & 3.95 & \ch{CH3CHO} & 9.72 \\
+		\ch{(CH3)2CHBr} & 4.17 & \ch{C6H5CHO} & 9.96 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Typical proton chemical shifts $\delta$ (\si{ppm}).}
+	\label{tab:chem_shifts}
+\end{table}
+
+Long-range \emph{deshielding} can occur in aromatic and other molecules with delocalized \( \pi \) electrons. 
+For example, when the plane of the benzene molecule is oriented perpendicular to \( B_0 \), circulation of the \( \pi \) electrons produces a ring current, illustrated in \cref{fig:ring_current}. 
+This ring current induces a secondary field at the protons that is aligned \emph{parallel} to \( B_0 \) and results in a higher local field for the protons. 
+This induced field changes with benzen orientation, but does not average to zero, since it is not spherically symmetric. 
+Because of this net deshielding effect, the resonance of the benzene protons occurs at a relatively low external field. 
+The proton chemical shift \( \delta  \) for benzene is \SI{7.27}{\ppm}, much higher in frequency from the value \( \delta = \SI{1.43}{\ppm} \) that is observed for cyclohexane, in which ring currents do not occur. 
+Similar deshielding values of \( \delta \) for different functional groups are shown in \cref{tab:chem_shifts}, and additional values are available in refs.~\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,sdbs2020,aldrich1993nmr}.
+Although the resonances change somewhat for different compounds, the range for a given functional group is usually small and \( \delta \) values are widely used for structural characterization in organic chemistry. 
+
+
+% subsection chemical_shifts (end)
+
+\subsection{Spin--Spin Splitting} % (fold)
+\label{sub:spin_spin_splitting}
+
+High-resolution NMR spectra of most organic compounds reveal more complicated spectra than those predicted by \cref{eq:chem_shift}, with transitions often appearing as multiplets.
+Such \emph{spin--spin splitting patterns} arise because the magnetic moments of one nucleus (A) can interact with that of a nearby nucleus (B), causing a small energy shift up or down depending on the relative orientations of the two moments. 
+The energy levels of nucleus A then have the form 
+\begin{equation}
+	E_\mtext{A} = -g_{N_\mtext{A}} \mu_N M_{I_\mtext{A}} \br{1-\sigma_\mtext{A}} B_0
+		+ h J_\mtext{AB} M_{I_\mtext{A}} M_{I_\mtext{B}}
+	\label{eq:j_coupling}
+\end{equation}
+and there is a similar expression for \( E_\mtext{B} \). 
+The spin--spin interaction is characterized by the coupling constant \( J_\mtext{AB} \), and the effect is to split the energy levels in the manner illustrated for acetaldehyde in \cref{fig:spin_splitting}. 
+It is apparent from this diagram that the external field \( B_0 \) does not affect the small spin--spin splitting that is characterized by the coupling constant \( J \). 
+The quantity \( J \) is a measure of the strength of the pairwise interaction of the spin nucleus A with the spin of nucleus B. 
+Since there are only proton--proton interactions in acetaldehyde, the same splitting occurs for both \ch{CH} and \ch{CH3} resonances. 
+
+\input{figures/EtOH_spectrum.tex}
+The total integrated intensity of the \ch{CH} and \ch{CH3} multiplets follows the proton ratio of \( 1{:}3 \). 
+However, the intensity distribution within each multiplet is determined by the relative population of the lower level in each transition. 
+Since the level spacing is much less than \( kT \), the Boltzmann population factors are essentially identical for these levels. 
+However, there is some degeneracy because rapid rotation of the \ch{CH3} group around the \ch{C-C} bond makes the three protons magnetically equivalent. 
+The number of spin orientations of the \ch{CH3} protons that produced equivalent fields at the \ch{CH} proton determine the degeneracy. 
+The eight permutations of the \ch{CH3} spins shown in \cref{fig:spin_splitting} thus lead to a predicted intensity ratio of \( 1{:}3{:}3{:}1 \) for the \ch{CH} multiplet. 
+Similarly, the \ch{CH3} doublet peaks will be of equal intensity, with a total integrated intensity three times that of the \ch{CH} peaks. 
+In a more general sense, it can be seen that \( n \) equivalent protons interacting with a different proton will split ins resonance into \( n + 1 \) lines whose relative intensities are given by coefficients of the terms in the binomial expansion of the expression \( \br{\alpha + \beta}^n \). 
+Equivalent protons also interact and produce splittings in the energy levels. 
+However, these splittings are symmetric for upper and lower energy states, so no new NMR resonances are produced. 
+\begin{margintable}
+	\centering
+	\begin{tabular}{@{}cS@{}} 
+		\toprule
+		\bfseries Coupling & {\( \bm{J} \, (\si{\textbf{Hz}}) \)} \\
+		\midrule 
+		\addlinespace[1em]
+		\chemfig{C(-[1]H)(-[3])(-[5])(-[7]H)} & \numrange{-20}{5} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5])-CH(-[1]H)(-[7]H)} & \numrange{2}{9} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5])-[@{op,.75}]C(-[2])(-[6])-[@{cl,0.25}]CH(-[1]H)(-[7])} & 0 \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5])=CH(-[1]H)(-[7]H)} & \numrange{0}{3.5} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5]H)=CH(-[1])(-[7]H)} & \numrange{6}{14} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5]H)=CH(-[1]H)(-[7])} & \numrange{11}{19} \\
+		\addlinespace[1em]
+		\chemfig{[:-30]**[,,scale=0.8]6(------)} 
+			{\def\arraystretch{1.3}\begin{tabular}{l}
+				\iupac{\ortho-} \\
+				\iupac{\meta-} \\
+				\iupac{\para-} 
+			\end{tabular}} & 
+			{\def\arraystretch{1.3}\begin{tabular}{c}
+				\numrange{6}{9}\\
+				\numrange{1}{3}\\
+				\num{1} 
+			\end{tabular}} \\
+		\addlinespace[0.5em]
+		\bottomrule
+		\makepolymerdelims{10pt}{op}{cl}
+	\end{tabular}
+	\caption{Typical proton spin--spin coupling constants}
+	\label{tab:j_values}
+\end{margintable}
+
+If a proton is coupled to more than one type of neighboring nucleus, the resultant multiplet pattern can often be understood as a simple stepwise coupling involving different \( J \) values.
+For example, the \ch{CH2} octet that occurs for pure \ch{CH3CH2OH} shown in \cref{fig:EtOH_spectrum} arises from \ch{OH} doublet splitting \( \br{J = \SI{4.80}{\Hz}} \) of the quartet of lines caused by coupling \( \br{J = \SI{7.15}{\Hz}} \) with \ch{CH3}. 
+It should be mentioned that such regular splitting and intensity patterns are expected for two nuclei A and B only if \( \abs{\nu_\mtext{A} - \nu_\mtext{B}} \gtrsim 10\,J_\mtext{AB} \). 
+The spectra for this weakly coupled case are termed \emph{first order.}
+Since the difference \( \nu_\mtext{A} - \nu_\mtext{B} \) (in \si{\Hz}) increases with field while \( J_\mtext{AB} \) does not, NMR spectra obtained with a high-field instrument (\SI{600}{\MHz}) are often easier to interpret than those from a low-field spectrometer (\SI{>200}{\MHz}). 
+However, even if the multiplets are not well separated, it is still possible to deduced accurate chemical shifts and \( J \) values using slightly more involved procedures, which are outlined in most texts on NMR spectroscopy.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
+Such an exercise can be done as an optional part of theis experiment, although it will not be necessary for the determination of equilibrium constants. 
+
+The mechanism of spin--spin coupling is known to be indirect and to involve the electrons in the bonds between interacting nuclei. 
+The spin of nucleus A is preferentially coupled antiparallel to the nearest bonding electron through the \emph{Fermi contact interaction}, which is significant only when the electron density is nonzero at the first nucleus.\sidenote{
+Such is the case only for electrons in \( s \) orbitals, since \( p \), \( d \), and \( f \) orbital wavefunctions have nodes at the nucleus.}
+This electron--spin alignment information is transmitted by electron--electron interactions to nucleus B to produced a field that thus depends on the spin orientation of the first nucleus, illustrated in \cref{fig:j_coupling}. 
+since the strength of this interaction falls off rapidly with separation, only neighboring groups produced significant splitting. 
+A few typical spin--spin coupling constants are given in \cref{tab:j_values}. 
+These, along with the chemical shifts, served to identify proton functional groups. 
+As mentioned above, the multiplet intensities also give useful information about neighboring groups. 
+Thus NMR spectra can provide detailed structural information about large and complex biomolecules. 
+
+\setchemfig{atom style={scale=1.2}}
+\begin{figure}[t]
+	\centering
+		\captionsetup[subfigure]{farskip=20pt, captionskip=20pt}
+		\subfloat[][low-energy case]{%
+			\chemfig{@{1}\chemabove{H_\emph{A}}{\Uparrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{A}}{\Downarrow}}
+			\namebond[6pt]{1}{2}{$ \upharpoonleft \quad \downharpoonright $}
+			\namebond[6pt]{2}{3}{$ \downharpoonleft \quad \upharpoonright $}
+			\namebond[6pt]{3}{4}{$ \upharpoonleft \quad \downharpoonright $}
+		} 
+		\subfloat[][high-energy case]{%
+			\chemfig{@{1}\chemabove{H_\emph{A}}{\Downarrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{A}}{\Downarrow}}
+			\namebond[6pt]{1}{2}{$ \upharpoonleft \quad \downharpoonright $}
+			\namebond[6pt]{2}{3}{$ \downharpoonleft \quad \upharpoonright $}
+			\namebond[6pt]{3}{4}{$ \upharpoonleft \quad \downharpoonright $}
+		} 
+	\caption{Illustration of nuclear spin--spin interaction transmitted via polarization of bonding electrons. 
+	The two electrons about each carbon will tend to be parallel, since this arrangement minimizes the electron--electron repulsion (Hund's rule for electrons in degenerate orbitals).}
+	\label{fig:j_coupling}
+\end{figure}
+
+% subsection spin_spin_splitting (end)
+
+\subsection{Keto--Enol Tautomerism} % (fold)
+\label{sub:keto_enol_tautomerism}
+
+\begin{figure}[h]
+	\centering
+		\chemnameinit{}
+		\schemestart
+			\chemname{\chemfig{H_3C-C(=[2]O)-CH_3}}{acetone\\(keto form)} 
+			\arrow{<=>} 
+			\chemname{\chemfig{H_2C=C(-[2]OH)-CH_3}}{\vphantom{acetone}\\(enol form)}
+		\schemestop
+		\chemnameinit{}
+	\caption{Tautomeric conversion of acetone.}
+	\label{fig:acetone_tautomer}
+\end{figure}
+
+It is well known that ketones such as acetone have an isomeric structure, resulting from proton movement, called the enol tautomer, and unsaturated alcohol, shown in \cref{fig:acetone_tautomer}.
+For acetone and the majority of cases in which this keto--enol tautomerism is possible, the keto form is far more stable and little, if any, enol can be detected. 
+However, with \iupac{\b-diketones} and \iupac{\b-ketoesters}, factors such as intramolecular hydrogen bonding and conjugation increase the stability of the enol form; causing the equilibrium to be shifted significantly to the right. 
+
+\begin{figure}[h]
+	\centering
+		\chemnameinit{}
+		\schemestart
+			\definesubmol{&}{-[,,,,draw=none]}
+			\chemname{
+				\chemfig{R*6(!&!&R''-C(=O)-C(-[:120]H)(-[:60]R')-C(=O)-)}
+				}{keto}
+			\arrow{<=>[*{0}\( k_1 \)][*{0}\( k_{-1} \)]}[-90,1]
+			\chemleft[
+				\subscheme{
+					\chemname{
+						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')=O-[,,,,dash pattern=on 2pt off 2pt]H-O-)}
+					}{enol 1}
+					\arrow{<=>[\( k_2 \)][\( k_{-2} \)]}
+					\chemname{
+						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')-O-H-[,,,,dash pattern=on 2pt off 2pt]O=)}
+					}{enol 2}
+				} 
+			\chemright]
+		\schemestop
+		\chemnameinit{}
+	\caption{Resonance structures of keto--enol tautomers}
+	\label{fig:enol_resonance}
+\end{figure}
+
+The proton chemical environment are quite different for the keto and enol tautomers, and the interconversion rate constants \( k_1 \) and \( k_{-1} \) between these forms are small enough that distinct NMR spectra are obtained for both forms. 
+In principle, the two enols are also distinguishable when \( \ch{R'} \ne \ch{R''} \). 
+However, the intramolecular \ch{OH} proton transfer is quite rapid at normal temperatures, so that a single (average) \ch{OH} resonance is observed. 
+In general, such averaging occurs when the conversion rates \( k_2 \) and \( k_{-2} \) (in \si{\Hz}) exceed the frequency separation \( \nu_1 - \nu_2 \) (also in \si{\Hz}) of the \ch{OH} resonance for the two enol forms.\autocite{pople1959nmr,slichter1990mr}
+The magnetic field at the \ch{OH} proton is thus averaged and resonance occurs at the average frequency, \( \br{\nu_1 + \nu_2}/2 \).
+Similarly rapid rotation about the \ch{C-C} bonds of the keto form explains why spectra due to different keto rotational conformers are not observed. 
+Thus distinct spectra are expected only for the two tautomers, and tese can be used to determine the equilibrium constant for keto-to-enol conversion:
+\begin{equation}
+	K_c = \frac{[\mtext{enol}]}{[\mtext{keto}]} \, ,
+	\label{eq:eq_const}
+\end{equation} 
+where brackets denote concentrations in any convenient units. 
+
+The keto arrangement shown in \cref{fig:enol_resonance} is the configuration which is electrostatically most favorable, but the steric repulsions between \ch{R} and \ch{R''} groups will be larger for this keto form than for the enol configuration. 
+Indeed, many experimental studies have confirmed that the enol concentration is larger when \ch{R} and \ch{R''} are bulky.\autocite{burdett1964a}
+This steric effect is less important in the \iupac{\b-ketoesters}, in which the \ch{R...R''} separation is greater. 
+For both \iupac{\b-ketoesters} and \iupac{\b-diketones}, \chemalpha{} substitution of large \ch{R'} groups results in steric hindrance between \ch{R'} and \ch{R} (or \ch{R''}) groups, particularly for the enol tautomer, whose concentration is thereby reduced. 
+Inductive effects have also been explored; in general, \chemalpha{} substitution of electron-withdrawing groups such as \ch{-Cl} or \ch{-CF_3} favor the enol form.\autocite{burdett1964a}
+
+The solvent plays an important role in determining \( K_c \). 
+This can occur through specific solute--solvent interactions such as hydrogen bonding or charge transfer. 
+In addition, the solvent can reduce solute--solute interactions by dilution and thereby change the equilibrium if such interactions are different in enol--enol, enol--keto, or keto--keto dimers. 
+Finally, the dielectric constant of the solution will depend on the solvent and one can expect the more polar tautomeri form to be favored by polar solvents. 
+Some of these aspects are explored in this experiment. 
+
+% subsection keto_enol_tautomerism (end)
+
+% section theory (end)
+
+\pagebreak
+
+\section{Safety Precautions} %(fold)
+\label{sec:safety}
+
+Chloroform-d (\ch{CDCl_3}) and tetramethylsilane (TMS) are both toxic chemicals. 
+Both chemicals are volatile and should be kept in tightly sealed containers. 
+Carry out all solution preparations in a fume hood. 
+Dispose of waste chemicals as instructed. 
+% section safety (end)
+
+
+\section{Procedure} % (fold)
+\label{sec:procedure}
+
+\begin{enumerate}
+	\item Obtain \SI{1}{\ml} each of acetylacetone (\ch{CH3OCH2COCH3}, M.W. \( = \SI{100.11}{\g\per\mol} \), density \( = \SI{0.98}{\g\per\cm\cubed} \)) and ethyl ecetoacetate (\ch{CH3CH2OCOCH2COCH3}, M.W. \( = \SI{130.45}{\g\per\mol} \), density \( = \SI{1.03}{\g\per\cm\cubed} \)). 
+	\item Prepare small volumes of three solutions with two solvents. 
+	\begin{description}
+		\item[Solvent A] Chloroform-d, spectrochemical grade (M.W. \( = \SI{120.38}{\g\per\mol} \), density \( = \SI{1.50}{\g\per\cm\cubed} \)) with TMS. 
+		\item[Solvent B] Methanol-d\textsubscript{4}, spectrochemical grade (M.W. \( = \SI{36.07}{\g\per\mol} \), density \( = \SI{0.888}{\g\per\cm\cubed} \)) with TMS.
+		\item[Solution 1] \num{0.05} mole fraction of acetylacetone in solvent A.
+		\item[Solution 2] \num{0.05} mole fraction of acetylacetone in solvent B.
+		\item[Solution 3] \num{0.05} mole fraction of ethyl acetoacetate in solvent A.
+	\end{description}
+	Prepare each solution in a \SIrange{1.5}{2.0}{\mL} microfuge tube. 
+	Use a \SI{100}{\uL} micropipettor  to measure out \SI{0.5}{\milli\mole} of solute, and use a \SI{1000}{\uL} micropipettor to the add the appropriate amount of \SI{9.5}{\milli\mole} of solvent. 
+	\item Record the NMR spectra for solutions \numrange{1}{3}, taking care to scan above \( \delta = \SI{16}{\ppm} \), since the enol \ch{OH} peak is substantially deshielded. 
+	\item Determine which peaks are due to solute and measure chemical shifts for all solute features. Integrate the bands carefully, expanding the vertical scale in order to obtain accurate relative intensity measurements. 
+\end{enumerate}
+
+% section procedure (end)
+
+\section{Data Analysis} % (fold)
+\label{sec:data_analysis}
+
+\begin{enumerate}
+	\item Correctly assign all peaks in the spectrum using \cref{tab:chem_shifts} and other NMR reference sources.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
+	Mark solvent peaks with an asterisk (*). If splitting patterns deviate from your expectations, discuss possible reasons for the deviation. 
+	\item Tabulate the results and use the integrated intensities to calculate the percentage enol present in solutions \numrange{1}{3}. 
+	If possible, use the total integral corresponding to the sum of methyl (or ethyl), methylene, methyne, and enol protons. 
+	If this proves difficult because of overlap with solvent bands, indicate clearly how you used the intensities to calculate the perentage enol. 
+	\item For both the enol and keto forms, compare experimental and theoretical ratios of the integrated intensities for different types of protons (\emph{e.g.,} methyl to methylene protons in the keto form). 
+	\item Using \cref{eq:eq_const}, calculate \( K_c \) and the corresponding free-energy difference \gibbs*{1} for the change in state from keto to enol in each solution. 
+\end{enumerate}
+
+% section data_analysis (end)
+
+\section{Questions and Further Thoughts} % (fold)
+\label{sec:questions_and_further_thoughts}
+
+\begin{enumerate}
+	\item Briefly discuss your assignments of chemical shifts and spin--spin splitting patterns of acetylacetone and ethyl acetoacetate. 
+	Which compound has a higher concentration of enol form, and what reasons can you offer to explain this result?
+	What changes would you expect in the NMR spectra of these two compounds if the interconversion rate between enol structures were much slower?
+	\item Compare the value of \( K_c \) for acetylacetone in \ch{CDCl3} with that in \ch{CD3OD}. 
+	What does your result suggest regarding the relatives polarity of the enol and keto forms?
+	Which form is favored by hydrogen bonding and why?
+	\item Compare your values of \gibbs*{1} with those for the gas phase (\gibbs{-9.2\pm2.1} for acetylacetone and \gibbs{-0.4\pm2.5} for ethyl acetoacetate).\autocite{folkendt1985a}
+	What solvent properties might account for any differences you observe?
+	\item Additional compounds suitable for studeis of steric effects on keto--enol equilibria include \iupac{\a-methylacetylacetone} (\ch{CH3COCHCH3COCH3}), \iupac{diethylmalonate} (\ch{CH3CH2OCOCH2COOCH2CH3}), \iupac{ethyl benzoylacetate} (\ch{C6H6COCH2COOCH2CH3}), and \iupac{\tert-butyl acetoacetate} (\ch{CH3COCH2COO^{t}Bu}).
+	Some other possible compounds are listed in \textcite{burdett1964a,rogers1956a}. Further aspects of this equilibrium that could be studied include the effects of concentration, temperature, and solvent dielectric constants on \( K_c \).\autocite{rogers1956a}
+\end{enumerate}
+
+% section questions_and_further_thoughts (end)
+
+\section{Lab Report Guidelines} % (fold)
+\label{sec:lab_report_guidelines}
+
+Your lab report should consist of the following parts:
+\begin{description}
+	\item[Title, Author and Date]
+	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
+	\item[Results and Discussion] This should include the following:
+	\begin{enumerate}
+		\item 
+	\end{enumerate}
+	\item[References]
+	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
+	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
+\end{description}
+
+\noindent You do \emph{not} need to include uncertainty calculations for this lab. 
+
+% section lab_report_guidelines (end)
+
+
+\nocite{*}
+\printbibliography[category=cited]% default title for `article` class: "References"
+
+\printbibliography[
+	title={Further Reading},
+	resetnumbers,
+	prefixnumbers={F},
+	notcategory=cited,
+	]
+
+
+\end{document}
