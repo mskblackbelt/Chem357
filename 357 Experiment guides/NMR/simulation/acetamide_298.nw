@@ -1,0 +1,41 @@
+echo
+
+start acetamide_nmr_298
+title acetamide_nmr
+charge 0
+
+geometry units angstroms print xyz autosym
+   C       -1.96068       -0.12333        0.08080
+   C       -0.50795        0.23164       -0.05827
+   H       -2.09113       -1.08310        0.58853
+   H       -2.41163       -0.18293       -0.91312
+   H       -2.46341        0.64851        0.66989
+   N        0.36811       -0.77791        0.19978
+   H        0.08216       -1.71597        0.44014
+   H        1.35490       -0.57927        0.09786
+   O       -0.11694        1.34240       -0.39588
+end
+
+BASIS "ao basis" PRINT 
+  * library 6-311G
+END
+
+relativistic
+  zora on 
+  zora:cutoff_NMR 1d-8 
+  zora:cutoff 1d-30
+end
+
+dft
+  odft 
+  xc b3lyp
+end 
+task dft
+
+property 
+  gshift 
+  hyperfine 
+  shielding
+end
+task dft property
+
