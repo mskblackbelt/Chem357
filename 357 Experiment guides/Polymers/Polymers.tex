@@ -434,23 +434,6 @@ Another important consideration we have ignored thus far in the discussion is ca
 This is the effective space that is inaccessible to a random coil or freely jointed chain. 
 This volume cannot be occupied because the segments of the polymer avoid each other as they become too close during the twisting and turning that the polymer undergoes. 
 
-\begin{table}[hb]
-	\centering
-	\sisetup{table-number-alignment = center}
-		\begin{tabular}{SSSr}%
-			\toprule
-			{\( K \)}										&	{\( a \)}	&	{Molecular Weight Range}		&	Source										\\
-			{(\si{\cm\cubed \per \g})}	&						&	{(\si{\kilo\pascal})}				&														\\
-			\midrule
-			0.020												&	0.76			&	\numrange{6}{210}						&	{\autocite{flory48,flory50}}	\\
-			0.30												&	0.50			&	\numrange{9}{170}						&	{\autocite{dialer52}}				\\
-			0.14												&	0.6				&	\numrange{10}{70}						&	{\autocite{dieu54}}					\\
-			\bottomrule
-		\end{tabular}
-	\caption{Mark-Houwink parameters for PVOH in water at \SI{25}{\celsius}.}
-	\label{tab:pvoh_mh_param}
-\end{table}
-
 A more general relationship between the intrinsic viscosity and molecular weight is provided by the Mark-Houwink equation:
 \begin{equation}
 	[\eta] = K M^a \qquad \si{\cm\cubed \per \g} \, ,
@@ -461,6 +444,23 @@ Typically, \( a \) ranges from \numrange{0.5}{0.8}.\sidenote{See \cref{eq:staud_
 The Mark-Houwink parameters are obtained from log-log plots of \( [\eta] \) vs. \( M \) for a series of monodisperse polymers. 
 Agreement between \( K \) and \( a \) values obtained by different workers is often apparently poor.\autocite{immergut75} 
 For example, for PVOH in water at \SI{25}{\celsius}, the following parameters showing in \cref{tab:pvoh_mh_param} have been reported. 
+\begin{table}[hb]
+	\centering
+	\sisetup{table-number-alignment = center}
+		\begin{tabular}{SSSr}%
+			\toprule
+			{\( K \)}	&	{\( a \)}	&	{Molecular Weight Range}	&	Source	\\
+			{(\si{\cm\cubed\per\g})}	&		&	{(\si{\kilo\dalton})}	&			\\
+			\midrule
+			0.020			&	0.76	&	\numrange{6}{210}	&	{\autocite{flory48,flory50}}	\\
+			0.30			&	0.50	&	\numrange{9}{170}	&	{\autocite{dialer52}}				\\
+			0.14			&	0.6		&	\numrange{10}{70}	&	{\autocite{dieu54}}					\\
+			\bottomrule
+		\end{tabular}
+	\caption{Mark-Houwink parameters for PVOH in water at \SI{25}{\celsius}.}
+	\label{tab:pvoh_mh_param}
+\end{table}
+
 
 We can obtain the molecular weight in explicit form from \cref{eq:mark_houwink}:
 \begin{equation}
