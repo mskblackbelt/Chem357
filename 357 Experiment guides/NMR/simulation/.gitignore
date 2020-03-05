@@ -1,0 +1,8 @@
+# nwchem files
+*.db
+*.movecs
+*.hess
+*.nmode
+*.cphf*
+*.zora*
+*.fd_*
