@@ -1,4 +1,4 @@
-\documentclass[nobib,nofonts,nols,nohyper,draft]{tufte-handout}
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
 \input{header.tex}
 	\DeclareSIUnit\gauss{G}
 	\usechemmodule{thermodynamics}\usechemmodule{polymers}
@@ -71,13 +71,13 @@ Solvent effects on the chemical shifts and on the equilibrium constant are inves
 \subsection{Magnetic Moments} % (fold)
 \label{sub:magnetic_moments}
 
-% \begin{marginfigure}
-%   \centering
-%    \def\svgwidth{0.9\textwidth}
-%    \input{figures/Zeeman_level_splitting_quad.pdf_tex}
-%   \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
-%   \label{fig:quad_splitting}
-% \end{marginfigure}
+\begin{marginfigure}
+  \centering
+   \def\svgwidth{0.9\textwidth}
+   \input{figures/Zeeman_level_splitting_quad.pdf_tex}
+  \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
+  \label{fig:quad_splitting}
+\end{marginfigure}
 The magnetic moment of a nucleus with nuclear spin quantum number \( I \) is 
 \begin{equation}
 	\mu = g_N \mu_N \sqrt{I \br{I+1}} \, ,
@@ -110,7 +110,7 @@ In this case, the resonant frequency is given by
 	\label{eq:res_freq}
 \end{equation}
 For protons, \( \nu (\si{\Hz}) = \num{4.26e7} B_\mtext{loc} (\si{\tesla}) \). For typical fields of \SIrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region. 
-In practice, values of\( B_0 \), the external applied field, are chosen to fix \( \nu \) to some convenient value (\emph{e.g.,} \SIlist{60;100;200}{\MHz}). 
+In practice, values of \( B_0 \) (the external applied field) are chosen to fix \( \nu \) to some convenient value (\emph{e.g.,} \SIlist{60;100;200}{\MHz}). 
 
 % subsection magnetic_moments (end)
 
@@ -289,18 +289,21 @@ Thus NMR spectra can provide detailed structural information about large and com
 \begin{figure}[t]
 	\centering
 		\captionsetup[subfigure]{farskip=20pt, captionskip=20pt}
+		\hspace*{\fill}%
 		\subfloat[][low-energy case]{%
-			\chemfig{@{1}\chemabove{H_\emph{A}}{\Uparrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{A}}{\Downarrow}}
-			\namebond[6pt]{1}{2}{$ \upharpoonleft \quad \downharpoonright $}
-			\namebond[6pt]{2}{3}{$ \downharpoonleft \quad \upharpoonright $}
-			\namebond[6pt]{3}{4}{$ \upharpoonleft \quad \downharpoonright $}
-		} 
+			\chemfig{@{1}\chemabove{H_\emph{A}}{\Uparrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{B}}{\Downarrow}}
+			\namebond[6pt]{1}{2}{$ \upharpoonleft \; \downharpoonright $}
+			\namebond[6pt]{2}{3}{$ \downharpoonleft \; \upharpoonright $}
+			\namebond[6pt]{3}{4}{$ \upharpoonleft \; \downharpoonright $}
+		}% 
+		\hfill%
 		\subfloat[][high-energy case]{%
-			\chemfig{@{1}\chemabove{H_\emph{A}}{\Downarrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{A}}{\Downarrow}}
-			\namebond[6pt]{1}{2}{$ \upharpoonleft \quad \downharpoonright $}
-			\namebond[6pt]{2}{3}{$ \downharpoonleft \quad \upharpoonright $}
-			\namebond[6pt]{3}{4}{$ \upharpoonleft \quad \downharpoonright $}
-		} 
+			\chemfig{@{1}\chemabove{H_\emph{A}}{\Downarrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{B}}{\Downarrow}}
+			\namebond[6pt]{1}{2}{$ \upharpoonleft \; \downharpoonright $}
+			\namebond[6pt]{2}{3}{$ \downharpoonleft \; \upharpoonright $}
+			\namebond[6pt]{3}{4}{$ \upharpoonleft \; \downharpoonright $}
+		}%
+		\hspace*{\fill}% 
 	\caption{Illustration of nuclear spin--spin interaction transmitted via polarization of bonding electrons. 
 	The two electrons about each carbon will tend to be parallel, since this arrangement minimizes the electron--electron repulsion (Hund's rule for electrons in degenerate orbitals).}
 	\label{fig:j_coupling}
