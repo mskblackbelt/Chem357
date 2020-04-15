@@ -1,0 +1,7 @@
+%nproc=4
+%mem=4GB
+# pbe1pbe/def2tzvp sp nosymm
+
+dummy
+
+-1 1

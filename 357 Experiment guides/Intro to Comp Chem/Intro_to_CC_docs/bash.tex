@@ -1,0 +1,66 @@
+\subsection{Appendix I: Bash and vi}\label{app:bash}
+%\begin{center}
+% \includegraphics[width=14cm]{picsM/bash.png}\\
+%\end{center}
+Bash is a Unix shell and command language for the GNU Project and the default shell on Linux and OS X systems. We will use it to execute most programs and exercises. Below you find a list of the most import commands.  `'$<>$' are used here to visually differentiate directories and files in the cheat-sheeet, do not use them (they redirect the flow, see below). It furthermore offers a full programming language (shell script) to automatize tasks e.g. via loops.\\
+
+\textbf{Basic navigation:}
+\begin{verbatim}
+ls - list all files and folders
+ls <dir-name> - list files in the directory.
+ls -lh - Detailed list, Human readable
+ls -l *.jpg - list jpeg files only
+
+cd <folderName> - change directory
+cd ..- go up one folder, tip: ../../../
+\end{verbatim}
+\textbf{Basic file operations:}
+\begin{verbatim}
+cat file - show content of a file
+head - from the top
+tail - from the bottom
+
+mkdir <directory-name>  - creates a new directory dir-name (called folder in windows) 
+cp file1 file2 - copy file1 to file2 
+cp image.jpg <dir-name>/ - cp file1 to the dir-name directory 
+cp *.txt stuff/ - copy all of txt-type files to the directory stuff
+
+mv file1 file2 - move (rename) file1 to file2
+mv file1 <dir-name>/ - move file1 to directory dir-name 
+mv <folderName>/ .. - move directory up 
+
+rm file1 - delete file1 
+rm -r <dir-name> - delete directory dir-name
+\end{verbatim}
+\textbf{Extract, sort and filter data:}
+\begin{verbatim}
+grep <someText> <fileName> - search for text in file
+   -i - Doesn't consider uppercase words
+grep -r <text> <folderName>/ - search for file names
+with occurrence of the text
+\end{verbatim}
+\textbf{Flow redirection and chain commands -redirecting results of commands:}
+\begin{verbatim}
+'>' at the end of a command to redirect the result to a file
+'>>' to redirect the result to the end of a file
+'|' at the end of a command to enter another one
+'&' run the command in the background 
+\end{verbatim}
+\noindent \textbf{Basic control:}
+\begin{verbatim}
+TAB - auto completion of file or command
+Up/Down - See previous commands
+CTRL R - reverse search history
+CTRL L - Clear the terminal
+!! - repeat last command 
+\end{verbatim}
+
+
+\textbf{ \texttt{ vi}} is a terminal-based file edit program. By typing \texttt{ vi} you open the program and create a new file that can be save later. By typing \texttt{ vi file} , you open \texttt{ file} to edit it. You can create new file by that you can edit immediately by this program. 
+
+The editor, despite its simplicity in appearance, is a very powerful terminal-based tool with numerous key-bindings. Therefore, be careful what you press. In order to start editing the file, you first need to press \texttt{ i} ('insert') and then you can start typing. In order to save the file, press escape to exit the editing mode, \texttt{ :} (shift + \texttt{ ;}) to enter the command mode in the bottom of the editor and  type wq (for `write  quit'). Confirm with enter. If you want to quit without saving the file, type \texttt{ q!}. 
+
+
+
+
+

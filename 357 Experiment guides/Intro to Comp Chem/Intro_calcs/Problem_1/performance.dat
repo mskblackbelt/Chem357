@@ -1,0 +1,17 @@
+    Method basis-set       #BS       E[Ha]
+        HF    STO-3G         1 -0.46658185
+        HF   cc-pVDZ         5 -0.49927840
+        HF   cc-pVTZ        14 -0.49980981
+        HF   cc-pVQZ        30 -0.49994557
+      SVWN    STO-3G         1 -0.45418012
+      SVWN   cc-pVDZ         5 -0.49528032
+      SVWN   cc-pVTZ        14 -0.49611409
+      SVWN   cc-pVQZ        30 -0.49630590
+    PBEPBE    STO-3G         1 -0.46437482
+    PBEPBE   cc-pVDZ         5 -0.49862741
+    PBEPBE   cc-pVTZ        14 -0.49961864
+    PBEPBE   cc-pVQZ        30 -0.49985413
+   PBE1PBE    STO-3G         1 -0.46650847
+   PBE1PBE   cc-pVDZ         5 -0.50028930
+   PBE1PBE   cc-pVTZ        14 -0.50103790
+   PBE1PBE   cc-pVQZ        30 -0.50122710

@@ -1,0 +1,205 @@
+% Tutorial prepared by Igor Y. Zhang, Hagen-Henrik Kowalski and Tonghao Shen 2017.
+% Updated 2017
+% \documentclass[10pt]{scrartcl}
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+\input{header.tex}
+
+\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
+	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+
+\usepackage[bibstyle=numeric,citestyle=verbose,sortcites,sorting=none,defernumbers=true,autocite=footnote]{biblatex}
+\addbibresource{hcl_dcl.bib}
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+% \usepackage[dvips]{geometry}
+% \geometry{textwidth=18cm,textheight=26cm,top=1.0cm}
+%
+% \usepackage[table]{xcolor}
+
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage{lmodern}
+
+% \usepackage{amsmath}
+% \usepackage[english]{babel}
+% \usepackage{booktabs}
+% \usepackage[small,bf]{caption}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+% \usepackage[hang]{footmisc}
+% \usepackage{graphicx}
+% \usepackage{listings}
+% \usepackage[square,numbers]{natbib}
+% \usepackage{ragged2e}
+\usepackage{textcomp}
+% \usepackage{siunitx}
+% \usepackage{xcolor}
+
+% \usepackage[%
+% pdftitle={Hands-on Workshop: First-principles simulations of molecules and materials},%
+%   pdfauthor={Igor Y. Zhang, Hagen-Henrik Kowalski and Tonghao Shen},
+%   pdfsubject={Hands-on Workshop: First-principles simulations of molecules and materials},
+%   bookmarks=true,
+%   bookmarksdepth=2,
+%   linkcolor=DarkBlue,
+%   citecolor=DarkBlue,
+%   filecolor=DarkBlue,
+%   urlcolor=DarkBlue,
+%  %hidelinks=true,
+%   colorlinks=true
+% ]{hyperref}
+%
+% \usepackage[square,numbers]{natbib}
+\newcommand\doi[1]{\doiprefix\href{http://dx.doi.org/#1}{\nolinkurl{#1}}}
+\newcommand\isbn[1]{\isbnprefix\href{http://www.books-by-isbn.com/#1}{#1}}
+\newcommand\urlprefix{URL:~}
+\newcommand\doiprefix{DOI:~}
+\newcommand\isbnprefix{ISBN:~}
+
+\definecolor{DarkBlue}{rgb}{0.0,0.0,0.5}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+% \setcounter{secnumdepth}{0} % no section numbering
+
+\newcommand\geometryin{\texttt{geometry.in}}
+\newcommand\controlin{\texttt{control.in}}
+
+\newcommand\aimsfilesdir{\$HandsOn/bin}
+\newcommand\species{\$SPECIES\_DEFAULTS}
+\newcommand\tutorialonedir{\$HandsOn/tutorial\_1}
+\newcommand\referencedir{\tutorialonedir/skel}
+\newcommand\aimscommand{aims.x} 
+\newcommand\vibcommand{get\_vibrations.py}
+
+\newcommand\by{\ensuremath{\times}}
+% \newcommand\mathup[1]{\mathrm{#1}}
+\newcommand\mathind[1]{{\mathup{#1}}}
+
+\newenvironment{tip}{%
+   \begin{center}
+   \begin{minipage}{0.80\linewidth}
+      \centerline{\rule{1.0\textwidth}{1pt}}%
+      }{%
+      \par
+      \centerline{\rule{1.0\textwidth}{1pt}}%
+      \vspace{1ex}%
+   \end{minipage}
+   \end{center}
+}
+
+\newcommand\task[1]{
+  \begin{center}
+    \fcolorbox{black!50}{black!10}{
+      \begin{minipage}{0.95\linewidth}
+        \vspace{0.3\baselineskip}
+        \begin{flushleft}
+          \begin{minipage}{0.95\linewidth}\RaggedRight
+            #1
+          \end{minipage}
+          \vspace{0.1\baselineskip}
+        \end{flushleft}
+      \end{minipage}
+    }
+  \end{center}
+  \noindent\ignorespaces
+}
+
+
+\lstset{language=bash,%
+           commentstyle=\color{mygreen},%
+           basicstyle=\ttfamily\footnotesize,
+           keepspaces=true,
+           keywordstyle=\color{blue},
+           stringstyle=\color{mymauve},
+           morekeywords={mkdir, grep, cp}}
+
+
+\newcommand\codefile[3]{
+  \begin{center}
+    \colorbox{black!2.5}{
+      \begin{minipage}{0.95\linewidth}
+        \centerline{\rule{1.0\textwidth}{1pt}}
+        \vspace{-0.5\baselineskip}
+        \lstinputlisting[language=#1,basicstyle=\ttfamily#2,%
+        morekeywords={hydro, species, ionic, cube}]{#3}
+        \vspace{-\baselineskip}
+        \centerline{\rule{1.0\textwidth}{1pt}}
+      \end{minipage}
+    }
+  \end{center}
+}
+
+\newcommand\bashfile[2][\small]{
+  \codefile{bash}{#1}{#2}
+}
+
+\newcommand\bashinline[1][\normalsize] {%
+\lstinline[basicstyle=\ttfamily#1]
+}
+
+\lstnewenvironment{bashenv}[1][\normalsize]
+  {\lstset{language=bash,basicstyle=\ttfamily#1}}
+  {}
+
+\newcommand{\OTHc}[1]{\textcolor{red}\textbf{] OTH: #1}}
+\newcommand{\LNc}[1]{\textcolor{red}\textbf{] LN: #1}}
+
+\usepackage{attachfile}
+\begin{document}
+
+% --------------------------------------------------------------------
+
+\thispagestyle{empty}
+\begin{fullwidth}
+  \begin{center}\huge\bfseries
+    \rule{1.5\textwidth}{1pt}
+    \\
+    PChem Lab 357: Spring 2019 
+    \\
+    \vspace{0.5cm}
+    \rule{1.5\textwidth}{1pt}
+  \end{center}
+  \vfill
+  \begin{center}\LARGE\bfseries
+    % \includegraphics[width=0.5\textwidth]{figures/aims-logo-gross}
+    \includegraphics[height=7.55cm]{pics/cover.png}
+    \vfill
+    Excercise 5: Introduction to Computational Chemistry\\ 
+    Excersise Problems for Gaussian16
+  \end{center}
+  \vfill
+  \begin{center}\large\bfseries
+    \rule{1.5\textwidth}{1pt}
+    \vfill
+    Adopted from Hands-On Workshop on Density-functional theory and beyond organized by FHI der MPG, Berlin.  \\
+    Adopted for G16 by Mateusz Marianski, NYC, Feb 2019 \\ 
+    Written fom FHI-aims code by Igor Y. Zhang et al.%, Hagen-Henrik Kowalski and Tonghao Shen\\
+  \end{center}
+\end{fullwidth}
+
+\clearpage
+
+% --------------------------------------------------------------------
+
+\include{Intro}
+\include{bash}
+%\include{vi}
+\include{part_1}
+\include{part_2}
+%\include{part_3}
+\clearpage
+
+\appendix
+%\include{appendix}
+
+\vfill
+
+%\section*{Acknowledgments}
+
+%1\newcommand\bibbegin{\RaggedRight}
+%\bibliography{Tutorial1-Basics}
+%\bibliographystyle{doi_style}
+% ----------------------------------------------------------------------
+
+\end{document}
