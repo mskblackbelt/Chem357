@@ -3,37 +3,49 @@
 % \documentclass[10pt]{scrartcl}
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
 \input{header.tex}
+\usepackage[mackeys=text]{menukeys}
 
-\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
-	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+\sisetup{binary-units = true}
+  \DeclareSIUnit\kcal{kcal}
+  \DeclareSIUnit\wn{\raiseto{-1}\cm}
+  \DeclareSIUnit\hartree{Ha}
 
-\usepackage[bibstyle=numeric,citestyle=verbose,sortcites,sorting=none,defernumbers=true,autocite=footnote]{biblatex}
-\addbibresource{hcl_dcl.bib}
-	\DeclareBibliographyCategory{cited}
-	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-% \usepackage[dvips]{geometry}
-% \geometry{textwidth=18cm,textheight=26cm,top=1.0cm}
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage[%
+%   bibstyle=numeric,%
+%   citestyle=numeric-comp,%
+%   sortcites,%
+%   sorting=none,%
+%   defernumbers=true%
+%   ]{biblatex}
+%   \addbibresource{../pchem_bib.bib}
 %
-% \usepackage[table]{xcolor}
-
-% \usepackage[T1]{fontenc}
-% \usepackage[utf8]{inputenc}
-% \usepackage{lmodern}
-
-% \usepackage{amsmath}
-% \usepackage[english]{babel}
-% \usepackage{booktabs}
-% \usepackage[small,bf]{caption}
-\usepackage{enumitem}
-\usepackage{etoolbox}
-% \usepackage[hang]{footmisc}
-% \usepackage{graphicx}
-% \usepackage{listings}
-% \usepackage[square,numbers]{natbib}
-% \usepackage{ragged2e}
-\usepackage{textcomp}
-% \usepackage{siunitx}
-% \usepackage{xcolor}
+% %% TODO: Troubleshoot this section… useful to only maintain one bibliography.
+%   % Filter bibliography file to only include entries matching keyword.
+%   \DeclareSourcemap{
+%     \maps[datatype=bibtex]{
+%       \map{
+%         \step[nocited, final]
+%         \step[fieldsource=keywords, notmatch=data, final]
+%         \step[entrynull]
+%       }
+%     }
+%   }
+%
+%   % Add a section for cited bibliography entries. At the end,
+%   % create a second bibliography for uncited items.
+%   \DeclareBibliographyCategory{cited}
+%   \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+%   % Remove URL from citations if DOI is present.
+%   \AtEveryBibitem{%
+%     \iffieldundef{doi}{
+%     % do nothing if true
+%     }
+%     { % otherwise, clear the URL
+%       \clearfield{url}
+%     }%
+%   }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \usepackage[%
 % pdftitle={Hands-on Workshop: First-principles simulations of molecules and materials},%
@@ -48,104 +60,103 @@
 %  %hidelinks=true,
 %   colorlinks=true
 % ]{hyperref}
-%
-% \usepackage[square,numbers]{natbib}
-\newcommand\doi[1]{\doiprefix\href{http://dx.doi.org/#1}{\nolinkurl{#1}}}
-\newcommand\isbn[1]{\isbnprefix\href{http://www.books-by-isbn.com/#1}{#1}}
-\newcommand\urlprefix{URL:~}
-\newcommand\doiprefix{DOI:~}
-\newcommand\isbnprefix{ISBN:~}
 
-\definecolor{DarkBlue}{rgb}{0.0,0.0,0.5}
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
+%%%%%%% Source Code options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \setcounter{secnumdepth}{0} % no section numbering
-
-\newcommand\geometryin{\texttt{geometry.in}}
-\newcommand\controlin{\texttt{control.in}}
-
-\newcommand\aimsfilesdir{\$HandsOn/bin}
-\newcommand\species{\$SPECIES\_DEFAULTS}
-\newcommand\tutorialonedir{\$HandsOn/tutorial\_1}
-\newcommand\referencedir{\tutorialonedir/skel}
-\newcommand\aimscommand{aims.x} 
-\newcommand\vibcommand{get\_vibrations.py}
-
-\newcommand\by{\ensuremath{\times}}
-% \newcommand\mathup[1]{\mathrm{#1}}
-\newcommand\mathind[1]{{\mathup{#1}}}
-
-\newenvironment{tip}{%
-   \begin{center}
-   \begin{minipage}{0.80\linewidth}
-      \centerline{\rule{1.0\textwidth}{1pt}}%
-      }{%
-      \par
-      \centerline{\rule{1.0\textwidth}{1pt}}%
-      \vspace{1ex}%
-   \end{minipage}
-   \end{center}
+% Command to insert PROMPT info before shell console input
+\newcommand{\BashFancyFormatLine}{%
+  \def\FancyVerbFormatLine##1{\textcolor{blue}{\small user:\char`\~\$}\ ##1}%
 }
 
-\newcommand\task[1]{
-  \begin{center}
-    \fcolorbox{black!50}{black!10}{
-      \begin{minipage}{0.95\linewidth}
-        \vspace{0.3\baselineskip}
-        \begin{flushleft}
-          \begin{minipage}{0.95\linewidth}\RaggedRight
-            #1
-          \end{minipage}
-          \vspace{0.1\baselineskip}
-        \end{flushleft}
-      \end{minipage}
-    }
-  \end{center}
-  \noindent\ignorespaces
+\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
+	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[red!20!blue!20!white] 
+      (frame.south west)  rectangle 
+      ([xshift=1.5em]frame.north west);
+    \end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em
 }
 
-
-\lstset{language=bash,%
-           commentstyle=\color{mygreen},%
-           basicstyle=\ttfamily\footnotesize,
-           keepspaces=true,
-           keywordstyle=\color{blue},
-           stringstyle=\color{mymauve},
-           morekeywords={mkdir, grep, cp}}
-
-
-\newcommand\codefile[3]{
-  \begin{center}
-    \colorbox{black!2.5}{
-      \begin{minipage}{0.95\linewidth}
-        \centerline{\rule{1.0\textwidth}{1pt}}
-        \vspace{-0.5\baselineskip}
-        \lstinputlisting[language=#1,basicstyle=\ttfamily#2,%
-        morekeywords={hydro, species, ionic, cube}]{#3}
-        \vspace{-\baselineskip}
-        \centerline{\rule{1.0\textwidth}{1pt}}
-      \end{minipage}
-    }
-  \end{center}
+\lstset{
+  breaklines=true,
+  basicstyle=\small,
+  numberstyle=\tiny,
+  numbers=left,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=2em,
 }
 
-\newcommand\bashfile[2][\small]{
-  \codefile{bash}{#1}{#2}
+\lstdefinestyle{gaussian}{
+  language=Clean,
+  % keywordstyle=\bfseries,
+  commentstyle=\slshape,
+  % stringstyle=\ttfamily,
+  numbers=left,
+  firstnumber=1,
+  stepnumber=2,
+  numberfirstline=true,
+  numbersep=2em,
+  numberstyle=\tiny,
+  breaklines=true,
+  breakautoindent=true,
+  tabsize=2,
+  basicstyle=\ttfamily\small,
+  showspaces=false,
+  showstringspaces=false,
+  morecomment=[s]{<}{>}
 }
 
-\newcommand\bashinline[1][\normalsize] {%
-\lstinline[basicstyle=\ttfamily#1]
+\newmintinline{bash}{}
+
+% Hack to force linebreaks at `¬` in bashinputs. From
+% https://tex.stackexchange.com/a/461455/27032
+\AtBeginEnvironment{bashinput}{%
+  \catcode`¬\active
+  \begingroup\lccode`~=`\¬\lowercase{\endgroup\def~{\linebreak}}%
 }
 
-\lstnewenvironment{bashenv}[1][\normalsize]
-  {\lstset{language=bash,basicstyle=\ttfamily#1}}
-  {}
+\newtcblisting{bashinput}[1][]{
+  listing engine=minted,
+  minted language=bash, 
+  listing only,
+  minted options={,
+    formatcom=\BashFancyFormatLine
+  },
+  #1
+}
 
-\newcommand{\OTHc}[1]{\textcolor{red}\textbf{] OTH: #1}}
-\newcommand{\LNc}[1]{\textcolor{red}\textbf{] LN: #1}}
+\newtcblisting{gaussinput}[1][]{
+	listing engine=listings,
+	listing only,
+  listing options={
+    style=gaussian
+    },
+  #1
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{attachfile}
 \begin{document}
 
 % --------------------------------------------------------------------
