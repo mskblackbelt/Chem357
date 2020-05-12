@@ -10,42 +10,55 @@
   \DeclareSIUnit\wn{\raiseto{-1}\cm}
   \DeclareSIUnit\hartree{Ha}
 
-%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % (fold)
 % \usepackage[%
-%   bibstyle=numeric,%
-%   citestyle=numeric-comp,%
+%   style=numeric-comp,%
 %   sortcites,%
 %   sorting=none,%
-%   defernumbers=true%
+%   defernumbers=true,%
+%   hyperref,
+%   backend=biber,
 %   ]{biblatex}
 %   \addbibresource{../pchem_bib.bib}
 %
-% %% TODO: Troubleshoot this section… useful to only maintain one bibliography.
 %   % Filter bibliography file to only include entries matching keyword.
-%   \DeclareSourcemap{
-%     \maps[datatype=bibtex]{
-%       \map{
-%         \step[nocited, final]
-%         \step[fieldsource=keywords, notmatch=data, final]
-%         \step[entrynull]
-%       }
-%     }
+%   \DeclareSourcemap{%
+%     \maps[datatype=bibtex]{%
+%       \map{%
+%         \step[nocited, final]%
+%         \step[fieldsource=keywords, notmatch=compchem, final]%
+%         \step[entrynull]%
+%       }%
+%     }%
 %   }
 %
-%   % Add a section for cited bibliography entries. At the end,
-%   % create a second bibliography for uncited items.
+%   % Add a section for cited bibliography entries.
+%   % At the end, create a second bibliography for uncited items (Further Reading).
 %   \DeclareBibliographyCategory{cited}
 %   \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+%
+%   % Define a style for the Further Reading section
+%   \defbibenvironment{nolabelbib}
+%     {\list
+%        {}
+%        {\setlength{\leftmargin}{2\bibhang}%
+%         \setlength{\itemindent}{-\bibhang}%
+%         \setlength{\itemsep}{\bibitemsep}%
+%         \setlength{\parsep}{\bibparsep}}}
+%     {\endlist}
+%     {\item}
+%
 %   % Remove URL from citations if DOI is present.
 %   \AtEveryBibitem{%
-%     \iffieldundef{doi}{
-%     % do nothing if true
+%     \iffieldundef{doi}{ % do nothing if true
 %     }
 %     { % otherwise, clear the URL
 %       \clearfield{url}
 %     }%
 %   }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % (end)
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \usepackage[%
 % pdftitle={Hands-on Workshop: First-principles simulations of molecules and materials},%
@@ -208,9 +221,15 @@
 
 %\section*{Acknowledgments}
 
-%1\newcommand\bibbegin{\RaggedRight}
-%\bibliography{Tutorial1-Basics}
-%\bibliographystyle{doi_style}
+% \nocite{*}
+% \printbibliography[category=cited]% default title for `article` class: "References"
+%
+% \printbibliography[
+%   env=nolabelbib,
+%   title={Further Reading},
+%   resetnumbers,
+%   notcategory=cited,
+%   ]
 % ----------------------------------------------------------------------
 
 \end{document}

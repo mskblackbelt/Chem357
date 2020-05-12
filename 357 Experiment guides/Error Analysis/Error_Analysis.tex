@@ -4,40 +4,53 @@
 % \tcbuselibrary{minted}
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
 \usepackage[%
-	bibstyle=numeric,%
-	citestyle=numeric-comp,%
-	sortcites,%
-	sorting=none,%
-	defernumbers=true%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
 	]{biblatex}
 	\addbibresource{../pchem_bib.bib}
 
-%% TODO: Troubleshoot this section… useful to only maintain one bibliography.
 	% Filter bibliography file to only include entries matching keyword.
-	\DeclareSourcemap{
-	  \maps[datatype=bibtex]{
-	    \map{
-	      \step[nocited, final]
-	      \step[fieldsource=keywords, notmatch=errors, final]
-	      \step[entrynull]
-	    }
-	  }
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=errors, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
 	}
 	
-	% Add a section for cited bibliography entries. At the end, 
-	% create a second bibliography for uncited items.
+	% Add a section for cited bibliography entries. 
+  % At the end, create a second bibliography for uncited items (Further Reading).
 	\DeclareBibliographyCategory{cited}
 	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-	% Remove URL from citations if DOI is present.
+	
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+  
+  % Remove URL from citations if DOI is present.
 	\AtEveryBibitem{%
-	  \iffieldundef{doi}{
-		% do nothing if true
+	  \iffieldundef{doi}{ % do nothing if true
 		}
 		{ % otherwise, clear the URL
 			\clearfield{url}
 		}%
 	}
+% (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Introduction to Error Analysis}
@@ -124,7 +137,8 @@ The variance is calculated by averaging the square of the distance from each mea
 \end{equation}
 
 Notice that this equation references the \emph{squared} distance from the mean. 
-This is done to prevent errors in the positive direction from canceling out errors in the negative direction.\footnote{Notice that it is also scaled by \( \br{n-1} \), rather than by \( n \). This is because the definition for \( \overline{x} \) is already an estimation, so the value for \( s^2 \) is contains some bias based on our sampling of the data. The only way to remove this bias is to know the \emph{true} value of the unknown, \( \mu \), based on every possible sample, to calculate \( sigma \), the \emph{true} variance. This is generally unrealistic, so we use \( \overline{x} \) and scale \( s^2 \) by \( \br{n-1} \).}
+This is done to prevent errors in the positive direction from canceling out errors in the negative direction.\sidenote[][-4\baselineskip]{
+Notice that it is also scaled by \( \br{n-1} \), rather than by \( n \). This is because the definition for \( \overline{x} \) is already an estimation, so the value for \( s^2 \) is contains some bias based on our sampling of the data. The only way to remove this bias is to know the \emph{true} value of the unknown, \( \mu \), based on every possible sample, to calculate \( sigma \), the \emph{true} variance. This is generally unrealistic, so we use \( \overline{x} \) and scale \( s^2 \) by \( \br{n-1} \).}
 But we'd really like a direct measurement of the deviation from the mean, rather than the squared variance. 
 The definition for variance, \( \sigma^2 \), gives a hint to what a definition for the variance might be. 
 In \cref{eq:stdev}, we see the traditional definition for \emph{standard deviation}. 
@@ -133,7 +147,6 @@ In \cref{eq:stdev}, we see the traditional definition for \emph{standard deviati
 	\label{eq:stdev}
 \end{equation}
 
-121111`111````````````````````````'''''''''''''''''''''''''
 % subsection statistical_analysis_of_multiple_measurements (end)
 
 \subsection{Sources of Uncertainty} % (fold)
@@ -190,9 +203,9 @@ Simple calculations (rate, area)
 \printbibliography[category=cited]% default title for `article` class: "References"
 
 \printbibliography[
+  env=nolabelbib,
 	title={Further Reading},
 	resetnumbers,
-	prefixnumbers={F},
 	notcategory=cited,
 	]
 	
