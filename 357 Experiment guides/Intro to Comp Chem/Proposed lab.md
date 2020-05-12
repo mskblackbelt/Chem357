@@ -49,3 +49,40 @@
 - Visualizing density differences in *para-*benzoquinone (IX)
   - Need to visualize *cube* outputs from Gaussian (Python packages [`openchemistry`](https://blog.kitware.com/open-chemistry-avogadro-electronic-structure-in-jupyterlab/), [`pygauss`](https://pypi.org/project/pygauss/) and [`exatomic`](https://github.com/exa-analytics/exatomic))
   - Provide `xyz` file for students in repo
+
+
+## Getting Part III to work with CClib/OpenChemistry
+
+### CJSON structure
+
+- 'chemicalJson' (or 'chemical json'): **required**, 1 or 0 (new version vs. old, camelCase or spaces in keys)
+- 'atoms': **required**
+
+### OpenChemistry _molecule.Molecule structure
+
+- orbitals
+- structure
+- properties
+- vibrations
+
+OpenChemistry CJSON files expect the following for vibrational data: 
+
+- Seems to take only IR _or_ Raman data? Caffeine molecule only has one set of vibrational data
+- Four categories: 
+  - 'frequencies': 
+      frequency of each mode
+  - 'intensities': 
+      intensity of each mode
+  - 'modes':
+      numeric identifier for the mode
+  - 'eigenVectors': 
+      array of eigenvectors for each vibration
+      
+Gaussian16 outputs (from cclib import)
+
+- 'displacement' => 'eigenVectors' (need reshape?)
+- 'frequencies' == 'frequencies'
+- 'intensities' == 'intensities'
+- 'vibration symmetry' : not needed
+
+Need to add a column for modes. Frequencies are already ordered from lowest to highest, just need to add a column (range(1,len(col)))

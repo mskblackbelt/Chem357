@@ -3,6 +3,112 @@
 	\DeclareSIUnit\wn{\raiseto{-1}\cm}
 \tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
 	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+  
+%%%%%%% Listing environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\newcommand{\BashFancyFormatLine}{%
+  \def\FancyVerbFormatLine##1{\textcolor{blue}{\small user:\char`\~\$}\ ##1}%
+}
+
+\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
+	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[red!20!blue!20!white] 
+      (frame.south west)  rectangle 
+      ([xshift=1.5em]frame.north west);
+    \end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em
+}
+
+\lstset{
+  breaklines=true,
+  basicstyle=\small,
+  numberstyle=\tiny,
+  numbers=left,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=2em,
+}
+
+\lstdefinestyle{gaussian}{
+  language=Clean,
+  % keywordstyle=\bfseries,
+  commentstyle=\slshape,
+  % stringstyle=\ttfamily,
+  numbers=left,
+  firstnumber=1,
+  stepnumber=2,
+  numberfirstline=true,
+  numbersep=2em,
+  numberstyle=\tiny,
+  breaklines=true,
+  breakautoindent=true,
+  tabsize=2,
+  basicstyle=\ttfamily\small,
+  showspaces=false,
+  showstringspaces=false,
+  morecomment=[s]{<}{>}
+}
+
+\newmintinline{bash}{}
+
+% Hack to force linebreaks at `¬` in bashinputs. From
+% https://tex.stackexchange.com/a/461455/27032
+\AtBeginEnvironment{bashinput}{%
+  \catcode`¬\active
+  \begingroup\lccode`~=`\¬\lowercase{\endgroup\def~{\linebreak}}%
+}
+
+\newtcblisting{bashinput}[1][]{
+  listing engine=minted,
+  minted language=bash, 
+  listing only,
+  minted options={,
+    formatcom=\BashFancyFormatLine
+  },
+  #1
+}
+
+\newtcblisting{gaussinput}[1][]{
+	listing engine=listings,
+	listing only,
+  listing options={
+    style=gaussian
+    },
+  #1
+}
+
+\newtcbinputlisting{\gaussfileinput}[2][]{
+	listing file={#2},
+  listing engine=listings,
+	listing only,
+  listing options={
+    style=gaussian
+    },
+  #1
+}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[%
@@ -45,7 +151,7 @@
 
 \author{Dustin Wheeler}
 
-%\date{28 March 2010} % without \date command, current date is supplied
+%\date{28 March 2020} % without \date command, current date is supplied
 
 %\geometry{showframe} % display margins for debugging page layout
 
@@ -63,7 +169,7 @@ This experiment is concerned with the rotational fine structure of the infrared 
 \label{sec:intro}
 
 The infrared region of the spectrum extends from the long-wavelength end of the visible region at \SI{1}{\micro\m} out to the microwave region at about \SI{1000}{\micro\m}. 
-It is common practice to specify infrared frequencies in wavenumber units: \( \widetilde{\nu}\br{\si{\wn}} = 1/\lambda = \nu/c \), where \( c \) is the speed of light in \si{\cm \per \s}. 
+It is common practice to specify infrared frequencies in wavenumber units (\si{\wn}): \( \widetilde{\nu} = 1/\lambda = \nu/c \), where \( c \) is the speed of light in \si{\cm \per \s}. 
 Thus, this region extends from \SI{10000}{\wn} down to \SI{10}{\wn}. 
 Although considerable work is now being done in the far-infrared region (below \SI{400}{\wn}), the spectral range from \SIrange{4000}{400}{\wn} has received the greatest attention because the vibrational frequencies of most molecules lie in this region. 
 
@@ -150,7 +256,7 @@ Since \( \Delta E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{
 	\widetilde{\nu}_P &= \widetilde{\nu}_0 -													 \br{2 B_e - 2 \alpha_e} J'' - \alpha_e J''^2 	&	J'' &= 0, 1, 2, \ldots 
 	\label{eq:p_branch}
 \end{align}
-where the \( D_J \)term has been dropped and \( \widetilde{\nu}_0 \), the frequency of the \emph{forbidden} transition from \( v'' = 0, J'' = 0 \) to \( v' = 1, J' = 0 \) is 
+where the \( D_J \) term has been dropped and \( \widetilde{\nu}_0 \), the frequency of the \emph{forbidden} transition from \( v'' = 0, J'' = 0 \) to \( v' = 1, J' = 0 \) is 
 \begin{equation}
 	\widetilde{\nu}_0 = \widetilde{\nu}_e - 2 \widetilde{\nu}_e \chi_e \, .
 	\label{eq:forbid_transition}
@@ -160,7 +266,7 @@ where the \( D_J \)term has been dropped and \( \widetilde{\nu}_0 \), the freque
   \centering
 	  \caption{Rotational energy levels for the ground vibrational state \( (v'' = 0) \) and the first excited vibrational state \( ( v' = 1) \) in a diatomic molecule. 
 			the vertical arrows indicated allowed transitions in the \emph{R} and \emph{P} branches; the numbers above the arrows index the value \( J'' \) of the lower state. 
-			Transitions in the \emph{Q} branch \( (\Delta J = 0) \) are not shown, since they are not infrared active. 
+			Transitions in the \emph{Q} branch \( (\Delta J = 0) \) are not shown, since they are not infrared-active. 
 			Image source code by Whitney R. Hess and Lisa M. Goss, Idaho State University (2011), distributed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0}{CC BY-NC-SA 3.0 license} 
 			(via \href{http://demonstrations.wolfram.com/RotationVibrationEnergyLevelTransitionsOfADiatomicRotor/}{Wolfram Demonstrations Project}). 
 		}
@@ -324,38 +430,43 @@ In the present experiment, inert sapphire windows with transmission down to \SI{
 \label{sub:filling_the_cell}
 
 Before beginning the synthesis, power on the FTIR. 
-A 50-mL two-neck round-bottom flask and a 10-cm air condenser should be washed thoroughly with soap and water followed by several rinses with distilled water. 
-Then, the glassware  should be dried in an oven for approximately \SI{10}{\minute} at a temperature near \SI{110}{\celsius}. 
-While the glassware is drying, purge the 5-cm gas cell (Thermo Fisher) with nitrogen gas to clean out the cell.
+% A 50-mL two-neck round-bottom flask and a 10-cm air condenser should be washed thoroughly with soap and water followed by several rinses with distilled water.
+% Then, the glassware  should be dried in an oven for approximately \SI{10}{\minute} at a temperature near \SI{110}{\celsius}.
+Prior to starting, purge the 5-cm gas cell (Thermo Fisher) with nitrogen gas to clean out the cell.
 This can be accomplished by attaching the tubing from the nitrogen tank regulator to one of the glass ports on the gas cell. 
 Open both stopcocks on the gas cell and slowly open the needle valve on the nitrogen tank\sidenote{Ask the instructor if you are unfamiliar with the use of a regulator.} until a steady stream of gas is exiting the open port of the gas cell. 
-After allowing the gas to flow for \SI{5}{\minute}, close the stopcock on the gas cell port releasing the gas and immediately close the stopcock on the port receiving the flowing gas, effectively sealing the gas cell. 
+After allowing the gas to flow for \SI{2}{\minute}, close the stopcock on the gas cell port releasing the gas and immediately close the stopcock on the port receiving the flowing gas, effectively sealing the gas cell. 
 Immediately close the knob above the regulator nozzle, then close the needle valve controlling the tank's gas flow. 
 Remove the tubing from the gas cell port and take the gas cell to the FTIR to obtain a background spectrum. 
 Return the gas cell to the fume hood for the gas synthesis. 
 
-By this time, the glassware in the oven should be dry. Remove the dry glassware and place on a piece of paper towel to cool for another \SI{10}{\minute} (or until cool to the touch). 
-Prepare an indicator solution by dissolving \numrange{3}{4} drops of bromcresol green in \SI{300}{\mL} of DI water in a 400-mL beaker. 
+% By this time, the glassware in the oven should be dry. Remove the dry glassware and place on a piece of paper towel to cool for another \SI{10}{\minute} (or until cool to the touch).
+Prepare an indicator solution by dissolving \numrange{3}{4} drops of bromcresol green in \SI{300}{\mL} of DI water in a \SI{400}{\mL} beaker. 
 Attach Tygon tubing to the two stems of the gas cell, lubricating with glycerin to help the tubing slide on the glass. 
 Take the end of one tube and submerge it in your indicator solution.\sidenote{This will fill two roles: as a bubbler, it will prevent atmospheric gases from diffusing back into the cell; and as an indicator, it will show when sufficient \ch{HCl} has passed through the cell. \ch{HCl} is highly soluble in water, so the gaseous \ch{HCl} will quickly acidify the water.} 
 
-To set up the rest of the apparatus, clamp the two-neck round-bottom flask to a ring stand. 
-Prepare the air condenser by placing a plug of glass wool at the bottom and filling the rest with \ch{CaCl2} (approximately 12 mesh). 
-Insert the stem of the condenser into a stopper, again using glycerin for lubrication, and insert the stopper into the vertical neck of the round-bottom flask. 
-Insert the end of the second tube (attached to the gas cell) into another stopper, then insert that stopper into the top of the air condenser. 
-Mix \SI{\sim5}{\mL} of \ch{D2O} with \SI{\sim5}{\mL} concentrated \ch{HCl},\sidenote{this is easiest to do in a small beaker}, then pour the mixture into the round-bottom flask via the second neck. 
-Finally, insert another stopper with a hole into the second neck of the flask. 
+To set up the rest of the apparatus, clamp a \SI{50}{\mL} round-bottom flask to a ring stand. 
+Place \SI{\sim5}{\mL} of \ch{D2O} with \SI{\sim5}{\mL} concentrated \ch{HCl} in the round-bottom flask.
+Prepare an air condenser (\SI{10}{\cm}) by placing a plug of glass wool at the bottom and filling the rest with \ch{CaCl2} (approximately \SI{12}{mesh}). 
+Insert the stem of the condenser into a stopper, again using glycerin for lubrication, and insert the stopper into the neck of the round-bottom flask. 
+Insert the end of the second tube (attached to the gas cell) into another stopper with a hole, then insert that stopper into the top of the air condenser. 
+% Mix \SI{\sim5}{\mL} of \ch{D2O} with \SI{\sim5}{\mL} concentrated \ch{HCl},\sidenote{this is easiest to do in a small beaker}, then pour the mixture into the round-bottom flask via the second neck.
+% Finally, insert another stopper with a hole into the second neck of the flask.
+%
+% With a disposable plastic pipette, obtain \SI{\sim 1}{\mL} of concentrated \ch{H2SO4}.
+% Insert the pipette (\textbf{carefully} so as not to prematurely inject it) into the hole of the second stopper.
+% Once you have verified that all of the holes are plugged, squeeze \numrange{1}{2} drops of sulfuric acid into the solution.
+% You should see vigorous bubbling in the flask.
+% At this point, open the stoppers on the gas cell.
+% Continue to \emph{slowly} add sulfuric acid dropwise to the flask, watching the bubbles evolving in the indicator.
 
-With a disposable plastic pipette, obtain \SI{\sim 1}{\mL} of concentrated \ch{H2SO4}. 
-Insert the pipette (\textbf{carefully} so as not to prematurely inject it) into the hole of the second stopper. 
-Once you have verified that all of the holes are plugged, squeeze \numrange{1}{2} drops of sulfuric acid into the solution. 
-You should see vigorous bubbling in the flask. 
-At this point, open the stoppers on the gas cell. 
-Continue to \emph{slowly} add sulfuric acid dropwise to the flask, watching the bubbles evolving in the indicator. 
-When the indicator changes color, stop injecting acid and close the stopcocks on the gas cell. 
+Suspend the round-bottom flask in a water bath held around \SI{80}{\celsius}. 
+Gaseous \ch{HCl} will slowly evolve from the solution and bubble through the indicator solution. 
+When the indicator changes color from blue to green/yellow, close the stopcocks on the gas cell and remove the round-bottom flask from the water bath. 
+This procedure should take \SI{\sim20}{\min}. 
 Carefully remove the tubes from the gas cell and proceed to the spectrometer for analysis. 
 
-Make sure the experimental settings are appropriate. 
+Make sure the experimental settings in the FTIR software are appropriate. 
 The most important change to make is changing the resolution to the smallest possible value. 
 This will allow you to distinguish the individual rotational transitions in the spectrum. 
 
@@ -363,8 +474,9 @@ An arrangement for filling the cell is shown in \cref{fig:cell_filling}.
 
 \begin{figure}[htb]
   \centering
-    \includegraphics[width=.9\textwidth]{images/exp_setup_landscape.jpg}
-  \caption{Glassware setup for generation and capture of HCl gas.}
+    \includegraphics[width=.9\textwidth]{images/exp_setup_diagram.png}
+  \caption{Experimental apparatus. (1) Water bath heating a round-bottom flask containing a mixture of \ch{HCl_{(aq)}} and \ch{DCl_{(aq)}}. (2) Condenser containing a drying agent. (3) Tygon tubing leading to and from the gas cell. (4) Beaker containing indicator solution. \\
+  Figure reproduced from \cref{bigham18}.}
   \label{fig:cell_filling}
 \end{figure}
 
@@ -379,73 +491,33 @@ You will need to calculate the physical properties of \ch{HCl} and \ch{DCl} usin
 
 Using Gaussian, calculate the potential well for the \ch{HCl} molecule. 
 Because of the methods used for calculation, the mass of the nuclei doesn't influence geometry, so results will be the same for the four isotopologues. 
-To simplify this process, you can use a modified version of the \Verb|run_scan.sh| script from the Introduction to Computational Chemistry lab.
-These files should be available for you in the \Verb|PChem_Lab| folder on the desktop, but a copy is also available on Blackboard. 
-You will need to modify the \Verb|run_scan.sh| script (printed below) from it's original distance parameters, set on lines \num{9} and \num{19}. 
-Reasonable ranges are \numrange{0.8}{2.5} for the first range and \numrange{1.15}{1.41} for the second range. 
-%
-\tcbset{
-	left=5mm,
-	colback=Blue!4!white, 
-	colframe=Blue!75!black,
-	enhanced jigsaw, 
-	breakable, 
-	overlay={
-		\begin{tcbclipinterior}
-			\fill[red!20!blue!20!white] (frame.south west) rectangle ([xshift=5mm]frame.north west);
-		\end{tcbclipinterior}}
-}
-\tcbinputlisting{
-	title=Contents of Script \texttt{run\_scan.sh},
-	fonttitle=\bfseries,
-	listing only,
-	listing engine=minted,
-	minted language=bash, 
-	minted style=colorful,
-	minted options={
-		fontsize=\small, 
-		breaklines, 
-		numbers=left, 
-		numbersep=3mm, 
-		stepnumber=2,
-		obeytabs,
-		tabsize=4},
-	grow to right by=9em,
-	listing file=Gaussian_simulations/potential_curves/run_scan.sh}
-%
-Once you have calculated the potential energy surface for the molecule, perform an optimization and frequency analysis of the \ch{HCl} molecule.\sidenote{As outlined for \ch{H2O} in Problem 3 in the Introduction to Computational Chemistry lab.} 
-You only need to do this for \ch{H^{35}Cl} and \ch{D^{35}Cl}. 
+To simplify this process, you can use the \Verb{scan} trick from from the \ch{H3O+} PES scan in the Introduction to Computational Chemistry lab.
+A number of files are available for your use in the \Verb{hcl-dcl_lab} folder in JupyterLab. 
+% These files should be available for you in the \Verb|PChem_Lab| folder on the desktop, but a copy is also available on Blackboard.
+You will need to modify the scan parameters in the \Verb{hcl_bond.com} file (printed below).
+The selected basis set and level of theory make this a quick calculation, so you can set the scan parameters quite large. 
+I recommend scanning from \SIrange{0.6}{4.5}{Å} in steps less than \SI{0.05}{Å}. 
+With this resolution, you should obtain a plot that gives good fidelity around the minimum while showing realistic behavior at long bond lengths. 
+\gaussfileinput[title=Contents of \Verb{hcl_bond.com}]{Gaussian_simulations/hcl_bond.com}
+
+Once you have calculated the potential energy surface for the molecule, perform an optimization and frequency analysis of the \ch{HCl} molecule.\sidenote{As outlined for \ch{H3O+} in Problem 3 in the Introduction to Computational Chemistry lab.} 
+You need to do this for \ch{H^{35}Cl}, \ch{H^{37}Cl}, \ch{D^{35}Cl}, and \ch{D^{37}Cl}. 
 Here is an example header for the input file for this calculation. 
-%
-\tcbinputlisting{
-	listing engine=listings,
-	listing options={
-		basicstyle=\small,
-		numbers=left,
-		numberstyle=\tiny,
-		stepnumber=2, 
-		numbersep=3mm},
-	left=5mm,
-	colback=Blue!4!white, 
-	colframe=Blue!75!black,
-	enhanced jigsaw, 
-	breakable, 
-	overlay={
-		\begin{tcbclipinterior}
-			\fill[red!20!blue!20!white] (frame.south west) rectangle ([xshift=5mm]frame.north west);
-		\end{tcbclipinterior}},
-	listing only,
-	listing file=Gaussian_simulations/potential_curves/template_input.temp}
-%
+
+\gaussfileinput[title=Template Gaussian input file vibrotational calculations on a diatomic molecule.]{Gaussian_simulations/sample.com}
+
 Line 3 sets the theory level and basis set to reasonable values for our computational abilities and time. 
-Line 4 tells Gaussian to \Verb|opt|imize the geometry, then do a \Verb|freq|uency analysis including anharmonic and vibrational-rotational coupling terms. 
-You will need to replace all items in angle brackets  with appropriate data.\sidenote{\emph{i.e.,} ``\lstinline`<atom1>(Iso=<mass_number>)`'' should become ``\lstinline`He(Iso=3)`'' for a \ch{^3He} atom)}
-Note the addition of the \lstinline`(Iso=<mass-number>)` option after the element labels. 
+Line 4 tells Gaussian to \Verb{opt}imize the geometry, then do a \Verb{freq}uency analysis including \Verb{anharm}onic and \Verb{vib}rational-\Verb{rot}ational coupling terms. 
+You will need to replace all items in angle brackets with appropriate data.
+Note the addition of the \lstinline[language=Gaussian]{(Iso=<mass-num>)} option after the element labels.\sidenote{\emph{i.e.,} \lstinline[language=Gaussian]{<atom1>(Iso=<mass_num>)} should become \lstinline[language=Gaussian]{He(Iso=3)} for a \ch{^3He} atom)} 
 By inserting the relevant value (total number of protons and neutrons) for your isotope (\num{2} for deuterium), you can tell Gaussian to calculate using a different atomic mass. 
 
-You will need to search the output file for the relevant information. 
-The vibrational and rotational constants are listed in tables under the heading ``Vibrational Energies at Anharmonic Level''. 
-You will need to find the \emph{two} values for the first-mode vibrational energy: one calculated using a harmonic analysis, the second incorporating the effects of anharmonicity. 
+You will need to import the files into your Jupyter notebook the same way you imported the files for the \ch{H3O+} molecule in the Introduction to Computational Chemistry lab. 
+From there, you need to extract the values for the equilibrium bond length, \( r_0 \), and zero-point energy \( D_e \). 
+
+You will need to search the output file for the relevant information on the energy of the ground state (relative to the zero-point energy), \( D_0 \), and the vibrational and rotational energies, \( \widetilde{\nu}_e \) and \( B_e \) (\Verb{cclib} doesn't yet parse these values).
+The vibrational and rotational constants are listed in tables under the heading ``Vibrational Energies at Anharmonic Level''.
+You will need to find the \emph{two} values for the first-mode vibrational energy: one calculated using a harmonic analysis, the second incorporating the effects of anharmonicity.
 In this same section will be equilibrium rotational constants for the two degenerate rotational modes (labeled \Verb|Ba(y)| and \Verb|Ca(z)|) and the energy (relative to the zero-point energy) of the ground state \( (D_0) \).\sidenote{All energy values are listed in \si{\wn}.}
 
 % subsection theoretical_calculations (end)
@@ -457,7 +529,7 @@ In this same section will be equilibrium rotational constants for the two degene
 
 \begin{enumerate}
 	\item Select your best \ch{HCl} and \ch{DCl} spectra and index the lines with the appropriate \( m \) values, as seen in \cref{fig:typ_spectrum}. 
-	If the \ch{^{35}Cl}/\ch{^{37}Cl} splitting is seen, index the stronger \ch{^{35}Cl} lines. 
+	If the \ch{^{35}Cl}/\ch{^{37}Cl} splitting is seen, index both sets, but be sure to separate them appropriately.
 	Make a table of these \( m \) values and the corresponding frequences, \( \widetilde{\nu}\br{m} \). 
 	Express the frequencies in \si{\wn} to the tenth of a \si{\wn}. 
 	Then, list the differences between adjacent lines, \( \Delta{\widetilde{\nu}}\br{m} \), which will be roughly \( 2 B_e \), but will vary with \( m \). 

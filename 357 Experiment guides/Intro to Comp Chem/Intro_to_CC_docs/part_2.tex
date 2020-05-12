@@ -20,7 +20,7 @@ H    0.00    1.06   0.00
   Use the \Verb{HF} level of theory and the \Verb{6-31G(d,p)} basis set. 
   We want to relax the geometry and perform the vibrational analysis of the ion. 
   Therefore, replace the \Verb{sp} keyword (`single-point') from the template with \Verb{opt freq} (`optimization' and `frequency'). 
-  After removing the intormation for Add the geometry of the cation at the end of the input file\sidenote{copy by hand or, in the terminal, type \bashinline{cat geom_planar.xyz >> input.com} to append the contents to then end of the file}.
+  After removing the information for the previous molecule, add the geometry of the cation at the end of the input file\sidenote{copy by hand or, in the terminal, type \bashinline{cat geom_planar.xyz >> input.com} to append the contents to then end of the file}.
   
   \item Run Gaussian.
   \begin{bashinput}
@@ -38,7 +38,7 @@ H    0.00    1.06   0.00
   
   \item   We'll use two additional cells to define bonds between the oxygen and all three hydrogens and to reformat the vibrational information so we can visualize it. 
   The final cells in this section of the notebook will show the corrected structure and list the normal modes/vibrations with their IR intensity, sorted by wavenumber (\si{\wn}). 
-  Click through the spctrom to animate some of the vibrations. 
+  Click through the spectrum to animate some of the vibrations. 
   You can select all of the vibrations by clicking the menu icon \( (\vdots) \) in the upper right corner of the output view window and using the dropdown menu for ``Normal Mode''. 
   You should see that one of the frequencies is negative -- select the normal mode to which it corresponds. 
   In the discussion section (at the end of the notebook), include this table and indicate what kind of molecular motion each vibration corresponds to. 
@@ -61,7 +61,7 @@ You should see the \ch{H3O+} in a pyramidal conformation now.
 Note again the total energy of the ion and compare it with the planar structure in your discussion. 
 Which conformation has lower energy? 
 Next, view the vibrations table and spectrum. 
-If caclulations were done properly, all vibrations should have positive wavenumbers. 
+If calculations were done properly, all vibrations should have positive wavenumbers. 
 Describe again in the discussion section the motion the vibrations correspond to. 
 
 

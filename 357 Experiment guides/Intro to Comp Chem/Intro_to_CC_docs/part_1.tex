@@ -97,7 +97,7 @@ From a technical perspective, this exercise teaches how simple shell scripting c
 \begin{enumerate} 
   \item The first task of this exercise will be to find the equilibrium bond distance of HF from a series of calculations. Start by creating an input file (name it \Verb{input.temp}) which contains a F atom in the center of the coordinate system and a H atom at distance \Verb{DIST} along the \emph{z-}axis. \Verb{DIST} is a variable name for a H-F distance in different computational steps. Please note that HF is a neutral closed-shell system (change the multiplicity). 
 
-The template file should specify the method and the basis set used for computation. In this excercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous excercise. 
+The template file should specify the method and the basis set used for computation. In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise. 
 %
 \item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs g16 calculations for a series of bond distances between \SI{0.7}{\angstrom} and \SI{1.3}{\angstrom} with \SI{0.1}{\angstrom} steps, and a denser step width of \SI{0.02}{\angstrom} between \SI{0.85}{\angstrom} and \SI{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
    \begin{itemize}
