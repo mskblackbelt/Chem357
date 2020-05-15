@@ -1,8 +1,6 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
 \input{header.tex}
 	\DeclareSIUnit\wn{\raiseto{-1}\cm}
-\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
-	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
   
 %%%%%%% Listing environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
@@ -137,18 +135,7 @@
   % At the end, create a second bibliography for uncited items (Further Reading).
 	\DeclareBibliographyCategory{cited}
 	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-	
-  % Define a style for the Further Reading section
-  \defbibenvironment{nolabelbib}
-    {\list
-       {}
-       {\setlength{\leftmargin}{2\bibhang}%
-        \setlength{\itemindent}{-\bibhang}%
-        \setlength{\itemsep}{\bibitemsep}%
-        \setlength{\parsep}{\bibparsep}}}
-    {\endlist}
-    {\item}
-  
+
   % Remove URL from citations if DOI is present.
 	\AtEveryBibitem{%
 	  \iffieldundef{doi}{ % do nothing if true
@@ -335,7 +322,7 @@ A closer approximation to the solid curve can be had by adding cubic and higher 
 	U\br{r} = \frac{1}{2} k \br{r - r_e}^2 + c_1 \br{r - r_e}^3 + c_2 \br{r - r_e}^4 + \ldots
 	\label{eq:anharmonic_expansion}
 \end{equation}
-Although somewhat complicated, it can be shown\autocite{herzberg89,levine75} that the \( c_1 \) and \( c_2 \) terms yeild, as the first correction to the energy levels, precisely the \( -\widetilde{\nu}_e \chi_e \br{v + {1}/{2}}^2 \) term given in \cref{eq:vib_rot_energies}. 
+Although somewhat complicated, it can be shown\autocite{herzberg89,levine75} that the \( c_1 \) and \( c_2 \) terms yield, as the first correction to the energy levels, precisely the \( -\widetilde{\nu}_e \chi_e \br{v + {1}/{2}}^2 \) term given in \cref{eq:vib_rot_energies}. 
 A similar conclusion is reached if \( U\br{r} \) is taken to have the Morse potential form given by%
 \sidenote{
 	The parameter \( \beta \) is determined by equating \( k_e \) to the curvature of the Morse potential at \( r = r_e \), yielding
@@ -362,10 +349,10 @@ In both cases, the mass dependence of \( \widetilde{\nu}_e \chi_e \) is found to
 \end{equation}
 and it is seen that a measurement of \( \widetilde{\nu}_0 \) for \ch{HCl} and \ch{DCl} suffices for a determination of \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \). 
 Alternatively or course, the latter constants can be determined from overtone vibrations \( \br{\Delta v > 0} \) of a single isotopic form\Footcite[See Exp. 39 in][]{nibler14}. 
-However, such overtones generally have low intensity and the transitions may fall outside the range of many infrated instruments, so the isotopic shift method is used in the present experiment. 
+However, such overtones generally have low intensity and the transitions may fall outside the range of many infrared instruments, so the isotopic shift method is used in the present experiment. 
 
 Since \ch{HCl} gas is a mixture of \ch{H^{35}Cl} and \ch{H^{37}Cl} molecules, a chlorine isotope effect will also be present. 
-However, the ratio of the reduced masses is only \num{1.0015},: therefore, high resulution is required to detect this effect. 
+However, the ratio of the reduced masses is only \num{1.0015},: therefore, high resolution is required to detect this effect. 
 \ch{HCl} is predominantly \ch{H^{35}Cl}, and for this experiment, we shall assume that the \ch{HCl} bands obtained are those of \ch{H^{35}Cl}. 
 If deuterium is substituted for hydrogen, the ratio of the reduced masses, \( \mu\br{\ch{D^{35}Cl}} / \mu\br{\ch{H^{35}Cl}} \), is \num{1.946} and the isotope effect is quite large. 
 
@@ -393,15 +380,15 @@ The vibrational contribution to \( \widetilde{C}_v \) varies with temperature an
 The partition function, \( q_\mtext{vib} \), of \ch{HCl} or \ch{DCl} is well-approximated by the harmonic-oscillator partition function, \( q_\mtext{HO} \). 
 Since the energy levels of a harmonic oscillator are given by \( \br{v + \tfrac{1}{2}} h \nu \), one obtains\autocite{levine95}
 \begin{equation}
-	q_\mtext{HO} = \sum_{v = 0}^\infty \exp \br{\frac{-\br{v + \tfrac{1}{2}} h \nu}{k T}} = \frac{e^{-h \nu/\br{2kT}}{1 - e^{-h \nu / \br{2 k T}}}} \, .
+	q_\mtext{HO} = \sum_{v = 0}^\infty \exp \br{\frac{-\br{v + \tfrac{1}{2}} h \nu}{k T}} = \frac{e^{-h \nu/\br{2kT}}}{{1 - e^{-h \nu / \br{k T}}}} \, .
 	\label{eq:qho_part_func}
 \end{equation}
 Combining \cref{eq:vib_part_func1,eq:qho_part_func}, we find 
 \begin{equation}
-	\widetilde{C}_v\br{\mtext{vib}} = R \frac{u^2 e^{-u}}{\br{1 - e^{-u}}^2} \, ,
+	\widetilde{C}_v\br{\mtext{vib}} = R \frac{u^2 e^{-u/2}}{\br{1 - e^{-u}}^2} \, ,
 	\label{eq:vib_part_func2}
 \end{equation}
-where \( u = h \nu / \br{kT} = h c \widetilde{\nu} / \br{k T} = 1.4388 \widetilde{\nu} / T \). 
+where \( u = h \nu / \br{kT} = h c \widetilde{\nu} / \br{k T} = 143.88 \widetilde{\nu} / T \). 
 
 % subsection vibrational_partition_function (end)
 
@@ -429,14 +416,14 @@ where \( u = h \nu / \br{kT} = h c \widetilde{\nu} / \br{k T} = 1.4388 \widetild
 \section{Procedure} % (fold)
 \label{sec:procedure}
 
-This experiment must be performed with an IR spectrometer capable of medium to high resolution (\( > \SI{2}{wn} \) resolution). 
+This experiment must be performed with an IR spectrometer capable of medium to high resolution (\( > \SI{2}{\wn} \) resolution). 
 A high-quality grating spectrometer and most FTIR instruments are generally capable of this, and FTIR instruments don't require calibration with external gas standards. 
 
 The infrared gas cell is constructed from a short (\SIrange{5}{10}{\cm}) length of large-diameter (\SIrange{4}{5}{\cm}) Pyrex tubing with a vacuum stopcock attached. 
 Infrared-transparent windows are clamped agains O-rings at the ends of the cell or are sealed on the ends with Glyptal resin. 
 For studies concentrating on the region \SIrange{4000}{500}{\wn}, \ch{NaCl} windows will suffice. 
 When the spectrum of interest extends down to \SI{\sim400}{\wn}, \ch{KBr} windows are necessary. 
-Both types of salt windows become ``foggy'' on prolonged exposure to a moist atmosphere and should be protected\sidenote{\emph{e.g.,} stored in a dessicator} when not in use. 
+Both types of salt windows become ``foggy'' on prolonged exposure to a moist atmosphere and should be protected\sidenote{\emph{e.g.,} stored in a desiccator} when not in use. 
 In the present experiment, inert sapphire windows with transmission down to \SI{1600}{\wn} are particularly convenient and relatively inexpensive. 
 
 \subsection{Filling the Cell and Recording the Spectra} % (fold)
@@ -543,7 +530,7 @@ In this same section will be equilibrium rotational constants for the two degene
 \begin{enumerate}
 	\item Select your best \ch{HCl} and \ch{DCl} spectra and index the lines with the appropriate \( m \) values, as seen in \cref{fig:typ_spectrum}. 
 	If the \ch{^{35}Cl}/\ch{^{37}Cl} splitting is seen, index both sets, but be sure to separate them appropriately.
-	Make a table of these \( m \) values and the corresponding frequences, \( \widetilde{\nu}\br{m} \). 
+	Make a table of these \( m \) values and the corresponding frequencies, \( \widetilde{\nu}\br{m} \). 
 	Express the frequencies in \si{\wn} to the tenth of a \si{\wn}. 
 	Then, list the differences between adjacent lines, \( \Delta{\widetilde{\nu}}\br{m} \), which will be roughly \( 2 B_e \), but will vary with \( m \). 
 	\item Plot \( \Delta{\widetilde{\nu}}\br{m} \) against \( m \) and plot the trendline for the series. 
