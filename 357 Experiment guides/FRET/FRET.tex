@@ -5,7 +5,7 @@
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
 \usepackage[%
-	style=numeric-comp,%
+	style=chem-acs,%
   sortcites,%
   sorting=none,%
   defernumbers=true,%
@@ -314,10 +314,11 @@ Finally, in part C, you will combine the knowledge gained in parts A and B to de
 \nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
 \printbibliography[%
-	env=nolabelbib,%
   title={Further Reading},%
-	resetnumbers,%
+  resetnumbers,%
+  omitnumbers,%
 	notcategory=cited,%
 	]
 

@@ -561,9 +561,6 @@ In this same section will be equilibrium rotational constants for the two degene
 \section{Questions and Further Thoughts} % (fold)
 \label{sec:questions_and_further_thoughts}
 
-\subsection{Data Analysis} % (fold)
-\label{sub:data_analysis}
-
 \begin{enumerate}
 	\item Compute the ratio of \( B_e^*/B_e \) and compare with the rigid-rotor prediction of \cref{eq:eff_mass_isotope_relation}. 
 	How constant is \( r_e \) for \ch{HCl} and \ch{DCl}?
@@ -578,9 +575,6 @@ In this same section will be equilibrium rotational constants for the two degene
 	For each calculation, report the values for total energy \( (D_e) \), vibration frequency \( (\widetilde{\nu}_0) \), bond length \( (r_e) \), rotation constant \( B_e \), and centrifugal distortion constant \( D_J \). 
 	Additionally, you should plot the potential energy curve output by Gaussian against the theoretical Morse potential for the molecule. 
 \end{enumerate}
-% subsection data_analysis (end)
-
-
 
 % section questions_and_further_thoughts (end)
 
@@ -600,16 +594,15 @@ As previously stated, your lab report should consist of the following parts:
 \end{description}
 % section lab_report_guidelines (end)
 
-
-
 \nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
-\printbibliography[
-	env=nolabelbib,
-  title={Further Reading},
-	resetnumbers,
-	notcategory=cited,
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
+\printbibliography[%
+  title={Further Reading},%
+  resetnumbers,%
+  omitnumbers,%
+	notcategory=cited,%
 	]
 
 \end{document}

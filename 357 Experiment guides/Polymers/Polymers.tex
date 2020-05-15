@@ -703,15 +703,15 @@ As previously stated, your lab report should consist of the following parts:
 \end{description}
 % section lab_report_guidelines (end)
 
-
 \nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
-\printbibliography[
-	env=nolabelbib,
-  title={Further Reading},
-	resetnumbers,
-	notcategory=cited,
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
+\printbibliography[%
+  title={Further Reading},%
+  resetnumbers,%
+  omitnumbers,%
+	notcategory=cited,%
 	]
 
 \end{document}
