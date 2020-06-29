@@ -85,9 +85,9 @@
 		% \foreach inside axis environment was tricky, see https://tex.stackexchange.com/a/17817/27032
 		% Harmonic potential and vibrational levels
 		\pgfplotsinvokeforeach{0,...,13}{
-			\draw[Red!30] (axis cs: {rminho( energyho(#1) )},{energyho(#1)}) -- (axis cs: {\re},{energyho(#1)});
+			\draw[red!30] (axis cs: {rminho( energyho(#1) )},{energyho(#1)}) -- (axis cs: {\re},{energyho(#1)});
 		}
-		\addplot +[thick, samples=50, Red, domain=-0.75:2.75] {Uho(x)};
+		\addplot +[thick, samples=50, red, domain=-0.75:2.75] {Uho(x)};
 		\node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 3.3,5.75) {
 			Harmonic potential: \\ 
 			\(\quad U_\mtext{HO}(r) = D_e \br{ -a\br{r-r_e}^2 - 1 }\) 
@@ -95,10 +95,12 @@
 		\node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 3.3,3) {
 			Energy levels: \\ 
 			\(\quad E_n = -D_e + h \nu_0 \br{v + 1/2}\) \vspace{1mm}
-			\\ 
-			with \(\nu_0 = \dfrac{a}{2\pi} \sqrt{\dfrac{2 D_e}{\mu}}\) 
 		};
 		
+    \node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 4.5,-2) {
+			For both: \( a = 2\pi\nu_0 \sqrt{\frac{\mu}{2 D_e}}\)
+    };
+    
 		% Morse potential and vibrational levels
 		\pgfplotsinvokeforeach{0,...,18}{
 			\draw[blue!30] (axis cs: {\re},{energymo(#1)}) -- (axis cs: {rmaxmo(energymo(#1))},{energymo(#1)});

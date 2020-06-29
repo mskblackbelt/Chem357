@@ -162,14 +162,19 @@
 
 \begin{abstract}
 \noindent
-This experiment is concerned with the rotational fine structure of the infrared vibrational spectrom of a linear molecule such as \ch{HCl}. By interpreting the details of this spectrum, it is possible to obtain the moment of inertia of the molecule and thus the internuclear separation. In addition, the pure vibrational frequency determines the force constant that is a measure of the bond strength. By also investigating \ch{DCl}, the isotope effect can be observed.\thanks{Transcribed (with corrections) from Nibler, et al.}
+This experiment is concerned with the rotational fine structure of the infrared vibrational spectrom of a linear molecule such as \ch{HCl}. By interpreting the details of this spectrum, it is possible to obtain the moment of inertia of the molecule and thus the internuclear separation. In addition, the pure vibrational frequency determines the force constant that is a measure of the bond strength. By also investigating \ch{DCl}, the isotope effect can be observed.\thanks{Transcribed (with corrections) from \textcite{nibler14}.}
 \end{abstract}
 
 \section{Introduction} % (fold)
 \label{sec:intro}
 
-The infrared region of the spectrum extends from the long-wavelength end of the visible region at \SI{1}{\micro\m} out to the microwave region at about \SI{1000}{\micro\m}. 
-It is common practice to specify infrared frequencies in wavenumber units (\si{\wn}): \( \widetilde{\nu} = 1/\lambda = \nu/c \), where \( c \) is the speed of light in \si{\cm \per \s}. 
+The infrared region of the spectrum extends from the long-wavelength end of the visible region near \SI{1}{\um} out to the microwave region at approximately \SI{1000}{\um}.
+It is common practice to specify infrared frequencies in wavenumber units of ``inverse centimeters'', \si{\wn}. 
+The wavenumber of a photon, \( \widetilde{\nu} \), is calculated as: 
+\begin{equation}
+  \widetilde{\nu} = 1/\lambda = \nu/c \, ,
+\end{equation} 
+where \( c \) is the speed of light in \si{\cm \per \s}, \( \nu \) is the frequency in \si{\Hz}, and \( \lambda \) is the wavelength in \si{\cm}.
 Thus, this region extends from \SI{10000}{\wn} down to \SI{10}{\wn}. 
 Although considerable work is now being done in the far-infrared region (below \SI{400}{\wn}), the spectral range from \SIrange{4000}{400}{\wn} has received the greatest attention because the vibrational frequencies of most molecules lie in this region. 
 
@@ -178,65 +183,69 @@ Although considerable work is now being done in the far-infrared region (below \
 \section{Theory} % (fold)
 \label{sec:theory}
 
-Almost all infrared work makes use of absorption techniques in which radiation from a source emitting all infrared frequencies is passed through a sample of the material to be studied. 
+Almost all infrared work makes use of absorption techniques in which radiation from a source emitting broadband infrared radiation is passed through a sample of the material to be studied. 
 When the frequency of this radiation is the same as the vibrational frequency of the molecule, the molecule may be vibrationally excited.
-This results in loss of energy from the radiation and gives rise to an absorption band. 
+This results in loss of energy from the radiation at that frequency and gives rise to an absorption band. 
 The spectrum of a polyatomic molecule generally consists of several such bands arising from different vibrational motions of the molecule. 
 This experiment involves diatomic molecules, which have only one vibrational mode. 
 
-The simples model of a vibrating diatomic molecule is a harmonic oscillator for which the potential energy depends quadratically on the change in internuclear distance. 
-The allowed energy levels of a harmonic oscillator, as calculated from quantum mechanics\autocite{atkins94}, are
+The simplest model of a \emph{vibrating} diatomic molecule is a harmonic oscillator, for which the potential energy depends quadratically on the change in internuclear distance. 
+The allowed energy levels of a harmonic oscillator, as calculated from quantum mechanics~\autocite{atkins94}, are
 \begin{equation}
 	E\br{v} = h \nu \br{v + \tfrac{1}{2}} \, ,
 	\label{eq:ho_energies}
 \end{equation}
-where \( v \) is the vibrational quantum number having integral values \( 0, 1, 2, \ldots \); \( \nu \) is the vibrational frequency in \si{\Hz}, and \( h \) is the Planck constant, \SI{6.626e-34}{\J\s}. 
+where \( v \) is the vibrational quantum number (having integer values \( 0, 1, 2, \ldots \)), \( \nu \) is the vibrational frequency in \si{\Hz}, and \( h \) is the Planck constant, \SI{6.626e-34}{\J\s}. 
 
-The simplest model of a rotating diatomic molecule is a rigid rotor or ``dumbell'' model in which the two atoms of mass \( m_1 \) and \( m_2 \) are considered to be joined by a rigid, weightless rod. 
-The allowed energy levels for a rigid rotor may be shown by quantum mechanics\autocite{atkins94} to be
+The simplest model of a \emph{rotating} diatomic molecule is a rigid rotor, or ``dumbell'', model in which the two atoms of mass \( m_1 \) and \( m_2 \) are considered to be joined by a rigid, weightless rod. 
+The allowed energy levels for a rigid rotor may be shown by quantum mechanics~\autocite{atkins94} to be
 \begin{equation}
 	E\br{J} = \frac{h^2}{8 \pi^2 I} J \br{J + 1} \, ,
 	\label{eq:vib_energies}
 \end{equation}
-where the rotational quantum number \( J \) may take integral values \( 0, 1, 2, \ldots \). 
-The quantity \( I \) is the moment of inertia, which is related to the internuclear distance \( r \) and the reduced mass \( \mu = m_1 m_2 / \br{m_1 + m_2} \) by
+where the rotational quantum number, \( J \), again takes integer values \( 0, 1, 2, \ldots \).
+The quantity \( I \) is the moment of inertia, which is related to the internuclear distance, \( r \), and the reduced mass, \( \mu \),\sidenote{
+Recall that \( \mu \) is defined by the equation \( mu^{-1} = m_1^{-1} + m_2^{-1} = \br{m_1 m_2}/\br{m_1 + m_2} \).
+} by
 \begin{equation}
 	I = \mu r^2 \, .
 	\label{eq:mom_of_intert}
 \end{equation}
 
-Since a real molecule is undergoing both rotation and vibration simultaneously, a first approximation to its energy levels, \( E\br{\nu, J} \) would be the sum of \cref{eq:ho_energies,eq:vib_energies}. 
-A more complete expression for the energy levels of a diatomic molecule\autocite{herzberg89,kerr82} is given below, with the levels expressed as \emph{term values} \( T \) in units of \si{\wn} rather than as energy values \( E \) in \si{\J}:
+Since a real molecule is undergoing both rotation and vibration simultaneously, a first approximation to its energy levels, \( E\br{v, J} \) would be the sum of \cref{eq:ho_energies,eq:vib_energies}. 
+A more complete expression for the energy levels of a diatomic molecule is given below~\autocite{herzberg89,kerr82}, with the levels expressed as \emph{term values}, \( T \), in frequency units of \si{\wn} rather than as energy values, \( E \), in joules (\si{\J}):
 \begin{equation}
 	\begin{aligned}
-	T\br{v, J} =& \frac{E\br{v, J}}{h c} = \\
+	T\br{v, J} =\,& \frac{E\br{v, J}}{h c} = \\
 		& \quad \widetilde{\nu}_e\br{v + \tfrac{1}{2}} - \widetilde{\nu}_e \chi_e\br{v + \tfrac{1}{2}}^2 + B_e J \br{J + 1} \\
-			& \qquad - D_J J^2 \br{J + 1}^2 - \alpha_e \br{v + \tfrac{1}{2}} J \br{J + 1} \, ,
+			& \quad - D_J J^2 \br{J + 1}^2 - \alpha_e \br{v + \tfrac{1}{2}} J \br{J + 1} \, ,
 	\end{aligned}
 	\label{eq:vib_rot_energies}
 \end{equation}
-where \( c \) is the speed of light in \si{\cm \per \s}, \( \widetilde{\nu}_e \) is the frequency in \si{\wn} for the molecule vibrating about its equilibrium internuclear separation \( r_e \), and 
+where \( c \) is the speed of light in \si{\cm \per \s}, \( \widetilde{\nu}_e \) is the frequency in \si{\wn} for the molecule vibrating about its equilibrium internuclear separation, \( r_e \), in \si{\angstrom}, and the equilibrium rotation frequency is defined as
 \begin{equation}
 	B_e = \frac{h}{8 \pi^2 I_e c} \, .
 	\label{eq:b_e}
 \end{equation}
 
 The first and third terms on the right-hand side of \cref{eq:vib_rot_energies} are the harmonic-oscillator and rigid-rotor terms with \( r = r_e \).
-The second term (containing the constant \( \chi_e \)) takes into account the effect of anharmonicity on the vibrational levels. 
-Since the real potential \( U\br{r} \) for a molecule differs from a harmonic potential \( U_\mtext{HO} \)\sidenote{See \cref{fig:potential_curves}}, the real vibrational levels are not quite those given by \cref{eq:ho_energies} and a correction term is required. 
-The fourth term (involving the \emph{centrifugal distortion constant} \( D_J \)) accounts for the effects of centrifugal stretching on the rotational levels. 
+The second term (containing the \emph{anharmonicity constant}, \( \chi_e \)) takes into account the effect of anharmonicity on the vibrational levels. 
+Since the real potential, \( U\br{r} \), for a molecule differs from a harmonic potential, \( U_\mtext{HO} \), the real vibrational levels are not quite those given by \cref{eq:ho_energies} and a correction term is required.\sidenote{See \cref{fig:potential_curves}} 
+The fourth term (involving the \emph{centrifugal distortion constant}, \( D_J \)) accounts for the effects of centrifugal stretching on the rotational levels. 
 Since a chemical bond is not truly rigid but more like a stiff spring, it stretches somewhat when the molecule rotates. 
 Such an effect is only important for high \( J \) values, since the constant \( D_J \) is usually very small. 
-The last term in \cref{eq:vib_rot_energies} accounts for interactions between vibration and rotation. 
+The last term in \cref{eq:vib_rot_energies}, involving \( \alpha_e \), accounts for interactions between vibration and rotation. 
 During a vibration, the internuclear distance \( r \) changes; this changes the moment of inertia and affects the rotation of the molecule. 
 The constant \( \alpha_e \) is also quite small, but this term should not be neglected. 
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering
     \includegraphics[width=0.9\textwidth]{images/potentials.tikz}
   \caption{Schematic diagram showing potential energy curves as a function of internuclear separation, \( r \), for a diatomic molecule.
 		The curve for a harmonic oscillator is depicted in red while the Morse potential is drawn in blue.
 		Vibrational levels are shown for each.
+    Note that \( 0 \) on the \emph{y}-axis corresponds to the dissociated system, not any physical representation of ``zero energy.''
+    This is important when considering your computational results later. 
 	}
   \label{fig:potential_curves}
 \end{figure}
@@ -244,11 +253,11 @@ The constant \( \alpha_e \) is also quite small, but this term should not be neg
 \subsection{Selection Rules} % (fold)
 \label{sub:selection_rules}
 
-The harmonic-oscillator, rigid-rotor selection rules\autocite{herzberg89} are \( \Delta v = \pm 1 \) and \( \Delta J = \pm 1\); that is, infrared emission or absorption can occur only when these ``allowed'' transitions take place. 
-For an anharmonic diatomic molecule, the \( \Delta J = \pm 1 \) selection rule is still valid, but weak transitions corresponding to \( \Delta v = \pm2, \pm3, \) etc. (overtones) can now be observed\autocite{herzberg89}. 
-Since we are interested in the most intense absorption band (the ``fundamental''), we are concerned with transitions from various \( J'' \) levels of the vibrational ground state \( \br{v'' = 0} \) to \( J' \) levels in the first excited vibrational state \( \br{v' - 1} \). 
-From the selection rule, we know that the transition must be from \( J'' \) to \( J' = J'' \pm 1 \). 
-Since \( \Delta E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{\nu} \) (in wavenumbers) for this transition will be just \( T\br{v', J'} - T\br{v'', J''} \). When \( \Delta J = +1 \) \( \br{J' = J'' + 1} \) and \( \Delta J = -1 \) \( \br{J' = J'' - 1} \), we find, respectively, from \cref{eq:vib_rot_energies} that
+The harmonic-oscillator, rigid-rotor selection rules are \( \Delta v = \pm 1 \) and \( \Delta J = \pm 1\); that is, infrared emission or absorption can occur only when these ``allowed'' transitions take place~\autocite{herzberg89}.
+For an \emph{anharmonic} diatomic molecule, the \( \Delta J = \pm 1 \) selection rule is still valid, but weak transitions corresponding to \( \Delta v = \pm2, \pm3, \) etc. (overtones) can now be observed~\autocite{herzberg89}. 
+Since we are interested in the most intense absorption band (the ``fundamental''), we are concerned with transitions from various \( J'' \) levels of the vibrational ground state \( \br{v'' = 0} \) to \( J' \) levels in the first excited vibrational state \( \br{v' = 1} \). 
+From the still-valid selection rule, we know that the transition must be from \( J'' \) to \( J' = J'' \pm 1 \). 
+Since \( \Delta E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{\nu} \) (in wavenumbers) for this transition will be \( \br{T\br{v', J'} - T\br{v'', J''}} \). Applying the selection rule, we find from \cref{eq:vib_rot_energies} that
 \begin{align}
 	\widetilde{\nu}_R &= \widetilde{\nu}_0 + \br{2 B_e - 3 \alpha_e} + \br{2 B_e - 4 \alpha_e} J'' - \alpha_e J''^2 	&	J'' &= 0, 1, 2, \ldots 
 	\label{eq:r_branch} 
@@ -256,36 +265,35 @@ Since \( \Delta E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{
 	\widetilde{\nu}_P &= \widetilde{\nu}_0 -													 \br{2 B_e - 2 \alpha_e} J'' - \alpha_e J''^2 	&	J'' &= 0, 1, 2, \ldots 
 	\label{eq:p_branch}
 \end{align}
-where the \( D_J \) term has been dropped and \( \widetilde{\nu}_0 \), the frequency of the \emph{forbidden} transition from \( v'' = 0, J'' = 0 \) to \( v' = 1, J' = 0 \) is 
+for \( \Delta J = +1 \) and \( \Delta J = -1 \), respectively, where the \( D_J \) term has been omitted and \( \widetilde{\nu}_0 \), the frequency of the \emph{forbidden} transition from \( {\br{v'',J''} = \br{0, 0}} \) to \( {v' = 1} \), \( {J' = 0} \) is defined as
 \begin{equation}
 	\widetilde{\nu}_0 = \widetilde{\nu}_e - 2 \widetilde{\nu}_e \chi_e \, .
 	\label{eq:forbid_transition}
 \end{equation}
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering
-	  \caption{Rotational energy levels for the ground vibrational state \( (v'' = 0) \) and the first excited vibrational state \( ( v' = 1) \) in a diatomic molecule. 
-			the vertical arrows indicated allowed transitions in the \emph{R} and \emph{P} branches; the numbers above the arrows index the value \( J'' \) of the lower state. 
-			Transitions in the \emph{Q} branch \( (\Delta J = 0) \) are not shown, since they are not infrared-active. 
-			Image source code by Whitney R. Hess and Lisa M. Goss, Idaho State University (2011), distributed under a \href{http://creativecommons.org/licenses/by-nc-sa/3.0}{CC BY-NC-SA 3.0 license} 
-			(via \href{http://demonstrations.wolfram.com/RotationVibrationEnergyLevelTransitionsOfADiatomicRotor/}{Wolfram Demonstrations Project}). 
-		}
-		\includegraphics[width=.9\textwidth]{images/rot_energy_levels.pdf}
-		\label{fig:typ_spectrum}
+    \input{images/vibrot_energy_diagram.pgf}
+    \caption{Rotational energy levels for the ground vibrational state \( {(v'' = 0)} \) and the first excited vibrational state \( {(v' = 1)} \) in a diatomic molecule.
+      The vertical arrows indicated allowed transitions in the \emph{R} and \emph{P} branches; the numbers above the arrows index the value \( J'' \) of the lower state.
+      Transitions in the \emph{Q} branch \( {(\Delta J = 0)} \) are not shown, since they are not infrared-active.
+      }
+    \label{fig:typ_spectrum}
 \end{figure}
 
 The two series of lines given in \cref{eq:r_branch,eq:p_branch} are called \emph{R} and \emph{P} branches, respectively. 
 These allowed transitions are indicated on the energy-level diagram given in \cref{fig:typ_spectrum}. 
-If \( \alpha_e \) were negligible, \cref{eq:r_branch,eq:p_branch} would predict a series of equally spaced lines with separation \( 2 B_e \) except for a missing line at \( \widetilde{\nu}_0 \). 
-The effect of interaction between rotation and vibration (non-zero \( \alpha_e \)) is to draw lines in the \emph{R} branch closer together and spread the lines in the \emph{P} branch farther apart, as shown for a typical spectrum in \cref{fig:typ_spectrum}. 
-For convenience, let us introduce a new quantity \( m \), where \( m = J'' + 1 \) for the \emph{R} branch and \( m = -J'' \) for the \emph{P} branch, as shown in \cref{fig:typ_spectrum}. 
+If \( \alpha_e \) were negligible, \cref{eq:r_branch,eq:p_branch} would predict a series of equally spaced lines separated by \( 2 B_e \) except for a missing line at \( \widetilde{\nu}_0 \). 
+The effect of interaction between rotation and vibration (non-zero \( \alpha_e \)) is to squeeze lines in the \emph{R} branch closer together and spread the lines in the \emph{P} branch farther apart, as shown for a typical spectrum in \cref{fig:typ_spectrum}. 
+
+For convenience, let us introduce a new quantity \( m \), where \( {m = J'' + 1} \) for the \emph{R} branch and \( {m = -J''} \) for the \emph{P} branch, as shown in \cref{fig:typ_spectrum}. 
 It is now possible to replace \cref{eq:r_branch,eq:p_branch} with a single equation:
 \begin{equation}
 	\widetilde{\nu}\br{m} = \widetilde{\nu}_0 + \br{2 B_e - 2 \alpha_e} m - \alpha_e m^2 \, ,
 	\label{eq:both_branches1}
 \end{equation}
-where \( m \) takes all integral values and \( m = 0 \) yields the frequency \( \widetilde{\nu}_0 \) of the forbidden ``purely vibrational'' transition. 
-If one retains the \( D_J \) term of \cref{eq:vib_rot_energies} (which assumes \( D'' = D' = D_J \)), \cref{eq:both_branches1} takes the form
+where \( m \) takes all integral values and \( {m = 0} \) yields the frequency \( \widetilde{\nu}_0 \) of the forbidden ``purely vibrational'' transition. 
+If one retains the \( D_J \) term of \cref{eq:vib_rot_energies} (which assumes \( {D'' = D' = D_J} \)), \cref{eq:both_branches1} takes the form
 \begin{equation}
 	\widetilde{\nu}\br{m} = \widetilde{\nu}_0 + \br{2 B_e - 2 \alpha_e} m - \alpha_e m^2 - 4 D_J m^3 \, .
 	\label{eq:both_branches2}
@@ -297,14 +305,14 @@ Thus, a multiple linear regression can be performed to determine \( \widetilde{\
 \subsection{Isotope Effect} % (fold)
 \label{sub:isotope_effect}
 
-When an isotopic substitution is made in a diatomic molecule, the equilibrium bond length, \( r_e \) and the force constant, \( k \), are unchanged, since they depend only on the behavior of the bonding electrons. 
+When an isotopic substitution is made in a diatomic molecule, the equilibrium bond length, \( r_e \), and the force constant, \( k \), are unchanged, since they depend only on the behavior of the bonding electrons. 
 However, the reduced mass, \( \mu \), does change, and this will affect the rotation and vibration of the molecule. 
 In the case of rotation, the isotope effect can be easily stated. From the definitions of \( B_e \) and \( I \), we see that 
 \begin{equation}
-	\frac{B_e^*}{B_e} = \frac{\mu}{\mu^*} \, ,
+	\frac{B_e^*}{B_e} = \frac{\mu^\hphantom{*}}{\mu^*} \, ,
 	\label{eq:eff_mass_isotope_relation}
 \end{equation}
-where an asterisk is used to distinguish one isotopic molecule from another. 
+where an asterisk is used to distinguish one isotopologue\sidenote{two molecules which differ only by the nuclear isotopes which make up the molecule} from another. 
 
 For a harmonic oscillator model, the frequency \( \widetilde{\nu}_e \) in wavenumbers is given by 
 \begin{equation}
@@ -313,58 +321,58 @@ For a harmonic oscillator model, the frequency \( \widetilde{\nu}_e \) in wavenu
 \end{equation}
 which leads to the relation 
 \begin{equation}
-	\frac{\widetilde{\nu}_e^*}{\widetilde{\nu}_e} = \sqrt{\frac{\mu}{\mu^*}}\, .
+	\frac{\widetilde{\nu}_e^*}{\widetilde{\nu}_e} = \sqrt{\frac{\mu^\hphantom{*}}{\mu^*}}\, .
 	\label{eq:ho_freq_relation}
 \end{equation}
 The ratio \( \widetilde{\nu}_e^* / \widetilde{\nu}_e \) differs slightly from this harmonic ratio due to deviation of the true potential function from a quadratic form, as depicted in \cref{fig:potential_curves}. 
-A closer approximation to the solid curve can be had by adding cubic and higher anharmonic terms to \( U\br{r} \)\sidenote{The Morse potential}, viz.,
+A closer approximation to the solid curve can be obtained by adding cubic and higher anharmonic terms to the interatomic potential \( U\br{r} \), like so:
 \begin{equation}
 	U\br{r} = \frac{1}{2} k \br{r - r_e}^2 + c_1 \br{r - r_e}^3 + c_2 \br{r - r_e}^4 + \ldots
 	\label{eq:anharmonic_expansion}
 \end{equation}
-Although somewhat complicated, it can be shown\autocite{herzberg89,levine75} that the \( c_1 \) and \( c_2 \) terms yield, as the first correction to the energy levels, precisely the \( -\widetilde{\nu}_e \chi_e \br{v + {1}/{2}}^2 \) term given in \cref{eq:vib_rot_energies}. 
-A similar conclusion is reached if \( U\br{r} \) is taken to have the Morse potential form given by%
-\sidenote{
-	The parameter \( \beta \) is determined by equating \( k_e \) to the curvature of the Morse potential at \( r = r_e \), yielding
-	\begin{equation}
-		\beta = \sqrt{\frac{k_e}{2 h c D_e}} \, .
-		\label{eq:morse_beta}
-	\end{equation}
+Although somewhat complicated, it can be shown~\autocite{herzberg89,levine75} that the \( c_1 \) and \( c_2 \) terms yield, as the first correction to the energy levels, precisely the \( -\widetilde{\nu}_e \chi_e \br{v + {1}/{2}}^2 \) term given in \cref{eq:vib_rot_energies}. 
+A similar conclusion is reached if \( U\br{r} \) is taken to have the Morse potential form given by\sidenote[-6\baselineskip]{
+	The parameter \( a \) is determined by equating \( k_e \) to the curvature of the Morse potential at \( r = r_e \), yielding
+		\[
+		  a = \sqrt{\frac{k_e}{2 D_e}} \, .
+		\]
 	This three-parameter function has the desired values of \( U\br{r = r_e} = -D_e \) and \( U\br{r = \infty} = 0 \). 
 	It provides a very good approximation to the real potential energy curve at all distances except \( r \ll r_e \), a region of no practical significance. 
 } 
 \begin{equation}
-	U\br{r - r_e} = D_e \br{\br{1 - \exp{-\beta\br{r - r_e}}}^2 - 1} \, .
+	U\br{r} = D_e \br{\br{1 - \exp{-a\br{r - r_e}}}^2 - 1} \, .
 	\label{eq_morse_potential}
 \end{equation}
 In both cases, the mass dependence of \( \widetilde{\nu}_e \chi_e \) is found to be greater than for \( \widetilde{\nu}_e \) and is
 \begin{equation}
-	\frac{\widetilde{\nu}_e^* \chi_e^*}{\widetilde{\nu}_e \chi_e } = \frac{\mu}{\mu^*} \, .
+	\frac{\widetilde{\nu}_e^* \chi_e^*}{\widetilde{\nu}_e \chi_e } = \frac{\mu^\hphantom{*}}{\mu^*} \, .
 	\label{eq:ve_isotope_relation}
 \end{equation}
 \Cref{eq:ho_freq_relation,eq:ve_isotope_relation} are useful in obtaining the \( \widetilde{\nu}_0^* \) counterpart of \cref{eq:forbid_transition},
 \begin{equation}
-	\widetilde{\nu}_0^* = \widetilde{\nu}_e^* - 2\widetilde{\nu}_e^* \chi_e^* = \widetilde{\nu}_e \sqrt{\frac{\mu}{\mu^*}} - 2 \widetilde{\nu}_e \chi_e \frac{\mu}{\mu^*} \, ,
+	\widetilde{\nu}_0^* = \widetilde{\nu}_e^* - 2\widetilde{\nu}_e^* \chi_e^* = \widetilde{\nu}_e \sqrt{\frac{\mu^\hphantom{*}}{\mu^*}} - 2 \widetilde{\nu}_e \chi_e \frac{\mu^\hphantom{*}}{\mu^*} \, ,
 	\label{eq:forbidden_isotope_transition} 
 \end{equation}
 and it is seen that a measurement of \( \widetilde{\nu}_0 \) for \ch{HCl} and \ch{DCl} suffices for a determination of \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \). 
-Alternatively or course, the latter constants can be determined from overtone vibrations \( \br{\Delta v > 0} \) of a single isotopic form\Footcite[See Exp. 39 in][]{nibler14}. 
+Alternatively or course, the latter constants can be determined from overtone vibrations \( \br{\Delta v > 0} \) of a single isotopic form.~\Footcite[See Exp. 39 in][]{nibler14} 
 However, such overtones generally have low intensity and the transitions may fall outside the range of many infrared instruments, so the isotopic shift method is used in the present experiment. 
 
 Since \ch{HCl} gas is a mixture of \ch{H^{35}Cl} and \ch{H^{37}Cl} molecules, a chlorine isotope effect will also be present. 
-However, the ratio of the reduced masses is only \num{1.0015},: therefore, high resolution is required to detect this effect. 
-\ch{HCl} is predominantly \ch{H^{35}Cl}, and for this experiment, we shall assume that the \ch{HCl} bands obtained are those of \ch{H^{35}Cl}. 
+Since the ratio of the reduced masses is only \num{1.0015}, high resolution is required to detect this effect. 
+\ch{HCl} is predominantly \ch{H^{35}Cl}. 
+If a single peak is seen in the \ch{HCl} manifold, it can be assumed that the bands are due to \ch{H^{37}Cl}. 
+At a resolution of \SI{<1}{\wn}, the band should consist of a series of doublets, with the larger peak due to \ch{H^{35}Cl} and the smaller peak due to \ch{H^{37}Cl}.
 If deuterium is substituted for hydrogen, the ratio of the reduced masses, \( \mu\br{\ch{D^{35}Cl}} / \mu\br{\ch{H^{35}Cl}} \), is \num{1.946} and the isotope effect is quite large. 
 
 % subsection isotope_effect (end)
 
-\subsection[Vibrational Partition Function]{Vibrational Partition Function\autocite{levine95,mcquarrie73,lewis61}} % (fold)
+\subsection[Vibrational Partition Function]{Vibrational Partition Function~\autocite{levine95,mcquarrie73,lewis61}} % (fold)
 \label{sub:vibrational_partition_function}
 
 The thermodynamic quantities for an ideal gas can usually be expressed as a sum of translational, rotational, and vibrational contributions. 
 We shall consider here the heat capacity at constant volume. 
 At room temperature and above, the translational and rotational contributions to \( C_v \) are constants that are independent of temperature. 
-For \ch{HCl} and \ch{DCl}\sidenote{diatomic, and thus linear, molecules}, the molar quantities are 
+For \ch{HCl} and \ch{DCl},\sidenote{diatomic, and thus linear, molecules} the molar quantities are 
 \begin{align}
 	\begin{split}
 		\widetilde{C}_v\br{\mtext{trans}}	&=	\frac{3}{2}R \\
@@ -378,7 +386,7 @@ The vibrational contribution to \( \widetilde{C}_v \) varies with temperature an
 	\label{eq:vib_part_func1}
 \end{equation}
 The partition function, \( q_\mtext{vib} \), of \ch{HCl} or \ch{DCl} is well-approximated by the harmonic-oscillator partition function, \( q_\mtext{HO} \). 
-Since the energy levels of a harmonic oscillator are given by \( \br{v + \tfrac{1}{2}} h \nu \), one obtains\autocite{levine95}
+Since the energy levels of a harmonic oscillator are given by \( \br{v + \tfrac{1}{2}} h \nu \), one obtains~\autocite{levine95}
 \begin{equation}
 	q_\mtext{HO} = \sum_{v = 0}^\infty \exp \br{\frac{-\br{v + \tfrac{1}{2}} h \nu}{k T}} = \frac{e^{-h \nu/\br{2kT}}}{{1 - e^{-h \nu / \br{k T}}}} \, .
 	\label{eq:qho_part_func}
@@ -487,7 +495,7 @@ An arrangement for filling the cell is shown in \cref{fig:cell_filling}.
 \label{sub:theoretical_calculations}
 
 The following work will be done during the second week of this lab. 
-You will need to calculate the physical properties of \ch{HCl} and \ch{DCl} using Gaussian\autocite{gaussian16}, including the potential energy, equilibrium bond length, and the predicted vibrational and rotational energies for the molecule.
+You will need to calculate the physical properties of \ch{HCl} and \ch{DCl} using Gaussian~\autocite{gaussian16}, including the potential energy, equilibrium bond length, and the predicted vibrational and rotational energies for the molecule.
 
 Using Gaussian, calculate the potential well for the \ch{HCl} molecule. 
 Because of the methods used for calculation, the mass of the nuclei doesn't influence geometry, so results will be the same for the four isotopologues. 
@@ -541,7 +549,7 @@ In this same section will be equilibrium rotational constants for the two degene
 	\item Calculate \( I_e \), the moment of inertia, and \( r_e \), the internuclear distance, for both \ch{HCl} and \ch{DCl}. 
 	Tabulate your results, along with your estimates  of the experimental uncertainty. Compare your results with literature values found in \textcite{kerr82}. 
 	\item Using your value of \( \widetilde{\nu}_0 \) for \ch{HCl}, calculate \( \widetilde{C}_v\br{\mtext{vib}} \) at \SI{298}{\K} and at \SI{1000}{\K} from \cref{eq:vib_part_func2}. 
-	Compare the spectroscopic value \( \widetilde{C}_v = 5/2 R + \widetilde{C}_v(\mtext{vib}) \) with the experimental \( \widetilde{C}_v \) value obtained from directly measured values\autocite{lewis61,spencer48} of \( \widetilde{C}_p \) and the expression \( \widetilde{C}_v = \widetilde{C}_p - R \): \( \widetilde{C}_v = \SI{20.80}{\J \per \mole\K} \) at \SI{298}{K} and \SI{23.20}{\J \per \mol\K} at \SI{1000}{\K}. 
+	Compare the spectroscopic value \( \widetilde{C}_v = 5/2 R + \widetilde{C}_v(\mtext{vib}) \) with the experimental \( \widetilde{C}_v \) value obtained from directly measured values~\autocite{lewis61,spencer48} of \( \widetilde{C}_p \) and the expression \( \widetilde{C}_v = \widetilde{C}_p - R \): \( \widetilde{C}_v = \SI{20.80}{\J \per \mole\K} \) at \SI{298}{K} and \SI{23.20}{\J \per \mol\K} at \SI{1000}{\K}. 
 \end{enumerate}
 % section data_analysis (end)
 
