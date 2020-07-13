@@ -1,4 +1,5 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+\usepackage[subpreambles,sort]{standalone}
 \input{header.tex}
 	\DeclareSIUnit\gauss{G}
 	\usechemmodule{thermodynamics}\usechemmodule{polymers}
@@ -86,8 +87,7 @@ Solvent effects on the chemical shifts and on the equilibrium constant are inves
 
 \begin{marginfigure}
   \centering
-   \def\svgwidth{0.9\textwidth}
-   \input{figures/Zeeman_level_splitting_quad.pdf_tex}
+   \input{figures/zeeman_splitting.tikz}
   \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
   \label{fig:quad_splitting}
 \end{marginfigure}
@@ -122,7 +122,7 @@ In this case, the resonant frequency is given by
 	\nu = \frac{\Delta E_\mtext{Zeeman}}{h} = \frac{g_N\mu_N}{h} B_\mtext{loc}\, .
 	\label{eq:res_freq}
 \end{equation}
-For protons, \( \nu (\si{\Hz}) = \num{4.26e7} B_\mtext{loc} (\si{\tesla}) \). For typical fields of \SIrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region. 
+For protons, \( \nu = \num{4.26e7} \cdot B_\mtext{loc} \), where \( \nu \) is expressed in hertz and \( B_\mtext{loc} \) is expressed in tesla. For typical fields of \SIrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region (\SIrange{10}{1000}{\MHz}). 
 In practice, values of \( B_0 \) (the external applied field) are chosen to fix \( \nu \) to some convenient value (\emph{e.g.,} \SIlist{60;100;200}{\MHz}). 
 
 % subsection magnetic_moments (end)
@@ -133,7 +133,7 @@ In practice, values of \( B_0 \) (the external applied field) are chosen to fix 
 \Cref{eq:zeeman_energy} gives the energy energy levels of a nucleus in the presence of an external applied field. 
 The term \( B_\mtext{loc} \) is the magnetic induction (\emph{local field}) at the nucleus. 
 
-In general, the local induction \( B_\mtext{loc} \) at the nucleus will differ from the externally applied induction \( B_0 \) because of the magnetization \( M \) that is induced by \( B_0 \):
+In general, the local induction, \( B_\mtext{loc} \), at the nucleus will differ from the externally applied induction, \( B_0 \), because of the magnetization, \( M \), that is induced by \( B_0 \):
 \begin{equation}
 	B_\mtext{loc} = B_0 + \mu_0 M = \br{1 + \chi} B \, ,
 	\label{eq:b_loc}
@@ -164,10 +164,17 @@ The chemical shift in \si{ppm} of a nucleus \( i \) relative to a reference nucl
 		\br{\sigma_\mtext{ref} - \sigma_i} \times 10^6 \, .
 		\label{eq:chem_shift_delta}
 \end{equation}
-Here, the definition is based on the resonant frequencies for a fixed external induction (field) \( B_0 \). 
+Here, the definition is based on the resonant frequencies for a fixed external induction (field), \( B_0 \). 
 
+\begin{figure}[htb]
+  \centering
+  \input{figures/shielding.tex}
+  \caption{Shielding and deshielding of protons: (a) shielding of a proton due to induced diamagnetic electron circulation; (b) deshielding of protons in benzene due to aromatic ring currents.}
+  \label{fig:shielding}
+\end{figure}
+  
 Tetramethylsilane (TMS) is usually used as the proton reference, since it is chemically inert and its 12 equivalent protons give a single transition at a frequency \( \nu_\mtext{ref} \), lower than the frequency \( \nu_i \) found in most organic compounds. 
-Thus \( \delta \) is generally positive and increases when substituents are added that attract electrons and thereby reduce the shielding about the proton. 
+Thus, \( \delta \) is generally positive and increases when substituents are added that attract electrons and thereby reduce the shielding about the proton. 
 This shielding arises because the electrons near the proton are induced to circulate by the applied field \( B_0 \), shown in \cref{fig:shielding}. 
 This electron current produces a secondary field that \emph{opposes} the external field and thus reduces the local field at the nucleus. 
 As a result, resonance at a fixed field, such as \SI{9.4}{\tesla}, requires a higher frequency for protons with greater shielding. 
@@ -203,7 +210,7 @@ Nuclei such as \ch{^{19}F}, \ch{^{13}C}, and \ch{^{11}B} have more local electro
 \end{table}
 
 Long-range \emph{deshielding} can occur in aromatic and other molecules with delocalized \( \pi \) electrons. 
-For example, when the plane of the benzene molecule is oriented perpendicular to \( B_0 \), circulation of the \( \pi \) electrons produces a ring current, illustrated in \cref{fig:ring_current}. 
+For example, when the plane of the benzene molecule is oriented perpendicular to \( B_0 \), circulation of the \( \pi \) electrons produces a ring current, illustrated in \cref{fig:shielding}. 
 This ring current induces a secondary field at the protons that is aligned \emph{parallel} to \( B_0 \) and results in a higher local field for the protons. 
 This induced field changes with benzen orientation, but does not average to zero, since it is not spherically symmetric. 
 Because of this net deshielding effect, the resonance of the benzene protons occurs at a relatively low external field. 
@@ -231,7 +238,23 @@ It is apparent from this diagram that the external field \( B_0 \) does not affe
 The quantity \( J \) is a measure of the strength of the pairwise interaction of the spin nucleus A with the spin of nucleus B. 
 Since there are only proton--proton interactions in acetaldehyde, the same splitting occurs for both \ch{CH} and \ch{CH3} resonances. 
 
-\input{figures/EtOH_spectrum.tex}
+\begin{figure}[htb]
+  \centering
+  \input{figures/spin_splitting.tex}
+  \caption{Energy levels, transitions, and the NMR spectrum for acetaldehyde (\ch{CH3CHO}) at \SI{100}{\MHz}. 
+  The coupling constant for the system is \( {J = J_{\ch{CH3}} = J_{\ch{CHO}} = \SI{2.09}{\Hz}} \). 
+  For \ch{CHO}, the quantum number \( {M_I = \pm\tfrac{1}{2}} \). For the \ch{CH3} group, \( {M_I = \pm\tfrac{1}{2}, \, \pm\tfrac{3}{2}} \). 
+  The dashed lines represent the level spacing that would occur in the absence of the spin--spin interaction.
+  The spacing of the energy levels are greatly exaggerated in the figure.}
+  \label{fig:spin_splitting}
+\end{figure}  
+
+\begin{figure}[htb]
+  \centering
+  \input{figures/EtOH_spectrum.tex}
+	\caption{Simulated NMR spectrum of highly purified ethanol at \SI{90}{\MHz}.}\
+	\label{fig:EtOH_spectrum}
+\end{figure}
 The total integrated intensity of the \ch{CH} and \ch{CH3} multiplets follows the proton ratio of \( 1{:}3 \). 
 However, the intensity distribution within each multiplet is determined by the relative population of the lower level in each transition. 
 Since the level spacing is much less than \( kT \), the Boltzmann population factors are essentially identical for these levels. 
@@ -242,7 +265,7 @@ Similarly, the \ch{CH3} doublet peaks will be of equal intensity, with a total i
 In a more general sense, it can be seen that \( n \) equivalent protons interacting with a different proton will split ins resonance into \( n + 1 \) lines whose relative intensities are given by coefficients of the terms in the binomial expansion of the expression \( \br{\alpha + \beta}^n \). 
 Equivalent protons also interact and produce splittings in the energy levels. 
 However, these splittings are symmetric for upper and lower energy states, so no new NMR resonances are produced. 
-\begin{margintable}
+\begin{margintable}[-10\baselineskip]
 	\centering
 	\begin{tabular}{@{}cS@{}} 
 		\toprule
@@ -344,7 +367,7 @@ It is well known that ketones such as acetone have an isomeric structure, result
 For acetone and the majority of cases in which this keto--enol tautomerism is possible, the keto form is far more stable and little, if any, enol can be detected. 
 However, with \iupac{\b-diketones} and \iupac{\b-ketoesters}, factors such as intramolecular hydrogen bonding and conjugation increase the stability of the enol form; causing the equilibrium to be shifted significantly to the right. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 		\chemnameinit{}
 		\schemestart
@@ -472,10 +495,7 @@ Your lab report should consist of the following parts:
 \begin{description}
 	\item[Title, Author and Date]
 	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
-	\item[Results and Discussion] This should include the following:
-	\begin{enumerate}
-		\item 
-	\end{enumerate}
+	\item[Results and Discussion] This should include an overview of the analyzed data and responses to the questions worked into a natrual narrative.
 	\item[References]
 	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
 	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
