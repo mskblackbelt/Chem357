@@ -1,0 +1,127 @@
+\section{A quick summary of the exercises}
+
+\subsection{A guideline through the tutorial}
+This tutorial aims to give a basic introduction to electronic structure calculations for very simple systems. 
+As every quantum chemistry code has its own philosophy, this tutorial should familiarize you with the general-purpose Gaussian16 (hereafter abbreviated as G16) software.
+The experiments will also demonstrate the predictive power of quantum-chemical calculations. 	
+	
+First, the basic structure of an input file to the G16 software will be explained.
+The second part will introduce scanning along the binding curve and computing observables. 
+The third part introduces geometric optimization of a small molecule and how to assess reliability of the result. 
+%The third part is dedicated to visualizing electronic structure derived data. 
+
+%\begin{enumerate}
+%\begin{enumerate}[label=Part \Roman*:,
+%  align=left,itemindent=\parindent]  
+%  \item \hyperref[sec:partI]{\quad Basic electronic-structure calculations with G16}
+
+\begin{enumerate}[
+    label=Prob. \Roman*:,
+    align=left,
+    leftmargin=*,
+    itemindent=\parsep
+  ]
+  \item \hyperref[sec:problemI]{The hydrogen atom}
+  \item \hyperref[sec:problemII]{Hydrofluoric acid: bond length and dipole moment}	      
+  \item \hyperref[sec:problemIII]{Hydronium cation: geometry relaxation, vibrations, and PES}
+  %\item \hyperref[sec:problemIII]{Molecular oxygen: spin state}
+\end{enumerate}
+
+
+%\item \hyperref[sec:partII]{\quad Local structure optimization of\texorpdfstring{ H$_3$O$^+$}{hydronium cation}}
+
+%    \begin{enumerate}[label=Problem \Roman*:,align=left,
+%   leftmargin=*,itemindent=\parindent,resume]
+%     \item \hyperref[sec:problemIII]{Planar hydronium cation}
+%     \item \hyperref[sec:problemIV]{Pyramidal hydronium cation}
+%     \item \hyperref[sec:problemV]{Potential-Energy Surface scan}
+%	 %     \item \hyperref[sec:problemIX]{Limits of the harmonic approximation \texorpdfstring{\textcolor{red}{\textbf{!}}}{!}}
+%     \end{enumerate}
+
+%\item \hyperref[sec:partIII]{\qquad Electron density mixing and visualising electron densities and eigenstates}
+%    \begin{enumerate}[label=Problem \Roman*:,align=left,
+%  leftmargin=*,itemindent=\parindent,resume]
+%    \item \hyperref[sec:problemVI]{Visualizing density differences of \textit{para}-benzoquinone}
+%    \end{enumerate}
+%\end{enumerate}
+\textbf{As the first step, please use this link to clone the files into your Jupyter directory:}
+\url{https://jupyter.hcpchemlab.org/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2Fpchem_comp-chem_template&urlpath=lab%2Ftree%2Fpchem_comp-chem_template%2FCompChem_template.ipynb}
+
+	%For every exercise, we also provide solutions and sample input files. They can be found in \tutorialonedir/solutions and \referencedir/exercise\_XX/templates, respectively. However, we strongly recommend to use the provided input files only in case of time shortage. You will maximize your learning progress by trying to generate the input files on your own. In case you get stuck with a particular problem, do not hesitate to ask one of the tutors. For the tutorials, an executable of FHI-aims will be provided on your workstation.\\
+
+\textbf{Note: Please do not copy and paste the text in this PDF into your input files. Invisible formatting characters are often copied from the PDF. Gaussian will not understand these characters and your calculations will not start.}
+
+\subsection{A first look at Gaussian16}
+
+A good practice is to perform each calculations a separate directory. The calculations are initialized by calling the \Verb{g16} command on an input file:
+	
+\begin{bashinput}
+  g16 input &
+\end{bashinput}
+	
+By convention, always name the input file as \Verb{input.com}, though any name will work. 
+The basic input file is shown below.\sidenote{Content wrapped in angle brackets (\Verb{<>}) should be replaced with the desired value and the angle brackets should be removed (they are not a recognized Gaussian input), \emph{e.g.,} \Verb{<basis>} \( \Rightarrow \) \Verb{STO-3G}.}
+This file starts a calculation on two processors using \SI{400}{\mega\byte} of memory. 
+The output will be redirected to the \Verb{input.log} output file. 
+This file contains the basic information and results of the calculation such as the total energy, atomic forces, and so forth. 
+Additional output files might be generated according to the specified settings. 
+Individual components of the input file are described below. 
+\begin{gaussinput}[
+title=Structure of a simple input file, 
+label=lst:gauss_samp]
+%nproc=2
+%mem=400MB
+#<method> <basis-set>
+#sp scf=tight
+    <empty line>
+<title information>
+    <empty line>
+<charge> <multiplicity>
+<atom1>   <x1>	<y1>	<z1>
+<atom2>   <x2>	<y2>	<z2>
+ ... 
+<atomN>   <xN>	<yN>	<zN>
+    <empty line>
+\end{gaussinput}
+
+\begin{description}[font=\ttfamily\upshape]
+  \item[\%nproc=2] This keyword specifies the number of processors that will be employed for calculations. The computer you are using has 2 processing cores and you should use them all. 
+  \item[\%mem=400MB] This keyword manages the maximum memory usage during the calculations. The most efficient memory specification is beyond this tutorial. 
+  \item[method] Substitute \Verb{<method>} with the method of choice for electron--electron interactions. In this tutorial, we will use several methods, namely Hartree-Fock (HF), Møller-Plesset second order perturbation theory  (MP2) and a few density-functionals. The details of each method will be covered in detail during the lecture. 
+  \item[basis-set] Substitute the \Verb{<basis-set>} word with the desired basis set. This specifies a set of basis functions (for instance atomic orbitals, gaussian-type orbitals, plane waves) that will be used to express an electronic configuration. The recommended basis sets are specified in each exercise. 
+  \item[sp] The \Verb{sp} command orders Gaussian to perform single-point calculations, \emph{i.e.,} energy evaluation of a specified structure using \Verb{method} and \Verb{basis-set}
+  \item[scf=tight] The Schrödinger equation is solved in self-consistent manner. The \Verb{scf=tight} option specifies tight convergence criteria for the self-consistent cycle. 
+  \item[your-comment] This line, surrounded by two empty lines, holds your comment, usually a description of the molecule and/or calculation to be performed. 
+  \item[charge] The \Verb{charge} keyword should be substituted with the total (integer-valued) charge of your system. 
+  \item[multiplicity] The \Verb{multiplicity} keyword should be substituted with the multiplicity of your system (\( 2\mtext{S}+1 \), where \( \mtext{S} \) is total spin). This should always be an integer.
+  \item[atomX <X> <Y> <Z>] This block specifies the geometry of the system. You can use either the atomic symbol (\emph{e.g.,} \Verb{C}) or the atomic number (\emph{e.g.,} 6) to specify the atom type, followed by it's cartesian coordinates in units of Angstroms (\si{\angstrom}).\sidenote{Use a decimal-valued coordinate, even if it is a whole number (\Verb{0.0}, not \Verb{0}).} This block must be followed by an empty line. 
+\end{description}
+
+Remember, there are no bonds (sticks) in quantum chemistry. The bonding is the result of the respective positions of atoms in space. The `stick' visible in visualization programs is simply a rendering for more intuitive display. A sample input for a square-planar molecule can be found at the end of the section (with all values filled in). 
+
+
+\subsection{Additional tools and programs}
+
+\begin{description}[font=\bfseries]
+  \item[Bash shell] A short list of the basic bash (command line) commands is given in Appendix~\ref{app:bash}. 
+  \item[vi] A number of introductions to the vi editor are available online. Two such examples are \url{https://www.openvim.com} and \url{https://vim-adventures.com/}.
+  % A short summary of the vi editor is given in Appendix~\hyperref[app:vi]{II}.
+  \item[Scripts] For some exercises, scripts are required for dedicated tasks. All scripts you will need for this tutorial can be found in their respective directories. 
+\end{description}
+
+\begin{gaussinput}[title=A sample \Verb{input.com} file for the \ch{XeF4} molecule.]
+%nproc=2
+%mem=400MB
+# b3lyp 6-31g
+# sp scf=tight
+
+Xenon tetrafluoride single point DFT calculation
+
+0 1
+Xe  0.0   0.0   0.0
+F   1.0   0.0   0.0
+F   0.0   1.0   0.0
+F  -1.0   0.0   0.0
+F   0.0  -1.0   0.0
+
+\end{gaussinput}

@@ -282,3 +282,7 @@ TSWLatexianTemp*
 
 # Ignore student work for a given semester
 Submitted work/*
+
+# Jupyter notebook checkpoints
+*.ipynb_checkpoints
+

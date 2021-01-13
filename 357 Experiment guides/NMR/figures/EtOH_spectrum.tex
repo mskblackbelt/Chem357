@@ -1,5 +1,10 @@
-\pgfplotsset{compat=1.16}
+\documentclass{standalone}
+% \input{header.tex}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 \usetikzlibrary{math}
+\usepackage{siunitx,chemmacros}
+\begin{document}
 
 \pgfplotsset{
   every axis legend/.append style =
@@ -43,158 +48,134 @@
 \pgfplotsset{
   tufte axes/.style =
     {
-			% after end axis/.code =
+		% after end axis/.code =
         % {
         %   \draw ({rel axis cs:0,0} -| {axis cs:\pgfplots@data@xmin,0})
         %     -- ({rel axis cs:0,0}  -| {axis cs:\pgfplots@data@xmax,0});
         % },
-			axis x line = bottom,
-			axis y line = none,
-			every inner x axis line/.append style={-|},
-      tick align      = outside,
-      tick pos        = left,
-			% ytick						= \empty,
-			x dir						= reverse,
+    	axis x line = bottom,
+		axis y line = none,
+		every inner x axis line/.append style={-|},
+        tick align      = outside,
+        tick pos        = left,
+    	% ytick						= \empty,
+		x dir						= reverse,
     }
 }
 \makeatother
 
-\begin{figure}[htb]
-	\begin{tikzpicture}
-		\pgfdeclarelayer{background}
-		\pgfdeclarelayer{foreground}
-		\pgfsetlayers{background,main,foreground}
-	  \begin{pgfonlayer}{background}
-	  	\begin{axis}%
-	  		    [
-	  		      % Choose the general settings
-	  		      nmr,
-	  		      % and the Tufte style
-	  		      tufte axes,
-	  		      % Place the legend 'out of the way': this needs a bit of
-	  		      % experimentation!
-	  		      scale only axis,
-							ymin=-1,ymax=18,
-							% enlarge y limits={rel=0.2},
-	  		      width = 0.95\textwidth
-	  		    ]
-	  		    % Loop for each scan rate
-	  		    \foreach \datafile in {EtOH_nmr_simsc}
-	  		      {
-	  		        % For each case, add a plot
-	  		        \addplot
-	  		          table
-	  		            [
-	  		              % This plot extracts data directly from the instrument files.
-	  		              % To do that, we skip the first couple of lines.
-	  		              	% skip first n = 2 ,
-	  		              % The x-axis has a correction for the zero: that is done using
-	  		              % a simple expression
-	  		              % x expr       = \thisrowno{0} + 0.412,
-	  		              % The y-axis is more complicated! There is a scaling so the
-	  		              % currents are in microamperes, and also a division by the
-	  		              % scan rate. The data files themselves are named using the
-	  		              % scan rate in millivolts per second: that is converted to 
-	  		              % volts per second before doing the square root.
-	  		              % y expr       = {}
-	  		            ]
-	  		          from {Figures/\datafile.txt}; 
-								\coordinate (insetPosition) at (axis cs:3.687,3);
-								\node [coordinate,pin=above:{\ch{-OH}}]
-						        at (axis cs:4.8,5.1)   {};
-						    \node [coordinate,pin=above:{\ch{-CH3}}]
-						        at (axis cs:1.226,15) {};
-	  		      };  
-	  		\end{axis}
-	  \end{pgfonlayer}
-		\tikzmath{
-			\pkctr=3.688;
-			\jCH=6.3/60;
-			\jOH=3.7/60;
-			\pkcta=\pkctr+\jOH/2;
-			\pkcte=\pkctr-\jOH/2;
-			\treeroot=7.5;
-			\leva=6.75;
-			\levb=6.5;
-			\levc=5.75;
-			\levd=5.5;
-			\leve=5.0;
-			\levf=4.75;
-			\apk=\pkctr+\jOH/2+3/2*\jCH;
-			\bpk=\pkctr+\jOH/2+1/2*\jCH;
-			\cpk=\pkctr+\jOH/2-1/2*\jCH;
-			\dpk=\pkctr+\jOH/2-3/2*\jCH;
-			\epk=\pkctr-\jOH/2+3/2*\jCH;
-			\fpk=\pkctr-\jOH/2+1/2*\jCH;
-			\gpk=\pkctr-\jOH/2-1/2*\jCH;
-			\hpk=\pkctr-\jOH/2-3/2*\jCH;
-			\jCHlbl=\pkctr-\jOH/2-\jCH;
-		}
-	  \begin{pgfonlayer}{foreground}
-	  	\begin{axis}%
-				[
-					% Choose the general settings
-					nmr,
-					% and the Tufte style
-					axis x line = none,
-					axis y line = none,
-					x dir=reverse,
-					xlabel={},
-					ymax=8,
-					scale only axis,
-					name=insetAxis,
-					at={(insetPosition)},
-					anchor={south},
-					width=0.5\textwidth,
-					height=2.4in,
-				]
-				{
-					\addplot
-						table from {Figures/EtOH_nmr_simsc_zoom.txt}; 
-					\node (A) at (axis cs:\pkctr,\treeroot) {\ch{-CH2-{}}};
-					\coordinate (Ag) at (axis cs:\apk,1.16);
-					\coordinate (Bg) at (axis cs:\bpk,3.64);
-					\coordinate (Cg) at (axis cs:\cpk,3.90);
-					\coordinate (Dg) at (axis cs:\dpk,1.43);
-					\coordinate (Eg) at (axis cs:\epk,0.96);
-					\coordinate (Fg) at (axis cs:\fpk,3.17);
-					\coordinate (Gg) at (axis cs:\gpk,3.56);
-					\coordinate (Hg) at (axis cs:\hpk,1.36);
-					\coordinate (Af) at (axis cs:\apk,\levf);
-					\coordinate (Bf) at (axis cs:\bpk,\levf);
-					\coordinate (Cf) at (axis cs:\cpk,\levf);
-					\coordinate (Df) at (axis cs:\dpk,\levf);
-					\coordinate (Ed) at (axis cs:\epk,\levd);
-					\coordinate (Fd) at (axis cs:\fpk,\levd);
-					\coordinate (Gd) at (axis cs:\gpk,\levd);
-					\coordinate (Hd) at (axis cs:\hpk,\levd);
-					\coordinate (Ae) at (axis cs:\pkcta,\leve);
-					\coordinate (Ec) at (axis cs:\pkcte,\levc);
-					\coordinate (Ad) at (axis cs:\pkcta,\levb);
-					\coordinate (Eb) at (axis cs:\pkcte,\levb);
-					\coordinate (Aa) at (axis cs:\pkctr,\leva);
-					\coordinate (Oa) at (axis cs:\pkcta,6.15);
-					\coordinate (Ob) at (axis cs:\pkcte,6.15);
-					\coordinate (Ha) at (axis cs:\gpk,5);
-					\coordinate (Hb) at (axis cs:\hpk,5);
-				};
-				\draw (Ag) -- (Af) -- (Ae) -- (Ad) -- (Aa) -- (A);
-				\draw (Bg) -- (Bf) -- (Ae);
-				\draw (Cg) -- (Cf) -- (Ae);
-				\draw (Dg) -- (Df) -- (Ae);
-				\draw (Eg) -- (Ed) -- (Ec) -- (Eb) -- (Aa);
-				\draw (Fg) -- (Fd) -- (Ec);
-				\draw (Gg) -- (Gd) -- (Ec);
-				\draw (Hg) -- (Hd) -- (Ec);
-				\draw[stealth-stealth] (Oa) -- (Ob);
-				\draw[stealth-stealth] (Ha) -- (Hb);
-		    \node [coordinate,pin=above left:{$J_\textup{\ch{CH2,OH}}$}]
-		        at (axis cs:\pkctr,6.15) {};
-		    \node [coordinate,pin=70:{$J_\textup{\ch{CH2,CH3}}$}]
-		        at (axis cs:\jCHlbl,5) {};
-			\end{axis}
-	  \end{pgfonlayer}
-	\end{tikzpicture}
-	\caption{Simulated NMR spectrum of highly purified ethanol at \SI{90}{\MHz}.}\
-	\label{fig:EtOH_spectrum}
-\end{figure}
+\begin{tikzpicture}
+	\pgfdeclarelayer{background}
+	\pgfdeclarelayer{foreground}
+	\pgfsetlayers{background,main,foreground}
+  \begin{pgfonlayer}{background}
+  	\begin{axis}%
+	    [
+	      % Choose the general settings
+	      nmr,
+	      % and the Tufte style
+	      tufte axes,
+	      % Place the legend 'out of the way': this needs a bit of
+	      % experimentation!
+	      scale only axis,
+				ymin=-1,ymax=18,
+				% enlarge y limits={rel=0.2},
+	      width = 0.95\textwidth
+	    ]
+      \addplot table from {figures/EtOH_nmr_simsc.dat}; 
+			\coordinate (insetPosition) at (axis cs:3.687,3);
+			\node [coordinate,pin=above:{\ch{-OH}}]
+	        at (axis cs:4.8,5.1)   {};
+	    \node [coordinate,pin=above:{\ch{-CH3}}]
+	        at (axis cs:1.226,15) {};
+		\end{axis}
+  \end{pgfonlayer}
+	\tikzmath{
+		\pkctr=3.688;
+		\jCH=6.3/60;
+		\jOH=3.7/60;
+		\pkcta=\pkctr+\jOH/2;
+		\pkcte=\pkctr-\jOH/2;
+		\treeroot=7.5;
+		\leva=6.75;
+		\levb=6.5;
+		\levc=5.75;
+		\levd=5.5;
+		\leve=5.0;
+		\levf=4.75;
+		\apk=\pkctr+\jOH/2+3/2*\jCH;
+		\bpk=\pkctr+\jOH/2+1/2*\jCH;
+		\cpk=\pkctr+\jOH/2-1/2*\jCH;
+		\dpk=\pkctr+\jOH/2-3/2*\jCH;
+		\epk=\pkctr-\jOH/2+3/2*\jCH;
+		\fpk=\pkctr-\jOH/2+1/2*\jCH;
+		\gpk=\pkctr-\jOH/2-1/2*\jCH;
+		\hpk=\pkctr-\jOH/2-3/2*\jCH;
+		\jCHlbl=\pkctr-\jOH/2-\jCH;
+	}
+  \begin{pgfonlayer}{foreground}
+  	\begin{axis}%
+			[
+				% Choose the general settings
+				nmr,
+				% and the Tufte style
+				axis x line = none,
+				axis y line = none,
+				x dir=reverse,
+				xlabel={},
+				ymax=8,
+				scale only axis,
+				name=insetAxis,
+				at={(insetPosition)},
+				anchor={south},
+				width=0.5\textwidth,
+				height=2.4in,
+			]
+			{
+				\addplot
+					table from {figures/EtOH_nmr_simsc_zoom.dat}; 
+				\node (A) at (axis cs:\pkctr,\treeroot) {\ch{-CH2-{}}};
+				\coordinate (Ag) at (axis cs:\apk,1.16);
+				\coordinate (Bg) at (axis cs:\bpk,3.64);
+				\coordinate (Cg) at (axis cs:\cpk,3.90);
+				\coordinate (Dg) at (axis cs:\dpk,1.43);
+				\coordinate (Eg) at (axis cs:\epk,0.96);
+				\coordinate (Fg) at (axis cs:\fpk,3.17);
+				\coordinate (Gg) at (axis cs:\gpk,3.56);
+				\coordinate (Hg) at (axis cs:\hpk,1.36);
+				\coordinate (Af) at (axis cs:\apk,\levf);
+				\coordinate (Bf) at (axis cs:\bpk,\levf);
+				\coordinate (Cf) at (axis cs:\cpk,\levf);
+				\coordinate (Df) at (axis cs:\dpk,\levf);
+				\coordinate (Ed) at (axis cs:\epk,\levd);
+				\coordinate (Fd) at (axis cs:\fpk,\levd);
+				\coordinate (Gd) at (axis cs:\gpk,\levd);
+				\coordinate (Hd) at (axis cs:\hpk,\levd);
+				\coordinate (Ae) at (axis cs:\pkcta,\leve);
+				\coordinate (Ec) at (axis cs:\pkcte,\levc);
+				\coordinate (Ad) at (axis cs:\pkcta,\levb);
+				\coordinate (Eb) at (axis cs:\pkcte,\levb);
+				\coordinate (Aa) at (axis cs:\pkctr,\leva);
+				\coordinate (Oa) at (axis cs:\pkcta,6.15);
+				\coordinate (Ob) at (axis cs:\pkcte,6.15);
+				\coordinate (Ha) at (axis cs:\gpk,5);
+				\coordinate (Hb) at (axis cs:\hpk,5);
+			};
+			\draw (Ag) -- (Af) -- (Ae) -- (Ad) -- (Aa) -- (A);
+			\draw (Bg) -- (Bf) -- (Ae);
+			\draw (Cg) -- (Cf) -- (Ae);
+			\draw (Dg) -- (Df) -- (Ae);
+			\draw (Eg) -- (Ed) -- (Ec) -- (Eb) -- (Aa);
+			\draw (Fg) -- (Fd) -- (Ec);
+			\draw (Gg) -- (Gd) -- (Ec);
+			\draw (Hg) -- (Hd) -- (Ec);
+			\draw[stealth-stealth] (Oa) -- (Ob);
+			\draw[stealth-stealth] (Ha) -- (Hb);
+	    \node [coordinate,pin=above left:{$J_\textup{\ch{CH2,OH}}$}]
+	        at (axis cs:\pkctr,6.15) {};
+	    \node [coordinate,pin=70:{$J_\textup{\ch{CH2,CH3}}$}]
+	        at (axis cs:\jCHlbl,5) {};
+		\end{axis}
+  \end{pgfonlayer}
+\end{tikzpicture}
+\end{document}

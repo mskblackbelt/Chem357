@@ -7,40 +7,53 @@
 
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
 \usepackage[%
-	bibstyle=numeric,%
-	citestyle=numeric-comp,%
-	sortcites,%
-	sorting=none,%
-	defernumbers=true%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
 	]{biblatex}
 	\addbibresource{../pchem_bib.bib}
 
-%% TODO: Troubleshoot this section… useful to only maintain one bibliography.
 	% Filter bibliography file to only include entries matching keyword.
-	\DeclareSourcemap{
-	  \maps[datatype=bibtex]{
-	    \map{
-	      \step[nocited, final]
-	      \step[fieldsource=keywords, notmatch=polymers, final]
-	      \step[entrynull]
-	    }
-	  }
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=polymers, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
 	}
 	
-	% Add a section for cited bibliography entries. At the end, 
-	% create a second bibliography for uncited items.
+	% Add a section for cited bibliography entries. 
+  % At the end, create a second bibliography for uncited items (Further Reading).
 	\DeclareBibliographyCategory{cited}
 	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-	% Remove URL from citations if DOI is present.
+	
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+  
+  % Remove URL from citations if DOI is present.
 	\AtEveryBibitem{%
-	  \iffieldundef{doi}{
-		% do nothing if true
+	  \iffieldundef{doi}{ % do nothing if true
 		}
 		{ % otherwise, clear the URL
 			\clearfield{url}
 		}%
 	}
+% (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Molecular Weight and Monomer Linkages Properties of Poly(vinyl alcohol)}
@@ -560,7 +573,7 @@ This results in a decreases in the (average) molecular weight of the polymer, an
 If we assume that the cleavage reaction is \SI{100}{\percent} effective (so that all the 1,2-diol linkages are cleaved), the increase in the number of solute molecules in the solution after treatment with \ch{KIO4} divided by the total number of monomer units represented in the polymer sample is equal to the ratio of 1,2-diol structures to the total 1,2-diol \emph{and} 1,3-diol arrangements in the system. 
 This ratio, which is defined here as \( f \), can be expressed as
 \begin{equation}
-	f = \frac{\frac{1}{M_n'} - \frac{1}{M_n^0}}{\frac{1}{M_n^0}} \, ,
+	f = \frac{\frac{1}{M_n'} - \frac{1}{M_n^0}}{\frac{1}{M^0}} \, ,
 	\label{eq:frac_glycol}
 \end{equation}
 where \( M_n^0 \) and \( M_n' \) are the number-average molecular weights of the polymer in the sample before
@@ -568,7 +581,7 @@ and after the \ch{KIO4} cleavage respectively.
 \( M^0 \) is the molecular weight of the monomer unit (\ch{CH2CHOH}), which is \SI{44}{\dalton}. 
 Using the relationship between the number average and viscosity-average molecular weight for PVOH,\sidenote{See \cref{eq:mol_weight_ratio_ex}} we get the following expression for the head-to-head fraction:
 \begin{equation}
-	f = S M^0 \br{\frac{1}{M_n'} - \frac{1}{M_n^0}}\, .
+	f = S M^0 \br{\frac{1}{M_v'} - \frac{1}{M_v^0}}\, .
 	\label{eq:h2h_frac}
 \end{equation}
 This equation provides the final result used in this experiment. 
@@ -690,15 +703,15 @@ As previously stated, your lab report should consist of the following parts:
 \end{description}
 % section lab_report_guidelines (end)
 
-
 \nocite{*}
 \printbibliography[category=cited]% default title for `article` class: "References"
 
-\printbibliography[
-	title={Further Reading},
-	resetnumbers,
-	prefixnumbers={F},
-	notcategory=cited,
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
+\printbibliography[%
+  title={Further Reading},%
+  resetnumbers,%
+  omitnumbers,%
+	notcategory=cited,%
 	]
 
 \end{document}
