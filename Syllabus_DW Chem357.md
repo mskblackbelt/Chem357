@@ -2,19 +2,19 @@
 title: Course Syllabus
 course: Chemistry 357
 author: Dustin Wheeler
-semester: Spring 2020
-left-foot: Chem 357, Spring 2020
+semester: Spring 2021
+left-foot: Chem 357, Spring 2021
 ---
 
 # Physical Chemistry Laboratory II #
 
-### Chemistry 357, Spring 2020 ###
+### Chemistry 357, Spring 2021 ###
 
 Instructor
 :
 Dustin Wheeler, Ph.D.  
 Office: HN1313B  
-Office hours: By appointment only  
+Office hours: Remotely, by appointment only  
 Email: <dustin.wheeler@hunter.cuny.edu>
 
 Course goal
@@ -36,7 +36,8 @@ If you are interested in purchasing a physical laboratory book (entirely optiona
 
 Web site
 : 
-Instructions on how to access the course website on Blackboard can be found on the [Hunter College BlackBoard Announcement page][bb-announce]. In addition to instructions for individual labs, announcements and additional resources will occasionally be posted on Blackboard. 
+Course communication, lectures, help sessions, and announcements will be posted on the course page in [Microsoft Teams][ms-teams]. All students should have been invited to the team prior to the start of the semester. To log in, use your CUNYlogin address (fname.lname##@login.cuny.edu). Please contact the course instructor and the [Student HelpDesk](mailto:studenthelpdesk@hunter.cuny.edu) if you have issues connecting to the course. 
+<!--Instructions on how to access the course website on Blackboard can be found on the [Hunter College BlackBoard Announcement page][bb-announce]. In addition to instructions for individual labs, announcements and additional resources will occasionally be posted on Blackboard. -->
 
 Attendance and Tardiness
 : 
@@ -94,6 +95,8 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 <!-- BREAK -->
 ## Course Schedule ##
 
+{{Course schedule.md}}
+<!--
 | Week	| Date 	| Groups 1 & 2 	| Groups 3 & 4	| 
 | :-------	| :------	|  ---------	| -----------	| 
 | 1				| 	1/27	| Introduction, Plotting Tutorial 				| Introduction, Plotting Tutorial | 
@@ -110,46 +113,57 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 | 12 			| 	4/27	| FRET 										| HCl/DCl | 
 | 13			| 	5/4 	| Final Presentations 						| Final Presentations | 
 | 14			| 	5/11 	| Checkout 									| Checkout | 
-
+-->
+<!--BREAK-->
 ## Description of Experiments ##
 
-1.	Introduction to Data Analysis and Plotting (Summary)
-: This one-week exercise will give you an introduction to basic plotting techniques and show you how to work with data in a variety of digital formats. 
-: **Instrumentation used:** Microsoft Excel
+1.	Introduction to Data Analysis and Plotting 
+: This one-week exercise will give you an introduction to the JupyterLab interface, the Jupyter notebook, basic plotting techniques using `matplotlib`, and show you how to work with data in a variety of digital formats. 
+: **Instrumentation used:** JupyterLab
+: **Report type**: Summary
 
-2.	Introduction to Error Analysis (Summary)
+2.	Introduction to Computation Chemistry 
+: This lab will introduce you to the Unix command line shell, after which you will learn to run some rudimentary quantum calculations using the Gaussian computational chemistry software package.
+:**Instrumentation used:** Command line shell, Python, Gaussian16
+: **Report type**: Summary
+
+3.	Introduction to Error Analysis 
 : This one week exercise will guide you through the principles of error analysis, propagation of error, and probability distributions. 
 : **Instrumentation used:** None
+: **Report type**: Summary
 
-3.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction (Summary)
+4.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction 
 : In this two-week experiment, you will determine the rate constant and collision diameter for a diffusion-controlled reaction using fluorescence quenching.
 :**Instrumentation used:** Fluorimeter
+: **Report type**: Summary
 
-<!--BREAK-->
-4.	Polymers - Molecular Weight and Monomer Linkage Properties of Poly(vinyl alcohol) (Summary)
+5.	Polymers - Molecular Weight and Monomer Linkage Properties of Poly(vinyl alcohol) 
 : Using a viscometer, you will determine the average molecular weight of a polymer chain and the fraction of head-to-head monomer linkages in the polymer.
 :**Instrumentation used:** Ostwald viscometer
+: **Report type**: Summary
 
-5.	NMR - Determination of Keto-Enol Equilibrium Constants via NMR Spectroscopy (Report)
-: Using nuclear magnetic resonance spectroscopy, you will determine the equilibrium composition of various keto-enol mixtures. By investigating a series of concentrations, you will determine the equilibrium constant for the conversion. 
-:**Instrumentation used:** NMR spectrometer, GaussView6
+6.	NMR - Determination of the Rotational Barrier in *N,N*-dimethylacetamide 
+: Using nuclear magnetic resonance spectroscopy, you will determine the energy of the rorational barrier in *N,N*-dimethylacetamide. By investigating the NMR spectra over a series of temperatures, you will determine the equilibrium constant for the conversion. 
+:**Instrumentation used:** NMR spectrometer, Gaussian16
+: **Report type**: Full report
 
-6.	Introduction to Computation Chemistry (Summary)
-: This lab will serve to introduce you to the Linux operating system and Unix command line, after which you will learn to run some rudimentary quantum calculations using the Gaussian computational chemistry software package.
-:**Instrumentation used:** Command line shell, Python, Gaussian16, GaussView6 
+<!--BREAK-->
 
-7.	HCl/DCl - Vibrational-Rotational Spectra of HCl and DCl (Report)
+7.	HCl/DCl - Vibrational-Rotational Spectra of HCl and DCl 
 : In this two-week experiment you will synthesize a gaseous mixture of hydrogen chloride and deuterium chloride to be analyzed using the FTIR spectrometer. You will then perform basic computations on the two molecules using the collected data. 
 :**Instrumentation used:** FTIR, Gaussian16
+: **Report type**: Full report
 
-8. FRET - Emission Spectroscopy: Biophysics and Förster Resonance Energy Transfer (FRET) (Report)
+8. FRET - Emission Spectroscopy: Biophysics and Förster Resonance Energy Transfer (FRET) 
 : In this two-week experiment, you will learn about quenching via Förster Resonance Energy Transfer, determine the free energy of unfolding a protein, and determine intramolecular distances in the partially-unfolded and fully-folded structures. 
 :**Instrumentation used:** UV-Vis, Fluorimeter
+: **Report type**: Full report
 
 9.	Final Presentations
 : Each group will be assigned a lab from the semester. Groups will create a detailed presentation related to the lab for their instructor and classmates. Presentations will be given at the end of the semester. 
 
 
+[ms-teams]: https://www.microsoft.com/teams
 [bb-announce]: http://bb.hunter.cuny.edu
 [jpca-auth-info]: https://pubs.acs.org/page/jpcafh/submission/authors.html
 [jpca-auth-guide]: https://publish.acs.org/publish/author_guidelines?coden=jpcafh
