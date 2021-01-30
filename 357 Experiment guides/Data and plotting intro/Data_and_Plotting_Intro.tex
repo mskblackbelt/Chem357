@@ -1,7 +1,7 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
-\RequirePackage{minted}
+% \RequirePackage{minted}
 \input{header.tex}
-\usepackage{menukeys}
+\usepackage[mackeys=text]{menukeys}
 \tcbuselibrary{minted}
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,7 +21,7 @@
 	  \maps[datatype=bibtex]{%
 	    \map{%
 	      \step[nocited, final]%
-	      \step[fieldsource=keywords, notmatch=fret, final]%
+	      \step[fieldsource=keywords, notmatch=plot, final]%
 	      \step[entrynull]%
 	    }%
 	  }%
@@ -54,7 +54,46 @@
 % (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Introduction to Data Analysis and Plotting with \\ Microsoft Excel}
+%%%%%% Listing settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[red!20!blue!20!white] 
+      (frame.south west)  rectangle 
+      ([xshift=1.5em]frame.north west);
+    \end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em
+}
+
+\newmintinline[pyinline]{python}{python3}
+
+\newtcblisting{pyinput}[1][]{
+  listing engine=minted,
+  minted language=python, 
+  listing only,
+  #1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Introduction to Data Analysis and Plotting \\with Jupyter}
 
 \author{Dustin Wheeler}
 
@@ -64,12 +103,12 @@
 
 \begin{abstract}
 	\noindent
-	The goal of this exercise is to familiarize the student with basic data manipulation and plotting using Microsoft Excel 2016. 
+	The goal of this exercise is to familiarize the student with basic data manipulation and plotting using Jupyter notebooks. 
 	Many of the concepts are general and can be translated to other software applications. 
 	By the end of this exercise, you should be able to 
 	\begin{itemize}
 		\item perform basic manipulations on data columns (formatting, transformations) 
-		\item perform simple mathematical operations over a column of data 
+		\item perform simple mathematical operations over a set of data 
 		\item plot columns of data in a clear and visually pleasing manner
 		\item perform simple statistical operations on a set of data
 		\item get a line-of-best-fit for multiple datasets
@@ -126,169 +165,175 @@ Here are the important parts of a plot, along with a brief description and guide
 \section{Basic Plotting and Linear Fits} % (fold)
 \label{basic-plotting-and-linear-fits}
 
-Your first task is to take the data in the file \texttt{data.txt} and import it into a new Excel workbook. 
-Begin by downloading the input files from the \Verb{Plotting Tutorial} folder on Blackboard. 
-This folder contains a few datasets in various formats. 
+Your first task is to take the data in the file \texttt{data.txt} and import it into a new Jupyter notebook.\marginnote{
+Note: prior to performing the following exercises, you should run through the \href{https://jupyter-notebook.readthedocs.io/en/stable/notebook.html}{introductory documentation to Jupyter} to familiarize yourself with the concepts and interface.} 
+
+As the first step, please use this link to clone the files into your Jupyter directory: \url{https://jupyter.hcpchemlab.org/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2F357_plot_intro&urlpath=lab%2Ftree%2F357_plot_intro%2Fplot_intro_template.ipynb&branch=main}\sidenote{
+Please do not copy and paste the text in this PDF into your input files, instead click on the link which should open your web browser.  
+Invisible formatting characters are often included when copying from the PDF. 
+Your web browser will misinterpret these characters and you will not be able to download the materials.} 
+This link will direct your browser to the class JupyterHub and download a folder containing a number of resources you'll need for this exercise. 
+
+The folder \Verb{raw_data} contains a few datasets in various formats. 
 The file extension doesn't always tell you what type of information is in a file and can sometimes
 lead you astray. 
-For this exercise, the file \texttt{data.txt} contains a set of ``tab-delimited'' data, meaning that the values in a row are separated by tab characters. 
+For this exercise, the file \Verb{data.txt} contains a set of ``tab-delimited'' data, meaning that the values in a row are separated by tab characters. 
 Another common format is ``comma-delimited'' or ``comma-separated'' data, such as the dataset in \Verb{anscombe.csv}. 
 You will find that different instruments have different defaults for exporting data, but these two are the most common.
-Sometimes, a \Verb{.dat} extension might be used for a plain-text file to indicate `data' regardless of the format or delimiter type. 
+Sometimes, a \Verb{.dat} extension might be used for a plain-text file to indicate `data' without indicating the underlying format or delimiter type. 
 
-Open up a new Excel workbook and save it to a safe location (if this is a lab computer, your best bet is to save directly to your own flash drive). 
-In the workbook, pull in the data from \Verb{data.txt} by selecting the \textbf{Data} tab in the Ribbon and clicking on \textbf{From Text} (see \cref{fig:import_data}). 
-On a Mac, you can also select \textbf{File \blacktriangleright Import} in the menu bar.
+Open a new Jupyter template by clicking on the Template icon, then select `pchem\_templates', and `PChem\_Lab.ipynb' in the second box. 
+This will open a new Jupyter notebook with a series of cells pre-populated with information to get you started. 
+Give this notebook a title (as instructed in the first cell), then click on File in the JupyterLab menubar, select ``Rename Notebook…'', and give the notebook a title following the instructions in the first cell. 
+In the notebook, execute the code cell under the Library Import section, then create a new cell  under the Data import section. 
+Import the data from \Verb{data.txt} by using the import function of the `pandas' library: 
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.9\textwidth]{images/import_data.png}
-	\caption{How to import data in Excel 2016.}
-	\label{fig:import_data}
-\end{figure}
+\begin{pyinput}
+	data = pd.read_csv("raw_data/data.txt", sep="\t")
+\end{pyinput}
 
-Follow the prompts to import data which is tab-separated into the first rows in your spreadsheet. 
+This will take the contents of \Verb{data.txt} and turn it into an object called a ``DataFrame'' with the name \pyinline{data}.\marginnote{For more information, type \pyinline{help(pd.DataFrame)} to get more information on the DataFrame object. Alternately, in the Jupyter notebook, you can press \keys{Shift + Tab} at the end of a command to get help on the object (i.e., when your cursor is at the end of \pyinline{pd.DataFrame} or your new object \pyinline{data}.)}
+The \pyinline{sep="\t"} argument is required because our data is ``tab-separated'', rather than ``comma-separated'', which is the default (as suggested by the function name \Verb{read_csv}). 
+When in doubt, specify the field separator when you import data with python and the pandas library. 
+
+To view your new object, just type \pyinline{data} and press \keys{Shift + Enter} to evaluate the cell. 
+By default Jupyter notebooks will display the results of the final line of a cell.\marginnote{They only display the results of intermediate lines of a cell if the \pyinline{print()} command is used.}
 You should end up with two columns of data with 21 data points in each column. 
 Once you have the data columns, create a new scatter plot from the data. 
-This is done by clicking on the \textbf{Insert} tab and selecting the correct type of chart.\footnote{
-	\emph{n.b.:}   Excel is designed primarily as a tool for finance and business  operations. 
-	The default settings for plots are often inappropriate for  scientific plots, and the \textbf{Recommended Charts} button will rarely give  you an appropriate suggestion for a plot.} 
-When you insert a new plot, it appears as a floating object in your current sheet. 
-While you are exploring data, this is fine, but you'll probably want to move these objects to their own sheet when you really start customizing their appearance. 
-You can do this by right-clicking on the plot background and selecting \textbf{Move Chart…}. 
-This will bring up a window where you can choose to move the chart to its own new sheet or as an object in another
-existing sheet (shown in \cref{fig:move_chart}).
+The pandas library automatically incorporates basic plotting functions from the matplotlib library, so data in a DataFrame can be plotted by using the \pyinline{plot()} function on a given DataFrame. 
+In your case, you need only type \pyinline{data.plot()} and evaluate the cell to see a plot of the data.\footnote{
+	\emph{n.b.:}   pandas is designed first as a tool for finance and business  operations. 
+	The default settings for plots are often inappropriate for  scientific plotsso some tweaking may be necessary.} 
+While you are exploring data, the default appearance is fine, but you'll probably want to start customizing the appearance of plots when you get them ready for publication. 
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.9\textwidth]{images/move_chart.png}
-	\caption{Moving a chart to a new location.}
-	\label{fig:move_chart}
-\end{figure}
+Notice that the plot isn't plotting column X against column Y, but instead is plotting X and Y against the \emph{index} (the bold column of numbers on the left side of the displayed data). 
+There are two ways to correct your plot. 
+The first is to import the data and define the index column during the import, like so:
+\begin{pyinput}
+	data = pd.read_csv("raw_data/data.txt", sep="\t", index_col="X")
+\end{pyinput}
+This method is useful if you know the structure of the data ahead of time (and when you have a clear index column, such as a time index, wavelength, or frequency). 
+The second way to fix the plot is to define the X and Y data in the arguments of the \pyinline{plot()} function. 
+The \pyinline{plot()} function takes a number of arguments (you can see them quickly by pressing \keys{Shift + Tab} inside of the parentheses), including arguments for features like plot type (\pyinline{kind="text"}), plot title (\pyinline{title="text"}), and axes labels (\pyinline{xlabel="text", ylabel="text"}). 
 
-Move the chart to a new sheet (name the sheet ``X vs. Y'') and fill in the fundamental plot items (descriptive title, axes title, etc.). 
-Once this is complete, remove any unnecessary ``chart junk''. 
-This includes things like background shading (Excel has gotten much better at this over the years), grid lines (only needed if you're trying to manually read data off the chart), and the border surrounding the full plot area (should only need axes to indicate the origin or provide an anchor for tick marks). 
-If there is a legend (useful when there are multiple datasets present), it should be a part of the plot area. 
-Don't waste valuable area on something like a legend than can be nestled in one of the empty parts of your plot. 
+With this in mind, create a scatter plot (\pyinline{kind="scatter"}) of Y and a function of X, give the plot a title (``X vs. Y'' is fine) and label each axis (``X'', ``Y''). 
+
+\subsection{Polishing Plot Appearance} % (fold)
+\label{sub:polishing_plot_appearance}
+
+When creating more complex plots, once the basics are complete, remove any unnecessary ``chart junk'' to prepare your plot for publication. 
+This includes things like background shading (\Verb{matplotlib} is pretty good about this), grid lines (only necessary if you're trying to manually read data off the chart, we don't need this with the ubiquity of computers), and the border surrounding the full plot area (should only need axes to indicate the origin or provide an anchor for tick marks). 
+If there is a legend (useful when there are multiple datasets present), it should usually be a part of the plot area, not pushed off to the side. 
+Don't waste valuable data area on something like a legend than can be nestled in one of the empty parts of your plot. 
 Finally, while color seems like a nice feature, plots shouldn't rely on color to convey meaning. 
 There's always a chance that readers won't have access to color printouts, or that the reader may be colorblind. 
 To keep plots accessible, use symbols, line weights, and dashing to differentiate your datasets. 
 The lesson to learn from this paragraph is that simplicity is key to conveying your message. 
-The sole purpose of your figures are to help the reader understand the message.
+The sole purpose of your figures is to help the reader understand the message.
 Anything that distracts from that is harmful to your cause.
 
-Now that the plot has been cleaned up, adjust the axes to best represent the data and insert a trendline (right-click an empty spot in the plot area, select \textbf{Add Trendline…}). 
-A linear fit should be sufficient for this data. 
-In the format options for the trendline, display the equation and \( R^2 \) value on the plot. 
-Move the text box so it doesn't obscure any of the plot data.
+Now that the plot has been cleaned up, we'd like to add a trendline.
+The \Verb{seaborn} library is a visual analysis package built on top of \Verb{matplotlib} with an emphasis on data exploration and friendly figures. 
+To plot our data with \Verb{seaborn}, do the input the following:
+\begin{pyinput}
+	sns.lmplot{data=data, x="X", y="Y", ci=None}
+\end{pyinput}
+This creates a scatterplot using the X and Y columns from \Verb{data}, fits it with a linear model (``lm''), and disables the confidence interval (CI) in the plot. 
+A linear fit should be sufficient for this data.
+The \Verb{seaborn} library isn't meant for complex customization or complex 
+
+% subsection polishing_plot_appearance (end)
 
 % section basic-plotting-and-linear-fits (end)
 
-\subsection{The \Verb{LINEST} Function} % (fold)
-\label{the-linest-function}
+\subsection{Fitting Data} % (fold)
+\label{fitting-data}
 
 Now that you have a trendline, it's time to get some information about it. 
-Excel has a function called \href{https://support.office.com/en-us/article/LINEST-function-84D7D0D9-6E50-4101-977A-FA7ABF772B6D}{\Verb{LINEST}},
-which calculates descriptive statistics on a line using a linear least-squares method to find the best fit. 
+The \Verb{numpy} library is a fundamental library in the numeric python community. 
+It contains a vast array of functions and structures that are used by \emph{many} other libraries. 
+One useful function in \Verb{numpy} is the \href{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}{\pyinline{polyfit()}} function, which calculates a polynomial of best fit using a linear least-squares method. 
 Examples can be seen on the linked page, but we will run through the simplest example, a straight line.
 
-Return to your data spreadsheet and highlight a \( 2 \times 5  \) grid of empty cells (the cells directly under or adjacent to your dataset will do). 
-Begin typing the following (your keystrokes will automatically go into the upper left cell):
+To use the \pyinline{polyfit()} function, you need to specify the data (``X'' and ``Y'') and the degree of the polynomial (\num{1}). 
+All other arguments are optional, and just giving these three arguments will return the coefficients of the polynomial from the highest power to the lowest (\( c_n, c_{n-1}, \ldots, c_1, c_0 \)). 
+The optional argument \pyinline{cov=True} will return the \href{https://en.wikipedia.org/wiki/Covariance_matrix}{\emph{covariance matrix}}, the diagonal values of which are the variances for each coefficient.
 
-\tcbset{
-	left=5mm,
-	colback=Blue!4!white, 
-	colframe=Blue!85!black,
-	listing engine=minted,
-	minted style=tango
-}
-\begin{tcblisting}{listing only,
-	minted language=vbscript}
-	=linest(
-\end{tcblisting}
+These (or, more precisely, their square roots) help you to see how ``good'' the returned fit is. 
+Please read the help page to learn what statistics are returned and in what form.\marginnote{If you're interested in doing more statistical modeling in Python, the \href{https://www.statsmodels.org/}{\Verb{statsmodel}} package offers a number of descriptive statistics and flexible models.}
 
-Excel will pop up a hint telling you what information needs to be entered next. 
-The first range should be your \( y \)-values (cells \textbf{B2} through \textbf{B22}), while the second range is your \( x \)-values (\textbf{A2} through \textbf{A22}).
-The third and fourth arguments are optional. 
-Setting the third argument to \Verb{TRUE} will tell the function to calculate a \( y \)-intercept value, while an entry of \Verb{FALSE} will set the intercept equal to zero. 
-The fourth argument toggles additional regression statistics using \Verb{TRUE} or \Verb{FALSE}. 
-These help you to see how ``good'' the returned fit is. 
-Please read the help page to learn what statistics are returned in which cell. 
-When you have finished entering your data into the cell, press \keys{Shift + Ctrl + Enter} to tell Excel to calculate all data in the array. 
-Note that the numbers in the first row of the array correspond to the slope and intercept of the trendline in your plot.
-
-% section the-linest-function (end)
+% section fitting-data (end)
 
 \section{Anscombe's Quartet} % (fold)
 \label{anscombes-quartet}
 
-Repeat the process of importing data with the file \Verb{anscombe.csv}. 
-You will need to change the delimiter to a comma for this file. 
-This time, import the data into a new sheet called \textbf{Anscombe}. 
-You should see 8 columns of data, \emph{x1--x4} and \emph{y1--y4}. 
-Begin by calculating \Verb{LINEST} arrays for each \emph{x/y} pair. 
-For clarity, you should label each array using a cell just above the array, as shown in \cref{fig:linest_label}.
+Repeat the process of importing data with the file \Verb{anscombe.csv}.\marginnote{There are two options here: you will need to change the delimiter to a comma (\pyinline{delim=","}) for this file, or, since the default delimiter for \pyinline{pd.read_csv()} is a comma, you can omit the \pyinline{delim=","} argument altogether (it is implicitly defined).}
+Name the new dataframe \Verb{anscombe} and display it by calling it alone in the last line of your cell.\marginnote{Just like we did with the dataframe \Verb{data} in the previous section.} 
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics{images/linest_label.png}
-	\caption{A \Verb{LINEST} array with a formatted label cell above it}
-	\label{fig:linest_label}
-\end{figure}
+Now we want to calculate and print a linear fit and corresponding error for each of the four sets of data in \Verb{anscombe}. 
+The columns in \Verb{anscombe} should be named ``x1'', ``y1'', ``x2'', ``y2'', etc. 
+For convenience, I've created a small loop for you to use on your data. 
+This allows us to perform repetitive operations without worrying about being consistent in our typing from operation to operation (if it's correct for the first set of data, it will be correct for each subsequent one). 
+\begin{pyinput}
+## We will make a loop to make this less repetitive (and reduce our chances of making an error)
+fits = []
+for x, y in (('x1','y1'),('x2','y2'),('x3','y3'),('x4','y4')):
+    fit_coeff, fit_cov = np.polyfit(anscombe[x], anscombe[y], 1, cov=True)
+    fit_err = np.sqrt(np.diag(fit_cov))
+    fits.append([fit_coeff,fit_err])
 
-Once you have four arrays, compare the values… do you notice anything odd? 
-Remember, the top two cells represent the slope and intercept of a line of best fit for the data. 
-It might help to format the cells to only display three decimal places (highlight the cells, right-click, \textbf{Format Cells…}, then select 3 decimal places under the \textbf{Number} data type).
+# This operation makes my point regarding this data more clear, as you'll see
+with np.printoptions(precision=2):
+    print("Fit, Std. Err.")
+    for x in fits:
+        print(x)
+\end{pyinput}
 
-Clearly, the data sets are different… so what's going on? 
+Clearly, the data sets are different… You can see that from the numbers in the table.
+So what's going on? 
 To learn more, plot each of the datasets in a separate plot. 
 Discuss your observations with your lab partner, and figure out the best way to deal with information like this. 
 
-The key takeaway from this exercise is that you should always plot your data, even if it's only a quick glance on
-the side of your spreadsheet! 
+The key takeaway from this exercise is that you should always plot your data, even if it's only a quick glance on the side of your spreadsheet! 
 This data was taken from \href{https://doi.org/10.1080/00031305.1973.10478966}{an article written by F.J. Anscombe in 1973} arguing for the necessity of graphs in statistical analysis.
+It is such a valuable dataset that the \Verb{seaborn} library is installed with a copy of the data (\pyinline{sns.load_dataset("anscombe")}). 
 
 % section anscombes-quartet (end)
 
 \section{Column Manipulation and Plotting Spectra} % (fold)
 \label{column-manipulation-and-plotting-spectra}
 
-From the set of input files you downloaded from Blackboard, open the file labeled \Verb{FTIR_UVVis_template.xltx}.\footnote{This template is handy to keep around for future work.} 
-Copy the data from the FTIR sheet and paste it into your plotting document in a new sheet called \textbf{FTIR}. 
-Once you have this data in a sheet, insert a new row at the top of the data (for column labels) and a new column between columns \textbf{A} and \textbf{B}. 
-Label column \textbf{A} ``Wavenumber (\si{\cm^{-1}})'', the new column \textbf{B} as ``Wavelength (\si{\um})'', column \textbf{C} as ``\% Transmission'', and column \textbf{D} as ``Absorbance''.\footnote{What are the relevant units for \%T and A?}
+Start a new section titled ``Plotting Spectra'' and import the file \Verb{ftir_data.csv}.
+Print out the top of the dataframe using the command \pyinline{df.head()}, where \Verb{df} is the name of your dataframe. 
+Notice that we have data in the form ``Wavenumber (\si{\cm^{-1}})'', ``Transmittance (\%)''. 
 
-You will be automatically filling in values for columns \textbf{B} and \textbf{D} based on the data in \textbf{A} and \textbf{C}. 
-Click on cell \textbf{B2} and enter the following:
+There is a very simple syntax in \Verb{pandas} for making a new column: 
+\begin{pyinput}
+  df["new col name"] = func(df["old col name"])
+\end{pyinput}
+In this case, \pyinline{func()} just represents the transform that we are applying to the original column (multiplication, addition, inversion, etc.). 
+Columns in dataframes will broadcast functions across every item in the column by default, so making a line-by-line transformation (e.g., doubling a column) is as easy as \pyinline{df["B"] = 2 * df["A"]}. 
+Using this syntax, create new calculated columns in our dataframe so we can plot the same spectrum as ``Wavelength (nm)'' vs ``Absorbance (A)''. \footnote{What are the relevant units for \%T and A?}
 
-\begin{tcblisting}{listing only,
-minted language=vbscript}
-=1/(A2/10^(-2))*10^(6)
-\end{tcblisting}
-
-This is a conversion from wavenumber to wavelength. 
+To get you started converting wavenumber to wavelength, make the following transformation on the ``Wavenumber'' column:
+\begin{pyinput}
+  df["Wavelength"] = 1/(df[0]/10**(-2)) * 10**(6)
+\end{pyinput}
+\marginnote{Notice that Python requires the use of ``**'' for exponentiation. This is because the caret character (\^) is often used for other commands. 
+This convention is common in programming languages.}
 You should be able to derive this equation quickly on your own…\footnote{Hint: label the units and work through the dimensional analysis.}
 
-Click on cell \textbf{B2}. 
-You can perform this next step in two ways. 
-First, you can copy cell \textbf{B2}, select the the whole range of cells below it (through \textbf{B1766}), and paste.\footnote{a range of cells can be selected by clicking the first cell, holding down the \keys{Shift} key, and then clicking the last cell.} 
-This will fill the range with an incremented version of the equation you just typed (\textbf{A2} will be incremented in each cell until it reaches \textbf{A1766}). 
-You can also select cell \textbf{B2} and click and hold on the small square that appears at the bottom right corner of the cell. 
-While holding down the mouse button, drag your selection down until you reach the bottom of the range (\textbf{B1766}). 
-For short selections (fewer than 50 cells) this can be convenient. 
-For larger selections, it is often easier to select the range using the \keys{Shift} key.
-
-Perform the same sets to take the values in column \textbf{C} and transform them into Absorbance values in column \textbf{D}. 
+Perform the same steps to take the column for ``Transmittance'' and transform it into Absorbance values. 
 Remember that Absorbance is \(\log_{10}(1/T)\) while Transmittance is \(I / I_0\).
 
-Once you have created columns \textbf{B} and \textbf{D}, create two plots, one plotting columns \textbf{A} vs. \textbf{C}, the second plotting \textbf{B} vs. \textbf{D}. 
+Once you have created the new columns, create two plots. 
+The first should plot wavenumber agains transmittance, while the second will plot wavelenth aganst absorbance. 
 Because these are spectra (data collected in a single experiment), it is appropriate to plot them as line plots, \emph{without} plotting the individual points. 
 Make sure that your plot reflects this. 
-You will also need to decrease the thickness of the default line so that fine features are not obscured by poor plot formatting (as I said, Excel's defaults are often inappropriate). 
+
 Make sure your plots are labeled in all the appropriate locations and that your spectra look clean and presentable.
 
-Congratulations, you have the basics of plotting and calculation using Excel! 
+Congratulations, you have the basics of plotting and calculation using Jupyter! 
 You are expected to take this information and build upon it as you write reports through the semester. 
 All of these techniques can be translated to other applications, some of which might be more appropriate for the type of research being performed in a research group. 
 You should be able to transfer your basic skills to any other software with ease, and the tips on presentability are universally applicable.
@@ -298,7 +343,7 @@ You should be able to transfer your basic skills to any other software with ease
 \section{Alternative Software} % (fold)
 \label{alternative-software}
 
-Excel may be the most common piece of software for plotting, but that doesn't mean it's the best. 
+While Microsoft Excel may be the most common piece of software for plotting,  that doesn't mean it's the best. 
 You may find that you desire more control over your plots, or a simpler interface, or the ability to manipulate your data in other manners. 
 If so, you might want to look at the following applications. 
 Some are free, some are available through a CUNY site license, and some are paid (and expensive). 
