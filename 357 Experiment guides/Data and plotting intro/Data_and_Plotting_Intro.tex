@@ -182,11 +182,11 @@ Another common format is ``comma-delimited'' or ``comma-separated'' data, such a
 You will find that different instruments have different defaults for exporting data, but these two are the most common.
 Sometimes, a \Verb{.dat} extension might be used for a plain-text file to indicate `data' without indicating the underlying format or delimiter type. 
 
-Open a new Jupyter template by clicking on the Template icon, then select `pchem\_templates', and `PChem\_Lab.ipynb' in the second box. 
+Make sure that you are located in the top folder for this lesson (i.e., inside of ``357\_plot\_intro'') and open a new Jupyter template by clicking on the Template icon, then select `pchem\_templates' in the top box and `PChem\_Lab.ipynb' in the second box. 
 This will open a new Jupyter notebook with a series of cells pre-populated with information to get you started. 
 Give this notebook a title (as instructed in the first cell), then click on File in the JupyterLab menubar, select ``Rename Notebook…'', and give the notebook a title following the instructions in the first cell. 
 In the notebook, execute the code cell under the Library Import section, then create a new cell  under the Data import section. 
-Import the data from \Verb{data.txt} by using the import function of the `pandas' library: 
+Import the data from \Verb{data.txt} by using the import function of the ``pandas'' (\Verb{pd}) library: 
 
 \begin{pyinput}
 data = pd.read_csv("raw_data/data.txt", sep="\t")
@@ -200,9 +200,9 @@ To view your new object, just type \pyinline{data} on a new line and press \keys
 By default Jupyter notebooks will display the results of the final line of a cell (if there is anything to display).\sidenote{They only display the results of intermediate lines of a cell if the \pyinline{print()} command is used.}
 You should end up with two columns of data with 21 data points in each column. 
 Once you have the data columns, create a new scatter plot from the data. 
-The pandas library automatically incorporates basic plotting functions from the matplotlib library, so data in a DataFrame can be plotted by using the \pyinline{plot()} function on a given DataFrame. 
+The Pandas library automatically incorporates basic plotting functions from the Matplotlib library, so data in a DataFrame can be plotted by using the \pyinline{plot()} function on a given DataFrame. 
 In your case, you need only type \pyinline{data.plot()} and evaluate the cell to see a plot of the data.\sidenote{
-	\emph{n.b.:}   pandas is designed first as a tool for finance and business  operations. 
+	\emph{n.b.:}   Pandas is designed first as a tool for finance and business  operations. 
 	The default settings for plots are often inappropriate for  scientific plotsso some tweaking may be necessary.} 
 While you are exploring data, the default appearance is fine, but you'll probably want to start customizing the appearance of plots when you get them ready for publication. 
 
@@ -223,7 +223,7 @@ With this in mind, create a scatter plot (\pyinline{kind="scatter"}) of Y and a 
 \label{sub:polishing_plot_appearance}
 
 When creating more complex plots, once the basics are complete, remove any unnecessary ``chart junk'' to prepare your plot for publication. 
-This includes things like background shading (\Verb{matplotlib} is pretty good about this), grid lines (only necessary if you're trying to manually read data off the chart, we don't need this with the ubiquity of computers), and the border surrounding the full plot area (should only need axes to indicate the origin or provide an anchor for tick marks). 
+This includes things like background shading (Matplotlib is pretty good about this), grid lines (only necessary if you're trying to manually read data off the chart, we don't need this with the ubiquity of computers), and the border surrounding the full plot area (should only need axes to indicate the origin or provide an anchor for tick marks). 
 If there is a legend (useful when there are multiple datasets present), it should usually be a part of the plot area, not pushed off to the side. 
 Don't waste valuable data area on something like a legend than can be nestled in one of the empty parts of your plot. 
 Finally, while color seems like a nice feature, plots shouldn't rely on color to convey meaning. 
@@ -234,8 +234,8 @@ The sole purpose of your figures is to help the reader understand the message.
 Anything that distracts from that is harmful to your cause.
 
 Now that the plot has been cleaned up, we'd like to add a trendline.
-The \Verb{seaborn} library is a visual analysis package built on top of \Verb{matplotlib} with an emphasis on data exploration and friendly figures. 
-To plot our data with \Verb{seaborn}, input the following:
+The Seaborn library is a visual analysis package built on top of Matplotlib with an emphasis on data exploration and friendly figures. 
+To plot our data with Seaborn, input the following:
 \begin{pyinput}
 sns.lmplot(data=data, x="X", y="Y", ci=None)
 \end{pyinput}
@@ -252,9 +252,11 @@ It is generally inappropriate for spectral data, but very good for visual statis
 \label{fitting-data}
 
 Now that you have a trendline, it's time to get some information about it. 
-The \Verb{numpy} library is a fundamental library in the numeric python community. 
-It contains a vast array of functions and structures that are used by \emph{many} other libraries. 
-One useful function in \Verb{numpy} is the \href{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}{\pyinline{polyfit()}} function, which calculates a polynomial of best fit using a linear least-squares method. 
+The Numpy library is a fundamental library in the numeric python community. 
+It contains a vast array of functions and structures that are used by \emph{many} other libraries.\sidenote{The Numpy library (shortened to \Verb{np} by convention) has a host of useful functions, including a number of common mathematical functions. 
+  The square root function is one of these (\Verb{np.sqrt(num)}). 
+  Another useful one (that you'll need later) is \Verb{np.log10(num)}.} 
+One useful function in Numpy is the \href{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}{\pyinline{polyfit()}} function, which calculates a polynomial of best fit using a linear least-squares method. 
 Examples can be seen on the linked page, but we will run through the simplest example, a straight line.
 
 To use the \pyinline{polyfit()} function, you need to specify the data (``X'' and ``Y'') and the degree of the polynomial (\num{1}). 
@@ -262,11 +264,11 @@ All other arguments are optional, and just giving these three arguments will ret
 The optional argument \pyinline{cov=True} will return the \href{https://en.wikipedia.org/wiki/Covariance_matrix}{\emph{covariance matrix}}, the diagonal values of which are the variances for each coefficient.
 
 These (or, more precisely, their square roots) help you to see how ``good'' the returned fit is. 
-Please read the help page to learn what statistics are returned and in what form.\sidenote{If you're interested in doing more statistical modeling in Python, the \href{https://www.statsmodels.org/}{\Verb{statsmodel}} package offers a number of descriptive statistics and flexible models.}
+Please read the help page to learn what statistics are returned and in what form.\sidenote{If you're interested in doing more statistical modeling in Python, the \href{https://www.statsmodels.org/}{Statsmodel} package offers a number of descriptive statistics and flexible models.}
 
 Implement this using the following code:\sidenote{A couple of notes on Python features: 
 \begin{itemize}
-  \item everything following the number sign (\#) on a line is considered a \emph{comment}, meaning that it isn't evaluated.
+  \item everything following the number sign (\emph{\#}) on a line is considered a \emph{comment}, meaning that it isn't evaluated.
   This is a great way to document your code as you work.
   \item The \href{https://docs.python.org/3.6/reference/lexical_analysis.html#f-strings}{``f-strings''} feature was introduced in Python 3.6.
   They are a far more convenient way to included code in printed strings, and result in much more readable code.
@@ -331,9 +333,9 @@ It is such a valuable dataset that the \Verb{seaborn} library is installed with 
 
 Start a new section titled ``Plotting Spectra'' and import the file \Verb{ftir_data.csv}.
 Print out the top of the dataframe using the command \pyinline{df.head()}, where \Verb{df} is the name of your dataframe. 
-Notice that we have data in the form ``Wavenumber (\si{\cm^{-1}})'', ``Transmittance (\%)''. 
+Notice that we have data in the form ``Wavenumber (cm\textasciicircum-1}})'', ``Transmittance (\%)''. 
 
-There is a very simple syntax in \Verb{pandas} for making a new column: 
+There is a very simple syntax in Pandas for making a new column: 
 \begin{pyinput}
 df["new col name"] = func(df["old col name"])
 \end{pyinput}
@@ -341,10 +343,10 @@ In this case, \pyinline{func()} just represents the transform that we are applyi
 Columns in dataframes will broadcast functions across every item in the column by default, so making a line-by-line transformation (e.g., doubling a column) is as easy as \pyinline{df["B"] = 2 * df["A"]}. 
 Using this syntax, create new calculated columns in our dataframe so we can plot the same spectrum as ``Wavelength'' vs ``Absorbance (A)''.\sidenote{What are the relevant units for \%T and A?}
 
-To get you started converting wavenumber to wavelength, make the following transformation on the ``Wavenumber'' column\sidenote{Notice that Python requires the use of ``**'' for exponentiation. This is because the caret character (\pyinline{^}) is often used for other commands. 
+To get you started converting wavenumber to wavelength, make the following transformation on the ``Wavenumber'' column\sidenote{Notice that Python requires the use of ``**'' for exponentiation. This is because the caret character (\textasciicircum) is often used for other commands. 
 This convention is common in programming languages.}:
 \begin{pyinput}
-df["Wavelength (??)"] = 1/(df[0]/10**(-2)) * 10**(6)
+df["Wavelength (??)"] = 1/(df["Wavenumber (cm^-1)"]/10**(-2)) * 10**(6)
 \end{pyinput}
 You should be able to derive this equation quickly on your own…\sidenote{Hint: label the units and work through the dimensional analysis. Fill in the question marks with the appropriate units.}
 
@@ -352,7 +354,7 @@ Perform the same steps to take the column for ``Transmittance'' and transform it
 Remember that Absorbance is \(\log_{10}(1/T)\) while Transmittance is \(I / I_0\).
 
 Once you have created the new columns, create two plots. 
-The first should plot wavenumber agains transmittance, while the second will plot wavelenth aganst absorbance. 
+The first should plot wavenumber agains transmittance, while the second will plot wavelength against absorbance. 
 Because these are spectra (data collected in a single experiment), it is appropriate to plot them as line plots, \emph{without} plotting the individual points. 
 Make sure that your plot reflects this. 
 
