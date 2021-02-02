@@ -168,10 +168,7 @@ Here are the important parts of a plot, along with a brief description and guide
 Your first task is to take the data in the file \texttt{data.txt} and import it into a new Jupyter notebook.\sidenote{
 Note: prior to performing the following exercises, you should run through the \href{https://jupyter-notebook.readthedocs.io/en/stable/notebook.html}{introductory documentation to Jupyter} to familiarize yourself with the concepts and interface.} 
 
-As the first step, please use this link to clone the files into your Jupyter directory:\\ \url{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2F357_plot_intro&urlpath=lab%2Ftree%2F357_plot_intro%2Fplot_intro_template.ipynb&branch=main}\sidenote{
-Please do not copy and paste the text in this PDF into your input files, instead click on the link which should open your web browser.  
-Invisible formatting characters are often included when copying from the PDF. 
-Your web browser will misinterpret these characters and you will not be able to download the materials.}\\ 
+As the first step, please use this link to clone the files into your Jupyter directory:\\ \href{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2F357_plot_intro&urlpath=lab%2Ftree%2F357_plot_intro%2Fplot_intro_template.ipynb&branch=main}{\texttt{https://tinyurl.com/chem357-plotting}}\\ 
 This link will direct your browser to the class JupyterHub and download a folder containing a number of resources you'll need for this exercise. 
 
 The folder \Verb{raw_data} contains a few datasets in various formats. 
@@ -182,17 +179,30 @@ Another common format is ``comma-delimited'' or ``comma-separated'' data, such a
 You will find that different instruments have different defaults for exporting data, but these two are the most common.
 Sometimes, a \Verb{.dat} extension might be used for a plain-text file to indicate `data' without indicating the underlying format or delimiter type. 
 
-Make sure that you are located in the top folder for this lesson (i.e., inside of ``357\_plot\_intro'') and open a new Jupyter template by clicking on the Template icon, then select `pchem\_templates' in the top box and `PChem\_Lab.ipynb' in the second box. 
+Make sure that you are located in the top folder for this lesson (i.e., inside of ``357\_plot\_intro'') and open a new Jupyter template by clicking on the Template icon, then select ``pchem\_templates'' in the top box and ``PChem\_Lab.ipynb'' in the second box. 
 This will open a new Jupyter notebook with a series of cells pre-populated with information to get you started. 
 Give this notebook a title (as instructed in the first cell), then click on File in the JupyterLab menubar, select ``Rename Notebook…'', and give the notebook a title following the instructions in the first cell. 
-In the notebook, execute the code cell under the Library Import section, then create a new cell  under the Data import section. 
-Import the data from \Verb{data.txt} by using the import function of the ``pandas'' (\Verb{pd}) library: 
+
+In the notebook, execute the code cell under the ``Library Import'' section.
+``Libraries'' are just collections of useful Python code that individuals or groups have created. 
+They generally cover a specific area or hold to a theme. 
+In our notebook template, we use the following:
+\begin{description}
+  \item[\href{http://numpy.org/}{Numpy}] A general purpose numerical library that speeds up number based operations, allows functions to operate on lists of numbers, and gives a large collection of useful mathematical functions (things like polynomial fitting, matrix operations, and common algebraic and trigonometric functions). The core functionality is based around Numpy arrays, very fast n-dimensional arrays of data (a core requirement for scientific computation). 
+  \item[\href{https://scipy.org/scipylib/index.html}{Scipy}] A fundamental library for scientific computing, builds on the Numpy library but includes numeric integration routines, non-linear curve fitting routines, interpolation, numerical optimization, and statistics. 
+  \item[\href{http://pandas.pydata.org/}{Pandas}] A data management library that offers functions for importing, tidying, organizing, and filtering data using the DataFrame construct. Excellent resource for 2-dimensional data, starts breaking down with more dimensions (look at the \href{http://xarray.pydata.org/}{xarray} package, which is built on top of Pandas, for this purpose). 
+  \item[\href{http://matplotlib.org/}{Matplotlib}] A comprehensive library for creating static, animated, and interactive visualizations in Python. It has become the de-facto standard library for plot visualizations in Python. 
+  \item[\href{https://seaborn.pydata.org}{Seaborn}] A collection of routines and formats built on top of Matplotlib that provides a high-level interface for drawing attractive and informative statistical graphics. 
+\end{description}
+
+Now, create a new cell  under the Data import section. 
+Import the data from \Verb{data.txt} by using the import function of the ``Pandas'' (\Verb{pd}) library: 
 
 \begin{pyinput}
 data = pd.read_csv("raw_data/data.txt", sep="\t")
 \end{pyinput}
 
-This will take the contents of \Verb{data.txt} and turn it into an object called a ``DataFrame'' with the name \pyinline{data}.\sidenote{For more information, type \pyinline{help(pd.DataFrame)} to get more information on the DataFrame object. Alternately, in the Jupyter notebook, you can press \keys{Shift + Tab} at the end of a command to get help on the object (i.e., when your cursor is at the end of \pyinline{pd.DataFrame} or your new object \pyinline{data}.)}
+This will take the contents of \Verb{data.txt} and turn it into an object called a ``DataFrame'' with the name \pyinline{data}.\sidenote[][-3\baselineskip]{For more information, type \pyinline{help(pd.DataFrame)} to get more information on the DataFrame object. Alternately, in the Jupyter notebook, you can press \keys{Shift + Tab} at the end of a command to get help on the object (i.e., when your cursor is at the end of \pyinline{pd.DataFrame} or your new object \pyinline{data}.)}
 The \pyinline{sep="\t"} argument is required because our data is ``tab-separated'', rather than ``comma-separated'', which is the default (as suggested by the function name \Verb{read_csv}). 
 When in doubt, specify the field separator when you import data with python and the pandas library. 
 
@@ -264,7 +274,7 @@ All other arguments are optional, and just giving these three arguments will ret
 The optional argument \pyinline{cov=True} will return the \href{https://en.wikipedia.org/wiki/Covariance_matrix}{\emph{covariance matrix}}, the diagonal values of which are the variances for each coefficient.
 
 These (or, more precisely, their square roots) help you to see how ``good'' the returned fit is. 
-Please read the help page to learn what statistics are returned and in what form.\sidenote{If you're interested in doing more statistical modeling in Python, the \href{https://www.statsmodels.org/}{Statsmodel} package offers a number of descriptive statistics and flexible models.}
+Please read the help page to learn what statistics are returned and in what form.\sidenote[][-2\baselineskip]{If you're interested in doing more statistical modeling in Python, the \href{https://www.statsmodels.org/}{Statsmodel} package offers a number of descriptive statistics and flexible models.}
 
 Implement this using the following code:\sidenote{A couple of notes on Python features: 
 \begin{itemize}
@@ -299,9 +309,9 @@ Repeat the process of importing data with the file \Verb{anscombe.csv}.\sidenote
 Name the new dataframe \Verb{anscombe} and display it by calling it alone in the last line of your cell.\sidenote{Just like we did with the dataframe \Verb{data} in the previous section.} 
 
 Now we want to calculate and print a linear fit and corresponding error for each of the four sets of data in \Verb{anscombe}. 
-The columns in \Verb{anscombe} should be named ``x1'', ``y1'', ``x2'', ``y2'', etc. 
+The columns in \Verb{anscombe} should have the names ``x1'', ``y1'', ``x2'', ``y2'', etc. 
 For convenience, I've created a small loop for you to use on your data. 
-This allows us to perform repetitive operations without worrying about being consistent in our typing from operation to operation (if it's correct for the first set of data, it will be correct for each subsequent one). 
+This allows us to perform repetitive operations without worrying about being consistent in our typing from operation to operation.\sidenote{If it's correct for the first set of data, it will be correct for each subsequent one} 
 \begin{pyinput}
 # We will make a loop to make this less repetitive (and reduce our chances of making an error)
 fits = []

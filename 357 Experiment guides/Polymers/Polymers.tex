@@ -133,8 +133,8 @@ If a given sheet is kept at a velocity \( v \), such that it exceeds the velocit
 The partial derivative, \( \br{\pdv*{v_x}{z}}_z \), is the tangential velocity gradient, and \( \eta \), the proportionality constant between \( f_x \) and this gradient, is now defined as the \emph{viscosity coefficient}. 
 From \cref{eq:layer_flow}, it can be seen that the SI dimensions of the viscosity coefficient are \si{\kg \per \m \per \s}. \Cref{eq:layer_flow} is called Newton's law of viscous flow. 
 Fluids that behave according to \cref{eq:layer_flow} are called Newtonian fluids and are said to undergo \emph{laminar} flow. 
-Cases of non-laminar, or non-Newtonian flow (at ordinary temperatures and pressures) are unusual but not uncommon (\emph{e.g.,} ``silly putty'').
-Materials whose viscosity decreases at high shear rates (\emph{e.g.,} paints that ``thin out'' as they are applied with a brush but then stiffen when quiescent) are examples of non-Newtonian fluids.
+Cases of non-laminar, or non-Newtonian flow (at ordinary temperatures and pressures) are unusual but not uncommon (e.g., ``silly putty'').
+Materials whose viscosity decreases at high shear rates (e.g., paints that ``thin out'' as they are applied with a brush but then stiffen when quiescent) are examples of non-Newtonian fluids.
 
 With respect to this experiment, a useful application of \cref{eq:layer_flow} to the case of mass transport through a circular tube of small internal diameter was derived by French physicist Jean Léonard Marie Poiseuille in 1844:
 \begin{equation}
@@ -168,7 +168,7 @@ In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa 
 % 	F \simeq \chi_{\ch{A}} F_{\ch{A}}^\bullet + \chi_{\ch{B}} F_{\ch{B}}^\bullet \, ,
 % 	\label{eq:mixture_fluidity}
 % \end{equation}
-% \emph{i.e.,} a mole-fraction-weighted linear combination of the pure liquid fluidities. The viscosity of the mixture is
+% i.e., a mole-fraction-weighted linear combination of the pure liquid fluidities. The viscosity of the mixture is
 % \begin{equation}
 % 	\eta \simeq \frac{1}{\chi_{\ch{A}} F_{\ch{A}}^\bullet + \chi_{\ch{B}} F_{\ch{B}}^\bullet} =
 % 		\frac{1}{\chi_{\ch{A}} / \eta_{\ch{A}}^\bullet + \chi_{\ch{B}} / \eta_{\ch{B}}^\bullet}
@@ -247,7 +247,7 @@ Because the hydrostatic pressure, \( P \), is proportional to the liquid density
 	\eta = k_\mtext{inst} \rho t \, .
 	\label{eq:viscometer_visc2}
 \end{equation}
-Thus, if you measure the flow time, \( t \), for a liquid having a density \( \rho \), you can determine its viscosity relative to that of some reference liquid, \emph{i.e.,}
+Thus, if you measure the flow time, \( t \), for a liquid having a density \( \rho \), you can determine its viscosity relative to that of some reference liquid, i.e.,
 \begin{equation}
 	\eta = \frac{\eta_\mtext{ref} \, \rho t}{\rho_\mtext{ref} \, t_\mtext{ref}} \, ,
 	\label{eq:ref_viscosity}
@@ -274,7 +274,7 @@ Thus the relevant equation is
 \end{equation}
 where \( \eta \) and \( \eta_0 \) are the respective viscosities of the solution and the pure solvent. 
 The term \( \eta_\mtext{sp} \) (which is dimensionless and positive because \( \eta > \eta_0 \)) is defined as the \emph{specific viscosity} and is proportional to the ratio of the solute volume, \( v_\mtext{solute} \), to that of the solution, \( V \). 
-Thus, \( \eta_\mtext{sp} \) is a \emph{colligative property} because its value depends on the amount of polymer in solution, \emph{i.e.,} its concentration. 
+Thus, \( \eta_\mtext{sp} \) is a \emph{colligative property} because its value depends on the amount of polymer in solution, i.e., its concentration. 
 The constant \( C \) has a theoretical value of \( 5/2 \) (for spherical solutes). 
 
 For a solution containing \( N \) spherical solute molecules, each of radius \( R \), \cref{eq:frac_visc1} becomes (using \( C = 5/2 \) and \( v_\mtext{solute} = 4 \pi R^3 / 3 \))
@@ -294,10 +294,10 @@ Another quantity that will prove to be very useful is the \emph{intrinsic viscos
 	[\eta] \equiv \lim_{c_m \to 0}\br{\frac{\eta_\mtext{sp}}{c_m}} = \frac{10\pi R^3}{3 m} \qquad \si{\cm\cubed \per \g}
 	\label{eq:staud_ind1}
 \end{equation}
-The limit of infinite dilution \( \br{ c_m \to 0} \) is required to define a viscosity property that is intrinsic to the solute (in the given solvent), \emph{i.e.,} independent of the concentration. 
+The limit of infinite dilution \( \br{ c_m \to 0} \) is required to define a viscosity property that is intrinsic to the solute (in the given solvent), i.e., independent of the concentration. 
 This approach essentially eliminates problems caused by the fact that the bulk properties of the polymer solution vary with concentration. 
 
-The limiting condition defined in \cref{eq:staud_ind1} is needed to define \( [\eta] \) because the reduced specific viscosity (\emph{i.e.,} \( \eta_\mtext{sp}/c_m \)) depends on the polymer concentration due to shear forces between the dissolved macromolecule and the solvent medium. 
+The limiting condition defined in \cref{eq:staud_ind1} is needed to define \( [\eta] \) because the reduced specific viscosity (i.e., \( \eta_\mtext{sp}/c_m \)) depends on the polymer concentration due to shear forces between the dissolved macromolecule and the solvent medium. 
 This concentration dependence is observed to follow the relation
 \begin{equation}
 	\frac{\eta_\mtext{sp}}{c_m} = [\eta] + k_\mtext{Hug} [\eta]^2 c_m + k' c_m^2 \, ,
@@ -522,7 +522,7 @@ Thus, when a monomer is about to bond to the ``growing'' end of a polymer chain,
 These alternatives are illustrated in \cref{fig:growth_directions}. 
 An attachment in which the functional groups alternate is called ``head-to-tail'', while the one in which they are attached on adjacent carbon atoms is referred to as a ``head-to-head'' linkage. 
 Because a head-to-head linkage involves considerable steric repulsion between the functional groups (ethyl will have been added to \emph{adjacent} carbon atoms on the polymer chain to form 1,2-substituents), it proceeds more slowly than a head-to-tail linkage. 
-Therefore, a polymer will have a predominance of the latter arrangements, and the functional groups will, for the most part, alternate in their positions on the polymer backbone (\emph{i.e.,} repetitive 1,3-substituents). 
+Therefore, a polymer will have a predominance of the latter arrangements, and the functional groups will, for the most part, alternate in their positions on the polymer backbone (i.e., repetitive 1,3-substituents). 
 \begin{figure}[htb]
 	\captionsetup[subfigure]{farskip=20pt,captionskip=20pt}
 	\subfloat[][head-to-head growth]{%
@@ -679,7 +679,7 @@ Temperature control for each of these measurements is important.
 	\item Consult a table of mathematical functions, and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited in and after \cref{eq:mol_weight_ratio_ex}.
 	\item Using the definition of \( f \),\sidenote{See the discussion before \cref{eq:frac_glycol}} derive \cref{eq:frac_glycol} and use the result in \cref{eq:mol_weight_ratio_ex} to obtain \cref{eq:h2h_frac}.
 	\item Viscosity measurements are often performed on proteins and other biopolymers. 
-	What experiments could be carried out on such molecules to examine the effect of solution conditions (\emph{e.g.,} ionic strength, or \ch{\pH}) on the extent of denaturation (breakdown of the biologically active structure)?
+	What experiments could be carried out on such molecules to examine the effect of solution conditions (e.g., ionic strength, or \ch{\pH}) on the extent of denaturation (breakdown of the biologically active structure)?
 	\item Specific and intrinsic viscosities provide structural information about macromolecules under the assumption that the solute is spherical.\sidenote{See \cref{eq:frac_visc1}} 
 	Is this a good assumption for a polymer such as PVOH? 
 	For what sort of macromolecule would you expect this assumption to be poor?

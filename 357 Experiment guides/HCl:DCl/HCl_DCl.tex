@@ -431,7 +431,7 @@ The infrared gas cell is constructed from a short (\SIrange{5}{10}{\cm}) length 
 Infrared-transparent windows are clamped agains O-rings at the ends of the cell or are sealed on the ends with Glyptal resin. 
 For studies concentrating on the region \SIrange{4000}{500}{\wn}, \ch{NaCl} windows will suffice. 
 When the spectrum of interest extends down to \SI{\sim400}{\wn}, \ch{KBr} windows are necessary. 
-Both types of salt windows become ``foggy'' on prolonged exposure to a moist atmosphere and should be protected\sidenote{\emph{e.g.,} stored in a desiccator} when not in use. 
+Both types of salt windows become ``foggy'' on prolonged exposure to a moist atmosphere and should be protected\sidenote{e.g., stored in a desiccator} when not in use. 
 In the present experiment, inert sapphire windows with transmission down to \SI{1600}{\wn} are particularly convenient and relatively inexpensive. 
 
 \subsection{Filling the Cell and Recording the Spectra} % (fold)
@@ -517,7 +517,7 @@ Here is an example header for the input file for this calculation.
 Line 3 sets the theory level and basis set to reasonable values for our computational abilities and time. 
 Line 4 tells Gaussian to \Verb{opt}imize the geometry, then do a \Verb{freq}uency analysis including \Verb{anharm}onic and \Verb{vib}rational-\Verb{rot}ational coupling terms. 
 You will need to replace all items in angle brackets with appropriate data.
-Note the addition of the \lstinline[language=Gaussian]{(Iso=<mass-num>)} option after the element labels.\sidenote{\emph{i.e.,} \lstinline[language=Gaussian]{<atom1>(Iso=<mass_num>)} should become \lstinline[language=Gaussian]{He(Iso=3)} for a \ch{^3He} atom)} 
+Note the addition of the \lstinline[language=Gaussian]{(Iso=<mass-num>)} option after the element labels.\sidenote{i.e., \lstinline[language=Gaussian]{<atom1>(Iso=<mass_num>)} should become \lstinline[language=Gaussian]{He(Iso=3)} for a \ch{^3He} atom)} 
 By inserting the relevant value (total number of protons and neutrons) for your isotope (\num{2} for deuterium), you can tell Gaussian to calculate using a different atomic mass. 
 
 You will need to import the files into your Jupyter notebook the same way you imported the files for the \ch{H3O+} molecule in the Introduction to Computational Chemistry lab. 
@@ -561,7 +561,7 @@ In this same section will be equilibrium rotational constants for the two degene
 	How constant is \( r_e \) for \ch{HCl} and \ch{DCl}?
 	\item Compute \( B_v = B_e - \alpha_e\br{v + \tfrac{1}{2}} \) for the \( v = 0 \), \num{1}, and \num{2} levels of \ch{HCl} and \ch{DCl} and, from these, obtain average \( r_v \) values for these levels. 
 	Comment in your report on the changes in these distances. 
-	\item Compare your \( \widetilde{\nu}_0^*/\widetilde{\nu}_0 \) ratio with the ratio \( \sqrt{\mu/\mu^*} \) expected for a harmonic oscillator. How anharmonic is the \ch{HCl} molecule: \emph{i.e.,} how large is \( \chi_e \)?
+	\item Compare your \( \widetilde{\nu}_0^*/\widetilde{\nu}_0 \) ratio with the ratio \( \sqrt{\mu/\mu^*} \) expected for a harmonic oscillator. How anharmonic is the \ch{HCl} molecule: i.e., how large is \( \chi_e \)?
 	\item Use your values of \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \) and \cref{eq:vib_rot_energies} to predict the frequencies of the first overtone transitions of \ch{HCl} and \ch{DCl} (ignore the rotational terms). 
 	Did you observe any evidence of these overtones in your spectra? 
 	\item Do your spectra show any evidence of a \ch{^{35}Cl}/\ch{^{37}Cl} isotope effect? 

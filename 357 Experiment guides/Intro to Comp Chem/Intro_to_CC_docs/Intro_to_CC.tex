@@ -10,55 +10,55 @@
   \DeclareSIUnit\wn{\raiseto{-1}\cm}
   \DeclareSIUnit\hartree{Ha}
 
-% %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % (fold)
-% \usepackage[%
-%   style=numeric-comp,%
-%   sortcites,%
-%   sorting=none,%
-%   defernumbers=true,%
-%   hyperref,
-%   backend=biber,
-%   ]{biblatex}
-%   \addbibresource{../pchem_bib.bib}
-%
-%   % Filter bibliography file to only include entries matching keyword.
-%   \DeclareSourcemap{%
-%     \maps[datatype=bibtex]{%
-%       \map{%
-%         \step[nocited, final]%
-%         \step[fieldsource=keywords, notmatch=compchem, final]%
-%         \step[entrynull]%
-%       }%
-%     }%
-%   }
-%
-%   % Add a section for cited bibliography entries.
-%   % At the end, create a second bibliography for uncited items (Further Reading).
-%   \DeclareBibliographyCategory{cited}
-%   \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-%
-%   % Define a style for the Further Reading section
-%   \defbibenvironment{nolabelbib}
-%     {\list
-%        {}
-%        {\setlength{\leftmargin}{2\bibhang}%
-%         \setlength{\itemindent}{-\bibhang}%
-%         \setlength{\itemsep}{\bibitemsep}%
-%         \setlength{\parsep}{\bibparsep}}}
-%     {\endlist}
-%     {\item}
-%
-%   % Remove URL from citations if DOI is present.
-%   \AtEveryBibitem{%
-%     \iffieldundef{doi}{ % do nothing if true
-%     }
-%     { % otherwise, clear the URL
-%       \clearfield{url}
-%     }%
-%   }
-% % (end)
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+  style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+  ]{biblatex}
+  \addbibresource{../../pchem_bib.bib}
+
+  % Filter bibliography file to only include entries matching keyword.
+  \DeclareSourcemap{%
+    \maps[datatype=bibtex]{%
+      \map{%
+        \step[nocited, final]%
+        \step[fieldsource=keywords, notmatch=compchem, final]%
+        \step[entrynull]%
+      }%
+    }%
+  }
+
+  % Add a section for cited bibliography entries.
+  % At the end, create a second bibliography for uncited items (Further Reading).
+  \DeclareBibliographyCategory{cited}
+  \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+
+  % Remove URL from citations if DOI is present.
+  \AtEveryBibitem{%
+    \iffieldundef{doi}{ % do nothing if true
+    }
+    { % otherwise, clear the URL
+      \clearfield{url}
+    }%
+  }
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \usepackage[%
 % pdftitle={Hands-on Workshop: First-principles simulations of molecules and materials},%
@@ -173,63 +173,97 @@
 \begin{document}
 
 % --------------------------------------------------------------------
-
-\thispagestyle{empty}
-\begin{fullwidth}
-  \begin{center}\huge\bfseries
-    \rule{1.5\textwidth}{1pt}
-    \\
-    PChem Lab 357: Spring 2019 
-    \\
-    \vspace{0.5cm}
-    \rule{1.5\textwidth}{1pt}
-  \end{center}
-  \vfill
-  \begin{center}\LARGE\bfseries
-    % \includegraphics[width=0.5\textwidth]{figures/aims-logo-gross}
-    \includegraphics[height=7.55cm]{pics/cover.png}
-    \vfill
-    Exercise 5: Introduction to Computational Chemistry\\ 
-    Exercise Problems for Gaussian16
-  \end{center}
-  \vfill
-  \begin{center}\large\bfseries
-    \rule{1.5\textwidth}{1pt}
-    \vfill
-    Adopted from Hands-On Workshop on Density-functional theory and beyond organized by FHI der MPG, Berlin.  \\
-    Adopted for G16 by Mateusz Marianski, NYC, Feb 2019 \\ 
-    Written fom FHI-aims code by Igor Y. Zhang et al.%, Hagen-Henrik Kowalski and Tonghao Shen\\
-  \end{center}
-\end{fullwidth}
-
-\clearpage
+%
+% \thispagestyle{empty}
+% \begin{fullwidth}
+%   \begin{center}\huge\bfseries
+%     \rule{1.5\textwidth}{1pt}
+%     \\
+%     PChem Lab 357: Spring 2019
+%     \\
+%     \vspace{0.5cm}
+%     \rule{1.5\textwidth}{1pt}
+%   \end{center}
+%   \vfill
+%   \begin{center}\LARGE\bfseries
+%     % \includegraphics[width=0.5\textwidth]{figures/aims-logo-gross}
+%     \includegraphics[height=7.55cm]{pics/cover.png}
+%     \vfill
+%     Exercise 5: Introduction to Computational Chemistry\\
+%     Exercise Problems for Gaussian16
+%   \end{center}
+%   \vfill
+%   \begin{center}\large\bfseries
+%     \rule{1.5\textwidth}{1pt}
+%     \vfill
+%     Adopted from Hands-On Workshop on Density-functional theory and beyond organized by FHI der MPG, Berlin.  \\
+%     Adopted for G16 by Mateusz Marianski, NYC, Feb 2019 \\
+%     Written fom FHI-aims code by Igor Y. Zhang et al.%, Hagen-Henrik Kowalski and Tonghao Shen\\
+%   \end{center}
+% \end{fullwidth}
+%
+% \clearpage
 
 % --------------------------------------------------------------------
 
-\include{Intro}
-\include{bash}
-%\include{vi}
-\include{part_1}
-\include{part_2}
-%\include{part_3}
+\title{Introduction to Computational Chemistry}
+
+\author{Dustin Wheeler, Mateusz Marianski}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  This tutorial aims to give a basic introduction to electronic structure calculations for very simple systems.\thanks{Adapted from \textcite{marianski19}.} 
+  As every quantum chemistry code has its own philosophy, this tutorial should familiarize you with the general-purpose Gaussian16 (hereafter abbreviated as G16) software.
+  The experiments will also demonstrate the predictive power of quantum-chemical calculations. 	
+	
+  First, the basic structure of an input file to the G16 software will be explained.
+  The second part will introduce scanning along the binding curve and computing observables. 
+  The third part introduces geometric optimization of a small molecule and how to assess reliability of the result. 
+
+  \begin{enumerate}[
+      label=Prob. \Roman*:,
+      align=left,
+      leftmargin=*,
+      itemindent=\parsep
+    ]
+    \item \hyperref[sec:problemI]{The hydrogen atom}
+    \item \hyperref[sec:problemII]{Hydrofluoric acid: bond length and dipole moment}	      
+    \item \hyperref[sec:problemIII]{Hydronium cation: geometry relaxation, vibrations, and PES}
+  \end{enumerate}
+
+As the first step, please use this link to clone the files into your Jupyter directory:\\  \href{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2Fpchem_comp-chem_template&urlpath=lab%2Ftree%2Fpchem_comp-chem_template%2FCompChem_template.ipynb&branch=main}{\texttt{https://tinyurl.com/chem357-compchem}}
+\marginnote[-4\baselineskip]{Do \textbf{not} copy and paste the code in this PDF into your input files. Invisible formatting characters are often copied from the PDF. Gaussian will not understand these characters and your calculations will not start.}
+
+This guide is meant to be used in tandem with the Jupyter notebook contained in the cloned folder (``pchem_comp-chem_template/CompChem_template.ipynb''). 
+That notebook has a number of cells pre-populated for your convenience. Make sure you read the notes and comments in the notebook as you go through the lab and fill in any blanks before executing the cells. 
+\end{abstract}
+
+
+
+\input{Intro}
+\input{part_1}
+\input{part_2}
+\input{part_3}
 \clearpage
 
 \appendix
-%\include{appendix}
+\include{bash}
+%\include{vi}
 
 \vfill
 
-%\section*{Acknowledgments}
+\nocite{*}
+\printbibliography[category=cited]% default title for `article` class: "References"
 
-% \nocite{*}
-% \printbibliography[category=cited]% default title for `article` class: "References"
-%
-% \DeclareFieldFormat{labelnumberwidth}{\textbullet}
-% \printbibliography[%
-%   title={Further Reading},%
-%   resetnumbers,%
-%   omitnumbers,%
-%   notcategory=cited,%
-%   ]
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
+\printbibliography[%
+  title={Further Reading},%
+  resetnumbers,%
+  omitnumbers,%
+  notcategory=cited,%
+  ]
 
 \end{document}

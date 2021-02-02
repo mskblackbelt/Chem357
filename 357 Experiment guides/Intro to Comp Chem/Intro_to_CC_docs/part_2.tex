@@ -1,144 +1,105 @@
-\section{Problem 3: Hydronium cation}
-\label{sec:problemIII}
-\subsection*{Planar hydronium cation}
+%!TEX root = ./Intro_to_CC.tex
 
-This exercise covers how to perform geometry optimizations.
-Specifically, we will relax the \ch{H3O^+} molecule starting from an initial planar guess for the geometry. 
+\section{Problem 2: Hydrogen Fluoride (HF): bond length and dipole moment} \label{sec:problemII}
 
-\begin{enumerate}
+\subsection*{Hydrogen Fluoride (HF)}
 
-  \item The planar \ch{H3O+} geometry has been provided in the file \Verb{geom_planar.xyz}.
-  \begin{gaussinput}[title=Contents of \Verb{geom_planar.xyz}]
-O    0.00    0.00   0.00
-H    0.92   -0.53   0.00
-H   -0.92   -0.53   0.00
-H    0.00    1.06   0.00
+In the exercise, we will calculate the binding curve, atomization energy (\( \increment H_\mtext{at} \)), and dipole moment for the hydrogen fluoride (HF) molecule with two methods. 
+From a technical perspective, this exercise teaches how simple shell scripting can be used to make your (computational) life easier. 
 
-  \end{gaussinput}
-  
-  \item Create an \Verb{input.com} file, using the template provided in the first problem. 
-  Use the \Verb{HF} level of theory and the \Verb{6-31G(d,p)} basis set. 
-  We want to relax the geometry and perform the vibrational analysis of the ion. 
-  Therefore, replace the \Verb{sp} keyword (`single-point') from the template with \Verb{opt freq} (`optimization' and `frequency'). 
-  After removing the information for the previous molecule, add the geometry of the cation at the end of the input file\sidenote{copy by hand or, in the terminal, type \bashinline{cat geom_planar.xyz >> input.com} to append the contents to then end of the file}.
-  
-  \item Run Gaussian.
-  \begin{bashinput}
-      g16 input.com &
-  \end{bashinput} 
-  
-  \item To visualize the results, we will use the notebook in JupyterLab. 
-  Execute the first few cells until you get an output that shows you the molecule. 
-  This cell also outputs the total energy of the ion. 
-  Note the command that outputs this value. 
-  Also note that the molecule only shows bonds to two of the hydrogen atoms. 
-   What does the fully relaxed structure look like? 
-   Do you think that this is the structure of \ch{H3O+} in the gas phase? 
-   % Save a picture of the ion.
-  
-  \item   We'll use two additional cells to define bonds between the oxygen and all three hydrogens and to reformat the vibrational information so we can visualize it. 
-  The final cells in this section of the notebook will show the corrected structure and list the normal modes/vibrations with their IR intensity, sorted by wavenumber (\si{\wn}). 
-  Click through the spectrum to animate some of the vibrations. 
-  You can select all of the vibrations by clicking the menu icon \( (\vdots) \) in the upper right corner of the output view window and using the dropdown menu for ``Normal Mode''. 
-  You should see that one of the frequencies is negative -- select the normal mode to which it corresponds. 
-  In the discussion section (at the end of the notebook), include this table and indicate what kind of molecular motion each vibration corresponds to. 
+\begin{enumerate} 
+  \item The first task of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations. 
+  Start by creating an input file (name it \Verb{input.temp}) which contains a F atom in the center of the coordinate system and a H atom at distance \Verb{DIST} along the \emph{z-}axis. 
+  \Verb{DIST} is a variable name for the H-F distance in different computational steps. 
+  Please note that HF is a neutral closed-shell system (i.e., correctly assign the multiplicity). 
 
-\end{enumerate}
+The template file should specify the method and the basis set used for computation. 
+In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. 
+Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise. 
 
+\item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \SI{0.7}{\angstrom} and \SI{1.3}{\angstrom} with \SI{0.1}{\angstrom} steps, and a denser step width of \SI{0.02}{\angstrom} between \SI{0.85}{\angstrom} and \SI{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
+   \begin{itemize}
+   \item create a unique directory for each computation
+   \item copies your template input file
+   \item replace the bond distance place holder \texttt{DIST} with the bond distance
+   \item start G16 calculations
+   \item \texttt{grep} for distance/energy and write it to a respective file. 
+   \end{itemize}}
+   
+Run the bash script \bashinline{bash run.sh}, which will run the calculations and return you a file with a bond length vs energy. 
+Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \SI{0.917}{\angstrom}?
 
-\subsection*{Pyramidal hydronium cation}
+\item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
+In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms. Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set. 
 
-Next, repeat the calculations for a pyramidal hydronium cation: 
-\begin{gaussinput}[title=Contents of \Verb{geom_pyramidal.xyz}]
-O    0.00   0.00   0.00 
-H    0.92  -0.53  -0.66 
-H   -0.92  -0.53  -0.66 
-H    0.00   1.06  -0.66 
+%\begin{tip}
+%\textbf{Note:}\newline
+%Atoms are highly symmetric systems, often with multiple degenerate solutions. In the case of fluorine, for example, the unpaired p-electron might sit in the $p_x$, $p_y$, or $p_z$ orbital. All three solutions are equivalent. If the calculation is started unbiased, it might converge to a superposition of these three cases, which is a saddle point on the potential energy surface and results in partial electron occupations. Although in DFT non-integer occupations are in principle allowed, one should be very suspicious when obtaining such a solution for non-metallic systems. Typically, solutions exist that are lower in energy. They can be found by breaking the inherent symmetry of the problem, for example by applying a small external field at the beginning of the SCF cycle.
+%\end{tip}
 
-\end{gaussinput}
-Visualize the results again using the steps from the previous section. 
-You should see the \ch{H3O+} in a pyramidal conformation now.  
-Note again the total energy of the ion and compare it with the planar structure in your discussion. 
-Which conformation has lower energy? 
-Next, view the vibrations table and spectrum. 
-If calculations were done properly, all vibrations should have positive wavenumbers. 
-Describe again in the discussion section the motion the vibrations correspond to. 
+%To break the inherent symmetry of an atom and ensure integer occupation, set the keyword \texttt{switch\_external\_pert 10 safe}. This means that for 10 iterations, a small external field in the z-direction is applied and then switched off. Usually, this is sufficient to perturb the SCF out of the symmetric solution and towards the correct electronic structure.
+Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by subtracting the free-atom energies from the predicted total energy of HF (i.e., the minimum total energy found when varying bond distances).
 
+\begin{equation}
+ \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
+\end{equation}
 
-\subsection*{Potential-Energy Surface Scan}
+How does this compare to the experimental value of \(\increment H_\mtext{at}=\SI{135.2}{\kcal\per\mol}\) (\SI{5.86}{\eV})? 
 
-In the final problem, we are going to inspect the potential-energy surface of the hydronium ion along its umbrella mode. In the planar cation problem, you have seen that the negative\sidenote{In fact, it is imaginary, \iu{} is dropped by convention} frequency corresponds to such an `umbrella' mode. 
-
+\item Now, let us look at the dipole moment. Search for the corresponding line in the output file. 
+You can use a grep function for this task: 
+\begin{bashinput}
+  grep Dipole file-name -A1 | grep Tot | ¬tail -n1 | awk '{print $8}'  \end{bashinput}
+The above command is a great example of an ugly ``bash one-liner'' that does the job and you don't question it.
+You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote{Briefly:
 \begin{itemize}
-  \item In a terminal window, change to the \Verb{PES} directory. 
-  You will an template input file already prepared. 
-  If you open it, you should see that the \( xyz \)-cartesian coordinates have been replaced with a \( z \)-matrix. 
-  The \( z \)-matrix allows precise control of the geometry within single calculations.
+  \item \Verb{-A1} in the first \Verb{grep} command tells it to output one \textbf{(1)} line \textbf{a}fter the search term in addition to the line with the search term. 
+  \item The next \Verb{grep} command just grabs the lines containing \textbf{Tot}al values. 
+  \item \Verb{tail -n1} grabs the indicated \textbf{n}umber of lines (\textbf{1}) at the end of the input.
+  \item \Verb{awk} is a ``pattern-directed scanning and processing language'' used in the Unix ecosystem. This command tells \Verb{awk} to print out the eighth record on each line of the input (the default record separator is a single space). 
+\end{itemize}}
+How does the dipole at the equilibrium distance compare with the experimental value of \SI{1.82}{debye}? 
+Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 
+Do you expect this trend to continue at large distances?  Why or why not?
 
-    \begin{gaussinput}[title=\(z\)-matrix in the PES input file]
-O   	                       
-X   1 a                   
-H   1 a   2 HOX            
-H   1 a   2 HOX   3  120.0 
-H   1 a   2 HOX   3 -120.0 
+\item Next, repeat the bond length determination using \Verb{PBE1PBE} method and same basis set. 
+In order to do so, modify the input template, \Verb{mv} all the results into \Verb{HF} directory (\bashinline{mkdir HF; mv dist_* HF/}) and rerun the bash script. 
+In addition, you need to compute energies for hydrogen (H) and fluorine (F) again using new method. 
+How does the optimal bond length, atomization energy and dipole moment change?
+In the lab report, prepare a plot with both dissociation curves, dipole moments and computed atomization energies. 
 
-a=OH 
-HOX= 135. -1. 45 
-
-    \end{gaussinput}
-  
-  
-  \item The first column shows the bonding, second shows the angles between atoms and the third column specifies the dihedral angle. 
-  X is a dummy (non-existent) atom that enables control of the umbrella motion. 
-  \Cref{fig:internal_coords} explains the \( z \)-matrix graphically. 
-  First, calculate the \ch{O-H} distance using the functions defined in the first cell of this section and the optimized pyramidal geometry from the previous section. Replace the \Verb{OH} in the input file with this value. 
-  Next, run the calculations using Gaussian. 
-  The calculations will perform a scan along the \ch{X-O-H} angle, performing a single point calculations every \ang{1} from \SIrange{135}{90}{\degree}. 
-  When the calculations are finished, import the results to Jupyter and plot the resulting potential-energy surface. 
-  Discuss these results in your report.  
-  The PES for angles below \ang{90} is the mirror image. Use \si{\kcal\per\mol} instead of \si{\hartree} in the report. 
-  \begin{marginfigure}[-12\baselineskip]
-    \begin{center}
-      \includegraphics[width=0.75\textwidth]{pics/zmat.png}
-    \end{center}
-    \caption{Definition of hydronium ion internal coordinates. 
-      The calculations perform a scan along the \ch{X-O-H} coordinates for all three hydrogens from \SIrange{135}{90}{\degree}. 
-      The \ang{120} dihedral angle indicates the relative position of hydrogen atoms.}
-    \label{fig:internal_coords}
-  \end{marginfigure}
-
-  \item Localize the lowest-energy and transition structure along the PES and calculate the reaction barrier of the internal flip of the hydronium ion. 
-  Whereas the energy of the pyramidal ion is comparable with the minimum on the PES, the energy of the optimized planar cation and the local maximum on the PES is different. 
-  Why? Compare the geometries. 
-
-  \item In the final step, rerun the calculations using the \texttt{MP2} method and compare your results. 
-  Try plotting both PES scan curves in one plot to compare methods. 
-  Look at the difference in final energies and the difference in the barrier energy for the two methods. 
-
-
-\end{itemize}
-
-\section*{Lab report}
-
-For the lab report, please prepare following data. 
-This is bare minimum, there are couple of open questions in the text that you should try to assess. 
-All of this can be done in the Discussion section of the Jupyter notebook. 
-When you are finished, export the finished document as a PDF file (File > Export Notebook As… > Export Notebook to PDF) and email that PDF to me. 
-
-\begin{enumerate}
-  \item Plot the Total Energy vs number of basis function for a hydrogen atom for all methods used in Problem 1. 
-
-  \item Plot the binding curves for HF using Hartree-Fock and PBE1PBE methods. Find the minimum distance and compute the atomization energy. 
-  Plot the dipole moment as a function of the bond distance. 
-  Plot both methods in the same image. You can do this with the \Verb{plt.plot()} method from the \Verb{matplotlib} library. If you made the distances into the index for your dataframe, you can call those values with \Verb{df.index.values}. Multiple sets of \emph{x-y} data can be plotted with \Verb{plt.plot(x1, y1, x2, y2)}, where \Verb{x1}, ... are the various lists of \emph{x} and \emph{y} data. 
-
-  \item Prepare tables listing molecular vibrations in a hydronium ion in planar and pyramidal geometries. 
-  Make sure the wavenumbers are shown for all molecular vibrations. 
-
-  \item Plot the PES along the HOX coordinate using HF and MP2 methods. 
-  Use \si{\kcal\per\mol} for the \( y \)-axis. 
-  Compute the heigh of the barrier separating two pyramidal structures (the energy required to pass over the planar intermediate on the PES). 
-  
 \end{enumerate}
 
-
+%\subsection*{Optional: Charge partition schemes.}
+%Chemical reactivity and many physical properties are often explained in terms of atomic charges. However, atomic charges are not physical observables, since no unique operator exists to determine this quantity. They rather depend on the chosen charge partition scheme. The charge partition schemes that is probably most commonly used is Mulliken \cite{mulliken1955epa}. In FHI-aims, you can request it by specifying
+%\texttt{output mulliken}  
+%in \controlin{}.
+%
+%For the equilibrium structure of HF, compute the atomic charges with this scheme using \texttt{pbe0}. Use the charges to calculate the dipole moment $\mu$ in the point dipole approximation. In this approximation, for a two atom system, the dipole moment is defined as:
+%\begin{equation}
+%\mu = q \cdot \left|  \vec{r_H} - \vec{r_F} \right|
+%\end{equation}
+%where $q$ is the atomic partial charge and $\vec{r_H}$ and $\vec{r_F}$ are the atomic positions of the atoms. The absolute value of the difference $ \left|  \vec{r_H} - \vec{r_F} \right|$ is the distance between hydrogen and fluorine.  Compare the dipole moment to the one computed by FHI-aims. How do they compare?
+%
+%\section{Problem III: Molecular oxygen - a critical look \textcolor{red}{!}} \label{sec:problemIII}
+%
+%An important part of every calculation is to always look critically at the output and ensure that the result is reasonable. For some systems, defaults may not be adequate, or assumptions which commonly work well may prove to be wrong. A prime example is the the treatment of spin in systems with degenerate orbitals, such as O$_2$.
+%
+%\task{[\textbf{Educational Objectives:}] 
+%  \begin{itemize}
+%\item  Do not trust default settings blindly
+%\item See the effect of an incorrect spin-treatment
+%  \end{itemize}%
+%}
+%%
+%\noindent
+%
+%\textbf{Tasks}
+%\begin{enumerate}
+%\item Set up a calculation for O$_2$ similar to the previous exercise, but leave out the \texttt{ spin} keyword in \controlin{}.  Look at the output file to find out which spin treatment is used by default.
+%\item Look at the output file and find the occupation numbers of the Kohn-Sham orbitals.  Does this make sense here?
+%\item Using \texttt{pbe} and \texttt{pbe0}, calculate the binding curve in the interval  $[0.8 , 1.6 ]$~\AA~ with a stepwidth of 0.1~\AA~ as before. Also, calculate the atomization energy ($\increment H_{at}$). 
+%\item Repeat the calculation with \texttt{spin collinear} and \texttt{default\_initial\_moment 2.0} - is Hund's rule now fulfilled? Compare the results: Do both spin settings yield the same equilibrium bond length? Calculate the difference in the total energy at the equilibrium bond length. Which one is lower? How does it compare to the experimental value of 1.21 \AA? How does the atomization energy ($\increment H_{at}$) compare to the experimental value of 5.18 eV?
+%\end{enumerate}
+%
+%Note: The oxygen atom is a notoriously difficult case to converge. If you have problems with it, try using the linear mixer for the SCF by including  the keyword \texttt{mixer linear} in \controlin{}. The linear mixer is guaranteed to converge, but usually requires much more iterations than the default (Pulay) mixing scheme.

@@ -1,7 +1,20 @@
+%!TEX root = ./Intro_to_CC.tex 
+
 \subsection{Appendix I: Bash and vi}
 \label{app:bash}
 
-Bash is a Unix shell and command language for the GNU Project and the default shell on Linux and OS X systems. We will use it to execute most programs and exercises. Below you find a list of the most import commands. Items in quotes indicate user-selected input (a directory/file name, a string of text, etc.). Bash furthermore offers a full programming language (often implemented via shell scripts) to automatize tasks \emph{e.g.,} via loops.
+Bash is a Unix shell and command language for the GNU Project and the default shell on Linux and OS X systems. We will use it to execute most programs and exercises. Below you find a list of the most import commands. Items in quotes indicate user-selected input (a directory/file name, a string of text, etc.). Bash furthermore offers a full programming language (often implemented via shell scripts) to automate tasks, e.g., via loops.
+\marginnote[-4\baselineskip]{
+A note on \emph{relative} and \emph{absolute} paths: Say you were giving directions to a location. You have two methods you can describe getting to the location:
+\begin{itemize}
+  \item Relative to where you stand, or
+  \item Relative to a landmark.
+\end{itemize}
+Both descriptions get you to the same location, but the former only works from your current location (``take a left, then a right, go through two lights then take another right'' wouldn't necessarily work from the next town over, but works from where you stand).
+
+In file systems, if you have \Verb{/home/user/documents/data.txt}, that's an absolute path (the starting \Verb{/} indicates the root of the drive). If you have \Verb{documents/data.txt}, it will only work so long as you're starting from \Verb{/home/user}. If you start in \Verb{/home/user/documents} you would need a \Verb{../} to get there correctly using the relative path. 
+
+However, no matter where you are on the hard drive, \Verb{/home/user/documents/data.txt} is a definitive way to get to that file.} 
 
 \begin{itemize}
   \item \textbf{Basic navigation:}
@@ -15,7 +28,7 @@ Bash is a Unix shell and command language for the GNU Project and the default sh
     \item[ls -lh] Detailed (\textbf{l}ong) list, \textbf{h}uman readable
     \item[ls -l mypics/*.jpg] list only the jpeg files in the ``mypics'' directory
     \item[cd "folderName"] change directory
-    \item[cd ..] go up one folder, tip: string together multiple folders \Verb{../../../}
+    \item[cd ..] go up one folder, tip: string together multiple folders \Verb{../../..}
   \end{description}
   
   \item \textbf{Basic file operations:}
@@ -47,7 +60,7 @@ Bash is a Unix shell and command language for the GNU Project and the default sh
     align=left,
     style=nextline,
     itemindent=*]
-    \item[grep "someText" "file1"] search for the text ``someText'' in ``file1''.\sidenote{If your input has spaces, enclosing the input in double quotes (\Verb{"}) will preserve the spaces, \emph{e.g.,}\Verb{"}Some quoted text\Verb{"}.} The \Verb{-i} flag tells grep to \textbf{i}gnore letter case (upper/lower).
+    \item[grep "someText" "file1"] search for the text ``someText'' in ``file1''.\sidenote{If your input has spaces, enclosing the input in double quotes (\Verb{"}) will preserve the spaces, e.g.,\Verb{"}Some quoted text\Verb{"}.} The \Verb{-i} flag tells grep to \textbf{i}gnore letter case (upper/lower).
     \item[grep -r "text" "folderName/"] return a list of lines in files contained in ``folderName'' with occurrences of ``text''
   \end{description}
   
