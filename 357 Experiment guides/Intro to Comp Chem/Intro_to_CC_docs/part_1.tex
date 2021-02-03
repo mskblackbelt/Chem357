@@ -32,7 +32,7 @@ From a technical perspective, we will learn how to compose input files, run basi
 \textbf{Tasks}
 \begin{enumerate}
   \item First, go to the \Verb{Problem_1} directory by typing in the terminal \bashinline{cd ~/pchem_comp-chem_template/Problem_1}. 
-  There, create a test directory (\bashinline{mkdir "dir-name"}) with a name of your choosing. 
+  There, create a test directory (\bashinline{mkdir "name_of_directory"}) with a name of your choosing. 
   Inside it, generate a simple \Verb{input.com} file (\menu{File>New>Text File}) which contains only a single hydrogen atom, using the example shown in the introduction. 
   This corresponds to a single hydrogen atom in a hypothetical ideal gas phase. 
   It is located at the origin of the coordinate system, although its position does not matter here.
@@ -73,14 +73,14 @@ From a technical perspective, we will learn how to compose input files, run basi
 \subsection*{Method performance}
 
 Repeat the calculations with different methods using the prepared bash script \Verb{performance.sh}. 
-In the script, on the line that says \Verb{for m in METHODS}, replace \Verb{METHODS} with the following list of density functionals:\sidenote{Edit the script file with the built-in editor or with Vim in the terminal.} \\
+In the script, on the line that says \Verb{for m in METHODS}, replace the word \Verb{METHODS} with the following list of density functionals (including spaces):\sidenote{Edit the script file with the built-in editor or with Vim in the terminal.} \\
   \Verb{SVWN PBEPBE PBE1PBE}\\
 You can add in the \Verb{HF} method if you like, to check the results against your previous step. 
 Next, execute the script by typing: 
 \begin{bashinput}
   bash performance.sh
 \end{bashinput}
-The script will iterate over the specified methods and tested basis sets (STO-3G, cc-pV\emph{X}Z, where \( X = \)D, T, Q) and create nested directories for each method/basis set pair. 
+The script will iterate over the specified methods and tested basis sets (STO-3G, cc-pV\emph{x}Z, where \( x = \)D, T, Q) and create nested directories for each method/basis set pair. 
 Next, it will execute the calculations. 
 Finally, it creates a \Verb{performance.dat} file which contains a list of basis sets, number of basis functions in the set, and the computed energy for different methods. 
 Use this data to prepare a plot in your Jupyter notebook showing the convergence of different methods to the exact value of \SI{0.5}{Ha}.
