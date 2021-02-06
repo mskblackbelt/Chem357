@@ -49,15 +49,26 @@ How does this compare to the experimental value of \(\increment H_\mtext{at}=\SI
 \item Now, let us look at the dipole moment. Search for the corresponding line in the output file. 
 You can use a grep function for this task: 
 \begin{bashinput}
-  grep Dipole file-name -A1 | grep Tot | ¬tail -n1 | awk '{print $8}'  \end{bashinput}
+  grep "Dipole" file-name -A1 | grep "Tot" | ¬awk '{print $8}'  
+\end{bashinput}
 The above command is a great example of an ugly ``bash one-liner'' that does the job and you don't question it.
-You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote{Briefly:
+You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote[][-5\baselineskip]{Briefly:
 \begin{itemize}
   \item \Verb{-A1} in the first \Verb{grep} command tells it to output one \textbf{(1)} line \textbf{a}fter the search term in addition to the line with the search term. 
   \item The next \Verb{grep} command just grabs the lines containing \textbf{Tot}al values. 
   \item \Verb{tail -n1} grabs the indicated \textbf{n}umber of lines (\textbf{1}) at the end of the input.
   \item \Verb{awk} is a ``pattern-directed scanning and processing language'' used in the Unix ecosystem. This command tells \Verb{awk} to print out the eighth record on each line of the input (the default record separator is a single space). 
 \end{itemize}}
+If you want to find the whole list of dipoles (from each folder beginning with ``dist\_'' in your directory), you can run the following:\sidenote{
+If you want to get really fancy (by which I mean, cut down on the amount of task switch you need to do), you can run Bash commands inside of your Jupyter notebook. 
+Just prefix the command with \Verb{!} and run the cell. 
+For example, a cell containing \Verb{!ls} would list the contents of your current directory as output in your notebook.
+You can assign that output to a python variable by placing the exclamation point after the assignment equals sign: \Verb{my_dir_list = !ls}. 
+Since you'll need to use this list of dipoles in your notebook, it's worth trying to run the \Verb{grep} function in your notebook to capture the list all at once.
+Just make sure you get the right path to the directory… check the contents of your directory with \Verb{!ls path/to/directory}.}
+\begin{bashinput}
+  grep Dipole dist*/*.log -A1 | grep Tot | awk '{print $9}'
+\end{bashinput}
 How does the dipole at the equilibrium distance compare with the experimental value of \SI{1.82}{debye}? 
 Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 
 Do you expect this trend to continue at large distances?  Why or why not?

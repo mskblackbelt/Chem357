@@ -93,7 +93,7 @@ HOX= 135. -1. 45
   \item The first column shows the bonding, second shows the angles between atoms and the third column specifies the dihedral angle. 
   X is a dummy (non-existent) atom that enables control of the umbrella motion. 
   \Cref{fig:internal_coords} explains the \( z \)-matrix graphically. 
-  First, calculate the \ch{O-H} distance using the functions defined in the first cell of this section and the optimized pyramidal geometry from the previous section. Replace the \Verb{OH} in the input file with this value. 
+  First, calculate the \ch{O-H} distance using the functions defined in the first cell of this section and the optimized pyramidal geometry from the previous section. Replace the \Verb{OH}\sidenote{On the line that says \Verb{a=OH}} in the input file with this value. 
   Next, run the calculations using Gaussian. 
   The calculations will perform a scan along the \ch{X-O-H} angle, performing a single point calculations every \ang{1} from \SIrange{135}{90}{\degree}. 
   When the calculations are finished, import the results to Jupyter and plot the resulting potential-energy surface. 
@@ -114,6 +114,7 @@ HOX= 135. -1. 45
   Why? Compare the geometries. 
 
   \item In the final step, rerun the calculations using the \texttt{MP2} method and compare your results. 
+  You'll need to rerun the geometry optimization (for the pyramidal molecule) using the MP2 level of theory so you get the right bond length to run the PES scan of the umbrella mode. 
   Try plotting both PES scan curves in one plot to compare methods. 
   Look at the difference in final energies and the difference in the barrier energy for the two methods. 
 
@@ -122,8 +123,7 @@ HOX= 135. -1. 45
 
 \section*{Lab report}
 
-For the lab report, please prepare following data. 
-This is the bare minimum; there are couple of open questions in the text that you should try to assess. 
+For the lab report, please prepare following data.\sidenote{This is the bare minimum; there are couple of open questions in the text that you should try to assess.}
 All of this can be done in the Discussion section of the Jupyter notebook. 
 When you are finished, export the finished document as a PDF file  by clicking \menu{File>Export Notebook As…>Export Notebook to PDF} and email that PDF to me. 
 
