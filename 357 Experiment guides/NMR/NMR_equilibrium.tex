@@ -71,10 +71,7 @@
 
 \begin{abstract}
 \noindent
-In this experiment, proton nuclear magnetic resonance (\NMR*) spectroscopy is used in evaluating the equilibrium compositions of various keto--enol mixtures. 
-Chemical shifts and spin-spin splitting patterns are employed to assign the spectral features to specific protons, and the integrated intensities are used to yield a quantitative measure of the relative amounts of the keto and enol forms. 
-Solvent effects on the chemical shifts and on the equilibrium constant are investigated for one or more \iupac{\b-diketones} and \iupac{\b-ketoesters}. 
-\thanks{Transcribed (with corrections) from \textcite{nibler14}.}
+In this experiment, the barrier to rotation in \iupac{\N,\N-dimethylacetamide} can be determined by measuring changes in \NMR* line shapes as a function of temperature. This study is an example of dynamic \NMR* spectroscopy (spectroscopy on a changing system, as opposed to a static one).\thanks{Transcribed from \textcite{nibler14,gasparro77}.}
 \end{abstract}
 
 %\printclassoptions
@@ -347,79 +344,111 @@ Thus NMR spectra can provide detailed structural information about large and com
 
 % subsection spin_spin_splitting (end)
 
-\subsection{Keto--Enol Tautomerism} % (fold)
-\label{sub:keto_enol_tautomerism}
+% \subsection{Keto--Enol Tautomerism} % (fold)
+% \label{sub:keto_enol_tautomerism}
+%
+% \begin{figure}[h]
+% 	\centering
+% 		\chemnameinit{}
+% 		\schemestart
+% 			\chemname{\chemfig{H_3C-C(=[2]O)-CH_3}}{acetone\\(keto form)}
+% 			\arrow{<=>}
+% 			\chemname{\chemfig{H_2C=C(-[2]OH)-CH_3}}{\vphantom{acetone}\\(enol form)}
+% 		\schemestop
+% 		\chemnameinit{}
+% 	\caption{Tautomeric conversion of acetone.}
+% 	\label{fig:acetone_tautomer}
+% \end{figure}
+%
+% It is well known that ketones such as acetone have an isomeric structure, resulting from proton movement, called the enol tautomer, and unsaturated alcohol, shown in \cref{fig:acetone_tautomer}.
+% For acetone and the majority of cases in which this keto--enol tautomerism is possible, the keto form is far more stable and little, if any, enol can be detected.
+% However, with \iupac{\b-diketones} and \iupac{\b-ketoesters}, factors such as intramolecular hydrogen bonding and conjugation increase the stability of the enol form; causing the equilibrium to be shifted significantly to the right.
+%
+% \begin{figure}[ht]
+% 	\centering
+% 		\chemnameinit{}
+% 		\schemestart
+% 			\definesubmol{&}{-[,,,,draw=none]}
+% 			\chemname{
+% 				\chemfig{R*6(!&!&R''-C(=O)-C(-[:120]H)(-[:60]R')-C(=O)-)}
+% 				}{keto}
+% 			\arrow{<=>[*{0}\( k_1 \)][*{0}\( k_{-1} \)]}[-90,1]
+% 			\chemleft[
+% 				\subscheme{
+% 					\chemname{
+% 						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')=O-[,,,,dash pattern=on 2pt off 2pt]H-O-)}
+% 					}{enol 1}
+% 					\arrow{<=>[\( k_2 \)][\( k_{-2} \)]}
+% 					\chemname{
+% 						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')-O-H-[,,,,dash pattern=on 2pt off 2pt]O=)}
+% 					}{enol 2}
+% 				}
+% 			\chemright]
+% 		\schemestop
+% 		\chemnameinit{}
+% 	\caption{Resonance structures of keto--enol tautomers}
+% 	\label{fig:enol_resonance}
+% \end{figure}
+%
+% The proton chemical environment are quite different for the keto and enol tautomers, and the interconversion rate constants \( k_1 \) and \( k_{-1} \) between these forms are small enough that distinct NMR spectra are obtained for both forms.
+% In principle, the two enols are also distinguishable when \( \ch{R'} \ne \ch{R''} \).
+% However, the intramolecular \ch{OH} proton transfer is quite rapid at normal temperatures, so that a single (average) \ch{OH} resonance is observed.
+% In general, such averaging occurs when the conversion rates \( k_2 \) and \( k_{-2} \) (in \si{\Hz}) exceed the frequency separation \( \nu_1 - \nu_2 \) (also in \si{\Hz}) of the \ch{OH} resonance for the two enol forms.\autocite{pople1959nmr,slichter1990mr}
+% The magnetic field at the \ch{OH} proton is thus averaged and resonance occurs at the average frequency, \( \br{\nu_1 + \nu_2}/2 \).
+% Similarly rapid rotation about the \ch{C-C} bonds of the keto form explains why spectra due to different keto rotational conformers are not observed.
+% Thus distinct spectra are expected only for the two tautomers, and tese can be used to determine the equilibrium constant for keto-to-enol conversion:
+% \begin{equation}
+% 	K_c = \frac{[\mtext{enol}]}{[\mtext{keto}]} \, ,
+% 	\label{eq:eq_const}
+% \end{equation}
+% where brackets denote concentrations in any convenient units.
+%
+% The keto arrangement shown in \cref{fig:enol_resonance} is the configuration which is electrostatically most favorable, but the steric repulsions between \ch{R} and \ch{R''} groups will be larger for this keto form than for the enol configuration.
+% Indeed, many experimental studies have confirmed that the enol concentration is larger when \ch{R} and \ch{R''} are bulky.\autocite{burdett1964a}
+% This steric effect is less important in the \iupac{\b-ketoesters}, in which the \ch{R...R''} separation is greater.
+% For both \iupac{\b-ketoesters} and \iupac{\b-diketones}, \chemalpha{} substitution of large \ch{R'} groups results in steric hindrance between \ch{R'} and \ch{R} (or \ch{R''}) groups, particularly for the enol tautomer, whose concentration is thereby reduced.
+% Inductive effects have also been explored; in general, \chemalpha{} substitution of electron-withdrawing groups such as \ch{-Cl} or \ch{-CF_3} favor the enol form.\autocite{burdett1964a}
+%
+% The solvent plays an important role in determining \( K_c \).
+% This can occur through specific solute--solvent interactions such as hydrogen bonding or charge transfer.
+% In addition, the solvent can reduce solute--solute interactions by dilution and thereby change the equilibrium if such interactions are different in enol--enol, enol--keto, or keto--keto dimers.
+% Finally, the dielectric constant of the solution will depend on the solvent and one can expect the more polar tautomeri form to be favored by polar solvents.
+% Some of these aspects are explored in this experiment.
+%
+% % subsection keto_enol_tautomerism (end)
 
-\begin{figure}[h]
+\subsection{Rotational Energy Barrier} % (fold)
+\label{sub:rotational_energy_barrier}
+
+In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo chemical exchange through a process analogous to a \emph{cis--trans} isomerization, where the product is chemically identical to the reactant.
+\begin{figure}[htb]
 	\centering
-		\chemnameinit{}
 		\schemestart
-			\chemname{\chemfig{H_3C-C(=[2]O)-CH_3}}{acetone\\(keto form)} 
-			\arrow{<=>} 
-			\chemname{\chemfig{H_2C=C(-[2]OH)-CH_3}}{\vphantom{acetone}\\(enol form)}
+			\chemfig{H_3C-[:60]C(=[:120]O)-N(-[:60]{(}CH_3{)}_{A})-[:-60]{(}CH_3{)}_{B}}
+			\arrow{<=>}
+			\chemfig{H_3C-[:60]C(=[:120]O)-N(-[:60]{(}CH_3{)}_{B})-[:-60]{(}CH_3{)}_{A}}
 		\schemestop
-		\chemnameinit{}
-	\caption{Tautomeric conversion of acetone.}
-	\label{fig:acetone_tautomer}
+	\caption{Isomerization of dimethylacetamide}
+	\label{fig:methyl_exchange}
 \end{figure}
+Due to the characteristic period of the \NMR* measurement, a large range of reaction rates relevant in the chemical laboratory is easily accessible (\SIrange{1e-1}{1e-5}{\per\second}).
+In addition, rotational barriers in the range of \SIrange{3}{20}{\kcal\per\mol} can be studied by this method.\autocite{bovey69} 
 
-It is well known that ketones such as acetone have an isomeric structure, resulting from proton movement, called the enol tautomer, and unsaturated alcohol, shown in \cref{fig:acetone_tautomer}.
-For acetone and the majority of cases in which this keto--enol tautomerism is possible, the keto form is far more stable and little, if any, enol can be detected. 
-However, with \iupac{\b-diketones} and \iupac{\b-ketoesters}, factors such as intramolecular hydrogen bonding and conjugation increase the stability of the enol form; causing the equilibrium to be shifted significantly to the right. 
+% subsection rotational_energy_barrier (end)
 
-\begin{figure}[ht]
-	\centering
-		\chemnameinit{}
-		\schemestart
-			\definesubmol{&}{-[,,,,draw=none]}
-			\chemname{
-				\chemfig{R*6(!&!&R''-C(=O)-C(-[:120]H)(-[:60]R')-C(=O)-)}
-				}{keto}
-			\arrow{<=>[*{0}\( k_1 \)][*{0}\( k_{-1} \)]}[-90,1]
-			\chemleft[
-				\subscheme{
-					\chemname{
-						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')=O-[,,,,dash pattern=on 2pt off 2pt]H-O-)}
-					}{enol 1}
-					\arrow{<=>[\( k_2 \)][\( k_{-2} \)]}
-					\chemname{
-						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')-O-H-[,,,,dash pattern=on 2pt off 2pt]O=)}
-					}{enol 2}
-				} 
-			\chemright]
-		\schemestop
-		\chemnameinit{}
-	\caption{Resonance structures of keto--enol tautomers}
-	\label{fig:enol_resonance}
-\end{figure}
+\subsection{Line Shape Analysis} % (fold)
+\label{sub:line_shape_analysis}
 
-The proton chemical environment are quite different for the keto and enol tautomers, and the interconversion rate constants \( k_1 \) and \( k_{-1} \) between these forms are small enough that distinct NMR spectra are obtained for both forms. 
-In principle, the two enols are also distinguishable when \( \ch{R'} \ne \ch{R''} \). 
-However, the intramolecular \ch{OH} proton transfer is quite rapid at normal temperatures, so that a single (average) \ch{OH} resonance is observed. 
-In general, such averaging occurs when the conversion rates \( k_2 \) and \( k_{-2} \) (in \si{\Hz}) exceed the frequency separation \( \nu_1 - \nu_2 \) (also in \si{\Hz}) of the \ch{OH} resonance for the two enol forms.\autocite{pople1959nmr,slichter1990mr}
-The magnetic field at the \ch{OH} proton is thus averaged and resonance occurs at the average frequency, \( \br{\nu_1 + \nu_2}/2 \).
-Similarly rapid rotation about the \ch{C-C} bonds of the keto form explains why spectra due to different keto rotational conformers are not observed. 
-Thus distinct spectra are expected only for the two tautomers, and tese can be used to determine the equilibrium constant for keto-to-enol conversion:
-\begin{equation}
-	K_c = \frac{[\mtext{enol}]}{[\mtext{keto}]} \, ,
-	\label{eq:eq_const}
-\end{equation} 
-where brackets denote concentrations in any convenient units. 
+If two groups of chemically equivalent nuclei are exhanged by an intramolecular process, the \NMR* spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{A typical value for \( \increment\nu \) is about \SI{10}{\hertz}.} 
+The effects of exchange at several temperatures on the linewidths at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) are shown in \cref{fig:lineshapes}. 
+At low temperatures, the exchange is slow and \( k \ll \increment\nu \). 
+The spectrum thus consists of two sharp singlets at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) (\cref{fig:lineshapes_a}). 
+At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes_d}). 
+There is also an intermediate temperature range over which the spectrum consists of two significantly broadened overlapping lines (\cref{fig:lineshapes_b}).
 
-The keto arrangement shown in \cref{fig:enol_resonance} is the configuration which is electrostatically most favorable, but the steric repulsions between \ch{R} and \ch{R''} groups will be larger for this keto form than for the enol configuration. 
-Indeed, many experimental studies have confirmed that the enol concentration is larger when \ch{R} and \ch{R''} are bulky.\autocite{burdett1964a}
-This steric effect is less important in the \iupac{\b-ketoesters}, in which the \ch{R...R''} separation is greater. 
-For both \iupac{\b-ketoesters} and \iupac{\b-diketones}, \chemalpha{} substitution of large \ch{R'} groups results in steric hindrance between \ch{R'} and \ch{R} (or \ch{R''}) groups, particularly for the enol tautomer, whose concentration is thereby reduced. 
-Inductive effects have also been explored; in general, \chemalpha{} substitution of electron-withdrawing groups such as \ch{-Cl} or \ch{-CF_3} favor the enol form.\autocite{burdett1964a}
 
-The solvent plays an important role in determining \( K_c \). 
-This can occur through specific solute--solvent interactions such as hydrogen bonding or charge transfer. 
-In addition, the solvent can reduce solute--solute interactions by dilution and thereby change the equilibrium if such interactions are different in enol--enol, enol--keto, or keto--keto dimers. 
-Finally, the dielectric constant of the solution will depend on the solvent and one can expect the more polar tautomeri form to be favored by polar solvents. 
-Some of these aspects are explored in this experiment. 
 
-% subsection keto_enol_tautomerism (end)
-
+% subsection line_shape_analysis (end)
 % section theory (end)
 
 \pagebreak
