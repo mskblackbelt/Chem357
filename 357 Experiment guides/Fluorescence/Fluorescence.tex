@@ -181,36 +181,37 @@ This expression essentially allows the motion of one of the reactants to be cons
 
 The solution of Fick's second law for this set of boundary conditions (first rendered by Smoluchowski in 1917) yields, for the space-time dependence of \emph{C},
 \begin{equation}
-	C(r, t) = C_0 \br{ 1 - \frac{R}{r} \erfc\br{ \frac{r-R}{2} \sqrt{D t} }} \, , 
+	C(r, t) = C_0 \br{ 1 - \frac{R}{r} \erfc\br{ \frac{r-R}{2 \sqrt{D t} }}} \, , 
 \end{equation}
 in which \( \erfc(x) \) is the \emph{complementary error function}, \( 1 - \erf(x) \), defined as
 \[
-	\erfc(x) \equiv 1 - \frac{2}{\pi}\int_0^x \exp\br{ -y^2 } \dd{y} \, .
+	\erfc(x) \equiv 1 - \frac{2}{\sqrt{\pi}}\int_0^x \exp\br{ -y^2 } \dd{y} \, .
 \]
 The time dependence of the reactant at the reaction boundary \( r = R \) becomes expressible in terms of the flux of reactant, \( J_R \), or its rate of transport across a hypothetical spherical surface with radius \( R \). 
 Thus
 \begin{equation}
-	J_R = 4\pi R D N_\mtext{A} C_0 \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{molecules \per \s}
+	J_R = \frac{4\pi R D N_\mtext{A} C_0}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{molecules \per \s} \, ,
 	\label{eq:rxnbound}
 \end{equation}
-where \( N_\mtext{A} \) is Avogadro's number. \Cref{eq:rxnbound} indicates that the flux (molecules per unit area per second) is actually time-dependent. 
+where \( N_\mtext{A} \) is Avogadro's number. 
+The units shown (and factor of 1000) pertain if \( C_0 \) is expressed in molarity (\si{\mol\per\liter}) and \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively.\sidenote[][-5\baselineskip]{
+To convert from \si{molecules} to \si{\Molar}, we need to acount for the number of particles in a \si{mole} (Avogadro's number) and convert from our molecular length units (\si{\cm}) to proper volume units. It's useful to know that \( \SI{1}{\L} =\SI{1}{\dm\cubed} \).}
+\Cref{eq:rxnbound} indicates that the flux (molecules per unit area per second) is actually time-dependent. 
 This time dependence comes from \( R/\sqrt{\pi D t} \), which is sometimes referred to as the \emph{transient term}. 
 Physically, the transient term accounts for the fact that initially nearby reactant molecules do not have to diffuse through the bulk medium in order to react. 
-After a short time, however, these nearby reactant molecules are depleted, and the flux approaches a constant, or steady-state, value, \( 4\pi R D N_\mtext{A} C_0 \). 
+After a short time, however, these nearby reactant molecules are depleted, and the flux approaches a constant, or steady-state, value, \( 4\pi R D N_\mtext{A} C_0 / 1000 \). 
 This can be seen mathematically in that time is represented in \cref{eq:rxnbound} as \( \sqrt{t} \). 
 
 Because \( J_R \) represents the rate of passage of one of the reactants (having a bulk concentration \( C_0 \) in \si{\Molar}) through a spherical reaction surface with the other reactant at the center, the rate of the reaction represented by \cref{eq:rxn_scheme} is merely \( J_R \) itself. 
 Hence, the bimolecular, diffusion-controlled rate constant \( k_1 \) is \( J_R/C_0 \),
 \begin{equation}
-	k_1 = \frac{4\pi R D}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{\per\Molar \per\s} \, .
+	k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{\per\Molar \per\s} \, .
 	\label{eq:rateconst1}
-\end{equation}
-The units shown pertain if \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively.\sidenote[][-5\baselineskip]{
-To convert from \si{molecules} to \si{\Molar}, we need to acount for the number of particles in a \si{mole} (Avogadro's number) and convert from our molecular length units (\si{\cm}) to proper volume units. It's useful to know that \( \SI{1}{\L} =\SI{1}{\dm\cubed} \).} 
+\end{equation} 
 This rate constant is not a true \emph{constant}, however, because of the transient term. 
 However, as \( t \) becomes large enough,
 \begin{equation}
-	\lim_{t \to \infty} k_1 = \frac{4\pi R D}{1000} \qquad \si{\per\Molar \per\s} \, ,
+	\lim_{t \to \infty} k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \qquad \si{\per\Molar \per\s} \, ,
 	\label{eq:rateconst2}
 \end{equation}
 and \cref{eq:rateconst2} can be used to determine the diffusion-controlled rate constant if the mutual diffusion constant \( (D_\mtext{A} + D_\mtext{B}) \) and collision radii \( (R_\mtext{A} + R_\mtext{B}) \) are known.%
@@ -226,7 +227,7 @@ We emphasize again that the units of \( k_1 \) presented above are \si{\per\Mola
 Often, however, \( R \) and \( D \) are not known, and an indirect method is used to estimate \( k_1 \). 
 This approach, developed by Einstein using Stokes's law, allows the diffusion coefficient to be expressed in terms of a bulk property, the solvent viscosity, \( \eta \). Thus
 \begin{equation}
-	k \simeq \frac{8 \overline{R} T}{3000 \eta} \qquad \si{\per\Molar \per \s} \, ,
+	k \simeq \frac{8 \overline{R} T}{3 \eta} \qquad \si{\per\Molar \per \s} \, ,
 	\label{eq:rateapprox}
 \end{equation}
 where \( \overline{R} = k_\mtext{B} N_\mtext{A} \) is the ideal gas constant.%
@@ -236,7 +237,7 @@ Everywhere else, \( R \) is the summed ``collision radii'' of the interacting sp
 It is this collision radius that we are trying to find in this experiment, along with the rate constant \( k_1 \). 
 Also, keep in mind that \cref{eq:rateapprox} represents and \emph{alternative} method for estimating the diffusion rate constant, \( k_1 \), based on bulk parameters of the solvent, rather than detailed knowledge of the molecular parameters \( R \) and \( D \).}
 \Cref{eq:rateapprox}, which is often referred to as the Stokes-Einstein-Smoluchowski (SES) equation, holds when the reactants \ch{A} and \ch{B} are different and their sizes are larger than that of the solvent molecules. 
-The indicated units are obtained if \( \overline{R} \) and \( \eta \) are expressed in SI units, such that \( \overline{R} = \SI{8.314}{\kJ \per \mol \per \K} \) and \( \eta \) is in \si[inter-unit-product=\ensuremath{{}\!\cdot\!{}}]{\Pa \s}.
+The indicated units are obtained if \( \overline{R} \) and \( \eta \) are expressed in SI units, such that \( \overline{R} = \SI{8.314e3}{\L \Pa \per \mol \per \K} \) and \( \eta \) is in \si[inter-unit-product=\ensuremath{{}\!\cdot\!{}}]{\Pa \s}.
 % section mass_trans (end)
 
 \section{Fluorescence Quenching} % (fold)
@@ -426,10 +427,10 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
 	Use the gas constant, \( \overline{R} \), the temperature (assume \SI{25}{\celsius} and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
-  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote{
+  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-5\baselineskip]{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
+		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		\textcite{ware66} reported a value of \( D = \SI{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \SI{25}{\celsius}. 
-    \textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		To obtain \( D \) for \emph{n}-hexane at some other temperature, assume that \( D \) is proportional to \( T/\eta \). 
 		They also reported a value of \( \tau_0 = \SI{5.52e-9}{\s} \). You can assume this to be temperature independent.
 	} 
@@ -437,12 +438,12 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\textbf{Keep track of your units, especially \emph{moles} vs. \emph{molecules}.}}
 	\item Using the \( k_1 \) you just calculated from the SES equation, superimpose the straight line obtained from \cref{eq:sv_rel} onto your Stern-Volmer plot. You’ll need the lifetime, \( \tau_0 \).\sidenote{
   To do this, you'll need to generate a set of \(x\)-values for your function, then apply your function to those values. 
-  The help page for \erfc(x) linked above shows how to do this for that particular function. }
+  The help page for \( \erfc(x) \) linked above shows how to do this for that particular function. }
 	Describe the relationship between this line and the experimental data points, if any.
 	\item Now we will consider the Stern-Volmer plot obtained when we ignore the transient term. 
 	Remember that this condition holds at low concentrations. 
 	Therefore we will be looking for the tangent to the experimental curve near the \emph{y}-axis. 
-	Take a few of the experimental data points close to \( \ch{[Q]} = 0 \) fit a trendline to them and show the equation. 
+	Take a few of the experimental data points close to \( \ch{[Q]} = 0 \), fit a trendline to them, and show the equation. 
 	The points you include for this should all be nearly in a straight line. 
 	If you take too many, they will begin to show the curvature and your slope will be incorrect. 
 	From the slope of this tangent line, calculate an alternate value for \( k_1 \). 
@@ -466,7 +467,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 
 \begin{enumerate}
 	\item Why is the anthracene fluorescence quenching diffusion-controlled as opposed to chemical-controlled? 
-	\emph{I.e.,} justify why the reaction between \ch{AN^*} and \ch{CBr4} is very fast.
+	I.e., justify why the reaction between \ch{AN^*} and \ch{CBr4} is very fast.
 	\item What experiment(s) could you perform to determine whether a stable photoproduct is formed as a result of the fluorescence quenching?
 	\item What could you do to obtain supporting evidence for the existence of a charge-transfer (or ion-pair) intermediate, e.g.,
 	\[
