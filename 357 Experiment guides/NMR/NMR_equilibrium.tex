@@ -1,15 +1,24 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
 \usepackage[subpreambles,sort]{standalone}
 \input{header.tex}
-	\DeclareSIUnit\gauss{G}
-	\usechemmodule{thermodynamics}\usechemmodule{polymers}
-	\setchemfig{atom style={scale=0.80}}
 
+%%%%%%% ChemMacros options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\DeclareSIUnit\gauss{G}
+\usechemmodule{thermodynamics}
+  \RenewChemState{\gibbs}{symbol=G, unit=\kilo\joule\per\mole, superscript-right=\transitionstatesymbol}
+  \RenewChemState{\enthalpy}{symbol=H, unit=\kilo\joule\per\mole, superscript-right=\transitionstatesymbol}
+  \RenewChemState{\entropy}{symbol=S, unit=\kilo\joule\per\kelvin\per\mole, superscript-right=\transitionstatesymbol}
+  
+\usechemmodule{polymers}
+\setchemfig{atom style={scale=0.80}}
 \newcommand\namebond[4][5pt]{\chemmove{\path(#2)--(#3)node[midway,sloped,yshift=#1]{#4};}}
 \newcommand{\headercell}[1]{\multicolumn{2}{c}{\bfseries #1}}
 \RenewChemIUPAC\ortho{\emph{ortho}}
 \RenewChemIUPAC\meta{\emph{meta}}
 \RenewChemIUPAC\para{\emph{para}}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
@@ -71,7 +80,7 @@
 
 \begin{abstract}
 \noindent
-In this experiment, the barrier to rotation in \iupac{\N,\N-dimethylacetamide} can be determined by measuring changes in \NMR* line shapes as a function of temperature. This study is an example of dynamic \NMR* spectroscopy (spectroscopy on a changing system, as opposed to a static one).\thanks{Transcribed from \textcite{nibler14,gasparro77}.}
+In this experiment, the barrier to rotation in \iupac{\N,\N-dimethylacetamide} can be determined by measuring changes in \NMR* line shapes as a function of temperature. This study is an example of dynamic NMR spectroscopy (spectroscopy on a changing system, as opposed to a static one).\thanks{Transcribed from \textcite{nibler14,gasparro77}.}
 \end{abstract}
 
 %\printclassoptions
@@ -306,7 +315,7 @@ It should be mentioned that such regular splitting and intensity patterns are ex
 The spectra for this weakly coupled case are termed \emph{first order.}
 Since the difference \( \nu_\mtext{A} - \nu_\mtext{B} \) (in \si{\Hz}) increases with field while \( J_\mtext{AB} \) does not, NMR spectra obtained with a high-field instrument (\SI{600}{\MHz}) are often easier to interpret than those from a low-field spectrometer (\SI{>200}{\MHz}). 
 However, even if the multiplets are not well separated, it is still possible to deduced accurate chemical shifts and \( J \) values using slightly more involved procedures, which are outlined in most texts on NMR spectroscopy.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
-Such an exercise can be done as an optional part of theis experiment, although it will not be necessary for the determination of equilibrium constants. 
+Such an exercise can be done as an optional part of this experiment, although it will not be necessary for the determination of equilibrium constants. 
 
 The mechanism of spin--spin coupling is known to be indirect and to involve the electrons in the bonds between interacting nuclei. 
 The spin of nucleus A is preferentially coupled antiparallel to the nearest bonding electron through the \emph{Fermi contact interaction}, which is significant only when the electron density is nonzero at the first nucleus.\sidenote{
@@ -324,14 +333,14 @@ Thus NMR spectra can provide detailed structural information about large and com
 		\captionsetup[subfigure]{farskip=20pt, captionskip=20pt}
 		\hspace*{\fill}%
 		\subfloat[][low-energy case]{%
-			\chemfig{@{1}\chemabove{H_\emph{A}}{\Uparrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{B}}{\Downarrow}}
+			\chemfig{@{1}\chemabove{H_{A}}{\Uparrow}-@{2}C-@{3}C-@{4}\chemabove{H_{B}}{\Downarrow}}
 			\namebond[6pt]{1}{2}{$ \upharpoonleft \; \downharpoonright $}
 			\namebond[6pt]{2}{3}{$ \downharpoonleft \; \upharpoonright $}
 			\namebond[6pt]{3}{4}{$ \upharpoonleft \; \downharpoonright $}
 		}% 
 		\hfill%
 		\subfloat[][high-energy case]{%
-			\chemfig{@{1}\chemabove{H_\emph{A}}{\Downarrow}-@{2}C-@{3}C-@{4}\chemabove{H_\emph{B}}{\Downarrow}}
+			\chemfig{@{1}\chemabove{H_{A}}{\Downarrow}-@{2}C-@{3}C-@{4}\chemabove{H_{B}}{\Downarrow}}
 			\namebond[6pt]{1}{2}{$ \upharpoonleft \; \downharpoonright $}
 			\namebond[6pt]{2}{3}{$ \downharpoonleft \; \upharpoonright $}
 			\namebond[6pt]{3}{4}{$ \upharpoonleft \; \downharpoonright $}
@@ -431,24 +440,174 @@ In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo
 	\caption{Isomerization of dimethylacetamide}
 	\label{fig:methyl_exchange}
 \end{figure}
-Due to the characteristic period of the \NMR* measurement, a large range of reaction rates relevant in the chemical laboratory is easily accessible (\SIrange{1e-1}{1e-5}{\per\second}).
-In addition, rotational barriers in the range of \SIrange{3}{20}{\kcal\per\mol} can be studied by this method.\autocite{bovey69} 
+Due to the characteristic period of the NMR measurement, a large range of reaction rates relevant in the chemical laboratory is easily accessible (\SIrange{e-1}{e-5}{\Hertz}).
+In addition, rotational barriers in the range of \SIrange{3}{20}{\kilo\cal\per\mol} can be studied by this method.\autocite{bovey69} 
+
+\subsubsection{Arrhenius and Eyring equations} % (fold)
+\label{ssub:arrhenius_and_eyring_equations}
+
+The Arrhenius equation (\cref{eq:arrhenius}) describes the temperature dependence of reaction rates. 
+It provides a simple, empirical method for finding the activation energy for a process by observing the change in reaction rate as a function of temperature. 
+\begin{equation}
+  k = A \exp{\frac{-E_\mtext{a}}{RT}}
+  \label{eq:arrhenius}
+\end{equation}
+As stated earlier, \( k \) is the rate constant of the reaction. \( T \) is the absolute temperature (in \si{\K}), \( A \) is a pre-exponential factor, constant and specific to each reaction, \( E_\mtext{a} \) is the activation energy for the process (with the same units as \( RT \)), and \( R \) is the universal gas constant. 
+By taking the natural logarithm of each side and rearranging a bit, the equation can be transformed into the following:
+\begin{equation}
+  \ln{k} = \frac{-E_\mtext{a}}{R} \frac{1}{T} + \ln{A} \, .
+  \label{eq:arrhenius_linear}
+\end{equation}
+This version makes \( \ln{k} \) a linear function of \( T^{-1} \) with a slope of \( -E_\mtext{a}/R \), resulting in a much easier task of curve-fitting. 
+
+An extension of the Arrhenius equation, the Eyring equation (\cref{eq:eyring}), is used in Transition State Theory to describe the enthalpy (\enthalpy*{1}), entropy (\entropy*{1}), and Gibbs free energy (\gibbs*{1}) of the transition state. 
+\begin{equation}
+  k = \kappa \frac{k_B T}{h} \exp{\frac{\gibbs*{1}}{RT}}
+  \label{eq:eyring}
+\end{equation}
+Recall that \( k_B \) and \( h \) are Boltzmann's constant and Planck's constant, respectively. 
+The constant \( \kappa \) represents the \emph{transmission coefficient} and accounts for the possibility that a complex might cross back through a transition state without becoming a product. 
+The transmission coefficient is generally assumed to be \num{1}. 
+If we recall that \gibbs*{1} can be expressed as \( \gibbs*{1} = \enthalpy*{1} + T \entropy*{1} \), \cref{eq:eyring} becomes 
+\begin{equation}
+  k = \kappa \frac{k_B T}{h} \exp{\frac{\entropy*{1}}{R}} \exp{-\frac{\enthalpy*{1}}{R T}} \, .
+  \label{eq:eyring_2}
+\end{equation}
+Again, if we take the natural logarithm of \cref{eq:eyring_2}, we obtain
+\begin{equation}
+  \ln{\frac{k}{T}} = \frac{-\enthalpy*{1}}{R} \frac{1}{T} 
+    + \ln{\frac{\kappa \k_B}{h}} + \frac{\entropy*{1}}{R} \, .
+  \label{eq:eyring_linear}
+\end{equation}
+With this form, we can fit a straight line to the reaction rate data as a function of \( 1/T \) and solve for \gibbs*{1}, \enthalpy*{1}, and \entropy*{1}. 
+% subsubsection arrhenius_and_eyring_equations (end)
 
 % subsection rotational_energy_barrier (end)
 
 \subsection{Line Shape Analysis} % (fold)
 \label{sub:line_shape_analysis}
 
-If two groups of chemically equivalent nuclei are exhanged by an intramolecular process, the \NMR* spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{A typical value for \( \increment\nu \) is about \SI{10}{\hertz}.} 
+If two groups of chemically equivalent nuclei are exchanged by an intramolecular process, the NMR spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{A typical value for \( \increment\nu \) is about \SI{10}{\hertz}.} 
 The effects of exchange at several temperatures on the linewidths at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) are shown in \cref{fig:lineshapes}. 
 At low temperatures, the exchange is slow and \( k \ll \increment\nu \). 
 The spectrum thus consists of two sharp singlets at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) (\cref{fig:lineshapes_a}). 
 At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes_d}). 
 There is also an intermediate temperature range over which the spectrum consists of two significantly broadened overlapping lines (\cref{fig:lineshapes_b}).
 
+Usually, spin--spin and spin--lattice relaxation determine the width of an NMR absorption peak.\autocite{pople67}
+Here, we are concerned with the additional effect of exchange of two groups of chemically equivalent nuclei on linewidth.
+The Heisenberg uncertainty principle states that the product of the uncertainty in the measurement of the energy of a particular state, \( \increment E \), and the uncertainty in the lifetime of the state, \( \increment t \), is approximately equal to the reduced Planck's constant, \( \hslash = h/\br{2\pi} \):
+\begin{equation}
+  \increment E \increment t \simeq \hslash \, .
+  \label{eq:heisenberg}
+\end{equation}
+Since 
+\begin{equation}
+  \increment E = h \increment \nu_{1/2} \, ,
+  \label{eq:width1}
+\end{equation}
+where \( \increment \nu_{1/2} \), the absorption linewidth for the transition, is inversely proportional to the lifetime of the excited state:
+\begin{equation}
+  \increment \nu_{1/2} 
+    = \frac{\increment E}{h} 
+    = \frac{\increment E \increment t}{h \increment t} 
+    = \frac{1}{2 \pi \increment t} \, .
+  \label{eq:width2}
+\end{equation}
+An exact analysis of the line broadening produced by the exchange process is derived from the Bloch equations.\autocite{bovey69}
+The Bloch equations describe the motion of the bulk magnetic moment of a sample in the presence of a static field, \( B_0 \), and a rotating field, \( B_1 \), perpendicular to \( B_0 \). 
 
+The exact function for the lineshape\autocite{carrington67} in the case of two equivalent exchanging groups with no coupling is given by 
+\begin{equation}
+  g\br{\nu} = \frac{K \tau \br{\nu_\ch{A} - \nu_{\ch{B}}}^2}{
+  \br{\frac{1}{2}\br{\nu_{\ch{A}} - \nu_{\ch{B}}} - \nu}^2 + \br{2 \pi \tau \br{\nu_{\ch{A}} - \nu} \br{\nu_{\ch{B}} - \nu}}^2} \, ,
+  \label{eq:lineshape}
+\end{equation}
+where \( g\br{\nu} \) is the intensity at the frequency, \( \nu \), \( K \) is a normalization constant, and \( \tau = 1/\br{2k} \), where \( k \) is the rate constant fro the exchange. 
+The variables \( \tau \), \( \nu_\ch{A} \), and \( \nu_\ch{B} \) are functions of temperature and cannot be determined separately. 
+Values for these three may be estimated with a fitting algorithm\sidenote{Such as the \href{https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html}{Scipy optimization library}.} to generate a curve-of-best fit for \( g\br{\nu} \). 
+Alternatively, various approximations can be made which apply over different ranges of exchange rates. 
 
 % subsection line_shape_analysis (end)
+
+\subsection{Approximate Methods for Evaluation of Rate Constants\autocite{johnson66}} % (fold)
+\label{sub:approximate_methods_for_evaluation_of_rate_constants_autocite_johnson66}
+
+Direct calculation of the lifetime of a specific spin state from \cref{eq:lineshape} can be made over a limited temperature range.  
+Beyond a certain temperature, the rate of exchange is so fast that the magnetic environments of the two sets of nuclei are identical and any possible distinction between the two sets of nuclei is lost. 
+Thus we have only one set of spins with a lifetime determined by the spin--spin and spin--lattice relaxation mechanisms. 
+
+As the temperature is varied from values at which the rate of exchange is low through values of intermediate exchange rates, to rapid exchange, a series of approximations is available for the calculation of lifetimes.
+although these approximate methods provide somewhat less accurate results than does \cref{eq:lineshape}, they present the student with a meaningful treatment of the data obtained by an NMR study of a chemical rate process. 
+
+\subsubsection{Slow and Intermediate Exchange} % (fold)
+\label{ssub:slow_and_intermediate_exchange}
+
+At slow exchange rates, the spectrum consists of two lines. 
+In this region, \( \tau \gg \br{\nu_\ch{A}}^-1 \), and \cref{eq:lineshape} reduces to 
+\begin{equation}
+  g\br{\nu}_{\ch{A}} = g\br{\nu}_{\ch{B}} = \frac{K T'_{2\ch{A}}}{1 + \br{T'_{2\ch{A}} \br{\nu_{\ch{A}} - \nu}}^2} \, ,
+  \label{eq:slow_exch_peak}
+\end{equation}
+where \( T'_{2\ch{A}} \) is the spin--spin relaxation time. 
+Comparison of \cref{eq:slow_exch} to the exact function shows that the linewidth of the line at \( \nu_{\ch{A}} \) is
+\begin{equation}
+  \br{\increment \nu_\ch{A}}_{1/2} = \frac{1}{\pi} \br{\frac{1}{T'_{2\ch{A}}} + \frac{1}{\tau_\ch{A}}} \, .
+  \label{eq:slow_exch_width}
+\end{equation}
+In the absence of exchange, the linewidth is \( \br{\increment \nu_0}_{1/2} = \br{\pi T'_{2\ch{A}}}^{-1} \). 
+Exchange results in \emph{broadening} equal to \( \br{\pi \tau_\ch{A}}^{-1} \). 
+A value for \( k \) (\( =1/\br{2\tau} \)) is determined by comparing linewidths at half height of exchanging peaks to those of peaks recorded at temperatures where the rate of exchange is very small:
+\begin{equation}
+  k = \pi \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}} \, .
+  \label{eq:slow_exch_k_1}
+\end{equation}
+For slow exchange, the rate can also be related to the change in \emph{peak separation}. 
+\Cref{eq:slow_exch_k_2} applies over the limited range where there is extensive overlap between the two separate peaks, but where they have not yet coalesced (see below):
+\begin{equation}
+  k = \frac{\pi}{\sqrt{2}} \sqrt{\increment \nu_0^2 - \increment \nu_e^2} \, ,
+  \label{eq:slow_exch_k_2}
+\end{equation}
+where \( \increment\nu_i \) is the peak separation in \si{\Hz}, and the subscripts (\( i = e \) or \num{0}) have the previously defined meanings.\sidenote{In other words, \( \increment \nu_e \) should range from \( \increment \nu_0 \)at very low temperatures to \num{0} at high temperatures.}
+
+A third method applies in the slow exchange region. 
+In the \emph{ratio method}, \( k \) is calculated from the ratio of the intensities of the peaks, \( I_\mtext{max} \), to the intensity midway between the peaks, \( I_\mtext{min} \), \( r = I_\mtext{max} / I_\mtext{min} \) and 
+\begin{equation}
+  k = \frac{\pi \increment \nu_0}{\sqrt{2}} \br{ r + \sqrt{ r^2 - r}}^{-1/2} \, .
+  \label{eq:slow_exch_k_3}
+\end{equation}
+
+% subsubsection slow_and_intermediate_exchange (end)
+
+\subsubsection{Coalescence Temperature} % (fold)
+\label{ssub:coalescence_temperature}
+
+The coalescence temperature is defined as the temperature at which the appearance of the spectrum changes from that of two separate peaks to that of a single, flat-topped peak (see \cref{fig:lineshapes_c}). 
+At this temperature, building on \cref{eq:slow_exch_k_3}, 
+\begin{equation}
+  k = \frac{\pi \increment \nu_0}{\sqrt{2}} \, .
+  \label{eq:intermed_exch_k}
+\end{equation}
+
+% subsubsection coalescence_temperature (end)
+
+\subsubsection{Fast Exchange} % (fold)
+\label{ssub:fast_exchange}
+
+At temperatures above the coalescence temperature, the spectrum consists of a single peak. 
+In this region, \( \tau \ll \br{\nu_{\ch{A}} - \nu_{\ch{B}}}^{-1} \) and \cref{eq:lineshape} reduces to
+\begin{equation}
+  g\br{\nu} = \frac{K T'_2}{1 + \pi T'_2 \br{\nu_{\ch{A}} + \nu_{\ch{B}} - 2 \nu}^2} \, .
+  \label{eq:fast_exch_lineshape}
+\end{equation}
+If the signal is not completely collapsed, i.e., the process is slow enough to contribute to its width but is still well beyond the rate corresponding to separate signals, the following approximation results:
+\begin{equation}
+  k = \frac{\pi \increment \nu_0^2}{2} \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}}^{-1}
+  \label{eq:fast_exch_k}
+\end{equation}
+% subsubsection fast_exchange (end)
+
+% subsection approximate_methods_for_evaluation_of_rate_constants_autocite_johnson66 (end)
 % section theory (end)
 
 \pagebreak
@@ -456,9 +615,10 @@ There is also an intermediate temperature range over which the spectrum consists
 \section{Safety Precautions} %(fold)
 \label{sec:safety}
 
-Chloroform-d (\ch{CDCl_3}) and tetramethylsilane (TMS) are both toxic chemicals. 
-Both chemicals are volatile and should be kept in tightly sealed containers. 
-Carry out all solution preparations in a fume hood. 
+Dimethyl sulfoxide (DMSO, \ch{(CH3)2SO}) is relatively non-toxic, but can rapidly carry other compounds through the skin. 
+Gloves should be worn whenever handling it. 
+\iupac{\N,\N-dimethylacetamide} (DMA, \ch{CH3C(O)N(CH3)2}) is toxic and students should avoid inhalation and skin contact. 
+Carry out all solution preparations in a fume hood or well-ventilated area. 
 Dispose of waste chemicals as instructed. 
 % section safety (end)
 
@@ -467,19 +627,10 @@ Dispose of waste chemicals as instructed.
 \label{sec:procedure}
 
 \begin{enumerate}
-	\item Obtain \SI{1}{\ml} each of acetylacetone (\ch{CH3OCH2COCH3}, M.W. \( = \SI{100.11}{\g\per\mol} \), density \( = \SI{0.98}{\g\per\cm\cubed} \)) and ethyl ecetoacetate (\ch{CH3CH2OCOCH2COCH3}, M.W. \( = \SI{130.45}{\g\per\mol} \), density \( = \SI{1.03}{\g\per\cm\cubed} \)). 
-	\item Prepare small volumes of three solutions with two solvents. 
-	\begin{description}
-		\item[Solvent A] Chloroform-d, spectrochemical grade (M.W. \( = \SI{120.38}{\g\per\mol} \), density \( = \SI{1.50}{\g\per\cm\cubed} \)) with TMS. 
-		\item[Solvent B] Methanol-d\textsubscript{4}, spectrochemical grade (M.W. \( = \SI{36.07}{\g\per\mol} \), density \( = \SI{0.888}{\g\per\cm\cubed} \)) with TMS.
-		\item[Solution 1] \num{0.05} mole fraction of acetylacetone in solvent A.
-		\item[Solution 2] \num{0.05} mole fraction of acetylacetone in solvent B.
-		\item[Solution 3] \num{0.05} mole fraction of ethyl acetoacetate in solvent A.
-	\end{description}
-	Prepare each solution in a \SIrange{1.5}{2.0}{\mL} microfuge tube. 
-	Use a \SI{100}{\uL} micropipettor  to measure out \SI{0.5}{\milli\mole} of solute, and use a \SI{1000}{\uL} micropipettor to the add the appropriate amount of \SI{9.5}{\milli\mole} of solvent. 
-	\item Record the NMR spectra for solutions \numrange{1}{3}, taking care to scan above \( \delta = \SI{16}{\ppm} \), since the enol \ch{OH} peak is substantially deshielded. 
-	\item Determine which peaks are due to solute and measure chemical shifts for all solute features. Integrate the bands carefully, expanding the vertical scale in order to obtain accurate relative intensity measurements. 
+	\item Prepare a \SI{15}{vol\percent} solution of \ch{DMA} and \ch{DMSO-d6} in  a \SIrange{1.5}{2.0}{\mL} microfuge tube. 
+	Use a \SI{1000}{\uL} micropipettor to the add an appropriate amount (\SI{\sim600}{\uL}) of the solution to a clean NMR tube. 
+	\item Record \NMR* spectra for the solution at \SI{10}{\kelvin} increments from \SIrange{293}{403}{\kelvin}. 
+	\item Peak widths, positions, and intensities should be measured using the TopSpin software on the NMR lab computers and this data should be exported with the spectra for later analysis.  
 \end{enumerate}
 
 % section procedure (end)
@@ -490,11 +641,13 @@ Dispose of waste chemicals as instructed.
 \begin{enumerate}
 	\item Correctly assign all peaks in the spectrum using \cref{tab:chem_shifts} and other NMR reference sources.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
 	Mark solvent peaks with an asterisk (*). If splitting patterns deviate from your expectations, discuss possible reasons for the deviation. 
-	\item Tabulate the results and use the integrated intensities to calculate the percentage enol present in solutions \numrange{1}{3}. 
-	If possible, use the total integral corresponding to the sum of methyl (or ethyl), methylene, methyne, and enol protons. 
-	If this proves difficult because of overlap with solvent bands, indicate clearly how you used the intensities to calculate the perentage enol. 
-	\item For both the enol and keto forms, compare experimental and theoretical ratios of the integrated intensities for different types of protons (e.g., methyl to methylene protons in the keto form). 
-	\item Using \cref{eq:eq_const}, calculate \( K_c \) and the corresponding free-energy difference \gibbs*{1} for the change in state from keto to enol in each solution. 
+	\item The data extracted from TopSpin should be split into three grups corresponding to slow/intermediate exchange, coalescence temperature, and fast exchange. 
+	\item Using \cref{eq:slow_exch_k_1} through \cref{eq:fast_exch_k}, to calculate values for \( k \) at each temperature. 
+	\item Create a plot of \( \ln{k} \)  as a function of \( 1/T \). 
+  The slope of this plot yields a value for \gibbs*{1}. 
+  Compare this value to literature values for this rotational barrier. 
+	\item Values for \enthalpy*{1} and \entropy*{1} can be calculated from the value obtained for \gibbs*{1} in the previous step. 
+  Error propagation formulae for these values have been published in \textcite{morse94nmr}.
 \end{enumerate}
 
 % section data_analysis (end)
@@ -503,16 +656,9 @@ Dispose of waste chemicals as instructed.
 \label{sec:questions_and_further_thoughts}
 
 \begin{enumerate}
-	\item Briefly discuss your assignments of chemical shifts and spin--spin splitting patterns of acetylacetone and ethyl acetoacetate. 
-	Which compound has a higher concentration of enol form, and what reasons can you offer to explain this result?
-	What changes would you expect in the NMR spectra of these two compounds if the interconversion rate between enol structures were much slower?
-	\item Compare the value of \( K_c \) for acetylacetone in \ch{CDCl3} with that in \ch{CD3OD}. 
-	What does your result suggest regarding the relatives polarity of the enol and keto forms?
-	Which form is favored by hydrogen bonding and why?
-	\item Compare your values of \gibbs*{1} with those for the gas phase (\gibbs{-9.2\pm2.1} for acetylacetone and \gibbs{-0.4\pm2.5} for ethyl acetoacetate).\autocite{folkendt1985a}
+	\item Briefly discuss your assignments of chemical shifts and spin--spin splitting patterns of \iupac{\N,\N-dimethylacetamide}. 
+	\item Compare your values of \gibbs*{1} with those for the gas phase (see values in \textcite{jarek97nmr}).
 	What solvent properties might account for any differences you observe?
-	\item Additional compounds suitable for studeis of steric effects on keto--enol equilibria include \iupac{\a-methylacetylacetone} (\ch{CH3COCHCH3COCH3}), \iupac{diethylmalonate} (\ch{CH3CH2OCOCH2COOCH2CH3}), \iupac{ethyl benzoylacetate} (\ch{C6H6COCH2COOCH2CH3}), and \iupac{\tert-butyl acetoacetate} (\ch{CH3COCH2COO^{t}Bu}).
-	Some other possible compounds are listed in \textcite{burdett1964a,rogers1956a}. Further aspects of this equilibrium that could be studied include the effects of concentration, temperature, and solvent dielectric constants on \( K_c \).\autocite{rogers1956a}
 \end{enumerate}
 
 % section questions_and_further_thoughts (end)
