@@ -64,7 +64,7 @@
 
 \begin{abstract}
 \noindent
-The objective of this lab is to determine the rate constant and collision diameter of a diffusion-controlled reaction (photoexcited anthracene with carbon tetrabromide, \ch{CBr4}) using the technique of fluorescence quenching. \thanks{Transcribed (with corrections) from \textcite{halpern97}.}
+The objective of this lab is to determine the rate constant and collision diameter of a diffusion-controlled reaction (photoexcited anthracene with carbon tetrabromide, \ch{CBr4}) using the technique of fluorescence quenching.\thanks{Transcribed (with corrections) from \textcite{halpern97}.}
 \end{abstract}
 
 %\printclassoptions
@@ -111,7 +111,7 @@ and we can approximate the steady-state concentration of the encounter complex a
 
 Now, if we further assume that the reaction rate is given by the slow step, i.e., \( k_2 \)\ch{[A-B]}, we can express that rate as
 \[
-	\textup{Rate} \simeq k_2 \ch{[A-B]} = \frac{k_1 k_2}{k_{-1} + k_2} \ch{[A][B]} = k_\textup{obs}\ch{[A][B]} \qquad \si{\Molar \per \s} \, .
+	\mtext{Rate} \simeq k_2 \ch{[A-B]} = \frac{k_1 k_2}{k_{-1} + k_2} \ch{[A][B]} = k_\mtext{obs}\ch{[A][B]} \qquad \si{\Molar \per \s} \, .
 \]
 For convenience, we define the second-order rate coefficient, \( k_\textup{obs} \), as 
 \begin{equation}
@@ -275,7 +275,7 @@ The probability that \ch{A\!^*} will fluoresce, \( P_\mtext{f} \), is the ratio 
 	P_\mtext{f} = \frac{k_\mtext{r}}{k_\mtext{r} + k_\mtext{nr} + k_\mtext{q} \ch{[Q]}}
 	\label{eq:prob_fluor}
 \end{equation}
-where \( k_\mtext{r} \), \( k_\mtext{nr} \), and \( k_\mtext{q} \)\ch{[Q]} are, respectively, the radiative, nonradiative, and (pseudo-first-order)quenching rate constants, 
+where \( k_\mtext{r} \), \( k_\mtext{nr} \), and \( k_\mtext{q} \)\ch{[Q]} are, respectively, the radiative, nonradiative, and (pseudo-first-order) quenching rate constants, 
 Since \( \ch{[Q]} \gg \ch{[A\!^*\,]}\), the diffusion-controlled bimolecular quenching step becomes pseudo-first-order. 
 If the amount of light absorbed by \ch{A} is unaffected by \ch{[Q]}, the fluorescence \emph{intensity}, \( I \), measured by the detector (i.e., the instrument response) is proportional to \( P_\mtext{f} \). 
 In the absence of quencher, \( I = I_0 = k_\mtext{r} / (k_\mtext{r} + k_\mtext{nr}) \), and the ratio of fluorescence intensities of unquenched to quenched samples of \ch{A} becomes 
@@ -330,12 +330,12 @@ The S-V relation can be expressed in terms of the diffusion-controlled rate cons
 The time dependence was treated by \textcite{ware66}, who applied \cref{eq:rateconst1} to the condition pertinent to this experiment, namely, that the system is considered to be suddenly exposed to a steady-state excitation source, called a step function (see \cref{fig:step_func} and Further Readings). 
 In this case, the S-V equation becomes more complicated:
 \begin{equation}
-	\frac{I_0}{I} = \frac{1 + (4 \pi R D N_\mtext{A}) \ch{[Q]} \tau_0}{Y} \, ,
+	\frac{I_0}{I} = \frac{1 + (4 \pi R D N_\mtext{A} / 1000) \ch{[Q]} \tau_0}{Y} \, ,
 	\label{eq:sv_step_rel}
 \end{equation}
 where
 \begin{equation}
-	Y = 1 - \frac{b \sqrt{\pi}}{\sqrt{a}} \exp\br{\br{ \frac{b^2}{a} }} \erfc\br{ \frac{b}{\sqrt{a}} }
+	Y = 1 - \frac{b \sqrt{\pi}}{\sqrt{a}} \exp\br{\br{ \frac{b^2}{a} }} \erfc\br{ \frac{b}{\sqrt{a}} } \, ,
 	\label{eq:sv_y}
 \end{equation}
 in which 
@@ -353,7 +353,7 @@ This statistical effect will be much more significant when there is a very high 
 Since the slope of the Stern-Volmer plot is proportional to the rate constant, \( k_1 \), this means that the slope will be large (faster rates) at high quencher concentrations, \ch{[Q]}, and small (slower rates) at low \ch{[Q]}. We will explore how these conditions relate to the other Stern-Volmer equation (\cref{eq:sv_rel}) in the Data Analysis section below.} 
 in which case \( k_\mtext{q} = k_1 \) from \cref{eq:rateconst2}.\sidenote{Verify this for yourself!}
 
-The Stern-Volmer plot based on \cref{eq:sv_step_rel} will be curved upward. 
+The Stern-Volmer plot based on \cref{eq:sv_step_rel} should be curved upward. 
 If the mutual diffusion coefficient of the reacting pair is known, the S-V plot of experimental data can be fit using \cref{eq:sv_step_rel} with \( R \) used as a ``fitting'' parameter. 
 For a satisfactory match between experiment and theory, however, the value of \( R \) must be physically reasonable. 
 That is, \( R \) should be approximately equal to the sum of the molecular diameters of \ch{A} (actually \ch{A\!^*\,}) and \ch{Q}.
@@ -396,15 +396,24 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Starting with the \SI{0}{\percent} sample (\ch{AN} only), introduce the solution into a fluorescence cell and deaerate with dry \ch{N2} for about \SI{2}{\min}. 
 	Avoid using an excessive flow rate that will cause the solution to splatter from the cell or to otherwise result in undue solvent evaporation. 
 	Promptly stopper the cell.
-	\item Record the full fluorescence spectrum using the instrumental conditions previously outlined by the instructor. 
+	\item Record the full fluorescence spectrum using the instrumental conditions previously outlined by the instructor.\sidenote{
+\begin{tabular}{lr}
+  \toprule
+  Parameter & Value\\
+  \midrule
+  \( \lambda_\mtext{exc} \) & \SI{283}{\nm}\\
+  \( \lambda_\mtext{det} \) & \SIrange{350}{550}{\nm}\\
+  Scan speed & \SI{300}{\nm\per\min}\\
+  Slit width & \SI{2.5}{\nm}\\
+  \bottomrule
+\end{tabular}}
 	Make sure the spectrum record is labeled.
-	\item Using exactly the same excitation wavelength as in step 4, measure the  fluorescence intensity of the most dilute and subsequently more concentrated \ch{AN}/\ch{CBr4} solutions. 
+	\item Using exactly the same settings as in step 4, measure the  fluorescence intensity of the most dilute and subsequently more concentrated \ch{AN}/\ch{CBr4} solutions. 
 	You must deaerate each sample in a consistent procedure (i.e., identical bubbling time). 
-	However, instead of obtaining the entire fluorescence spectrum, you need monitor only the \ch{AN} maximum (near \SI{\sim398}{\nm}). 
-	Make sure you are at the maximum by first scanning that region slowly. 
 	If you have any doubt as to the steadiness of the exciting source, switch back to the \ch{AN} sample and compare its maximum intensity with that of the first sample run.
-	\item As you examine increasingly more concentrated samples, the fluorescence intensity will diminish to the point that you will need to increase the instrument gain (i.e., signal amplification) to ensure maximal reading sensitivity. 
+	\item As you examine increasingly more concentrated samples, the fluorescence intensity will diminish to the point that you may need to increase the instrument gain (i.e., signal amplification) to ensure maximal reading sensitivity. 
 	Establish the background, or ``dark check,'' when the instrument sensitivity is changed.
+  This gain should result in a linear increase in signal, but you should take spectra of one concentration twice (once at each gain level) to provide a way to scale your spectra. 
 	\item Keep in mind the following procedural points: 
 	\begin{enumerate}
 		\item The temperature of the sample should be held constant within \SIrange{0.5}{1.0}{\celsius}; 
@@ -453,12 +462,13 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	We will do this by fitting our data to \cref{eq:sv_step_rel} using a ``nonlinear regression analysis'' with \( R \) as the only parameter.%
 	\sidenote{%
     To perform this step with Python, you will need to use the SciPy library. 
-		Instructions and an example can be found in the SciPy Cookbook under \href{https://scipy-cookbook.readthedocs.io/items/robust_regression.html}{Robust Nonlinear Regression in SciPy}. 
+		Instructions and an example can be found in the SciPy Documentation under \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html}{scipy.optimize.curve\_fit}. 
 	} 
 	Just make sure you realize that the parameter \( R \) enters into \cref{eq:sv_step_rel} directly in the numerator, as well as through the denominator \( Y \) due to the \( R \) dependence of \( a \) and \( b \). 
 	Thus, you need to make sure that all of these parts of the equation refer to the same variable for \( R \) so that it is varied consistently throughout. 
 	Make sure that you use \( \erfc() \) and not \( \erf() \). 
-	You can start with a guess of \SI{6}{\angstrom} for the radius \( R \) and have Solver vary it to fit your line. 	Superimpose the theoretical curve corresponding to this \( R \) value onto your data points.
+	You can start with a guess of \SI{10}{\angstrom} for the radius \( R \) and have \Verb{curve_fit()} solve for the best fit of your line. 
+  Superimpose the theoretical curve corresponding to this \( R \) value onto your data points.
 \end{enumerate}
 % section data_analysis (end)
 
@@ -476,7 +486,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	in the quenching process?
 	\item Verify that if \( Y = 1 \) in \cref{eq:sv_step_rel}, \( k_\mtext{q} \rightarrow k_1 \) (see \cref{eq:sv_rel,eq:rateconst2}).
 	\item One of the undesirable complications associated with this type of experiment is the potential presence of \emph{ground-state} complexes between \ch{AN} and \ch{CBr4}. 
-	If such a complex competes for light absorption with uncomplexed, free anthracene, it can cause a decrease in fluorescence intensity without there having to be a diffusion between \ch{AN^*} and \ch{CBr4}. 
+	If such a complex competes for light absorption with uncomplexed, free anthracene, it can cause a decrease in fluorescence intensity without the existence of diffusion between \ch{AN^*} and \ch{CBr4}. 
 	This is sometimes called \emph{static quenching}. 
 	For this reason, it is desirable to work with quencher concentrations as low as possible. 
 	What experiment could you do to obtain evidence of a ground-state complex? 
