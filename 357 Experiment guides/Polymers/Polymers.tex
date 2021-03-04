@@ -74,12 +74,12 @@ The objective of this lab is to determine the viscosity-average molecular weight
 
 From a phenomenological point of view, we can say that the viscosity of a fluid is its resistance to flow. 
 Viscosity measurements are often carried out for either of two main reasons. 
-Viscosity is a quantitative property of a fluid and although a particular sample might be highly complex, such as a blend of various resins or polymers, its viscosity serves to represent a physical property of that system. 
-Viscosity therefore can be used as an empirical index in quality- control applications concerning, for example, oils and resins, latex paints, or chocolate mousse. 
+Viscosity is a quantitative property of a fluid and, although a particular sample might be highly complex, such as a blend of various resins or polymers, its viscosity serves to represent a physical property of that system. 
+Viscosity, therefore, can be used as an empirical index in quality-control applications concerning, for example, oils and resins, latex paints, or chocolate mousse. 
 Another motivation for measuring viscosity is to determine a fundamental and intrinsic property of a liquid (as a solvent medium): the rate of mass transport, or diffusion, within the medium. 
 In this application, for example, viscosity data can provide important information about chemical reaction kinetics. 
 
-\begin{figure}[b]
+\begin{figure}[htb]
 	\centering
 	\begin{tikzpicture}[scale=1.5]
 		\draw[thick]	(-2,0.15)	--	(4.6,0.15);
@@ -124,7 +124,7 @@ These forces are appreciable; they are manifest, for example, as latent heat of 
 The mathematical treatment of viscosity is best introduced by looking at \cref{fig:viscous_flow}.
 
 A liquid is presumed to be flowing smoothly in the \( x \)-direction. 
-Imagine that the liquid is composed of sheets of infinitesimal cross section \( \dd{A} \) that are oriented in the \emph{x-y} plane, and that each sheet flows tangentially to its surface area, in the positive \( x \)-direction. 
+Imagine that the liquid is composed of sheets of infinitesimal cross section \( \dd{A} \) that are oriented in the \( xy \)-plane, and that each sheet flows tangentially to its surface area, in the positive \( x \)-direction. 
 If a given sheet is kept at a velocity \( v \), such that it exceeds the velocity of an adjacent sheet by an amount \( \dd{v} \), and the adjacent sheet is displaced by a distance \( \dd{z} \) the force required (per unit area) to maintain the motion of the given sheet, \( \dd{f_x} \), is given by
 \begin{equation}
 	\dv{f_x}{A} = \eta \br{ \pdv{v_x}{z}}_z \, .
@@ -138,18 +138,17 @@ Materials whose viscosity decreases at high shear rates (e.g., paints that ``thi
 
 With respect to this experiment, a useful application of \cref{eq:layer_flow} to the case of mass transport through a circular tube of small internal diameter was derived by French physicist Jean Léonard Marie Poiseuille in 1844:
 \begin{equation}
-	\dv{V}{t} = \frac{\pi r^4 \Delta P}{8 \eta L} \, ,
+	\dv{V}{t} = \frac{\pi r^4 \increment P}{8 \eta L} \, ,
 	\label{eq:tube_flow}
 \end{equation}
 where \( \dv*{V}{t} \) is the volume flow rate of the liquid emerging from the tube, and \( r \) and \( L \) are, respectively, the radius and length of the tube.
-\( \Delta P \) is the pressure difference across the ends of the tube and is the driving force for the bulk flow. 
+The quantity \( \increment P \) is the pressure difference across the ends of the tube and is the driving force for the bulk flow. 
 \Cref{eq:tube_flow} assumes that the flow rate is slow and uniform. 
-The viscosity coefficient, \( \eta \), is called the poise in recognition of Poiseuille, and has cgs units. 
-Thus one poise, \si{\poise}, is \SI{1}{\g \per \cm \per \s}, or \SI{1}{\dyne \s}. 
-For many common liquids at room temperature, viscosities are about \SIrange{0.002}{0.04}{\poise}. 
-For convenience, the centipoise (\si{\centi\poise}, \SI{e-2}{\poise}), is often used to report viscosity. 
-In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa \s}. 
-\( \SI{1e-3}{\Pa} = \SI{1}{\centi\poise} \).
+The viscosity coefficient, \( \eta \), is called the poise in recognition of Poiseuille, and has cgs units.\sidenote{One poise, \si{\poise}, is \SI{1}{\g \per \cm \per \s}, or \SI{1}{\dyne \s}.}
+For convenience, the centipoise (\si{\centi\poise}, \SI{e-2}{\poise}), was often used to report viscosity. 
+In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa \s}, and \( \SI{1e-3}{\Pa} = \SI{1}{\milli\Pa} = \SI{1}{\centi\poise} \).
+For many common liquids at room temperature, viscosities are about \SIrange{0.2}{4}{\milli\Pa}. 
+
 
 
 %% The following sections are unecessary if the mixture-of-liquids experiments are skipped. 
@@ -191,15 +190,15 @@ In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa 
 \subsection{Temperature Dependence of Viscosity} % (fold)
 \label{sub:temperature_dependence_of_viscosity}
 
-It is found that over a reasonably wide temperature range, the viscosity of a pure liquid increases exponentially with the inverse absolute temperature.
+It is found that, over a reasonably wide temperature range, the viscosity of a pure liquid increases exponentially with the inverse absolute temperature.
 This relationship was first expressed quantitatively by Swedish physicist and chemist Svante Arrhenius in 1912:\sidenote[][-2\baselineskip]{Arrhenius is more famously associated with a similar equation that expresses the temperature dependence of a rate constant.}
 \begin{equation}
 	\eta = A \exp\br{\frac{E_\eta}{R T}} \, ,
 	\label{eq:arrhenius_visc}
 \end{equation}
-where \( A \) is a constant for a given liquid, and \( E_\eta \) is sometimes called the activation energy to viscous flow of the liquid.
+where \( A \) is a constant for a given liquid and \( E_\eta \) is sometimes called the activation energy to viscous flow of the liquid.
 Several theories have been proposed to rationalize \cref{eq:arrhenius_visc}.
-Simply viewed, however, an energy barrier must be surmounted in order for a molecule to ``squeeze'' past its neighbors if it is to undergo transport in the bulk medium.
+Simply viewed, however, if a molecule is to undergo transport in the bulk medium, an energy barrier must be surmounted in order for it to ``squeeze'' past its neighbors.
 In so doing, the transported molecule is overcoming intermolecular attractive forces.
 A plot of \( \ln{\eta} \) vs. \( 1/T \) (sometimes called an Arrhenius plot) should, according to \cref{eq:arrhenius_visc}, be linear and have a slope equal to \( E_\eta / R \).
 
@@ -210,7 +209,7 @@ A plot of \( \ln{\eta} \) vs. \( 1/T \) (sometimes called an Arrhenius plot) sho
 \section{The Ostwald Viscometer} % (fold)
 \label{sec:the_ostwald_viscometer}
 
-The apparatus used in this experiment is called an Ostwald viscometer and is shown in \cref{fig:viscometer}. 
+The apparatus used in this experiment is called an Ostwald viscometer, shown in \cref{fig:viscometer}. 
 Its design reflects the application of Poiseuille's law in that the liquid whose viscosity is being measured flows through a uniform capillary tube. 
 In principle, the viscosity of a fluid could be measured absolutely using \cref{eq:tube_flow} if its flow rate was determined and the physical dimensions of the viscometer were known. 
 However, it is more practical to calibrate a given viscometer with a liquid of known viscosity. 
@@ -244,7 +243,7 @@ where \( t \) is the elapsed time and \( V \) is the volume of liquid passing th
 The latter is constant for a given viscometer. 
 Because the hydrostatic pressure, \( P \), is proportional to the liquid density, \( \rho \) (the height is the same for both liquids), and the physical characteristics of the viscometer can be lumped into a constant, \( k_\mtext{inst} = r^4/\br{8 V} \), the expression for viscosity becomes simply
 \begin{equation}
-	\eta = k_\mtext{inst} \rho t \, .
+	\eta = k_\mtext{inst}\, \rho t \, .
 	\label{eq:viscometer_visc2}
 \end{equation}
 Thus, if you measure the flow time, \( t \), for a liquid having a density \( \rho \), you can determine its viscosity relative to that of some reference liquid, i.e.,
@@ -358,7 +357,7 @@ In this experiment, the polymer studied---like many others---is a \emph{linear} 
 Although the molecule is called a ``linear'' chain, its geometry surely does not resemble a straight-line assembly of monomer units. 
 Rather, it is coiled up and adopts an overall shape that is approximately spherical. It may be thought to resemble a loosely tangled ball of yarn, illustrated in \cref{fig:poly_ball}.
 This so-called random coil is not a static structure but continually undergoes contortional motion as the different segments go through various conformational transitions. 
-On a time- averaged basis, however, we can define a statistical radius called the \emph{radius of gyration}, \( R_g \). 
+On a time-averaged basis, however, we can define a statistical radius called the \emph{radius of gyration}, \( R_g \). 
 This characteristic property is expressed quantitatively as
 \begin{equation}
 	R_g = \sqrt{\frac{I}{m}} \, ,
@@ -491,10 +490,10 @@ where \( f_i \) is the fraction of polymers having molecular weight \( M_i \); t
 
 \textcite{schaefgen48} have shown that the relationship between \( M_v \) and \( M_n \) is
 \begin{equation}
-	\frac{M_v}{M_n} = \br{\br{1 + a} \GammaFunc{1 + a}}^{1/a} \, ,
+	\frac{M_v}{M_n} = \br{\br{1 + a} \GammaFunc\br{1 + a}}^{1/a} \, ,
 	\label{eq:mol_weight_ratio}
 \end{equation}
-where \( a \) is the same parameter used in \cref{eq:mark_houwink} and \( \GammaFunc{x} \) denotes the \emph{gamma function}, whose value (for a given \( x \)) can be obtained from mathematical tables. 
+where \( a \) is the same parameter used in \cref{eq:mark_houwink} and \( \GammaFunc\br{x} \) denotes the \emph{gamma function}, whose value (for a given \( x \)) can be obtained from mathematical tables. 
 For example, for \( a = 0.76 \) (for PVOH in water at \SI{25}{\celsius}),\autocite{flory48} the ratio in \cref{eq:mol_weight_ratio} is 
 \begin{equation}
 	\frac{M_v}{M_n} \equiv S = 1.89 \, .
@@ -518,22 +517,22 @@ The structure of vinyl acetate is shown in \cref{fig:vinyl_acetate}.
 	\label{fig:vinyl_acetate}
 \end{marginfigure}
 It is an unsymetrically substituted ethylene molecule, since only one end of the molecule is derivatized. 
-Thus, when a monomer is about to bond to the ``growing'' end of a polymer chain, it can do so in two ways with respect to the previously bonded monomer unit: either the carbon atom containing the functional group, \ch{X} (\ch{C1}), can bond to the terminal end of the polymer chain, or the unfunctionalized carbon (\ch{C2}) can form the bond. 
+Thus, when a monomer is about to bond to the ``growing'' end of a polymer chain, it can do so in two ways with respect to the previously bonded monomer unit: either the carbon atom containing the functional group, \ch{X} (\ch{C\sb{a}}), can bond to the terminal end of the polymer chain, or the unfunctionalized carbon (\ch{C\sb{b}}) can form the bond. 
 These alternatives are illustrated in \cref{fig:growth_directions}. 
 An attachment in which the functional groups alternate is called ``head-to-tail'', while the one in which they are attached on adjacent carbon atoms is referred to as a ``head-to-head'' linkage. 
-Because a head-to-head linkage involves considerable steric repulsion between the functional groups (ethyl will have been added to \emph{adjacent} carbon atoms on the polymer chain to form 1,2-substituents), it proceeds more slowly than a head-to-tail linkage. 
-Therefore, a polymer will have a predominance of the latter arrangements, and the functional groups will, for the most part, alternate in their positions on the polymer backbone (i.e., repetitive 1,3-substituents). 
+Because a head-to-head linkage involves considerable steric repulsion between the functional groups (ethyl will have been added to \emph{adjacent} carbon atoms on the polymer chain to form \iupac{1,2-substituents}), it proceeds more slowly than a head-to-tail linkage. 
+Therefore, a polymer will have a predominance of the latter arrangements, and the functional groups will, for the most part, alternate in their positions on the polymer backbone (i.e., repetitive \iupac{1,3-substituents}). 
 \begin{figure}[htb]
 	\captionsetup[subfigure]{farskip=20pt,captionskip=20pt}
 	\subfloat[][head-to-head growth]{%
 		\chemfig{
-			CH-CH(-[2]R)-[@{op, 0.5}]CH-CH(-[2]R)-[@{cl,0.5}]CH-CH(-[2]R)-{\color{blue}C_1}(-[2]R)={\color{red}C_2}(-[2]H)-H}
+			CH-CH(-[2]R)-[@{op, 0.5}]CH-CH(-[2]R)-[@{cl,0.5}]CH-CH(-[2]R)-{\color{blue}C_\emph{a}}(-[2]R)={\color{red}C_\emph{b}}(-[2]H)-H}
 		\makepolymerdelims{35pt}[7pt]{op}{cl}
 		\label{fig:h2h_growth}
 	} \\
 	\subfloat[][head-to-tail growth]{%
 		\chemfig{
-			CH-CH(-[2]R)-[@{op, 0.5}]CH-CH(-[2]R)-[@{cl,0.5}]CH-CH(-[2]R)-{\color{red}C_2}(-[2]H)={\color{blue}C_1}(-[2]R)-CH_3}
+			CH-CH(-[2]R)-[@{op, 0.5}]CH-CH(-[2]R)-[@{cl,0.5}]CH-CH(-[2]R)-{\color{red}C_\emph{b}}(-[2]H)={\color{blue}C_\emph{a}}(-[2]R)-CH_3}
 		\makepolymerdelims{35pt}[7pt]{op}{cl}
 		\label{fig:h2t_growth}
 	}
@@ -541,18 +540,18 @@ Therefore, a polymer will have a predominance of the latter arrangements, and th
 	\label{fig:growth_directions}
 \end{figure}
 
-Note also that if, after a head-to-head linkages has taken place, the next monomer attaches in a tail-to-tail fashion, the resulting arrangement between the substituents is a 1,4-disusbstituted configuration. 
+Note also that if, after a head-to-head linkage has taken place, the next monomer attaches in a tail-to-tail fashion, the resulting arrangement between the substituents is a \iupac{1,4-disubstituted} configuration. 
 Considering the way this experiment is to be carried out,\sidenote{See the procedure} only the presence of head-to-head attachment is chemically significant. 
-These result in the formation of 1,2-disubstituted structures on the polymer chain. The number of such events that occur in polymerization relative to the more common head-to-tail attachment (and thus 1,3-disubstituted structures) is of interest because the physical and chemical properties of the polymer depend on the fraction of such head-to-head linkages. 
+These result in the formation of \iupac{1,2-disubstituted} structures on the polymer chain. The number of such events that occur in polymerization relative to the more common head-to-tail attachment (and thus \iupac{1,3-disubstituted} structures) is of interest because the physical and chemical properties of the polymer depend on the fraction of such head-to-head linkages. 
 Thus, some analytical method for establishing this information is desirable. 
 
-In the case of the polymerization of vinyl acetate and the subsequent hydrolysis of the polymer to form PVOH, the consequence of the head-to-head linkage is the formation of a 1,2-diol (or \emph{vicinal glycol}). 
-The more common head-to-tail linkages result in the formation of 1,3-diols. 
-The presence of 1,2-diol structures in the polymer can be conveniently distinguished form the 1,3-diols by a chemical means. 
-The 1,2-diol is specifically cleaved (and oxidized) using periodic acid, \ch{HIO4}. 
+In the case of the polymerization of vinyl acetate and the subsequent hydrolysis of the polymer to form PVOH, the consequence of the head-to-head linkage is the formation of a \iupac{1,2-diol} (or \emph{vicinal glycol}). 
+The more common head-to-tail linkages result in the formation of \iupac{1,3-diols}. 
+The presence of \iupac{1,2-diol} structures in the polymer can be conveniently distinguished from the \iupac{1,3-diols} by a chemical means. 
+The \iupac{1,2-diol} is specifically cleaved (and oxidized) using periodic acid, \ch{HIO4}. 
 Actually, the reagent used is the periodate anion (from \ch{KIO4}), which hydrolyzed in water to form \ch{HIO4}.
 The reaction is shown in \cref{fig:diol_cleavage}. 
-Hence, treatment of a PVOH sample with \ch{KIO4} will split the polymer wherever a 1,2-diol structure exists. 
+Hence, treatment of a PVOH sample with \ch{KIO4} will split the polymer wherever a \iupac{1,2-diol} structure exists. 
 This results in a decreases in the (average) molecular weight of the polymer, and this change can be detected via viscosity measurements. 
 \setchemfig{atom style={scale=0.80}}
 \begin{figure}[htb]
@@ -676,7 +675,7 @@ Temperature control for each of these measurements is important.
 \label{sec:questions_and_further_thoughts}
 
 \begin{enumerate}
-	\item Consult a table of mathematical functions, and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited in and after \cref{eq:mol_weight_ratio_ex}.
+	\item Consult a table of mathematical functions,\sidenote{These can be physical tables, or values coded in the gamma function built into a software library like SciPy, found at \Verb{scipy.special.gamma}.} and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited in and after \cref{eq:mol_weight_ratio_ex}.
 	\item Using the definition of \( f \),\sidenote{See the discussion before \cref{eq:frac_glycol}} derive \cref{eq:frac_glycol} and use the result in \cref{eq:mol_weight_ratio_ex} to obtain \cref{eq:h2h_frac}.
 	\item Viscosity measurements are often performed on proteins and other biopolymers. 
 	What experiments could be carried out on such molecules to examine the effect of solution conditions (e.g., ionic strength, or \ch{\pH}) on the extent of denaturation (breakdown of the biologically active structure)?
