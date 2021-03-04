@@ -253,11 +253,11 @@ The constant \( \alpha_e \) is also quite small, but this term should not be neg
 \subsection{Selection Rules} % (fold)
 \label{sub:selection_rules}
 
-The harmonic-oscillator, rigid-rotor selection rules are \( \Delta v = \pm 1 \) and \( \Delta J = \pm 1\); that is, infrared emission or absorption can occur only when these ``allowed'' transitions take place~\autocite{herzberg89}.
-For an \emph{anharmonic} diatomic molecule, the \( \Delta J = \pm 1 \) selection rule is still valid, but weak transitions corresponding to \( \Delta v = \pm2, \pm3, \) etc. (overtones) can now be observed~\autocite{herzberg89}. 
+The harmonic-oscillator, rigid-rotor selection rules are \( \increment v = \pm 1 \) and \( \increment J = \pm 1\); that is, infrared emission or absorption can occur only when these ``allowed'' transitions take place~\autocite{herzberg89}.
+For an \emph{anharmonic} diatomic molecule, the \( \increment J = \pm 1 \) selection rule is still valid, but weak transitions corresponding to \( \increment v = \pm2, \pm3, \) etc. (overtones) can now be observed~\autocite{herzberg89}. 
 Since we are interested in the most intense absorption band (the ``fundamental''), we are concerned with transitions from various \( J'' \) levels of the vibrational ground state \( \br{v'' = 0} \) to \( J' \) levels in the first excited vibrational state \( \br{v' = 1} \). 
 From the still-valid selection rule, we know that the transition must be from \( J'' \) to \( J' = J'' \pm 1 \). 
-Since \( \Delta E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{\nu} \) (in wavenumbers) for this transition will be \( \br{T\br{v', J'} - T\br{v'', J''}} \). Applying the selection rule, we find from \cref{eq:vib_rot_energies} that
+Since \( \increment E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{\nu} \) (in wavenumbers) for this transition will be \( \br{T\br{v', J'} - T\br{v'', J''}} \). Applying the selection rule, we find from \cref{eq:vib_rot_energies} that
 \begin{align}
 	\widetilde{\nu}_R &= \widetilde{\nu}_0 + \br{2 B_e - 3 \alpha_e} + \br{2 B_e - 4 \alpha_e} J'' - \alpha_e J''^2 	&	J'' &= 0, 1, 2, \ldots 
 	\label{eq:r_branch} 
@@ -265,7 +265,7 @@ Since \( \Delta E = h \nu = h c \widetilde{\nu} \), the frequency \( \widetilde{
 	\widetilde{\nu}_P &= \widetilde{\nu}_0 -													 \br{2 B_e - 2 \alpha_e} J'' - \alpha_e J''^2 	&	J'' &= 0, 1, 2, \ldots 
 	\label{eq:p_branch}
 \end{align}
-for \( \Delta J = +1 \) and \( \Delta J = -1 \), respectively, where the \( D_J \) term has been omitted and \( \widetilde{\nu}_0 \), the frequency of the \emph{forbidden} transition from \( {\br{v'',J''} = \br{0, 0}} \) to \( {v' = 1} \), \( {J' = 0} \) is defined as
+for \( \increment J = +1 \) and \( \increment J = -1 \), respectively, where the \( D_J \) term has been omitted and \( \widetilde{\nu}_0 \), the frequency of the \emph{forbidden} transition from \( {\br{v'',J''} = \br{0, 0}} \) to \( {v' = 1} \), \( {J' = 0} \) is defined as
 \begin{equation}
 	\widetilde{\nu}_0 = \widetilde{\nu}_e - 2 \widetilde{\nu}_e \chi_e \, .
 	\label{eq:forbid_transition}
@@ -276,7 +276,7 @@ for \( \Delta J = +1 \) and \( \Delta J = -1 \), respectively, where the \( D_J 
     \input{images/vibrot_energy_diagram.pgf}
     \caption{Rotational energy levels for the ground vibrational state \( {(v'' = 0)} \) and the first excited vibrational state \( {(v' = 1)} \) in a diatomic molecule.
       The vertical arrows indicated allowed transitions in the \emph{R} and \emph{P} branches; the numbers above the arrows index the value \( J'' \) of the lower state.
-      Transitions in the \emph{Q} branch \( {(\Delta J = 0)} \) are not shown, since they are not infrared-active.
+      Transitions in the \emph{Q} branch \( {(\increment J = 0)} \) are not shown, since they are not infrared-active.
       }
     \label{fig:typ_spectrum}
 \end{figure}
@@ -354,7 +354,7 @@ In both cases, the mass dependence of \( \widetilde{\nu}_e \chi_e \) is found to
 	\label{eq:forbidden_isotope_transition} 
 \end{equation}
 and it is seen that a measurement of \( \widetilde{\nu}_0 \) for \ch{HCl} and \ch{DCl} suffices for a determination of \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \). 
-Alternatively or course, the latter constants can be determined from overtone vibrations \( \br{\Delta v > 0} \) of a single isotopic form.~\Footcite[See Exp. 39 in][]{nibler14} 
+Alternatively or course, the latter constants can be determined from overtone vibrations \( \br{\increment v > 0} \) of a single isotopic form.~\Footcite[See Exp. 39 in][]{nibler14} 
 However, such overtones generally have low intensity and the transitions may fall outside the range of many infrared instruments, so the isotopic shift method is used in the present experiment. 
 
 Since \ch{HCl} gas is a mixture of \ch{H^{35}Cl} and \ch{H^{37}Cl} molecules, a chlorine isotope effect will also be present. 
@@ -540,8 +540,8 @@ In this same section will be equilibrium rotational constants for the two degene
 	If the \ch{^{35}Cl}/\ch{^{37}Cl} splitting is seen, index both sets, but be sure to separate them appropriately.
 	Make a table of these \( m \) values and the corresponding frequencies, \( \widetilde{\nu}\br{m} \). 
 	Express the frequencies in \si{\wn} to the tenth of a \si{\wn}. 
-	Then, list the differences between adjacent lines, \( \Delta{\widetilde{\nu}}\br{m} \), which will be roughly \( 2 B_e \), but will vary with \( m \). 
-	\item Plot \( \Delta{\widetilde{\nu}}\br{m} \) against \( m \) and plot the trendline for the series. 
+	Then, list the differences between adjacent lines, \( \increment{\widetilde{\nu}}\br{m} \), which will be roughly \( 2 B_e \), but will vary with \( m \). 
+	\item Plot \( \increment{\widetilde{\nu}}\br{m} \) against \( m \) and plot the trendline for the series. 
 	If any values seem out of line, check the calculation for that cell. 
 	\item Carry out a multiple linear least-squares fit to the data using \cref{eq:both_branches1} to determine \( \widetilde{\nu}_0 \), \( B_e \), \( \alpha_e \), and their standard errors. 
 	Repeat this fitting procedure using \cref{eq:both_branches2}, noting that high \( m \) transitions will be the most important ones in determining \( D_J \), due to its \( m^3 \) dependence. 
