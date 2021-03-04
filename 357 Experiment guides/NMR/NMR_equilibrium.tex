@@ -122,10 +122,10 @@ In many texts, \( \vb{B} \) is loosely called the \emph{magnetic field}.
 \end{equation}
 Here, \( M_I \) is the quantum number measuring the component of nuclear spin angular momentum (and magnetic moment) along the field direction, which can have values of \( -I, -I+1, \ldots, +I \). 
 The effect of the field is thus to break the \( 2I + 1 \) degeneracy and to produce energy levels whose spacing increases linearly with \( B_\mtext{loc} \) (or \( B \)), as shown in \cref{fig:quad_splitting}. 
-Transitions among these levels can be produced by electromagnetic radiation, provided that the selection rule \( \Delta M_I = \pm 1 \) is satisfied. 
+Transitions among these levels can be produced by electromagnetic radiation, provided that the selection rule \( \increment M_I = \pm 1 \) is satisfied. 
 In this case, the resonant frequency is given by 
 \begin{equation}
-	\nu = \frac{\Delta E_\mtext{Zeeman}}{h} = \frac{g_N\mu_N}{h} B_\mtext{loc}\, .
+	\nu = \frac{\increment E_\mtext{Zeeman}}{h} = \frac{g_N\mu_N}{h} B_\mtext{loc}\, .
 	\label{eq:res_freq}
 \end{equation}
 For protons, \( \nu = \num{4.26e7} \cdot B_\mtext{loc} \), where \( \nu \) is expressed in hertz and \( B_\mtext{loc} \) is expressed in tesla. For typical fields of \SIrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region (\SIrange{10}{1000}{\MHz}). 
@@ -429,7 +429,7 @@ Thus NMR spectra can provide detailed structural information about large and com
 \subsection{Rotational Energy Barrier} % (fold)
 \label{sub:rotational_energy_barrier}
 
-In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo chemical exchange through a process analogous to a \emph{cis--trans} isomerization, where the product is chemically identical to the reactant.
+In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo chemical exchange through a process analogous to a \cis--\trans isomerization, where the product is chemically identical to the reactant.
 \begin{figure}[htb]
 	\centering
 		\schemestart
@@ -494,7 +494,7 @@ The spectrum thus consists of two sharp singlets at \( \nu_\ch{A} \) and \( \nu_
 At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes_d}). 
 There is also an intermediate temperature range over which the spectrum consists of two significantly broadened overlapping lines (\cref{fig:lineshapes_b}).
 
-Usually, spin--spin and spin--lattice relaxation determine the width of an NMR absorption peak.\autocite{pople67}
+Usually, spin--spin and spin--lattice relaxation determine the width of an NMR absorption peak.\autocite{levitt08a}
 Here, we are concerned with the additional effect of exchange of two groups of chemically equivalent nuclei on linewidth.
 The Heisenberg uncertainty principle states that the product of the uncertainty in the measurement of the energy of a particular state, \( \increment E \), and the uncertainty in the lifetime of the state, \( \increment t \), is approximately equal to the reduced Planck's constant, \( \hslash = h/\br{2\pi} \):
 \begin{equation}
@@ -530,7 +530,7 @@ Alternatively, various approximations can be made which apply over different ran
 
 % subsection line_shape_analysis (end)
 
-\subsection{Approximate Methods for Evaluation of Rate Constants\autocite{johnson66}} % (fold)
+\subsection{Approximate Methods for Evaluation of Rate Constants\autocite{johnson65}} % (fold)
 \label{sub:approximate_methods_for_evaluation_of_rate_constants_autocite_johnson66}
 
 Direct calculation of the lifetime of a specific spin state from \cref{eq:lineshape} can be made over a limited temperature range.  
@@ -630,7 +630,7 @@ Dispose of waste chemicals as instructed.
 	\item Prepare a \SI{15}{vol\percent} solution of \ch{DMA} and \ch{DMSO-d6} in  a \SIrange{1.5}{2.0}{\mL} microfuge tube. 
 	Use a \SI{1000}{\uL} micropipettor to the add an appropriate amount (\SI{\sim600}{\uL}) of the solution to a clean NMR tube. 
 	\item Record \NMR* spectra for the solution at \SI{10}{\kelvin} increments from \SIrange{293}{403}{\kelvin}. 
-	\item Peak widths, positions, and intensities should be measured using the TopSpin software on the NMR lab computers and this data should be exported with the spectra for later analysis.  
+	\item Peak widths, positions, and intensities should be measured using the TopSpin software on the NMR lab computers and this data should be exported with the spectra for later analysis. 
 \end{enumerate}
 
 % section procedure (end)
