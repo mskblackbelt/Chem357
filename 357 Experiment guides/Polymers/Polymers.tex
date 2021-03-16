@@ -517,7 +517,7 @@ The structure of vinyl acetate is shown in \cref{fig:vinyl_acetate}.
 	\label{fig:vinyl_acetate}
 \end{marginfigure}
 It is an unsymetrically substituted ethylene molecule, since only one end of the molecule is derivatized. 
-Thus, when a monomer is about to bond to the ``growing'' end of a polymer chain, it can do so in two ways with respect to the previously bonded monomer unit: either the carbon atom containing the functional group, \ch{X} (\ch{C\sb{a}}), can bond to the terminal end of the polymer chain, or the unfunctionalized carbon (\ch{C\sb{b}}) can form the bond. 
+Thus, when a monomer is about to bond to the ``growing'' end of a polymer chain, it can do so in two ways with respect to the previously bonded monomer unit: either the carbon atom containing the functional group, \ch{X} (\ch{C$\sb{a}$}), can bond to the terminal end of the polymer chain, or the unfunctionalized carbon (\ch{C$\sb{b}$}) can form the bond. 
 These alternatives are illustrated in \cref{fig:growth_directions}. 
 An attachment in which the functional groups alternate is called ``head-to-tail'', while the one in which they are attached on adjacent carbon atoms is referred to as a ``head-to-head'' linkage. 
 Because a head-to-head linkage involves considerable steric repulsion between the functional groups (ethyl will have been added to \emph{adjacent} carbon atoms on the polymer chain to form \iupac{1,2-substituents}), it proceeds more slowly than a head-to-tail linkage. 
@@ -569,7 +569,7 @@ This results in a decreases in the (average) molecular weight of the polymer, an
 	\label{fig:diol_cleavage}
 \end{figure}
 
-If we assume that the cleavage reaction is \SI{100}{\percent} effective (so that all the 1,2-diol linkages are cleaved), the increase in the number of solute molecules in the solution after treatment with \ch{KIO4} divided by the total number of monomer units represented in the polymer sample is equal to the ratio of 1,2-diol structures to the total 1,2-diol \emph{and} 1,3-diol arrangements in the system. 
+If we assume that the cleavage reaction is \SI{100}{\percent} effective (so that all the \iupac{1,2-diol} linkages are cleaved), the increase in the number of solute molecules in the solution after treatment with \ch{KIO4} divided by the total number of monomer units represented in the polymer sample is equal to the ratio of \iupac{1,2-diol} structures to the total \iupac{1,2-diol} \emph{and} \iupac{1,3-diol} arrangements in the system. 
 This ratio, which is defined here as \( f \), can be expressed as
 \begin{equation}
 	f = \frac{\frac{1}{M_n'} - \frac{1}{M_n^0}}{\frac{1}{M^0}} \, ,
@@ -612,11 +612,26 @@ If the viscometer appears to be dirty, do not proceed with the experiment.
 Either obtain a clean one, or take the time to clean your viscometer thoroughly. 
 Consult your instructor. 
 If you do not remember how to use the viscometer, review the material in Experiment 16, or ask your instructor for this information. 
-A stock solution of PVOH in water (\( c_m \) about \SI{0.016}{\g \per \mL}) should be available; if it is not, you will be told how to prepare this solution. 
+A stock solution of PVOH in water (\( c_m \approx \SI{0.016}{\g \per \mL} \)) should be available; if it is not, you will be told how to prepare this solution. 
 This PVOH must have been appropriately filtered before use; undissolved particles will clog the viscometer. 
 You will measure the viscosities of PVOH solutions of three or four different concentrations for both the cleaved and uncleaved polymers. 
 You will calibrate the viscometer using pure water. 
 Temperature control for each of these measurements is important.
+
+\subsection{Required Equipment} % (fold)
+\label{sub:required_equipment}
+
+\begin{itemize}
+	\item (2) \SI{100}{\mL} volumetric flask
+	\item (6) \SI{50}{\mL} volumetric flasks
+	\item (1) \SI{50}{\mL} volumetric pipet
+	\item (1) \SI{50}{\mL} graduated cylinder
+	\item (1) pipet filler
+	\item (1) Ostwald viscometer
+	\item (1) temperature-controlled water bath
+\end{itemize}
+
+% subsection required_equipment (end)
 
 \begin{enumerate}
 	\item Prepare \SI{100}{\mL} of a \SI{50}{\percent} solution of the PVOH stock solution. 
@@ -643,13 +658,13 @@ Temperature control for each of these measurements is important.
 	Using a pipet bulb, carefully ``push'' the water up through the capillary tube until it is above the upper fiducial mark. 
 	Remove the bulb and allow the water to drain. 
 	Start the timer or stopwatch exactly as the water meniscus passes the upper fiducial mark; stop the timer just as the meniscus passes the lower mark. 
-	Record this time. Repeat this measurement at least three times. 
+	Record this time. Repeat this measurement at three to five times. 
 	Use the pipet bulb to ``reset'' the liquid. 
 	Alternatively, use a flexible tube connected to an aspirator. 
 	The timings should be within \SIrange{0.2}{0.5}{\s}. 
 	After the calibration is complete, remove the viscometer from the bath.
 	\item Following the same procedure, measure the viscosities of the cleaved and uncleaved samples, starting with the most dilute samples. 
-	Make each measurement in triplicate.
+	Make each measurement three to five times.
 \end{enumerate}
 
 % section procedure (end)
@@ -675,7 +690,7 @@ Temperature control for each of these measurements is important.
 \label{sec:questions_and_further_thoughts}
 
 \begin{enumerate}
-	\item Consult a table of mathematical functions,\sidenote{These can be physical tables, or values coded in the gamma function built into a software library like SciPy, found at \Verb{scipy.special.gamma}.} and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited in and after \cref{eq:mol_weight_ratio_ex}.
+	\item Consult a table of mathematical functions,\sidenote{These can be physical tables, or values coded in the gamma function built into a software library like SciPy, found at \Verb{scipy.special.gamma}.} and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited within and following \cref{eq:mol_weight_ratio_ex}.
 	\item Using the definition of \( f \),\sidenote{See the discussion before \cref{eq:frac_glycol}} derive \cref{eq:frac_glycol} and use the result in \cref{eq:mol_weight_ratio_ex} to obtain \cref{eq:h2h_frac}.
 	\item Viscosity measurements are often performed on proteins and other biopolymers. 
 	What experiments could be carried out on such molecules to examine the effect of solution conditions (e.g., ionic strength, or \ch{\pH}) on the extent of denaturation (breakdown of the biologically active structure)?
