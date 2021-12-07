@@ -1,3 +1,100 @@
-\documentclass{article}
-\title{My Title}
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+% \RequirePackage{minted}
+\input{header.tex}
+\usepackage[mackeys=text]{menukeys}
+\tcbuselibrary{minted}
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+	]{biblatex}
+	\addbibresource{../pchem_bib.bib}
+
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=python, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
+	}
+
+	% Add a section for cited bibliography entries.
+  % At the end, create a second bibliography for uncited items (Further Reading).
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+
+  % Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{ % do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Listing settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[red!20!blue!20!white]
+      (frame.south west)  rectangle
+      ([xshift=1.5em]frame.north west);
+    \end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em
+}
+
+\newmintinline[pyinline]{python}{python3}
+
+\newtcblisting{pyinput}[1][]{
+  listing engine=minted,
+  minted language=python,
+  listing only,
+  #1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{An Introduction to Basic Programming Concepts with Python}
+
+\author{Dustin Wheeler}
+
 \begin{document}
