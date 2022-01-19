@@ -1,0 +1,7 @@
+pip
+jupyterlab
+jupyterlab_server
+jupyterlab-latex
+jupyterlab_templates
+ipykernel
+nbgitpuller
