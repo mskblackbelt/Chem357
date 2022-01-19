@@ -1,0 +1,64 @@
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+\input{header.tex}
+	\DeclareSIUnit\wn{\raiseto{-1}\cm}
+	\DeclareSIUnit\cal{cal}
+  
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+	style=chem-acs,%
+	sortcites,%
+	sorting=none,%
+	defernumbers=true,%
+	hyperref,
+	backend=biber,
+	]{biblatex}
+	\addbibresource{../../pchem_bib.bib}
+
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{%
+		\maps[datatype=bibtex]{%
+			\map{%
+				\step[nocited, final]%
+				\step[fieldsource=keywords, notmatch=fret, final]%
+				\step[entrynull]%
+			}%
+		}%
+	}
+	
+	% Add a section for cited bibliography entries. 
+	% At the end, create a second bibliography for uncited items (Further Reading).
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	
+	% Define a style for the Further Reading section
+	\defbibenvironment{nolabelbib}
+		{\list
+			{}
+			{\setlength{\leftmargin}{2\bibhang}%
+				\setlength{\itemindent}{-\bibhang}%
+				\setlength{\itemsep}{\bibitemsep}%
+				\setlength{\parsep}{\bibparsep}}}
+		{\endlist}
+		{\item}
+	
+		% Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+		\iffieldundef{doi}{ % do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Emission Spectroscopy: Biophysics and FRET}
+
+\author{Dustin Wheeler}
+
+%\date{28 March 2021} % without \date command, current date is supplied
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\begin{document}
