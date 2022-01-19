@@ -1,5 +1,7 @@
 # Python Introduction for Physical Chemistry
 
+# Python Introduction for Physical Chemistry
+
 Students should end up with a feel for programming in Python and interacting with the JupyterHub/JupyterLab interface. Use MolSSI course for [Python Scripting for Computational Molecular Science](https://education.molssi.org/python_scripting_cms/) as a template. Basic skills students should have by the end of the exercise:
 
 - Create a notebook
@@ -10,17 +12,28 @@ Students should end up with a feel for programming in Python and interacting wit
     - Change the first cell to a Markdown cell, give your notebook a title and brief description. For assistance, see the [CommonMark help page](https://commonmark.org/help/).
     	- Here is [another resource for learning about Markdown](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
     - Evaluate that cell using <kbd>Shift</kbd> + <kbd>Return</kbd> 
-- Perform basic arithmetic operations
-- Assign a value to a variable
-- Define a simple function
-	- Calculate the value of an equation? Fibonacci sequence?
-- Import a:
-	- library
-	- function from a library
+- Basics
+    - Perform basic arithmetic operations
+    - Assign a value to a variable
+    - Assign multiple variables at once
+    - Modify a variable
+    - Create basic lists
+    - Slice lists
+    - Looping and logic
+TODO
+    - List comprehensions
+    - Import a:
+        - library (`math`)
+        - individual object or function from a library (`math.sin`)
+    - Define a simple function
+        - Calculate the value of an equation? Fibonacci sequence?
+
 - Work with the file system (use [`pathlib`](https://realpython.com/python-pathlib/))
+TODO: Needs a rewrite using `pathlib`
 	- Navigate and list files
 	- Read a text file
 	- Write a file
+    - Read multiple text files
 - Work with tabular data
 	- Read in tabular data using `numpy` functions
 	- Work with data in `numpy` arrays
@@ -32,3 +45,4 @@ Students should end up with a feel for programming in Python and interacting wit
 	- Save figure to a file
 
 Should this content be separated from the plotting lesson? Or should plotting follow naturally on from this? 
+
