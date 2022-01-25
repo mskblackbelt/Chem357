@@ -1,4 +1,4 @@
-name: pchem2_test
+name: pchem2_lab
 channels:
   - conda-forge
   - bioconda
