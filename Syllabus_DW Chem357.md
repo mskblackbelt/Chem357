@@ -1,10 +1,8 @@
----
 title: Course Syllabus
 course: Chemistry 357
 author: Dustin Wheeler
 semester: Spring 2021
 left-foot: Chem 357, Spring 2021
----
 
 # Physical Chemistry Laboratory II #
 
@@ -41,7 +39,7 @@ Course communication, lectures, help sessions, and announcements will be posted 
 
 Attendance and Tardiness
 : 
-Your attendance in each and every lab is mandatory. There will be no makeup labs offered for this course. For safety reasons, if you are **more than 15 minutes late** for class, you will not be permitted to perform the lab and you will lose participation points for the session. 
+Your attendance in each and every lab is mandatory. There will be no makeup labs offered for this course. For safety reasons, if you are more than 15 minutes late for class, you will not be permitted to perform the lab and you will lose participation points for the session. 
 
 Lab Safety
 :
@@ -62,7 +60,7 @@ Your grade for this course will be based on the following factors:
 	- Summaries should include Procedure, Results/Discussion, and Appendix sections (60 points total)
 - A series of laboratory reports (3) to be completed at home (**30%** of semester grade)
 	- Pre-lab preparation (10% of each lab report)
-	- Lab reports should be written in the style of *The Journal of Physical Chemistry A* (JPCA). If you are unfamiliar with this style, please look up a few articles in a recent issue to familiarize yourself with the format. The [Information for Authors][jpca-auth-info] page and [Author Guidelines][jpca-auth-guide] (specifically the author guidelines section on *Manuscript Text Components*) may be helpful if you aren't sure how to structure a manuscript. Templates (MS Word and LaTeX) are available for download on the course Blackboard page. 
+	- Lab reports should be written in the style of *The Journal of Physical Chemistry A* (JPCA). If you are unfamiliar with this style, please look up a few articles in a recent issue to familiarize yourself with the format. The [Information for Authors][jpca-auth-info] page and [Author Guidelines][jpca-auth-guide] (specifically the author guidelines section on *Manuscript Text Components*) may be helpful if you aren't sure how to structure a manuscript. Since you will be writing your reports in JupyterLab, you need to make sure you follow the _content_ conventions, not necessarily the format conventions (format is defined by the Jupyter export settings, set up by the instructor). 
 - A final group presentation based on one of the labs performed during the semester. More details will be given later in the semester. (**10%** of semester grade)
 : 
 Pre-lab preparation is worth 10% of the grade for each summary or report. Summaries are due one week after the completion of the lab, while full reports are due two weeks after completing the lab. Write-ups should be clear, concise evaluations of the experiment, including any observations, experimental procedures, instrumental methods and instrumentation used, computational methods and results, and any additional analyses you performed. Please see the JPCA author guidelines for details on these sections. 
@@ -134,7 +132,7 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 
 4.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction 
 : In this two-week experiment, you will determine the rate constant and collision diameter for a diffusion-controlled reaction using fluorescence quenching.
-:**Instrumentation used:** Fluorimeter
+:**Instrumentation used:** Fluorometer
 : **Report type**: Summary
 
 5.	Polymers - Molecular Weight and Monomer Linkage Properties of Poly(vinyl alcohol) 
@@ -142,8 +140,8 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 :**Instrumentation used:** Ostwald viscometer
 : **Report type**: Summary
 
-6.	NMR - Determination of the Rotational Barrier in *N,N*-dimethylacetamide 
-: Using nuclear magnetic resonance spectroscopy, you will determine the energy of the rorational barrier in *N,N*-dimethylacetamide. By investigating the NMR spectra over a series of temperatures, you will determine the equilibrium constant for the conversion. 
+6.	NMR - Determination of the Rotational Barrier in *N, N*-dimethylacetamide 
+: Using nuclear magnetic resonance spectroscopy, you will determine the energy of the rorational barrier in *N, N*-dimethylacetamide. By investigating the NMR spectra over a series of temperatures, you will determine the equilibrium constant for the conversion. 
 :**Instrumentation used:** NMR spectrometer, Gaussian16
 : **Report type**: Full report
 
@@ -156,7 +154,7 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 
 8. FRET - Emission Spectroscopy: Biophysics and Förster Resonance Energy Transfer (FRET) 
 : In this two-week experiment, you will learn about quenching via Förster Resonance Energy Transfer, determine the free energy of unfolding a protein, and determine intramolecular distances in the partially-unfolded and fully-folded structures. 
-:**Instrumentation used:** UV-Vis, Fluorimeter
+:**Instrumentation used:** UV-Vis, Fluorometer
 : **Report type**: Full report
 
 9.	Final Presentations
