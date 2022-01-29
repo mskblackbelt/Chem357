@@ -286,3 +286,5 @@ Submitted work/*
 # Jupyter notebook checkpoints
 *.ipynb_checkpoints
 
+# Emacs autosave files
+.#*
