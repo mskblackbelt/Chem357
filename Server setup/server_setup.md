@@ -41,7 +41,7 @@ Gaussian install: <https://gaussian.com/g16/g16bin_install.pdf>
 - Modify tljh/user.py to add specific skel folder and groups to new users, reformat with `black`
 ```
 user_file="/opt/tljh/hub/lib/python3.?/site-packages/tljh/user.py"
-sudo sed -i "s/\(\"--create-home\"\)/\1, \"--skel \/etc\/skel-tljh\", \"--groups gaussian\"/" $user_file
+sudo sed -i "s/\(\"--create-home\"\)/\1, \"--skel\", \"\/etc\/skel-tljh\", \"--groups\", \"$gauss_group\"/" "$user_file"
 sudo /opt/tljh/user/bin/black $user_file
 ```
 

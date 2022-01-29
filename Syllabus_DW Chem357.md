@@ -1,12 +1,12 @@
 title: Course Syllabus
 course: Chemistry 357
 author: Dustin Wheeler
-semester: Spring 2021
-left-foot: Chem 357, Spring 2021
+semester: Spring 2022
+left-foot: Chem 357, Spring 2022
 
 # Physical Chemistry Laboratory II #
 
-### Chemistry 357, Spring 2021 ###
+### Chemistry 357, Spring 2022 ###
 
 Instructor
 :
@@ -28,6 +28,9 @@ Course Materials
 : 
 **Required:** One carbon copy laboratory notebook (available in the Hunter College bookstore). 
 There is no textbook for this course. I will provide handouts or post the relevant material on Blackboard for you. You should print out each lab and _must_ complete a summary of the lab procedure in your notebook before you come to class. 
+
+:
+A USB drive for retrieving data from the various instruments used in the course. 
 
 : 
 If you are interested in purchasing a physical laboratory book (entirely optional), many of our experiments will be modified from the standard physical chemistry laboratory lab manual by Garland, Nibler, and Shoemaker: _Experiments in Physical Chemistry,_ 7th Ed., 2003, McGraw-Hill, New York, NY.
@@ -94,40 +97,23 @@ In compliance with the CUNY Policy on Sexual Misconduct, Hunter College reaffirm
 ## Course Schedule ##
 
 {{Course schedule.md}}
-<!--
-| Week	| Date 	| Groups 1 & 2 	| Groups 3 & 4	| 
-| :-------	| :------	|  ---------	| -----------	| 
-| 1				| 	1/27	| Introduction, Plotting Tutorial 				| Introduction, Plotting Tutorial | 
-| 2				| 	2/3 	| Introduction to Error Analysis 				| Introduction to Error Analysis | 
-| 3				| 	2/10	| Fluorescence 								| Fluorescence | 
-| 4				| 	2/24	| Fluorescence 								| Fluorescence | 
-| 5				| 	3/2 	| Polymers 									| Polymers | 
-| 6				| 	3/9 	| NMR 										| NMR | 
-| 7				| 	3/16	| NMR 										| NMR | 
-| 8				| 	3/23	| Introduction to Computational Chemistry 	| Introduction to Computational Chemistry | 
-| 9				| 	3/30	| HCl/DCl 									| FRET | 
-| 10			| 	4/6 	| HCl/DCl 									| FRET | 
-| 11 			| 	4/20	| FRET 										| HCl/DCl | 
-| 12 			| 	4/27	| FRET 										| HCl/DCl | 
-| 13			| 	5/4 	| Final Presentations 						| Final Presentations | 
-| 14			| 	5/11 	| Checkout 									| Checkout | 
--->
+
 <!--BREAK-->
 ## Description of Experiments ##
 
 1.	Introduction to Data Analysis and Plotting 
-: This one-week exercise will give you an introduction to the JupyterLab interface, the Jupyter notebook, basic plotting techniques using `matplotlib`, and show you how to work with data in a variety of digital formats. 
+: This one-week exercise will give you an introduction to the JupyterLab interface, the Jupyter notebook, and the basics of the Python programming language. Additionally, you  will learn to work with data in external files. 
 : **Instrumentation used:** JupyterLab
 : **Report type**: Summary
 
-2.	Introduction to Computation Chemistry 
-: This lab will introduce you to the Unix command line shell, after which you will learn to run some rudimentary quantum calculations using the Gaussian computational chemistry software package.
-:**Instrumentation used:** Command line shell, Python, Gaussian16
+2.	Introduction to Plotting and Error Analysis 
+: This one-week exercise will give you an introduction to basic plotting techniques using `matplotlib`, and show you how to work with data in a variety of digital formats.  Additionally, you will be introduced to the principles of error analysis, propagation of error, and probability distributions. 
+: **Instrumentation used:** JupyterLab
 : **Report type**: Summary
 
-3.	Introduction to Error Analysis 
-: This one week exercise will guide you through the principles of error analysis, propagation of error, and probability distributions. 
-: **Instrumentation used:** None
+3.	Introduction to Computation Chemistry 
+: This lab will introduce you to the Unix command line shell, after which you will learn to run some rudimentary quantum calculations using the Gaussian computational chemistry software package.
+:**Instrumentation used:** Command line shell, Python, Gaussian16
 : **Report type**: Summary
 
 4.	Fluorescence - The Kinetics of a Diffusion-Controlled Reaction 

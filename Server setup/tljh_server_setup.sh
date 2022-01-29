@@ -19,30 +19,51 @@ do
   conf_gauss="${conf_gauss:=n}"
   case $conf_gauss in
     [yY][eE][sS]|[yY])
-      # Create g16 user group, take ownership of $GAUSS_SCRDIR, $g16root/g16 folders
-      sudo groupadd g16
-      sudo chgrp -R g16 /usr/bin/g16
-      sudo chgrp -R g16 /scratch-data/g16-scratch
+      # Create g16 user group if g16 or gaussian group doesn't exist
+      if [[ $(getent group {g16,gaussian} | wc -l ) -eq 0 ]]; then 
+        gauss_group="g16"
+        sudo groupadd "$gauss_group"
+      else
+        gauss_group=$(getent group {g16,gaussian} | cut -d: -f1)
+      fi
+      # Create, take ownership of $GAUSS_SCRDIR, $g16root/g16 folders
+      if [[ -d /usr/bin/g16 ]]; then 
+        g16root="/usr/bin"
+      else 
+        read -p -r "Gaussian16 not installed in default location, please provide g16root[/usr/bin]: " g16root
+      fi
+      read -p -r "Provide location of g16 scratch directory[/scrach-data/g16-scratch]: " GAUSS_SCRDIR
+      GAUSS_SCRDIR="${GAUSS_SCRDIR:=/scrach-data/g16-scratch}"
+      sudo chgrp -R g16 $g16root/g16
+      sudo chgrp -R g16 $GAUSS_SCRDIR
       
       # Export Gaussian information to skeleton .profile if it's not present
       if ! (grep -q "g16root" /etc/skel/.profile); then
         sudo cat <<- EOF >> /etc/skel/.profile
-					## Bash setup commands for g16
-					export g16root="/usr/bin"
-					export GAUSS_SCRDIR="/scrach-data/g16-scratch"
+					## Bash setup commands for Gaussian16
+					export g16root="$g16root" 
+					export GAUSS_SCRDIR="$GAUSS_SCRDIR"
 
 					source $g16root/g16/bsd/g16.profile
 				EOF
       fi
     ;;
     [nN][oO]|[nN])
-      echo "You said no, resuming installation"
+      echo "You said no, skipping Gaussian setup and resuming installation"
     ;;
     *)
       echo "Invalid input, please choose [Y]es or [N]o"
     ;;
   esac
 done
+
+## Create skeleton user folder for new JupyterHub users
+sudo cp /etc/skel /etc/skel-tljh
+
+sudo mkdir -p /srv/shared/{data,submissions}
+
+sudo ln -s /srv/shared /etc/skel-tljh
+sudo ln -s /srv/data /etc/skel-tljh
 
 ## Install The Littlest JupyerHub
 
@@ -62,19 +83,10 @@ sudo openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout "$key_file" -o
 export PATH=/opt/tljh/user/bin:${PATH}
 
 # Modify tljh/user.py to add specific skel folder and groups to new users, reformat with `black`
+gauss_group="${gauss_group:=$(getent group {g16,gaussian} | cut -d: -f1)}"
 user_file="/opt/tljh/hub/lib/python3.8/site-packages/tljh/user.py"
-sudo sed -i "s/\(\"--create-home\"\)/\1, \"--skel \/etc\/skel-tljh\", \"--groups gaussian\"/" "$user_file"
+sudo sed -i "s/\(\"--create-home\"\)/\1, \"--skel\", \"\/etc\/skel-tljh\", \"--groups\", \"$gauss_group\"/" "$user_file"
 sudo /opt/tljh/user/bin/black "$user_file"
-
-## Create skeleton user folder for new JupyterHub users
-sudo cp /etc/skel /etc/skel-tljh
-
-sudo mkdir -p /srv/shared/{data,submissions}
-
-
-
-sudo ln -s /srv/shared /etc/skel-tljh
-sudo ln -s /srv/data /etc/skel-tljh
 
 ## Configure TLJH via tljh-config
 
@@ -104,30 +116,60 @@ sudo tljh-config set https.port 443
 sudo tljh-config set https.tls.key "$key_file"
 sudo tljh-config set https.tls.cert "$cert_file"
 
+# Upgrade mamba, pip, conda to latest versions
+sudo /opt/tljh/user/bin/mamba upgrade -y mamba conda pip
+
+# Configure JupyterLab templates
+# Install node.js v.12
+# Instructions from https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
+curl -sL https://deb.nodesource.com/setup_12.x | sudo bash
+
+# Enable Jupyter Lab and Server extensions
+sudo /opt/tljh/user/bin/jupyter labextension install jupyterlab_templates
+sudo /opt/tljh/user/bin/jupyter serverextension enable --py --sys-prefix jupyterlab_templates
+
+# TODO: place desired templates in appropriate location
+# Templates need to be organized in subfolders in the $template_dir
+
 # Set up notebook templates
 template_dir="/opt/tljh/user/share/jupyter/notebook_templates"
+read -p "Location of Jupyter templates folder: " template_folder
+sudo mkdir -p "$template_dir"
+if [[ -d "$template_folder" ]]; then
+  sudo cp "$template_folder" "$template_dir"
+fi
 sudo tljh-config set c.JupyterLabTemplates.template_dirs "$template_dir"
-
-
-# TODO: upgrade mamba, pip, conda to latest versions?
-# TODO: check location of mamba binary
-# sudo /opt/tljh/user/bin/mamba upgrade -y mamba conda pip
-
-# TODO: Install packages in base conda environment (if not implemented during installation)
 
 # Install computation conda env (prompt for file path first)
 read -p "Location of environment.yml file: " env_file_loc
 sudo /opt/tljh/user/bin/conda env create -f="$env_file_loc"
 
-# TODO: Install jupyterlab extension for OpenChemistry (need to know location of conda binary… or activate conda env?)
+# Add conda commands to /etc/skel-tljh/.bashrc
+sudo cat <<- EOF >> /etc/skel/.profile
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/tljh/user/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+		eval "$__conda_setup"
+else
+		if [ -f "/opt/tljh/user/etc/profile.d/conda.sh" ]; then
+				. "/opt/tljh/user/etc/profile.d/conda.sh"
+		else
+				export PATH="/opt/tljh/user/bin:$PATH"
+		fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+EOF
+fi
 
-# Configure JupyterLab templates
-sudo /opt/tljh/user/bin/jupyter serverextension enable --py jupyterlab_templates
+# Install jupyterlab extension for OpenChemistry 
+# TODO: don't hard-code path, or activate conda env?
+sudo /opt/tljh/user/envs/pchem2_lab/bin/jupyter labextension install @openchemistry/jupyterlab
 
-# TODO: place desired templates in appropriate location
-
-# TODO: give access to the new python kernel for pchem users
-sudo /opt/tljh/user/bin/python3 -m ipython kernel install --name "pchem2" --display-name "Python (PChem Lab)" --sys-prefix
+# Give access to the new python kernel for pchem users
+# TODO: don't hard-code env name
+sudo /opt/tljh/user/envs/pchem2_lab/bin/python3 -m ipykernel install --name "pchem2_lab" --display-name "Python (PChem Lab)" --prefix="/opt/tljh/user"
 
 # Restart TLJH and Traefik on completion
 sudo service jupyterhub restart
