@@ -24,11 +24,11 @@ do
       sudo chgrp -R g16 /usr/bin/g16
       sudo chgrp -R g16 /scratch-data/g16-scratch
       
-      # Export Gaussian information to skeleton .profile
-      if [[ $(grep -q -c "g16root" /etc/skel/.profile) -lt 1 ]]; then 
+      # Export Gaussian information to skeleton .profile if it's not present
+      if ! (grep -q "g16root" /etc/skel/.profile); then
         sudo cat <<- EOF >> /etc/skel/.profile
 					## Bash setup commands for g16
-					export g16root="/usr/bin" 
+					export g16root="/usr/bin"
 					export GAUSS_SCRDIR="/scrach-data/g16-scratch"
 
 					source $g16root/g16/bsd/g16.profile
