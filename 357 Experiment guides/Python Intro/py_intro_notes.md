@@ -30,5 +30,10 @@ Students should end up with a feel for programming in Python and interacting wit
 	- Label plot axes, title, legend, etc.
 	- Plot multiple graphs in one figure 
 	- Save figure to a file
+- Work with functions
+    - Defining a function
+    - Documentation
+    - Default arguments
+    
 
 Should this content be separated from the plotting lesson? Or should plotting follow naturally on from this? 
