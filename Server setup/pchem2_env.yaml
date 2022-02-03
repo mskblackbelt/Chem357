@@ -1,9 +1,9 @@
 name: pchem2_lab
 channels:
+  - defaults
   - conda-forge
   - bioconda
   - psi4
-  - defaults
 dependencies:
   - python>=3.8
   - pip>=21

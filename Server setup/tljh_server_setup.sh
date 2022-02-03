@@ -40,8 +40,8 @@ do
       sudo chgrp -R g16 $g16root/g16
       sudo chgrp -R g16 $GAUSS_SCRDIR
       
-      # Export Gaussian information to skeleton .profile
-      if [[ $(grep -q -c "g16root" /etc/skel/.profile) -lt 1 ]]; then 
+      # Export Gaussian information to skeleton .profile if it's not present
+      if ! (grep -q "g16root" /etc/skel/.profile); then
         sudo cat <<- EOF >> /etc/skel/.profile
 					## Bash setup commands for Gaussian16
 					export g16root="$g16root" 
