@@ -210,33 +210,41 @@ To view your new object, just type \pyinline{data} on a new line and press \keys
 By default Jupyter notebooks will display the results of the final line of a cell (if there is anything to display).\sidenote{They only display the results of intermediate lines of a cell if the \pyinline{print()} command is used.}
 You should end up with two columns of data with 21 data points in each column.
 Once you have the data columns, create a new scatter plot from the data.
-The Pandas library automatically incorporates basic plotting functions from the Matplotlib library, so data in a DataFrame can be plotted by using the \pyinline{plot()} function on a given DataFrame.
-In your case, you need only type \pyinline{data.plot()} and evaluate the cell to see a plot of the data.\sidenote{
+While the Pandas library automatically incorporates basic plotting functions from the Matplotlib library, customizing the plot can often be difficult.\sidenote{
 	\emph{n.b.:}   Pandas is designed first as a tool for finance and business  operations.
-	The default settings for plots are often inappropriate for  scientific plotsso some tweaking may be necessary.}
+	The default settings for plots are often inappropriate for  scientific plots so some tweaking may be necessary.}
+It works well for quick plots, but we'll generally be better off using Matplotlib directly.
+To quickly plot your data, you only need to type \pyinline{plt.plot('X',
+  'Y', data=data)}.
 While you are exploring data, the default appearance is fine, but you'll probably want to start customizing the appearance of plots when you get them ready for publication.
 
-Notice that the plot isn't plotting column X against column Y, but instead is plotting X and Y against the \emph{index} (the bold column of numbers on the left side of the displayed data).
-There are two ways to correct your plot.
-The first is to import the data and define the index column during the import, like so:
+Adding data to the plot function is done in the following manner:
 \begin{pyinput}
-data1 = pd.read_csv("raw_data/data.txt", sep="\t", index_col="X")
-data1.plot()
+  plt.plot(x1, y1, ['fmt1'], x2, y2, ['fmt2'], ..., data=data-source)
 \end{pyinput}
-This method is useful if you know the structure of the data ahead of time (and when you have a clear index column, such as a time index, wavelength, or frequency).
-The second way to fix the plot is to define the \emph{x} and \emph{y} data in the arguments of the \pyinline{plot()} function.
-The \pyinline{plot()} function takes a number of arguments (you can see them quickly by pressing \keys{Shift + Tab} inside of the parentheses), including arguments for features like plot type (e.g., \pyinline{kind="scatter"}), plot title (e.g., \pyinline{title="My Plot"}), and axes labels (e.g., \pyinline{xlabel="Time", ylabel="Effort"}).
+The variables \Verb{x1}, \Verb{y1}, etc. represent the \(x\) and \(y\) data you want to plot, while the string \Verb{'fmt#'} is a format string for the plot data, composed of a letter representing the color of the data and a character to represent the symbol or line.
+If you're using labeled data, such as columns in a dataframe, you can use the label strings as your \Verb{x1} and \Verb{y1} information.
+The default format is \Verb{'b-'}, which is a solid blue line.
+The square brackets arount \Verb{'fmt#'} indicates that the parameter is optional.
+In addition to the parameter being optional, each part is also optional, so \Verb{':'} would keep the default color and change the line style to a dotted line, while \Verb{'r'} would create a red solid line.
+Adding information like title, axes labels, etc. can be done by using the appropriate command.\sidenote{
+  If any of this confuses you, or you'd like more examples, see the \href{https://matplotlib.org/stable/tutorials/introductory/pyplot.html}{Pyplot Tutorial} on the Matplotlib website.
+}
+Think of a plot as an object exclusive to its own cell (\emph{i.e.,} it has an implicit identity like ``plot-742'').
+Any calls to \pyinline{plt} within that cell will operate on that particular plot object.
+So using functions like \pyinline{plt.title()} or \pyinline{plt.xlabel()} will change the title and \(x\)-axis label of that particular plot.
+There are a slew of methods available to \Verb{matplotlib.pyplot} and you can find out more information on the \href{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.html}{associated help page}.
 
-With this in mind, create a scatter plot (\pyinline{kind="scatter"}) of Y and a function of X, give the plot a title (``X vs. Y'' is fine) and label each axis (``X'', ``Y'').
+With this in mind, create a scatter plot (symbol type \Verb{'o'}) of Y as a function of X, give the plot a title (``X vs. Y'' is fine) and label each axis (``X'', ``Y'').
 
 \subsection{Polishing Plot Appearance} % (fold)
 \label{sub:polishing_plot_appearance}
 
 When creating more complex plots, once the basics are complete, remove any unnecessary ``chart junk'' to prepare your plot for publication.
-This includes things like background shading (Matplotlib is pretty good about this), grid lines (only necessary if you're trying to manually read data off the chart, we don't need this with the ubiquity of computers), and the border surrounding the full plot area (should only need axes to indicate the origin or provide an anchor for tick marks).
+This includes things like background shading (Matplotlib is pretty good about this), grid lines (only necessary if you're trying to manually read data off the chart; we don't need this with the ubiquity of computers), and the border surrounding the full plot area (should only need axes to indicate the origin or provide an anchor for tick marks).
 If there is a legend (useful when there are multiple datasets present), it should usually be a part of the plot area, not pushed off to the side.
-Don't waste valuable data area on something like a legend than can be nestled in one of the empty parts of your plot.
-Finally, while color seems like a nice feature, plots shouldn't rely on color to convey meaning.
+Don't waste valuable data area in your papers on something like a legend than can be nestled in one of the empty parts of your plot.
+Finally, while color \emph{seems} like a nice feature, plots shouldn't rely on color to convey meaning.
 There's always a chance that readers won't have access to color printouts, or that the reader may be colorblind.
 To keep plots accessible, use symbols, line weights, and dashing to differentiate your datasets.
 The lesson to learn from this paragraph is that simplicity is key to conveying your message.
@@ -247,12 +255,12 @@ Now that the plot has been cleaned up, we'd like to add a trendline.
 The Seaborn library is a visual analysis package built on top of Matplotlib with an emphasis on data exploration and friendly figures.
 To plot our data with Seaborn, input the following:
 \begin{pyinput}
-sns.lmplot(data=data, x="X", y="Y", ci=None)
+  sns.lmplot(data=data, x="X", y="Y", ci=None)
 \end{pyinput}
 This creates a scatterplot using the X and Y columns from \Verb{data}, fits it with a linear model (``lm''), and disables the confidence interval (CI) in the plot.\sidenote{``ci'' can be set to a numeric value to represent the confidence interval of the associated fit, typically \SI{95}{\percent} (\pyinline{ci=95}).}
 A linear fit should be sufficient for this data.
-The \Verb{seaborn} is really designed for exploratory data analysis, not for complex curve fits and edge cases of data.
-It is generally inappropriate for spectral data, but very good for visual statistical explorations of data.
+The Seaborn library is really designed for \emph{exploratory} data analysis, not for complex curve fits and edge cases of data.
+It is generally inappropriate for spectral data, but very good for visual and statistical explorations of data.
 
 % subsection polishing_plot_appearance (end)
 
@@ -261,8 +269,9 @@ It is generally inappropriate for spectral data, but very good for visual statis
 \subsection{Fitting Data} % (fold)
 \label{fitting-data}
 
+% TODO: Change polyfit() to Polynomial.fit(), need covariance matrix first
 Now that you have a trendline, it's time to get some information about it.
-The Numpy library is a fundamental library in the numeric python community.
+The Numpy library is a fundamental library in the numeric Python community.
 It contains a vast array of functions and structures that are used by \emph{many} other libraries.\sidenote{The Numpy library (shortened to \Verb{np} by convention) has a host of useful functions, including a number of common mathematical functions.
   The square root function is one of these (\Verb{np.sqrt(num)}).
   Another useful one (that you'll need later) is \Verb{np.log10(num)}.}
@@ -322,17 +331,17 @@ for x, y in (('x1','y1'),('x2','y2'),('x3','y3'),('x4','y4')):
 
 # This operation makes my point regarding this data more clear, as you'll see
 with np.printoptions(precision=2):
-    print("Fit, Std. Err.")
-    for x in fits:
-        print(x)
+    print("Fit param., Std. Err.")
+    for item in fits:
+        print(item)
 \end{pyinput}
 
-Clearly, the data sets are different… You can see that from the numbers in the table.
+Clearly, the data sets are different… You can see that from the raw data in the table.
 So what's going on?
 To learn more, plot each of the datasets in a separate plot.
 Discuss your observations with your lab partner, and figure out the best way to deal with information like this.
 
-The key takeaway from this exercise is that you should always plot your data, even if it's only a quick glance on the side of your spreadsheet!
+The key takeaway from this exercise is that you should always plot your data, even if it's only a quick glance on the side of your workspace!
 This data was taken from \href{https://doi.org/10.1080/00031305.1973.10478966}{an article written by F.J. Anscombe in 1973} arguing for the necessity of graphs in statistical analysis.
 It is such a valuable dataset that the \Verb{seaborn} library is installed with a copy of the data (\pyinline{sns.load_dataset("anscombe")}).
 
@@ -349,8 +358,8 @@ There is a very simple syntax in Pandas for making a new column:
 \begin{pyinput}
 df["new col name"] = func(df["old col name"])
 \end{pyinput}
-In this case, \pyinline{func()} just represents the transform that we are applying to the original column (multiplication, addition, inversion, etc.).
-Columns in dataframes will broadcast functions across every item in the column by default, so making a line-by-line transformation (e.g., doubling a column) is as easy as \pyinline{df["B"] = 2 * df["A"]}.
+In this case, \pyinline{func()} just represents the transformation that we are applying to the original column (multiplication, addition, inversion, etc.).
+Columns in dataframes will apply functions across every item in the column by default (a process called ``broadcasting''), so making a line-by-line transformation (e.g., doubling a column) is as easy as \pyinline{df["B"] = 2 * df["A"]}.
 Using this syntax, create new calculated columns in our dataframe so we can plot the same spectrum as ``Wavelength'' vs ``Absorbance (A)''.\sidenote{What are the relevant units for \%T and A?}
 
 To get you started converting wavenumber to wavelength, make the following transformation on the ``Wavenumber'' column\sidenote{Notice that Python requires the use of ``**'' for exponentiation. This is because the caret character (\textasciicircum) is often used for other commands.
@@ -377,6 +386,7 @@ You should be able to transfer your basic skills to any other software with ease
 
 %section column-manipulation-and-plotting-spectra (end)
 
+% TODO: Integrate exercises from MolSSI plotting tutorial https://education.molssi.org/python-visualization/introduction.html
 \section{Alternative Software} % (fold)
 \label{alternative-software}
 
