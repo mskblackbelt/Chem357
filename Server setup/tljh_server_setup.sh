@@ -30,9 +30,12 @@ do
       if [[ -d /usr/bin/g16 ]]; then 
         g16root="/usr/bin"
       else 
-        read -p -r "Gaussian16 not installed in default location, please provide g16root[/usr/bin]: " g16root
+        echo "Gaussian16 not installed in default location,"
+        echo "please provide g16root[/usr/bin]:" 
+        read g16root
       fi
-      read -p -r "Provide location of g16 scratch directory[/scrach-data/g16-scratch]: " GAUSS_SCRDIR
+      echo "Provide location of g16 scratch directory[/scrach-data/g16-scratch]: " 
+      read GAUSS_SCRDIR
       GAUSS_SCRDIR="${GAUSS_SCRDIR:=/scrach-data/g16-scratch}"
       sudo chgrp -R g16 $g16root/g16
       sudo chgrp -R g16 $GAUSS_SCRDIR
@@ -100,7 +103,8 @@ sudo tljh-config set c.Authenticator.check_common_password True
 sudo tljh-config set user_environment.default_app jupyterlab
 
 # Prompt for admin username for TLJH
-read -p "Enter admin user(s) for TLJH (separate users with a space): " users
+echo "Enter admin user(s) for TLJH (separate users with a space): " 
+read users
 # Add administrator user(s)
 sudo tljh-config add-item users.admin $users
 
@@ -133,7 +137,8 @@ sudo /opt/tljh/user/bin/jupyter serverextension enable --py --sys-prefix jupyter
 
 # Set up notebook templates
 template_dir="/opt/tljh/user/share/jupyter/notebook_templates"
-read -p "Location of Jupyter templates folder: " template_folder
+echo "Location of Jupyter templates folder: " 
+read template_folder
 sudo mkdir -p "$template_dir"
 if [[ -d "$template_folder" ]]; then
   sudo cp "$template_folder" "$template_dir"
@@ -141,7 +146,8 @@ fi
 sudo tljh-config set c.JupyterLabTemplates.template_dirs "$template_dir"
 
 # Install computation conda env (prompt for file path first)
-read -p "Location of environment.yml file: " env_file_loc
+echo "Location of environment.yml file: " 
+read env_file_loc
 sudo /opt/tljh/user/bin/conda env create -f="$env_file_loc"
 
 # Add conda commands to /etc/skel-tljh/.bashrc
@@ -170,6 +176,26 @@ sudo /opt/tljh/user/envs/pchem2_lab/bin/jupyter labextension install @openchemis
 # Give access to the new python kernel for pchem users
 # TODO: don't hard-code env name
 sudo /opt/tljh/user/envs/pchem2_lab/bin/python3 -m ipykernel install --name "pchem2_lab" --display-name "Python (PChem Lab)" --prefix="/opt/tljh/user"
+
+## Give JupyterHub users access to shared folders in /srv
+submission_dir="/srv/shared/submissions"
+data_dir="/srv/shared/data"
+
+# Transfer ownership of submission_dir to jupyterhub-admins
+sudo chgrp -R jupyterhub-admins $submission_dir
+# set s(t)icky bit and setgid bit, let admins have full run, block all others.
+sudo chmod 3770 $submission_dir
+
+# Allow jupyterhub-users to view contents, add their own material to the directory
+sudo setfacl -m g:jupyterhub-users:rwx $submission_dir
+# Set default permissions for new files to only allow the owner to view files. 
+sudo setfacl -d -m o::--- $submission_dir
+sudo setfacl -d -m g:jupyterhub-users:--- $submission_dir # might not be necessary…
+
+# Transfer ownership of data_dir to jupyterhub-admins
+sudo chgrp -R jupyterhub-admins $data_dir
+# set setgid bit, allow admins to have full run, block others.
+sudo chmod 2775 $data_dir
 
 # Restart TLJH and Traefik on completion
 sudo service jupyterhub restart
