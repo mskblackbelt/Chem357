@@ -17,7 +17,7 @@ The template file should specify the method and the basis set used for computati
 In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. 
 Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise. 
 
-\item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \SI{0.7}{\angstrom} and \SI{1.3}{\angstrom} with \SI{0.1}{\angstrom} steps, and a denser step width of \SI{0.02}{\angstrom} between \SI{0.85}{\angstrom} and \SI{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
+\item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \qty{0.7}{\angstrom} and \qty{1.3}{\angstrom} with \qty{0.1}{\angstrom} steps, and a denser step width of \qty{0.02}{\angstrom} between \qty{0.85}{\angstrom} and \qty{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
    \begin{itemize}
    \item create a unique directory for each computation
    \item copies your template input file
@@ -27,7 +27,7 @@ Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise.
    \end{itemize}}
    
 Run the bash script \bashinline{bash run.sh}, which will run the calculations and return you a file with a bond length vs energy. 
-Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \SI{0.917}{\angstrom}?
+Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
 
 \item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
 In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms. Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set. 
@@ -44,7 +44,7 @@ Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by 
  \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
 \end{equation}
 
-How does this compare to the experimental value of \(\increment H_\mtext{at}=\SI{135.2}{\kcal\per\mol}\) (\SI{5.86}{\eV})? 
+How does this compare to the experimental value of \(\increment H_\mtext{at}=\qty{135.2}{\kcal\per\mol}\) (\qty{5.86}{\eV})? 
 
 \item Now, let us look at the dipole moment. Search for the corresponding line in the output file. 
 You can use a grep function for this task: 
@@ -69,7 +69,7 @@ Just make sure you get the right path to the directory… check the contents of 
 \begin{bashinput}
   grep Dipole dist*/*.log -A1 | grep Tot | awk '{print $9}'
 \end{bashinput}
-How does the dipole at the equilibrium distance compare with the experimental value of \SI{1.82}{debye}? 
+How does the dipole at the equilibrium distance compare with the experimental value of \qty{1.82}{debye}? 
 Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 
 Do you expect this trend to continue at large distances?  Why or why not?
 

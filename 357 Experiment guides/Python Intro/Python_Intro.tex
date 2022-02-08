@@ -245,7 +245,7 @@ To plot our data with Seaborn, input the following:
 \begin{pyinput}
 sns.lmplot(data=data, x="X", y="Y", ci=None)
 \end{pyinput}
-This creates a scatterplot using the X and Y columns from \Verb{data}, fits it with a linear model (``lm''), and disables the confidence interval (CI) in the plot.\sidenote{``ci'' can be set to a numeric value to represent the confidence interval of the associated fit, typically \SI{95}{\percent} (\pyinline{ci=95}).} 
+This creates a scatterplot using the X and Y columns from \Verb{data}, fits it with a linear model (``lm''), and disables the confidence interval (CI) in the plot.\sidenote{``ci'' can be set to a numeric value to represent the confidence interval of the associated fit, typically \qty{95}{\percent} (\pyinline{ci=95}).} 
 A linear fit should be sufficient for this data.
 The \Verb{seaborn} is really designed for exploratory data analysis, not for complex curve fits and edge cases of data. 
 It is generally inappropriate for spectral data, but very good for visual statistical explorations of data. 

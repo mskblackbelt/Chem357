@@ -111,7 +111,7 @@ and we can approximate the steady-state concentration of the encounter complex a
 
 Now, if we further assume that the reaction rate is given by the slow step, i.e., \( k_2 \)\ch{[A-B]}, we can express that rate as
 \[
-	\mtext{Rate} \simeq k_2 \ch{[A-B]} = \frac{k_1 k_2}{k_{-1} + k_2} \ch{[A][B]} = k_\mtext{obs}\ch{[A][B]} \qquad \si{\Molar \per \s} \, .
+	\mtext{Rate} \simeq k_2 \ch{[A-B]} = \frac{k_1 k_2}{k_{-1} + k_2} \ch{[A][B]} = k_\mtext{obs}\ch{[A][B]} \qquad \unit{\Molar \per \s} \, .
 \]
 For convenience, we define the second-order rate coefficient, \( k_\textup{obs} \), as 
 \begin{equation}
@@ -144,7 +144,7 @@ Fick's first law says that the number of molecules, \( \dd{n} \), diffusing thro
 	\label{eq:fickA}
 \end{equation}
 where the proportionality constant \( D \) is called the \emph{diffusion coefficient}. 
-The units of \( D \) are \si{\cm\squared \per \s}. 
+The units of \( D \) are \unit{\cm\squared \per \s}. 
 The minus sign in \cref{eq:fickA} indicates that transport goes against the concentration gradient
 (i.e., from high to low concentration values).
 
@@ -190,28 +190,28 @@ in which \( \erfc(x) \) is the \emph{complementary error function}, \( 1 - \erf(
 The time dependence of the reactant at the reaction boundary \( r = R \) becomes expressible in terms of the flux of reactant, \( J_R \), or its rate of transport across a hypothetical spherical surface with radius \( R \). 
 Thus
 \begin{equation}
-	J_R = \frac{4\pi R D N_\mtext{A} C_0}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{molecules \per \s} \, ,
+	J_R = \frac{4\pi R D N_\mtext{A} C_0}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \unit{molecules \per \s} \, ,
 	\label{eq:rxnbound}
 \end{equation}
 where \( N_\mtext{A} \) is Avogadro's number. 
-The units shown (and factor of 1000) pertain if \( C_0 \) is expressed in molarity (\si{\mol\per\liter}) and \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively.\sidenote[][-5\baselineskip]{
-To convert from \si{molecules} to \si{\Molar}, we need to acount for the number of particles in a \si{mole} (Avogadro's number) and convert from our molecular length units (\si{\cm}) to proper volume units. It's useful to know that \( \SI{1}{\L} =\SI{1}{\dm\cubed} \).}
+The units shown (and factor of 1000) pertain if \( C_0 \) is expressed in molarity (\unit{\mol\per\liter}) and \( R \) and \( D \) are expressed in \unit{\cm} and \unit{\cm\squared \per \s}, respectively.\sidenote[][-5\baselineskip]{
+To convert from \unit{molecules} to \unit{\Molar}, we need to acount for the number of particles in a \unit{mole} (Avogadro's number) and convert from our molecular length units (\unit{\cm}) to proper volume units. It's useful to know that \( \qty{1}{\L} =\qty{1}{\dm\cubed} \).}
 \Cref{eq:rxnbound} indicates that the flux (molecules per unit area per second) is actually time-dependent. 
 This time dependence comes from \( R/\sqrt{\pi D t} \), which is sometimes referred to as the \emph{transient term}. 
 Physically, the transient term accounts for the fact that initially nearby reactant molecules do not have to diffuse through the bulk medium in order to react. 
 After a short time, however, these nearby reactant molecules are depleted, and the flux approaches a constant, or steady-state, value, \( 4\pi R D N_\mtext{A} C_0 / 1000 \). 
 This can be seen mathematically in that time is represented in \cref{eq:rxnbound} as \( \sqrt{t} \). 
 
-Because \( J_R \) represents the rate of passage of one of the reactants (having a bulk concentration \( C_0 \) in \si{\Molar}) through a spherical reaction surface with the other reactant at the center, the rate of the reaction represented by \cref{eq:rxn_scheme} is merely \( J_R \) itself. 
+Because \( J_R \) represents the rate of passage of one of the reactants (having a bulk concentration \( C_0 \) in \unit{\Molar}) through a spherical reaction surface with the other reactant at the center, the rate of the reaction represented by \cref{eq:rxn_scheme} is merely \( J_R \) itself. 
 Hence, the bimolecular, diffusion-controlled rate constant \( k_1 \) is \( J_R/C_0 \),
 \begin{equation}
-	k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \si{\per\Molar \per\s} \, .
+	k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \unit{\per\Molar \per\s} \, .
 	\label{eq:rateconst1}
 \end{equation} 
 This rate constant is not a true \emph{constant}, however, because of the transient term. 
 However, as \( t \) becomes large enough,
 \begin{equation}
-	\lim_{t \to \infty} k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \qquad \si{\per\Molar \per\s} \, ,
+	\lim_{t \to \infty} k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \qquad \unit{\per\Molar \per\s} \, ,
 	\label{eq:rateconst2}
 \end{equation}
 and \cref{eq:rateconst2} can be used to determine the diffusion-controlled rate constant if the mutual diffusion constant \( (D_\mtext{A} + D_\mtext{B}) \) and collision radii \( (R_\mtext{A} + R_\mtext{B}) \) are known.%
@@ -222,12 +222,12 @@ However, at the very beginning there will be some fraction of molecules that are
 Therefore, the apparent rate of the reaction will be faster initially. 
 As these pairs react, this population is depleted, leaving behind reactants that are farther apart and thus need to undergo diffusion. 
 Thus, the transient term dies out and the reaction finally reaches a purely diffusion controlled regime, described by the rate constant in \cref{eq:rateconst2}.}
-We emphasize again that the units of \( k_1 \) presented above are \si{\per\Molar \per \s}, if \( R \) and \( D \) are expressed in \si{\cm} and \si{\cm\squared \per \s}, respectively. 
+We emphasize again that the units of \( k_1 \) presented above are \unit{\per\Molar \per \s}, if \( R \) and \( D \) are expressed in \unit{\cm} and \unit{\cm\squared \per \s}, respectively. 
 
 Often, however, \( R \) and \( D \) are not known, and an indirect method is used to estimate \( k_1 \). 
 This approach, developed by Einstein using Stokes's law, allows the diffusion coefficient to be expressed in terms of a bulk property, the solvent viscosity, \( \eta \). Thus
 \begin{equation}
-	k \simeq \frac{8 \overline{R} T}{3 \eta} \qquad \si{\per\Molar \per \s} \, ,
+	k \simeq \frac{8 \overline{R} T}{3 \eta} \qquad \unit{\per\Molar \per \s} \, ,
 	\label{eq:rateapprox}
 \end{equation}
 where \( \overline{R} = k_\mtext{B} N_\mtext{A} \) is the ideal gas constant.%
@@ -237,7 +237,7 @@ Everywhere else, \( R \) is the summed ``collision radii'' of the interacting sp
 It is this collision radius that we are trying to find in this experiment, along with the rate constant \( k_1 \). 
 Also, keep in mind that \cref{eq:rateapprox} represents and \emph{alternative} method for estimating the diffusion rate constant, \( k_1 \), based on bulk parameters of the solvent, rather than detailed knowledge of the molecular parameters \( R \) and \( D \).}
 \Cref{eq:rateapprox}, which is often referred to as the Stokes-Einstein-Smoluchowski (SES) equation, holds when the reactants \ch{A} and \ch{B} are different and their sizes are larger than that of the solvent molecules. 
-The indicated units are obtained if \( \overline{R} \) and \( \eta \) are expressed in SI units, such that \( \overline{R} = \SI{8.314e3}{\L \Pa \per \mol \per \K} \) and \( \eta \) is in \si[inter-unit-product=\ensuremath{{}\!\cdot\!{}}]{\Pa \s}.
+The indicated units are obtained if \( \overline{R} \) and \( \eta \) are expressed in SI units, such that \( \overline{R} = \qty{8.314e3}{\L \Pa \per \mol \per \K} \) and \( \eta \) is in \unit[inter-unit-product=\ensuremath{{}\!\cdot\!{}}]{\Pa \s}.
 % section mass_trans (end)
 
 \section{Fluorescence Quenching} % (fold)
@@ -291,7 +291,7 @@ Identifying \( 1/(k_\mtext{r} + k_\mtext{nr}) \) as the reciprocal of the \emph{
 
 \Cref{eq:sv_rel} is known as the steady-state Stern-Volmer (S-V) relation as applied to fluorescence quenching. 
 It predicts that a plot of \( I_0/I - 1 \) vs. \ch{[Q]} should be linear, having an intercept of zero and a slope equal to \( k_\mtext{q} \tau_0 \). 
-The latter is called the Stern-Volmer constant, \( K_\mtext{SV} \) (units of \si{\per\Molar}). 
+The latter is called the Stern-Volmer constant, \( K_\mtext{SV} \) (units of \unit{\per\Molar}). 
 If fluorescence quenching is diffusion-controlled (which is the case in the anthracene/\ch{CBr4} system), \( k_\mtext{q} \) can be identified with \( k_1 \) (see \cref{eq:rxn_scheme,eq:k_obs,eq:rateconst1,eq:rateconst2,eq:rateapprox}).%
 \sidenote[][-4.0in]{
 	The first Stern-Volmer Equation \cref{eq:sv_rel} is generally applicable because it makes no assumptions about the quenching rate constant \( k_\mtext{q} \). 
@@ -340,8 +340,8 @@ where
 \end{equation}
 in which 
 \begin{align*}
-	a &= \frac{1}{\tau_0} + \frac{4 \pi R D N_\mtext{A}}{1000} \ch{[Q]} \qquad \si{\per\s} \, ,\\
-	b &= \frac{4 \sqrt{\pi D} R^2 N_\mtext{A}}{1000} \ch{[Q]} \qquad \si{\sqrt{1\per\s}}\, .
+	a &= \frac{1}{\tau_0} + \frac{4 \pi R D N_\mtext{A}}{1000} \ch{[Q]} \qquad \unit{\per\s} \, ,\\
+	b &= \frac{4 \sqrt{\pi D} R^2 N_\mtext{A}}{1000} \ch{[Q]} \qquad \unit{\sqrt{1\per\s}}\, .
 \end{align*}
 If \( Y = 1 \), \cref{eq:sv_step_rel} reduces to \cref{eq:sv_rel},%
 \sidenote{\Cref{eq:sv_step_rel} describes a curved line due to the transient effects that take place very soon after the light source is switched on. 
@@ -376,7 +376,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	If you detect this gas, which has a sharp, slightly acrid odor, notify your instructor and immediately shut off the source.
 	Increase ventilation, and leave the room immediately.
 	\item The compressed-gas cylinder used in deaerating should be securely strapped to a firm support.
-	The delivery pressure should never exceed a few (e.g., 5) \si{\psig}.
+	The delivery pressure should never exceed a few (e.g., 5) \unit{\psig}.
 	\item The experiment should be performed in an open, well-ventilated laboratory.
 \end{itemize}
 % section safety (end)
@@ -389,8 +389,8 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 \label{sub:required_equipment}
 
 \begin{itemize}
-	\item (10) \SI{10}{\mL} volumetric flasks
-	\item (1) \SI{10}{\ml} graduated pipet
+	\item (10) \qty{10}{\mL} volumetric flasks
+	\item (1) \qty{10}{\ml} graduated pipet
 	\item (1) fluorescence cell
 	\item dry nitrogen gas cylinder
 \end{itemize}
@@ -399,14 +399,14 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 
 
 \begin{enumerate}
-	\item Using freshly sublimed or purified anthracene and \ch{CBr4}, prepare \SI{250}{\mL} of \SI{\sim1.00E-4}{\Molar} solution of anthracene (\ch{AN}) in spectrometric (or fluorometric) quality \emph{n-}hexane. 
-	Using this solution as ``solvent,'' prepare \SI{25}{\mL} of \SI{\sim1.50E-2}{\Molar} ``stock'' solution of \ch{CBr4}.
+	\item Using freshly sublimed or purified anthracene and \ch{CBr4}, prepare \qty{250}{\mL} of \qty{\sim1.00E-4}{\Molar} solution of anthracene (\ch{AN}) in spectrometric (or fluorometric) quality \emph{n-}hexane. 
+	Using this solution as ``solvent,'' prepare \qty{25}{\mL} of \qty{\sim1.50E-2}{\Molar} ``stock'' solution of \ch{CBr4}.
 	\item Prepare at least eight dilutions of the \ch{AN}/\ch{CBr4} stock solution using the \ch{AN} solution as solvent.
-	The most dilute should be \SI{5}{\percent}, and the rest should be nearly evenly spaced up to the stock-solution value. 
-	A volume of \SI{10}{\mL} of each solution is appropriate. 
-	Include \SIlist{0;100}{\percent} samples for uniformity. 
+	The most dilute should be \qty{5}{\percent}, and the rest should be nearly evenly spaced up to the stock-solution value. 
+	A volume of \qty{10}{\mL} of each solution is appropriate. 
+	Include \qtylist{0;100}{\percent} samples for uniformity. 
 	Label these samples.
-	\item Starting with the \SI{0}{\percent} sample (\ch{AN} only), introduce the solution into a fluorescence cell and deaerate with dry \ch{N2} for about \SI{2}{\min}. 
+	\item Starting with the \qty{0}{\percent} sample (\ch{AN} only), introduce the solution into a fluorescence cell and deaerate with dry \ch{N2} for about \qty{2}{\min}. 
 	Avoid using an excessive flow rate that will cause the solution to splatter from the cell or to otherwise result in undue solvent evaporation. 
 	Promptly stopper the cell.
 	\item Record the full fluorescence spectrum using the instrumental conditions previously outlined by the instructor.\sidenote{
@@ -414,10 +414,10 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
   \toprule
   Parameter & Value\\
   \midrule
-  \( \lambda_\mtext{exc} \) & \SI{283}{\nm}\\
-  \( \lambda_\mtext{det} \) & \SIrange{350}{550}{\nm}\\
-  Scan speed & \SI{300}{\nm\per\min}\\
-  Slit width & \SI{2.5}{\nm}\\
+  \( \lambda_\mtext{exc} \) & \qty{283}{\nm}\\
+  \( \lambda_\mtext{det} \) & \qtyrange{350}{550}{\nm}\\
+  Scan speed & \qty{300}{\nm\per\min}\\
+  Slit width & \qty{2.5}{\nm}\\
   \bottomrule
 \end{tabular}}
 	Make sure the spectrum record is labeled.
@@ -429,7 +429,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
   This gain should result in a linear increase in signal, but you should take spectra of one concentration twice (once at each gain level) to provide a way to scale your spectra. 
 	\item Keep in mind the following procedural points: 
 	\begin{enumerate}
-		\item The temperature of the sample should be held constant within \SIrange{0.5}{1.0}{\celsius}; 
+		\item The temperature of the sample should be held constant within \qtyrange{0.5}{1.0}{\celsius}; 
 		\item the exposure times of all of the samples (especially those rich in \ch{CBr4}) to the excitation source (and even room light) should be minimized; and 
 		\item samples should be stored in the dark until they are used.
 	\end{enumerate}
@@ -440,21 +440,21 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 \section{Data Analysis} % (fold)
 \label{sec:data_analysis}
 \begin{enumerate}
-	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \SI{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \si{\Molar}).\marginnote{This is a good place to practice with the Pandas library. 
+	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).\marginnote{This is a good place to practice with the Pandas library. 
   All of your spectra should use the same wavelength range, so you can import the CSV data and set the index column to the wavelength.
   You can then find the wavelength for the maximum fluorescence and grab the intensity at that wavelength for each sample.}
 	\item Plot a graph of  \( I_0/I \)  vs. \ch{[Q]}. 
 	Note that \( I_0 \) is simply the value of the unquenched fluorescence peak (when \( \ch{[Q]} = 0 \)). 
 	This is your experimental quenching curve or Stern-Volmer plot, and we will now see how it corresponds to the two limits of the quenching model (with and without the transient term), as well as the SES equation.
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
-	Use the gas constant, \( \overline{R} \), the temperature (assume \SI{25}{\celsius} and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
+	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius} and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
   Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-5\baselineskip]{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
 		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
-		\textcite{ware66} reported a value of \( D = \SI{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \SI{25}{\celsius}. 
+		\textcite{ware66} reported a value of \( D = \qty{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \qty{25}{\celsius}. 
 		To obtain \( D \) for \emph{n}-hexane at some other temperature, assume that \( D \) is proportional to \( T/\eta \). 
-		They also reported a value of \( \tau_0 = \SI{5.52e-9}{\s} \). You can assume this to be temperature independent.
+		They also reported a value of \( \tau_0 = \qty{5.52e-9}{\s} \). You can assume this to be temperature independent.
 	} 
 	What is the collision radius calculated this way (including the unit)?\sidenote{%
 	\textbf{Keep track of your units, especially \emph{moles} vs. \emph{molecules}.}}
@@ -480,7 +480,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	Just make sure you realize that the parameter \( R \) enters into \cref{eq:sv_step_rel} directly in the numerator, as well as through the denominator \( Y \) due to the \( R \) dependence of \( a \) and \( b \). 
 	Thus, you need to make sure that all of these parts of the equation refer to the same variable for \( R \) so that it is varied consistently throughout. 
 	Make sure that you use \( \erfc() \) and not \( \erf() \). 
-	You can start with a guess of \SI{10}{\angstrom} for the radius \( R \) and have \Verb{curve_fit()} solve for the best fit of your line. 
+	You can start with a guess of \qty{10}{\angstrom} for the radius \( R \) and have \Verb{curve_fit()} solve for the best fit of your line. 
   Superimpose the theoretical curve corresponding to this \( R \) value onto your data points.
 \end{enumerate}
 % section data_analysis (end)

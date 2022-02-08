@@ -79,22 +79,22 @@
 		N_0 \exp\br{-x/\lambda} \, ,
 		\] 
 		where \( N_0 \) is the number of particles at \( x = 0 \) and \( \lambda \) is the mean free path of a particle. 
-		What is \( N \) if \( N_0=\num{1000(5)e6} \), \( x = \SI{1.00(1)}{\m} \), and \( \lambda = \SI{0.25(6)}{\m} \)?
+		What is \( N \) if \( N_0=\num{1000(5)e6} \), \( x = \qty{1.00(1)}{\m} \), and \( \lambda = \qty{0.25(6)}{\m} \)?
 		
 		\item A particle travels along a straight-line trajectory given by \[
 		 y = a + bx \, .
 		 \] 
-		If \( a = \SI{2.5(3)}{\m} \) and \( b = \num{5.0(1)e-2} \), what is the value of \( y \) at:
+		If \( a = \qty{2.5(3)}{\m} \) and \( b = \num{5.0(1)e-2} \), what is the value of \( y \) at:
 		\begin{enumerate}
-			\item \( x = \SI{4}{\m} \) and
+			\item \( x = \qty{4}{\m} \) and
 			
-			\item \( x = \SI{4.0(1)}{\m} \)?
+			\item \( x = \qty{4.0(1)}{\m} \)?
 		\end{enumerate}
 		
 		\item The molar specific heat, \( c_{\textsc{m}} \), of a metal at low temperature, \( T \), is given by \[
 			c_{\textsc{m}} = a T + b T^3 \, .
 		\]
-		If \( a = \SI{1.35(5)}{\mJ\per\mol\K^2} \), \( b = \SI{0.021(1)}{\mJ\per\mol\K^4} \), and \( T = \SI{5.0(5)}{\K} \), what is the value of \( c_{\textsc{m}} \)?
+		If \( a = \qty{1.35(5)}{\mJ\per\mol\K^2} \), \( b = \qty{0.021(1)}{\mJ\per\mol\K^4} \), and \( T = \qty{5.0(5)}{\K} \), what is the value of \( c_{\textsc{m}} \)?
 	\end{enumerate}
 	
 	\item\marginnote{The following problems come from \textcite{taylor1997error}.} Evaluate each of the following:
@@ -113,11 +113,11 @@
 	
 	\item A student makes the following measurements:
 		\begin{align*}
-			a &= \SI{5(1)}{\cm} \\
-			b &= \SI{18(2)}{\cm} \\
-			c &= \SI{12(1)}{\cm} \\
-			t &= \SI{2.0(5)}{\s} \\
-			m &= \SI{18(1)}{\g} 
+			a &= \qty{5(1)}{\cm} \\
+			b &= \qty{18(2)}{\cm} \\
+			c &= \qty{12(1)}{\cm} \\
+			t &= \qty{2.0(5)}{\s} \\
+			m &= \qty{18(1)}{\g} 
 		\end{align*}
 	\begin{enumerate}
 		\item Use the provisional rules (eqs. 3.4 and 3.8 in the text) to compute the following quantities with their absolute and relative uncertainties (assuming the errors are correlated, \emph{i.e., not} independent and random):
@@ -149,7 +149,7 @@
 						xtick={50,51,52,53,54,55},
 						extra x ticks={51,52,53,54},
 						xtick align=inside,
-						ylabel={Wavelength \( \lambda \) (\si{\nm})},
+						ylabel={Wavelength \( \lambda \) (\unit{\nm})},
 						ymin=400, ymax=700,
 						ytick align=inside,
 						ytick={400,450,500,550,600,650,700},
@@ -199,23 +199,23 @@
 	\end{figure*}
 	\item \label[problem]{prob:spec} A spectrometer is a device for separating the different wavelengths in a beam of light and measuring the wavelengths. 
 	It deflects the different wavelengths through different angles \( \theta \), and, if the relation between the angle \( \theta \) and the wavelength \( \lambda \) is known, the experimenter can find \( \lambda \) by measuring \( \theta \). 
-	Careful measurements with a certain spectrometer have established the calibration curve shown in \cref{fig:calib}; this figure is simply a graph of \( \lambda \) (in nanometers, \si{\nm}) agains \( \theta \), obtained by measuring \( \theta \) for several accurately known wavelengths \( \lambda \). 
+	Careful measurements with a certain spectrometer have established the calibration curve shown in \cref{fig:calib}; this figure is simply a graph of \( \lambda \) (in nanometers, \unit{\nm}) agains \( \theta \), obtained by measuring \( \theta \) for several accurately known wavelengths \( \lambda \). 
 	A student directs a narrow beam of light from a hydrogen lamp through this spectrometer and finds that the light consists of just three well-defined wavelengths; that is, she sees three narrow beams (one red, one turquoise, and one violet) emerging at three different angles. 
 	She measures those angles as
 	\begin{align*}
-		\theta_1 &= \SI{51.0(2)}{\degree} \\
-		\theta_2 &= \SI{52.6(2)}{\degree} \\
-		\theta_3 &= \SI{54.0(2)}{\degree} \\
+		\theta_1 &= \qty{51.0(2)}{\degree} \\
+		\theta_2 &= \qty{52.6(2)}{\degree} \\
+		\theta_3 &= \qty{54.0(2)}{\degree} \\
 	\end{align*}
 	\begin{enumerate}
 		\item \label[problem]{prob:calib} Use the calibration curve in \cref{fig:calib} to find the corresponding wavelengths \( \lambda_1 \), \( \lambda_2 \), and \( \lambda_3 \) with their uncertainties. 
-		\item According to theory, these wavelengths should be \SIlist{656;486;434}{\nm}. 
+		\item According to theory, these wavelengths should be \qtylist{656;486;434}{\nm}. 
 		Are the student's measurements in satisfactory agreement with these theoretical values?
 		\item \label[problem]{prob:zoomed} If the spectrometer has a vernier scale to read the angles, the angles can be measured with an uncertainty of \ang{0.05} or even less. 
-		Let us suppose the three measurements above have uncertainties of \SI{\pm0.05}{\degree}. Given this new, smaller uncertainty in the angles and \emph{without drawing any more lines on the graph,} use your answers from \cref{prob:calib} to find the new uncertainties in the three wavelengths, explaining clearly how you do it.\footnote{Hint: the calibration curve is nearly straight in the vicinity of any one measurement.}
+		Let us suppose the three measurements above have uncertainties of \qty{\pm0.05}{\degree}. Given this new, smaller uncertainty in the angles and \emph{without drawing any more lines on the graph,} use your answers from \cref{prob:calib} to find the new uncertainties in the three wavelengths, explaining clearly how you do it.\footnote{Hint: the calibration curve is nearly straight in the vicinity of any one measurement.}
 		\item To take advantage of more accurate measurements, an experimenter may need to enlarge the calibration curve. 
 		The inset in \cref{fig:calib} is an enlargement in the vicinity of the angle \( \theta_2 \). 
-		Use this graph to find the wavelength \( \lambda_2 \) if \( \theta_2 \) has been measured as \SI{52.72(5)}{\degree}; check that your prediction for the uncertainty of \( \lambda_2 \) in \cref{prob:zoomed} was correct. 
+		Use this graph to find the wavelength \( \lambda_2 \) if \( \theta_2 \) has been measured as \qty{52.72(5)}{\degree}; check that your prediction for the uncertainty of \( \lambda_2 \) in \cref{prob:zoomed} was correct. 
 	\end{enumerate}
 	
 	\item If you measure two independent variables as \[

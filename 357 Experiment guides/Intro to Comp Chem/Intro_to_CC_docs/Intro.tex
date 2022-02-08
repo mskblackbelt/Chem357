@@ -23,7 +23,7 @@ By convention, the input file is named \Verb{input.com}, though any name and ext
 The basic input file is shown below.\sidenote{
   Content wrapped in angle brackets (\Verb{<*>}) should be \textbf{replaced} with the desired value and the angle brackets should be \textbf{removed} (they are not a recognized Gaussian input), e.g., \Verb{<basis>} \( \Rightarrow \) \Verb{STO-3G}.
 }
-This file starts a calculation on two processor cores using \SI{400}{\mega\byte} of memory.
+This file starts a calculation on two processor cores using \qty{400}{\mega\byte} of memory.
 The output will be redirected to the \Verb{input.log} output file. 
 This file contains the basic information and results of the calculation such as the total energy, atomic forces, and so forth. 
 Additional output files might be generated according to the specified settings. 
@@ -63,7 +63,7 @@ label=lst:gauss_samp]
   \item[multiplicity] The \Verb{multiplicity} keyword should be substituted with the multiplicity of your system (\( 2\mtext{S}+1 \), where \( \mtext{S} \) is total spin).
     This should always be an integer.
   \item[atomX <X> <Y> <Z>] This block specifies the geometry of the system.
-    You can use either the atomic symbol (e.g., \Verb{C}) or the atomic number (e.g., \Verb{6}) to specify the atom type, followed by it's cartesian coordinates in units of Angstroms (\si{\angstrom}).\sidenote{
+    You can use either the atomic symbol (e.g., \Verb{C}) or the atomic number (e.g., \Verb{6}) to specify the atom type, followed by it's cartesian coordinates in units of Angstroms (\unit{\angstrom}).\sidenote{
       Use a decimal-valued coordinate, even if it is a whole number (\Verb{0.0}, not \Verb{0}).
     }
     This block must be followed by an empty line.
