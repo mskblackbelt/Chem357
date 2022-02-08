@@ -1,6 +1,7 @@
+% TODO: Convert code over to Psi4 so all work can be done inside Jupyter notebooks
 % Tutorial prepared by Igor Y. Zhang, Hagen-Henrik Kowalski and Tonghao Shen 2017.
-% Updated 2017
-% \documentclass[10pt]{scrartcl}
+% Transcribed and modified by Dustin D. Wheeler
+% Updated 2021
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
 \input{header.tex}
 \usepackage[mackeys=text]{menukeys}
@@ -58,31 +59,19 @@
     }%
   }
 % (end)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \usepackage[%
-% pdftitle={Hands-on Workshop: First-principles simulations of molecules and materials},%
-%   pdfauthor={Igor Y. Zhang, Hagen-Henrik Kowalski and Tonghao Shen},
-%   pdfsubject={Hands-on Workshop: First-principles simulations of molecules and materials},
-%   bookmarks=true,
-%   bookmarksdepth=2,
-%   linkcolor=DarkBlue,
-%   citecolor=DarkBlue,
-%   filecolor=DarkBlue,
-%   urlcolor=DarkBlue,
-%  %hidelinks=true,
-%   colorlinks=true
-% ]{hyperref}
 
 %%%%%%% Source Code options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Command to insert PROMPT info before shell console input
+% Command to insert $PROMPT before shell console input
 \newcommand{\BashFancyFormatLine}{%
   \def\FancyVerbFormatLine##1{\textcolor{blue}{\small user:\char`\~\$}\ ##1}%
 }
 
+% Set up Gaussian input settings
 \tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
 	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+
+% tcolorbox settings for code blocks
 \tcbset{
   colback=blue!4!white,
   colframe=blue!85!black,
@@ -110,6 +99,7 @@
   numbersep=1em
 }
 
+% Settings for all code blocks
 \lstset{
   breaklines=true,
   basicstyle=\small,
@@ -121,6 +111,7 @@
   numbersep=2em,
 }
 
+% Settings for Gaussian code blocks
 \lstdefinestyle{gaussian}{
   language=Clean,
   % keywordstyle=\bfseries,
@@ -141,6 +132,7 @@
   morecomment=[s]{<}{>}
 }
 
+% Minted settings for inline bash code
 \newmintinline{bash}{}
 
 % Hack to force linebreaks at `¬` in bashinputs. From
@@ -150,6 +142,7 @@
   \begingroup\lccode`~=`\¬\lowercase{\endgroup\def~{\linebreak}}%
 }
 
+% Settings for bash code blocks
 \newtcblisting{bashinput}[1][]{
   listing engine=minted,
   minted language=bash, 
@@ -160,6 +153,7 @@
   #1
 }
 
+% Settings for Gaussian input file blocks
 \newtcblisting{gaussinput}[1][]{
 	listing engine=listings,
 	listing only,
@@ -171,40 +165,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-
-% --------------------------------------------------------------------
-%
-% \thispagestyle{empty}
-% \begin{fullwidth}
-%   \begin{center}\huge\bfseries
-%     \rule{1.5\textwidth}{1pt}
-%     \\
-%     PChem Lab 357: Spring 2019
-%     \\
-%     \vspace{0.5cm}
-%     \rule{1.5\textwidth}{1pt}
-%   \end{center}
-%   \vfill
-%   \begin{center}\LARGE\bfseries
-%     % \includegraphics[width=0.5\textwidth]{figures/aims-logo-gross}
-%     \includegraphics[height=7.55cm]{pics/cover.png}
-%     \vfill
-%     Exercise 5: Introduction to Computational Chemistry\\
-%     Exercise Problems for Gaussian16
-%   \end{center}
-%   \vfill
-%   \begin{center}\large\bfseries
-%     \rule{1.5\textwidth}{1pt}
-%     \vfill
-%     Adopted from Hands-On Workshop on Density-functional theory and beyond organized by FHI der MPG, Berlin.  \\
-%     Adopted for G16 by Mateusz Marianski, NYC, Feb 2019 \\
-%     Written fom FHI-aims code by Igor Y. Zhang et al.%, Hagen-Henrik Kowalski and Tonghao Shen\\
-%   \end{center}
-% \end{fullwidth}
-%
-% \clearpage
-
-% --------------------------------------------------------------------
 
 \title{Introduction to Computational Chemistry}
 
@@ -235,7 +195,7 @@
   \end{enumerate}
 
 As the first step, please use this link to clone the files into your Jupyter directory:\\  \href{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2Fpchem_comp-chem_template&urlpath=lab%2Ftree%2Fpchem_comp-chem_template%2FCompChem_template.ipynb&branch=main}{\texttt{https://tinyurl.com/chem357-compchem}}
-\marginnote[-4\baselineskip]{Do \textbf{not} copy and paste the code in this PDF into your input files. Invisible formatting characters are often copied from the PDF. Gaussian will not understand these characters and your calculations will not start.}
+\marginnote[-4\baselineskip]{While working through this lab, do \textbf{not} copy and paste the code in this PDF into your input files. Invisible formatting characters are often copied from the PDF. Gaussian will not understand these characters and your calculations will not start.}
 
 This guide is meant to be used in tandem with the Jupyter notebook contained in the cloned folder (``pchem\_comp-chem\_template/CompChem\_template.ipynb''). 
 That notebook has a number of cells pre-populated for your convenience. Make sure you read the notes and comments in the notebook as you go through the lab and fill in any blanks before executing the cells. 
@@ -251,7 +211,6 @@ That notebook has a number of cells pre-populated for your convenience. Make sur
 
 \appendix
 \include{bash}
-%\include{vi}
 
 \vfill
 
