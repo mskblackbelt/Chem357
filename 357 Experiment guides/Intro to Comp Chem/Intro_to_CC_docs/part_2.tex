@@ -7,59 +7,55 @@
 In the exercise, we will calculate the binding curve, atomization energy (\( \increment H_\mtext{at} \)), and dipole moment for the hydrogen fluoride (HF) molecule with two methods. 
 From a technical perspective, this exercise teaches how simple shell scripting can be used to make your (computational) life easier. 
 
-\begin{enumerate} 
-  \item The first task of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations. 
-  Start by creating an input file (name it \Verb{input.temp}) which contains a F atom in the center of the coordinate system and a H atom at distance \Verb{DIST} along the \emph{z-}axis. 
-  \Verb{DIST} is a variable name for the H-F distance in different computational steps. 
-  Please note that HF is a neutral closed-shell system (i.e., correctly assign the multiplicity). 
+\begin{enumerate}
+  \item The first task of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations.
+    Start by creating an input file (name it \Verb{input.temp}) which contains a fluorine (F) atom in the center of the coordinate system and a hydrogen (H) atom at distance \Verb{DIST} along the \emph{z-}axis.
+    \Verb{DIST} is a variable name for the H-F distance in different computational steps.
+    Please note that HF is a neutral closed-shell system (i.e., correctly assign the multiplicity).
 
-The template file should specify the method and the basis set used for computation. 
-In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. 
-Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise. 
+    The template file should specify the method and the basis set used for computation.
+    In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set.
+    Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise.
+  \item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \qty{0.7}{\angstrom} and \qty{1.3}{\angstrom} with \qty{0.1}{\angstrom} steps, and a denser step width of \qty{0.02}{\angstrom} between \qty{0.85}{\angstrom} and \qty{0.95}{\angstrom}.\sidenote{
+      In details, the script performs following tasks:
+      \begin{itemize}
+        \item create a unique directory for each computation
+        \item copies your template input file
+        \item replace the bond distance place holder \texttt{DIST} with the bond distance
+        \item start G16 calculations
+        \item \texttt{grep} for distance/energy and write it to a respective file.
+        \end{itemize}
+      }
+      Run the bash script \bashinline{bash run.sh}, which will run the calculations and return you a file with a bond length vs energy.
+      Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
+    \item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
+      In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms.
+      Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set.
+      Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by subtracting the free-atom energies from the predicted total energy of HF (i.e., the minimum total energy found when varying bond distances).
 
-\item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \qty{0.7}{\angstrom} and \qty{1.3}{\angstrom} with \qty{0.1}{\angstrom} steps, and a denser step width of \qty{0.02}{\angstrom} between \qty{0.85}{\angstrom} and \qty{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
-   \begin{itemize}
-   \item create a unique directory for each computation
-   \item copies your template input file
-   \item replace the bond distance place holder \texttt{DIST} with the bond distance
-   \item start G16 calculations
-   \item \texttt{grep} for distance/energy and write it to a respective file. 
-   \end{itemize}}
-   
-Run the bash script \bashinline{bash run.sh}, which will run the calculations and return you a file with a bond length vs energy. 
-Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
+      \begin{equation}
+        \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
+      \end{equation}
 
-\item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
-In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms. Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set. 
+      How does this compare to the experimental value of \(\increment H_\mtext{at}=\qty{135.2}{\kcal\per\mol}\) (\qty{5.86}{\eV})?
 
-%\begin{tip}
-%\textbf{Note:}\newline
-%Atoms are highly symmetric systems, often with multiple degenerate solutions. In the case of fluorine, for example, the unpaired p-electron might sit in the $p_x$, $p_y$, or $p_z$ orbital. All three solutions are equivalent. If the calculation is started unbiased, it might converge to a superposition of these three cases, which is a saddle point on the potential energy surface and results in partial electron occupations. Although in DFT non-integer occupations are in principle allowed, one should be very suspicious when obtaining such a solution for non-metallic systems. Typically, solutions exist that are lower in energy. They can be found by breaking the inherent symmetry of the problem, for example by applying a small external field at the beginning of the SCF cycle.
-%\end{tip}
-
-%To break the inherent symmetry of an atom and ensure integer occupation, set the keyword \texttt{switch\_external\_pert 10 safe}. This means that for 10 iterations, a small external field in the z-direction is applied and then switched off. Usually, this is sufficient to perturb the SCF out of the symmetric solution and towards the correct electronic structure.
-Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by subtracting the free-atom energies from the predicted total energy of HF (i.e., the minimum total energy found when varying bond distances).
-
-\begin{equation}
- \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
-\end{equation}
-
-How does this compare to the experimental value of \(\increment H_\mtext{at}=\qty{135.2}{\kcal\per\mol}\) (\qty{5.86}{\eV})? 
-
-\item Now, let us look at the dipole moment. Search for the corresponding line in the output file. 
-You can use a grep function for this task: 
+    \item Now, let us look at the dipole moment. Search for the corresponding line in the output file.
+      You can use a grep function for this task:
 \begin{bashinput}
-  grep "Dipole" file-name -A1 | grep "Tot" | ¬awk '{print $8}'  
+  grep 'Dipole' file-name -A1 | grep 'Tot' | ¬awk '{print $8}'
 \end{bashinput}
-The above command is a great example of an ugly ``bash one-liner'' that does the job and you don't question it.
-You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote[][-5\baselineskip]{Briefly:
-\begin{itemize}
-  \item \Verb{-A1} in the first \Verb{grep} command tells it to output one \textbf{(1)} line \textbf{a}fter the search term in addition to the line with the search term. 
-  \item The next \Verb{grep} command just grabs the lines containing \textbf{Tot}al values. 
-  \item \Verb{tail -n1} grabs the indicated \textbf{n}umber of lines (\textbf{1}) at the end of the input.
-  \item \Verb{awk} is a ``pattern-directed scanning and processing language'' used in the Unix ecosystem. This command tells \Verb{awk} to print out the eighth record on each line of the input (the default record separator is a single space). 
-\end{itemize}}
-If you want to find the whole list of dipoles (from each folder beginning with ``dist\_'' in your directory), you can run the following:\sidenote{
+      The above command is a great example of an ugly ``bash one-liner'' that does the job and you don't question it.
+      You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote[][-5\baselineskip]{
+        Briefly:
+        \begin{itemize}
+          \item \Verb{-A1} in the first \Verb{grep} command tells it to output one \textbf{(1)} line \textbf{a}fter the search term in addition to the line with the search term.
+          \item The next \Verb{grep} command just grabs the lines containing \textbf{Tot}al values.
+          \item \Verb{tail -n1} grabs the indicated \textbf{n}umber of lines (\textbf{1}) at the end of the input.
+          \item \Verb{awk} is a ``pattern-directed scanning and processing language'' used in the Unix ecosystem.
+            This command tells \Verb{awk} to print out the eighth record on each line of the input (the default record separator (a.k.a. delimiter) is a single space).
+        \end{itemize}
+      }
+    If you want to find the whole list of dipoles (from each folder beginning with ``dist\_'' in your directory), you can run the following:\sidenote{
 If you want to get really fancy (by which I mean, cut down on the amount of task switch you need to do), you can run Bash commands inside of your Jupyter notebook. 
 Just prefix the command with \Verb{!} and run the cell. 
 For example, a cell containing \Verb{!ls} would list the contents of your current directory as output in your notebook.
@@ -67,7 +63,7 @@ You can assign that output to a python variable by placing the exclamation point
 Since you'll need to use this list of dipoles in your notebook, it's worth trying to run the \Verb{grep} function in your notebook to capture the list all at once.
 Just make sure you get the right path to the directory… check the contents of your directory with \Verb{!ls path/to/directory}.}
 \begin{bashinput}
-  grep Dipole dist*/*.log -A1 | grep Tot | awk '{print $9}'
+  grep Dipole dist*/*.log -A1 | grep Tot | ¬awk '{print $9}'
 \end{bashinput}
 How does the dipole at the equilibrium distance compare with the experimental value of \qty{1.82}{debye}? 
 Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 

@@ -5,8 +5,8 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
 \input{header.tex}
 \usepackage[mackeys=text]{menukeys}
-
-\sisetup{binary-units = true}
+  \usetikzlibrary{arrows.meta}
+  \tikzset{>=Triangle} % Change Arrow headers for key symbols
   \DeclareSIUnit\kcal{kcal}
   \DeclareSIUnit\wn{\raiseto{-1}\cm}
   \DeclareSIUnit\hartree{Ha}
@@ -176,7 +176,7 @@
 
 \begin{abstract}
   This tutorial aims to give a basic introduction to electronic structure calculations for very simple systems.\thanks{Adapted from \textcite{marianski19}.} 
-  As every quantum chemistry code has its own philosophy, this tutorial should familiarize you with the general-purpose Gaussian16 (hereafter abbreviated as G16) software.
+  As every quantum chemistry code has its own philosophy, this tutorial should familiarize you with the general-purpose Gaussian16 (hereafter abbreviated as g16) software.
   The experiments will also demonstrate the predictive power of quantum-chemical calculations. 	
 	
   First, the basic structure of an input file to the G16 software will be explained.

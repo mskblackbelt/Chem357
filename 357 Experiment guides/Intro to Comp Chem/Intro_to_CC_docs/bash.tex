@@ -64,15 +64,15 @@ However, no matter where you are on the hard drive, \Verb{/home/user/documents/d
     \item[grep -r "text" "folderName/"] return a list of lines in files contained in ``folderName'' with occurrences of ``text''
   \end{description}
   
-  \item \textbf{Flow redirection and chain commands -redirecting results of commands:}
+  \item \textbf{Flow redirection and chain commands -- redirecting results of commands:}
   \begin{description}[
     font=\ttfamily\upshape,
     align=left,
     style=nextline,
     itemindent=*]
-    \item[>] at the end of a command to redirect the result to a file
-    \item[>>] at the end of a command to append the result to the end of a file
-    \item[|] at the end of a command to send the output to another command
+    \item[>] at the end of a command to redirect the result to a file (overwrites the contents of the file)
+    \item[>>] at the end of a command to \textbf{append} the result to the end of a file
+    \item[|] at the end of a command to send the output to another command 
     \item[\&] run the command in the background 
   \end{description}
   
@@ -90,9 +90,9 @@ However, no matter where you are on the hard drive, \Verb{/home/user/documents/d
   \end{description}
 \end{itemize}
 
-\textbf{vi} is a terminal-based file edit program. By typing \Verb{vi} you open the program and create a new file that can be save later. By typing \Verb{vi "fileName"} , you open ``fileName'' to edit it. If ``fileName'' doesn't exist, you will create the new file and edit it immediately with this program. 
+\textbf{vi} is a terminal-based file edit program. By typing \Verb{vi} you open the program and create a new file that can be save later. By typing \Verb{vi "fileName"}, you open ``fileName'' to edit it. If ``fileName'' doesn't exist, you will create the new file and edit it immediately with this program. 
 
-The editor, despite its simplicity in appearance, is a very powerful terminal-based tool with numerous key-bindings. Therefore, be careful what you press. In order to start editing the file, you first need to press \keys{I} (`\textbf{i}nsert') and then you can start typing. In order to save the file, press the \keys{Esc} key to exit the editing mode, then type \Verb{:} (\keys{\shift+;}) to enter the command mode in the bottom of the editor and type \Verb{wq} (for `\textbf{w}rite \textbf{q}uit'). Confirm with Enter. If you want to quit without saving the file, type \Verb{q!} in command mode. 
+The editor, despite its simplicity in appearance, is a very powerful terminal-based tool with numerous key-bindings. Therefore, be careful what you press. In order to start editing the file, you first need to press \keys{I} (`\textbf{i}nsert') and then you can start typing. In order to save the file, press the \keys{Esc} key to exit the editing mode, then type \Verb{:} (\keys{\shift+;}) to enter the command mode in the bottom of the editor and type \Verb{wq} (for `\textbf{w}rite \textbf{q}uit'). Confirm with \keys{\return}. If you want to quit without saving the file, type \Verb{q!} in command mode. 
 
 
 
