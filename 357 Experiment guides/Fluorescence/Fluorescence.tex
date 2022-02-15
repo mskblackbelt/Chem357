@@ -440,7 +440,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 \section{Data Analysis} % (fold)
 \label{sec:data_analysis}
 \begin{enumerate}
-	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).\marginnote{This is a good place to practice with the Pandas library. 
+	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).\marginnote[-2\baselineskip]{This is a good place to practice with the Pandas library. 
   All of your spectra should use the same wavelength range, so you can import the CSV data and set the index column to the wavelength.
   You can then find the wavelength for the maximum fluorescence and grab the intensity at that wavelength for each sample.}
 	\item Plot a graph of  \( I_0/I \)  vs. \ch{[Q]}. 
@@ -449,7 +449,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
 	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius} and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
-  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-5\baselineskip]{
+  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-7\baselineskip]{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
 		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		\textcite{ware66} reported a value of \( D = \qty{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \qty{25}{\celsius}. 
