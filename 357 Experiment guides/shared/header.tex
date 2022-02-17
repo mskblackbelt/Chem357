@@ -79,6 +79,16 @@
 
 \usepackage{microtype} % improves kerning in certain cases. 
 	% recommended to disable protrusion in table of contents!
+% \usepackage{moresize} % adds additional font sizes \HUGE and \ssmall
+% \usepackage{relsize} % adds incredibly useful relative font sizing functions
+	% \relsize{i}				Change font size by i steps.
+	% \larger[i]				Increase size by (optional) i steps (default 1).
+	% \smaller[i]				Reduce font size by i steps (default 1).
+	% \relscale{f}				Change font size by scale factor f.
+	% \textlarger[i]{<text>}		Text size enlarged by (optional) i steps.
+	% \textsmaller[i]{<text>}		Text size reduced by (optional) i steps.
+	% \textscale{f}{<text>}		Text size scaled by factor f.
+
 
 %% Latex interface 
 
@@ -91,21 +101,32 @@
 
 %% media interface
 
-% \usepackage{graphicx} % support the \includegraphics command and options
-% \usepackage{subfig} % Support for subfigures and subcaptions
-%   \captionsetup[subfloat]{position=bottom}
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{subfig} % Support for subfigures and subcaptions
+	\captionsetup[subfloat]{position=bottom}
 \makeatletter%
 \@ifclassloaded{tufte-handout}% xcolor is pre-loaded with the tufte-latex package
   {}%
   {\usepackage[dvipsnames,svgnames,table,hyperref]{xcolor}
 	% provides access to large number of colors and related features
 	% see end notes for lists of available colors
+	\ifxetexorluatex % if lua- or xelatex http://tex.stackexchange.com/a/140164/1913
+		\newcommand{\textools}[2][5]{%
+			\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+		}
+		\renewcommand{\allcapsspacing}[1]{\textools[15]{#1}}
+		\renewcommand{\smallcapsspacing}[1]{\textools[10]{#1}}
+		\renewcommand{\allcaps}[1]{\textools[15]{\MakeTextUppercase{#1}}}
+		\renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+		\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+	\else 
+	\fi
 	}%
 \makeatother%
 \usepackage{svg} % provides \includesvg command for svg figures. 
 \usepackage{pgfplots} % for plotting in tikzpicture environment
 	\pgfplotsset{compat=1.16} % required to select newest version
-% \usepackage{tikzscale} % allows \includegraphics{*.tikz} and scaling of TiKZ images
+\usepackage{tikzscale} % allows \includegraphics{*.tikz} and scaling of TiKZ images
 
 
 
@@ -127,8 +148,7 @@
 	% e.g. \br{\br{x-a}^2+\br{y-b}^2} produces \left[ \left( x-a \right)^2 + \left( y-b \right)^2 \right]
 	% also provides rudimentary derivatives, but overwritten by custom definitions
 
-% \usepackage{chemfig}
-\usepackage{chemmacros} % for writing chemical formulas with \ch, e.g. \ch{AgCl2-} or \ch{^{227}_{90}Th+}
+\usepackage{chemmacros,chemfig} % for writing chemical formulas with \ch, e.g. \ch{AgCl2-} or \ch{^{227}_{90}Th+}
 	\usechemmodule{
 		spectroscopy, % provides 
     thermodynamics, % provides state variables and equations
@@ -151,7 +171,6 @@
 	% has an unfortunate bug in otherwise ideal derivatives code
 	% see https://tex.stackexchange.com/questions/54425
 	% Warning: renamed \Beta and \Zeta to \BetaF and \ZetaF below
-% \usepackage{derivative}
 \usepackage{physics} % provides streamlined interface with many commands to simplify
 	% writing standard physics notation (bra-kets, derivatives, etc.)
 	% differentials and derivatives: \dd[n]{x}, \dv[n]{f}{x}, \dv{x}, \pdv{f}{x}{y}, \var{Q}, \fdv{F}{g}
@@ -167,7 +186,7 @@
 
 %% misc packages
 
-% \usepackage{datetime} % allows easy formatting of dates, e.g. \formatdate{dd}{mm}{yyyy}
+\usepackage{datetime} % allows easy formatting of dates, e.g. \formatdate{dd}{mm}{yyyy}
 %\usepackage[inline]{enumitem} % allows for custom labels on enumerated lists
 	% e.g. \begin{enumerate}[label=\textbf{(\alph*)}]
 	% label options are: \alph, \Alph, \arabic, \roman, and \Roman
@@ -183,26 +202,26 @@
 %\usepackage{ctable} % allows for footnotes under table and properly spaced caption above 
 	% must be loaded after tikz
 	% incorporates (..?)
-% \usepackage{framed} % provides boxed 'framed' environment for easily boxing text
+\usepackage{framed} % provides boxed 'framed' environment for easily boxing text 
 \usepackage{tcolorbox}
 	\tcbuselibrary{skins, breakable, xparse, minted}
 	% provides fancier boxes than regular \makebox, \fbox, etc.
 	% e.g. \doublebox, \ovalbox, \shadowbox
 	% Can use `\tcbuselibrary{listings}` to use the listings library, 
 		% doesn't require a language to be defined. 
-% \usepackage{empheq} % provides 'empheq' environment
+\usepackage{empheq} % provides 'empheq' environment 
 	% for improved control over shape, size, color of framed boxes, e.g. 
-% \newcommand{\boxedeq}[2]{
-%   \begin{empheq}[box={\fboxsep=6pt\fbox}]{align}\label{#1}#2\end{empheq}
-% }
-% \newcommand{\coloredeq}[2]{
-%   \begin{empheq}[box=\colorbox{lightgreen}]{align}\label{#1}#2\end{empheq}
-% }
+\newcommand{\boxedeq}[2]{
+	\begin{empheq}[box={\fboxsep=6pt\fbox}]{align}\label{#1}#2\end{empheq}
+}
+\newcommand{\coloredeq}[2]{
+	\begin{empheq}[box=\colorbox{lightgreen}]{align}\label{#1}#2\end{empheq}
+}
 
 
 %% document interface 
 
-% \usepackage{footnote} %
+\usepackage{footnote} % 
 \usepackage{hyperref} % adds hyperlinks and outline to PDF documents
 	\hypersetup{%
 		pdfencoding=auto,%
@@ -225,7 +244,7 @@
 	% options enable enhanced unicode and math support in PDF outlines [causes conflict with \C command?]
 \usepackage{cleveref} % provides \cref command which inserts contextually correct word in front of ref.
 	% e.g. \cref{eq:myeq} --> Equation 1.2, or so
-% \usepackage{bookmark} % improves package hyperref's bookmarking.
+\usepackage{bookmark} % improves package hyperref's bookmarking. 
 	% properties such as style and color can be set. Generates bookmarks in first run. 
 
 %% font packages -- load fontenc, then inputenc, then lmodern. 
@@ -265,9 +284,9 @@
 
 
 %% load later packages
-% \usepackage{lineno} % provides line numbers in main text for reference and peer review
+\usepackage{lineno} % provides line numbers in main text for reference and peer review
 	% activated by calling \linenumbers in document
-% \usepackage[textsize=footnotesize]{todonotes}
+\usepackage[textsize=footnotesize]{todonotes}
 
 
 
@@ -280,19 +299,19 @@
 
 % functions and operators
 % some functions deprecated by physics.sty
-% \newcommand{\code}[2][]{ % for typesetting monospaced code
-%   %\ifthenelse{\equal{#1}{}}{ % if description is empty
-%   %\ifdefempty{#1}{
-%   \ifstrempty{#1}{
-%     \texttt{#2}
-%   }{ %else
-%     \colorbox{#1}{\texttt{#2}}
-%   }
-% }
-% \definecolor{lighter-gray}{gray}{0.85} % lighter gray for code highlighting
-% \newcommand{\codehl}[2][lighter-gray]{\code[#1]{#2}} % \code with light gray highlight by default
-% \newcommand{\codeLtxMacro}[2]{\code[#1]{\textbackslash{}#2}} % same as \code but inserts backslash in front, for Latex macros
-% \newcommand{\codehlLtxMacro}[2][lighter-gray]{\codeLtxMacro[#1]{#2}}
+\newcommand{\code}[2][]{ % for typesetting monospaced code
+	%\ifthenelse{\equal{#1}{}}{ % if description is empty
+	%\ifdefempty{#1}{
+	\ifstrempty{#1}{
+		\texttt{#2}
+	}{ %else
+		\colorbox{#1}{\texttt{#2}}
+	}
+}
+\definecolor{lighter-gray}{gray}{0.85} % lighter gray for code highlighting
+\newcommand{\codehl}[2][lighter-gray]{\code[#1]{#2}} % \code with light gray highlight by default
+\newcommand{\codeLtxMacro}[2]{\code[#1]{\textbackslash{}#2}} % same as \code but inserts backslash in front, for Latex macros
+\newcommand{\codehlLtxMacro}[2][lighter-gray]{\codeLtxMacro[#1]{#2}}
 \newcommand{\mtext}[1]{{\textnormal{#1}}} % for writing text within math mode, e.g. for subscripts
 % \LetLtxMacro{\mtxt}{\mtext} % legacy alias for \mtext
 % \LetLtxMacro{\opname}{\operatorname} % custom operator names
