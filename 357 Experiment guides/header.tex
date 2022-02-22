@@ -78,13 +78,10 @@
 \usepackage{graphicx} % support the \includegraphics command and options
 \usepackage{subfig} % Support for subfigures and subcaptions
 	\captionsetup[subfloat]{position=bottom}
-\makeatletter%
-\@ifclassloaded{tufte-handout}% xcolor is pre-loaded with the tufte-latex package
-  {}%
-  {\usepackage[dvipsnames,svgnames,table,hyperref]{xcolor}
-	% provides access to large number of colors and related features
-	% see end notes for lists of available colors
-	\ifxetexorluatex % if lua- or xelatex http://tex.stackexchange.com/a/140164/1913
+% \makeatletter%
+% \@ifclassloaded{tufte-handout}% xcolor is pre-loaded with the tufte-latex package
+%   {
+	% \ifxetexorluatex % if lua- or xelatex http://tex.stackexchange.com/a/140164/1913
 		\newcommand{\textools}[2][5]{%
 			\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
 		}
@@ -93,15 +90,18 @@
 		\renewcommand{\allcaps}[1]{\textools[15]{\MakeTextUppercase{#1}}}
 		\renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
 		\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
-	\else 
-	\fi
-	}%
-\makeatother%
+% 	\else
+% 	\fi
+% }%
+%   {\usepackage[dvipsnames,svgnames,table,hyperref]{xcolor}
+% 	% provides access to large number of colors and related features
+% 	% see end notes for lists of available colors
+% 	}%
+% \makeatother%
 \usepackage{svg} % provides \includesvg command for svg figures. 
 \usepackage{pgfplots} % for plotting in tikzpicture environment
 	\pgfplotsset{compat=1.16} % required to select newest version
 \usepackage{tikzscale} % allows \includegraphics{*.tikz} and scaling of TiKZ images
-
 
 
 %% math interface
@@ -222,38 +222,19 @@
 
 %% font packages -- load fontenc, then inputenc, then lmodern. 
 % see http://tex.stackexchange.com/a/44699
-\ifxetexorluatex % if lua- or xelatex http://tex.stackexchange.com/a/140164/1913
-	\usepackage{fontspec}
-	\usepackage[math-style=ISO]{unicode-math} 
-	\ifdraft{}{
-		\setmainfont{STIX2Text}[
-			Extension={.otf},
-			UprightFont={*-Regular},
-			BoldFont={*-Bold},
-			ItalicFont={*-Italic},
-			BoldItalicFont={*-BoldItalic},]
-		\setmathfont{STIX2Math}[
-			Extension={.otf}]
-	}
+\usepackage{fontspec}
+\usepackage[math-style=ISO]{unicode-math} 
+\ifdraft{}{
+	\setmainfont{STIX2Text}[
+		Extension={.otf},
+		UprightFont={*-Regular},
+		BoldFont={*-Bold},
+		ItalicFont={*-Italic},
+		BoldItalicFont={*-BoldItalic},]
+	\setmathfont{STIX2Math}[
+		Extension={.otf}]
+}
 	\renewcommand{\vb}[1]{\symbf{#1}} % fix vector command from physics package to work with unicode-math
-\else 
-	\usepackage[T1]{fontenc} % improves output font encoding
-		% T1: provides expanded Latin character encoding, with accents
-		% T2A: provides Cyrillic character encoding for use in cyrillic math commands
-	\usepackage[utf8]{inputenc} % provides full utf8 input encoding
-	%\usepackage{lmodern} % loads Latin Modern fonts, enhanced versions of the Computer Modern (CM) fonts.
-		% They have enhanced scaling, metrics and glyph coverage. 
-		% See http://www.tug.dk/FontCatalogue/lmodern/
-		% Also solves rasterized/aliased fonts issue on incomplete LaTeX installations without CM-super fonts
-	\usepackage{stix2}
-	\usepackage{cmap} % provides better copy-pasteable output text. 
-		% see for details: http://tex.stackexchange.com/a/64198
-		% can also use mmap.sty, but not compatible with fonts other than Computer Modern
-		% see for details: http://tex.stackexchange.com/questions/74630/
-	\input{glyphtounicode}	% these two commands improve glyph output for non-T1 encodings
-	\pdfgentounicode=1		% and this
-\fi
-
 
 
 %% load later packages
@@ -287,6 +268,7 @@
 \DeclareMathOperator{\GammaFunc}{\symup{\Gamma}}
 \newcommand{\iu}{\TextOrMath{$\mtext{i}$}{\mtext{i}\mkern1mu}}
 %
+% \newcommand{\laplacian}{\nabla^2}
 
 %% pre-defined colors
 % standard: black, blue, brown, cyan, darkgray, gray, green, lightgray, lime, magenta, olive, orange, pink, purple, red, teal, violet, white, yellow

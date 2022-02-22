@@ -1,0 +1,64 @@
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+\input{../../header.tex}
+	\usechemmodule{polymers}
+	\DeclareSIUnit\poise{P}
+	\DeclareSIUnit\dalton{Da}
+	\DeclareSIUnit\dyne{dyn}
+
+\usetikzlibrary{arrows.meta}
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+	]{biblatex}
+	\addbibresource{../../pchem_bib.bib}
+
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=polymers, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
+	}
+	
+	% Add a section for cited bibliography entries. 
+  % At the end, create a second bibliography for uncited items (Further Reading).
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+  
+  % Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{ % do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Molecular Weight and Monomer Linkages Properties of Poly(vinyl alcohol)}
+
+\author{Dustin Wheeler}
+
+\begin{document}
