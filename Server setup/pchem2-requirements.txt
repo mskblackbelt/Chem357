@@ -1,0 +1,10 @@
+pip
+jupyterlab
+jupyterlab_server
+jupyterlab-latex
+jupyterlab_templates
+jupyterlab-spellchecker
+ipykernel
+nbgitpuller
+black
+jupyterlab-git
