@@ -1,7 +1,7 @@
 \documentclass{standalone}
 % \input{header.tex}
 \usepackage{pgfplots}
-\pgfplotsset{compat=newest}
+\pgfplotsset{compat=1.13}
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{math}
 \usetikzlibrary{calc}
@@ -111,7 +111,7 @@
     },
     groupplot xlabel={
       $\delta \, (\si{ppm})$ \\ $\Leftarrow \nu, \, B_\textup{loc}$},
-    ymin=-0.08, ymax=6.75,
+    ymin=1.0, ymax=6.75,
   ]
   
   \nextgroupplot[

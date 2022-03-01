@@ -1,0 +1,605 @@
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+In this experiment, the barrier to rotation in \iupac{\N,\N-dimethylacetamide} can be determined by measuring changes in \NMR* line shapes as a function of temperature. This study is an example of dynamic NMR spectroscopy (spectroscopy on a changing system, as opposed to a static one).\thanks{Transcribed from \textcite{nibler14,gasparro77}.}
+\end{abstract}
+
+%\printclassoptions
+
+\section{Theory} % (fold)
+\label{sec:theory}
+
+\subsection{Magnetic Moments} % (fold)
+\label{sub:magnetic_moments}
+
+\begin{marginfigure}
+  \centering
+   \input{figures/zeeman_splitting.tikz}
+  \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
+  \label{fig:quad_splitting}
+\end{marginfigure}
+The magnetic moment of a nucleus with nuclear spin quantum number \( I \) is 
+\begin{equation}
+	\mu = g_N \mu_N \sqrt{I \br{I+1}} \, ,
+	\label{eq:mag_mom}
+\end{equation}
+where \( g_N \) is the nuclear \( g \) factor (\num{5.5856} for a proton) and \( \mu_N = e h / \br{4 \pi m_\mtext{p}} \) is the nuclear magneton.
+Substitution of the charge \( e \) and mass of a proton, \( m_\mtext{p} \), gives the value of \SI{5.051e-27}{\joule\per\tesla} for \( \mu_N \). 
+The symbol \( \mu_N \) is the unit of nuclear magnetic moment and is smaller than the electronic Bohr magneton (\( \mu_B \)) by the electron-to-proton mass ratio (\num{\sim1800}). 
+
+The nuclear moment will interact with a local \emph{magnetic induction} (flux density)\sidenote{
+The vector quantity \( \vb{B} \) is called either the \emph{magnetic induction} or the \emph{magnetic flux density}, although the term \emph{magnetic field strength} is more commonly used.
+Unfortunately, the name \emph{magnetic field strength} was given to \( \vb{H} \) at a time when \( \vb{H} \) was considered to be the fundamental magnetic-field vector.
+It is now known that \( \vb{B} \) is the fundamental vector (analogous to \( \vb{E} \), the electric-field vector).
+To add to the confusion, \( \vb{B} = \vb{H} \) in a vacuum when CGS units are used.
+In the internationally-recognized SI system, \( \vb{B} = \mu_0 \vb{H} \) in a vacuum, and the vacuum permeability \( \mu_0 = \SI{4\pi e-7}{\henry\per\m} \).
+In SI units, \( \vb{B} \) is expressed in tesla (\( \SI{1}{\tesla} = \SI{1}{\weber\per\meter\squared} = \SI{1e4}{\gauss}\)) and \( \vb{H} \) is expressed in \si{\A\per\m}.
+In many texts, \( \vb{B} \) is loosely called the \emph{magnetic field}.
+}, 
+\( B_\mtext{loc} \), to cause an energy change (the Zeeman effect)
+\begin{equation}
+	E_\mtext{Zeeman} = -g_N \mu_N M_I B_\mtext{loc} \, .
+	\label{eq:zeeman_energy}
+\end{equation}
+Here, \( M_I \) is the quantum number measuring the component of nuclear spin angular momentum (and magnetic moment) along the field direction, which can have values of \( -I, -I+1, \ldots, +I \). 
+The effect of the field is thus to break the \( 2I + 1 \) degeneracy and to produce energy levels whose spacing increases linearly with \( B_\mtext{loc} \) (or \( B \)), as shown in \cref{fig:quad_splitting}. 
+Transitions among these levels can be produced by electromagnetic radiation, provided that the selection rule \( \increment M_I = \pm 1 \) is satisfied. 
+In this case, the resonant frequency is given by 
+\begin{equation}
+	\nu = \frac{\increment E_\mtext{Zeeman}}{h} = \frac{g_N\mu_N}{h} B_\mtext{loc}\, .
+	\label{eq:res_freq}
+\end{equation}
+For protons, \( \nu = \num{4.26e7} \cdot B_\mtext{loc} \), where \( \nu \) is expressed in hertz and \( B_\mtext{loc} \) is expressed in tesla. For typical fields of \SIrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region (\SIrange{10}{1000}{\MHz}). 
+In practice, values of \( B_0 \) (the external applied field) are chosen to fix \( \nu \) to some convenient value (e.g., \SIlist{60;100;200}{\MHz}). 
+
+% subsection magnetic_moments (end)
+
+\subsection{Chemical Shifts} % (fold)
+\label{sub:chemical_shifts}
+
+\Cref{eq:zeeman_energy} gives the energy energy levels of a nucleus in the presence of an external applied field. 
+The term \( B_\mtext{loc} \) is the magnetic induction (\emph{local field}) at the nucleus. 
+
+In general, the local induction, \( B_\mtext{loc} \), at the nucleus will differ from the externally applied induction, \( B_0 \), because of the magnetization, \( M \), that is induced by \( B_0 \):
+\begin{equation}
+	B_\mtext{loc} = B_0 + \mu_0 M = \br{1 + \chi} B \, ,
+	\label{eq:b_loc}
+\end{equation}
+where \( \mu_0 \) is the vacuum permeability and \( \chi \) is the (dimensionless) volume susceptibility, the magnetic analog of dielectric polarizability. 
+
+As most organic compounds are diamagnetic, only the diamagnetic contribution to the susceptibility is important in determining the resonance condition for a given nucleus. 
+The diamagnetic contribution arises because the orbital motion of the electrons is altered by the presence of \( B_0 \) so that there is a net orbiting of electrons about the field lines. 
+This circulating charge in turn generates a magnetic induction, \( B_d \), which is proportional and directly opposed to the external field, \( B_0 \). 
+Thus, \( B_\mtext{loc} \) equals \( B_0 + B_d \), with
+\begin{equation}
+	B_d = \chi B_0 = -\sigma B_0 \, ,
+	\label{eq:B_dia}
+\end{equation}
+where \( \sigma \) is a positive constant called the \emph{shielding constant}. 
+The resonant frequency of nucleus \( i \) becomes 
+\begin{equation}
+	\nu_i = \frac{g_N \mu_N}{h} B_{i, \mtext{loc}} = \frac{g_N \mu_N}{h} B_0 \br{1 - \sigma} \, .
+	\label{eq:chem_shift}
+\end{equation} 
+The diamagnetic shielding constant, \( \sigma \), is generally quite small (\num{\sim e-5}) and increases as the electron density around the nucleus is increased. 
+Changes in the local induction (\( B_\mtext{loc} = B_0 \br{1 - \sigma} \)), and thus changes in \( \nu \), of a few parts per million (\si{\ppm}) are typical when the chemical environment about a nucleus is changed. 
+The chemical shift in \si{ppm} of a nucleus \( i \) relative to a reference nucleus \( r \) is defined by 
+\begin{equation}
+	\delta_{i} \equiv 
+		\frac{\nu_{i}-\nu_\mtext{ref}}{\nu_\mtext{ref}} \times 10^6 = 
+		\frac{\sigma_\mtext{ref} - \sigma_i}{1 - \sigma_\mtext{ref}} \times 10^6 \simeq 
+		\br{\sigma_\mtext{ref} - \sigma_i} \times 10^6 \, .
+		\label{eq:chem_shift_delta}
+\end{equation}
+Here, the definition is based on the resonant frequencies for a fixed external induction (field), \( B_0 \). 
+
+\begin{figure}[htb]
+  \centering
+  \input{figures/shielding.tex}
+  \caption{Shielding and deshielding of protons: (a) shielding of a proton due to induced diamagnetic electron circulation; (b) deshielding of protons in benzene due to aromatic ring currents.}
+  \label{fig:shielding}
+\end{figure}
+  
+Tetramethylsilane (TMS) is usually used as the proton reference, since it is chemically inert and its 12 equivalent protons give a single transition at a frequency \( \nu_\mtext{ref} \), lower than the frequency \( \nu_i \) found in most organic compounds. 
+Thus, \( \delta \) is generally positive and increases when substituents are added that attract electrons and thereby reduce the shielding about the proton. 
+This shielding arises because the electrons near the proton are induced to circulate by the applied field \( B_0 \), shown in \cref{fig:shielding}. 
+This electron current produces a secondary field that \emph{opposes} the external field and thus reduces the local field at the nucleus. 
+As a result, resonance at a fixed field, such as \SI{9.4}{\tesla}, requires a higher frequency for protons with greater shielding. 
+This shielding effect is generally restricted to electrons localized on the nucleus of interest, since random tumbling of molecules causes the effect of secondary fields due to electrons associated with neighboring nuclei to average to zero. 
+Nuclei such as \ch{^{19}F}, \ch{^{13}C}, and \ch{^{11}B} have more local electrons than hydrogen, hence their chemical shift ranges are much larger. 
+
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{lS@{\hspace{3em}}lS} 
+		\toprule
+		\headercell{\ch{CH3} protons}	&	\headercell{Acetylenic protons} \\
+		\ch{(CH3)4Si}	&	0.0	&	\ch{HOCH2C+CH}	& 2.33 \\
+		\ch{(CH3)4C} & 0.92 & \ch{ClCH2C+CH} & 2.40 \\
+		\ch{CH3CH2OH} & 1.17 & \ch{CH2COC+CH} & 3.17\\
+		\ch{CH3COCH3} & 2.07 & \headercell{Olefinic protons}\\
+		\ch{CH3OH} & 3.38 & \ch{(CH3)2C=CH2} & 4.6 \\
+		\ch{CH3F} & 4.30 & \iupac{Cyclohexene} & 5.57 \\
+		\headercell{\ch{CH2} protons} & \ch{CH2CH=CHCHO} & 6.05 \\
+		\iupac{Cyclopropane} & 0.22 & \ch{Cl2C=CHCl} & 6.45 \\
+		\ch{CH3(CH2)4CH3} & 1.25 & \headercell{Aromatic protons} \\
+		\ch{(CH3CH2)2CO} & 2.39 & \iupac{Benzene} & 7.27 \\
+		\ch{CH3COCH2COOCH3} & 3.48 & \ch{C6H5CN} & 7.54 \\
+		\ch{CH3CH2OH} & 3.59 & \iupac{Naphthalene} & 7.73 \\
+		\headercell{\ch{CH} protons} & \iupac{\a-Pyridine} & 8.50 \\
+		\iupac{Bicyclo[2.2.1]heptane} & 2.19 & \headercell{Aldehydic protons} \\
+		\iupac{Chlorocyclopropane} & 2.95 & \ch{CH3OCHO} & 8.03 \\
+		\ch{(CH3)2CHOH} & 3.95 & \ch{CH3CHO} & 9.72 \\
+		\ch{(CH3)2CHBr} & 4.17 & \ch{C6H5CHO} & 9.96 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Typical proton chemical shifts $\delta$ (\si{ppm}).}
+	\label{tab:chem_shifts}
+\end{table}
+
+Long-range \emph{deshielding} can occur in aromatic and other molecules with delocalized \( \pi \) electrons. 
+For example, when the plane of the benzene molecule is oriented perpendicular to \( B_0 \), circulation of the \( \pi \) electrons produces a ring current, illustrated in \cref{fig:shielding}. 
+This ring current induces a secondary field at the protons that is aligned \emph{parallel} to \( B_0 \) and results in a higher local field for the protons. 
+This induced field changes with benzen orientation, but does not average to zero, since it is not spherically symmetric. 
+Because of this net deshielding effect, the resonance of the benzene protons occurs at a relatively low external field. 
+The proton chemical shift \( \delta  \) for benzene is \SI{7.27}{\ppm}, much higher in frequency from the value \( \delta = \SI{1.43}{\ppm} \) that is observed for cyclohexane, in which ring currents do not occur. 
+Similar deshielding values of \( \delta \) for different functional groups are shown in \cref{tab:chem_shifts}, and additional values are available in refs.~\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,sdbs2020,aldrich1993nmr}.
+Although the resonances change somewhat for different compounds, the range for a given functional group is usually small and \( \delta \) values are widely used for structural characterization in organic chemistry. 
+
+
+% subsection chemical_shifts (end)
+
+\subsection{Spin--Spin Splitting} % (fold)
+\label{sub:spin_spin_splitting}
+
+High-resolution NMR spectra of most organic compounds reveal more complicated spectra than those predicted by \cref{eq:chem_shift}, with transitions often appearing as multiplets.
+Such \emph{spin--spin splitting patterns} arise because the magnetic moments of one nucleus (A) can interact with that of a nearby nucleus (B), causing a small energy shift up or down depending on the relative orientations of the two moments. 
+The energy levels of nucleus A then have the form 
+\begin{equation}
+	E_\mtext{A} = -g_{N_\mtext{A}} \mu_N M_{I_\mtext{A}} \br{1-\sigma_\mtext{A}} B_0
+		+ h J_\mtext{AB} M_{I_\mtext{A}} M_{I_\mtext{B}}
+	\label{eq:j_coupling}
+\end{equation}
+and there is a similar expression for \( E_\mtext{B} \). 
+The spin--spin interaction is characterized by the coupling constant \( J_\mtext{AB} \), and the effect is to split the energy levels in the manner illustrated for acetaldehyde in \cref{fig:spin_splitting}. 
+It is apparent from this diagram that the external field \( B_0 \) does not affect the small spin--spin splitting that is characterized by the coupling constant \( J \). 
+The quantity \( J \) is a measure of the strength of the pairwise interaction of the spin nucleus A with the spin of nucleus B. 
+Since there are only proton--proton interactions in acetaldehyde, the same splitting occurs for both \ch{CH} and \ch{CH3} resonances. 
+
+\begin{figure}[htb]
+  \centering
+  \input{figures/spin_splitting.tex}
+  \caption{Energy levels, transitions, and the NMR spectrum for acetaldehyde (\ch{CH3CHO}) at \SI{100}{\MHz}. 
+  The coupling constant for the system is \( {J = J_{\ch{CH3}} = J_{\ch{CHO}} = \SI{2.09}{\Hz}} \). 
+  For \ch{CHO}, the quantum number \( {M_I = \pm\tfrac{1}{2}} \). For the \ch{CH3} group, \( {M_I = \pm\tfrac{1}{2}, \, \pm\tfrac{3}{2}} \). 
+  The dashed lines represent the level spacing that would occur in the absence of the spin--spin interaction.
+  The spacing of the energy levels are greatly exaggerated in the figure.}
+  \label{fig:spin_splitting}
+\end{figure}  
+
+\begin{figure}[htb]
+  \centering
+  \input{figures/EtOH_spectrum.tex}
+	\caption{Simulated NMR spectrum of highly purified ethanol at \SI{90}{\MHz}.}\
+	\label{fig:EtOH_spectrum}
+\end{figure}
+The total integrated intensity of the \ch{CH} and \ch{CH3} multiplets follows the proton ratio of \( 1{:}3 \). 
+However, the intensity distribution within each multiplet is determined by the relative population of the lower level in each transition. 
+Since the level spacing is much less than \( kT \), the Boltzmann population factors are essentially identical for these levels. 
+However, there is some degeneracy because rapid rotation of the \ch{CH3} group around the \ch{C-C} bond makes the three protons magnetically equivalent. 
+The number of spin orientations of the \ch{CH3} protons that produced equivalent fields at the \ch{CH} proton determine the degeneracy. 
+The eight permutations of the \ch{CH3} spins shown in \cref{fig:spin_splitting} thus lead to a predicted intensity ratio of \( 1{:}3{:}3{:}1 \) for the \ch{CH} multiplet. 
+Similarly, the \ch{CH3} doublet peaks will be of equal intensity, with a total integrated intensity three times that of the \ch{CH} peaks. 
+In a more general sense, it can be seen that \( n \) equivalent protons interacting with a different proton will split ins resonance into \( n + 1 \) lines whose relative intensities are given by coefficients of the terms in the binomial expansion of the expression \( \br{\alpha + \beta}^n \). 
+Equivalent protons also interact and produce splittings in the energy levels. 
+However, these splittings are symmetric for upper and lower energy states, so no new NMR resonances are produced. 
+\begin{margintable}[-10\baselineskip]
+	\centering
+	\begin{tabular}{@{}cS@{}} 
+		\toprule
+		\bfseries Coupling & {J, Hz} \\
+		\midrule 
+		\addlinespace[1em]
+		\chemfig{C(-[1]H)(-[3])(-[5])(-[7]H)} & \numrange{-20}{5} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5])-CH(-[1]H)(-[7]H)} & \numrange{2}{9} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5])-[@{op,.75}]C(-[2])(-[6])-[@{cl,0.25}]CH(-[1]H)(-[7])} & 0 \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5])=CH(-[1]H)(-[7]H)} & \numrange{0}{3.5} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5]H)=CH(-[1])(-[7]H)} & \numrange{6}{14} \\
+		\addlinespace[1em]
+		\chemfig{CH(-[3])(-[5]H)=CH(-[1]H)(-[7])} & \numrange{11}{19} \\
+		\addlinespace[1em]
+		\chemfig{[:-30]**[,,scale=0.8]6(------)} 
+			{\def\arraystretch{1.3}\begin{tabular}{l}
+				\iupac{\ortho-} \\
+				\iupac{\meta-} \\
+				\iupac{\para-} 
+			\end{tabular}} & 
+			{\def\arraystretch{1.3}\begin{tabular}{c}
+				\numrange{6}{9}\\
+				\numrange{1}{3}\\
+				\num{1} 
+			\end{tabular}} \\
+		\addlinespace[0.5em]
+		\bottomrule
+		\makepolymerdelims{10pt}{op}{cl}
+	\end{tabular}
+	\caption{Typical proton spin--spin coupling constants}
+	\label{tab:j_values}
+\end{margintable}
+
+If a proton is coupled to more than one type of neighboring nucleus, the resultant multiplet pattern can often be understood as a simple stepwise coupling involving different \( J \) values.
+For example, the \ch{CH2} octet that occurs for pure \ch{CH3CH2OH} shown in \cref{fig:EtOH_spectrum} arises from \ch{OH} doublet splitting \( \br{J = \SI{4.80}{\Hz}} \) of the quartet of lines caused by coupling \( \br{J = \SI{7.15}{\Hz}} \) with \ch{CH3}. 
+It should be mentioned that such regular splitting and intensity patterns are expected for two nuclei A and B only if \( \abs{\nu_\mtext{A} - \nu_\mtext{B}} \gtrsim 10\,J_\mtext{AB} \). 
+The spectra for this weakly coupled case are termed \emph{first order.}
+Since the difference \( \nu_\mtext{A} - \nu_\mtext{B} \) (in \si{\Hz}) increases with field while \( J_\mtext{AB} \) does not, NMR spectra obtained with a high-field instrument (\SI{600}{\MHz}) are often easier to interpret than those from a low-field spectrometer (\SI{>200}{\MHz}). 
+However, even if the multiplets are not well separated, it is still possible to deduced accurate chemical shifts and \( J \) values using slightly more involved procedures, which are outlined in most texts on NMR spectroscopy.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
+Such an exercise can be done as an optional part of this experiment, although it will not be necessary for the determination of equilibrium constants. 
+
+The mechanism of spin--spin coupling is known to be indirect and to involve the electrons in the bonds between interacting nuclei. 
+The spin of nucleus A is preferentially coupled antiparallel to the nearest bonding electron through the \emph{Fermi contact interaction}, which is significant only when the electron density is nonzero at the first nucleus.\sidenote{
+Such is the case only for electrons in \( s \) orbitals, since \( p \), \( d \), and \( f \) orbital wavefunctions have nodes at the nucleus.}
+This electron--spin alignment information is transmitted by electron--electron interactions to nucleus B to produced a field that thus depends on the spin orientation of the first nucleus, illustrated in \cref{fig:j_coupling}. 
+since the strength of this interaction falls off rapidly with separation, only neighboring groups produced significant splitting. 
+A few typical spin--spin coupling constants are given in \cref{tab:j_values}. 
+These, along with the chemical shifts, served to identify proton functional groups. 
+As mentioned above, the multiplet intensities also give useful information about neighboring groups. 
+Thus NMR spectra can provide detailed structural information about large and complex biomolecules. 
+
+\setchemfig{atom style={scale=1.2}}
+\begin{figure}[t]
+	\centering
+		\captionsetup[subfigure]{farskip=20pt, captionskip=20pt}
+		\hspace*{\fill}%
+		\subfloat[][low-energy case]{%
+			\chemfig{@{1}\chemabove{H_{A}}{\Uparrow}-@{2}C-@{3}C-@{4}\chemabove{H_{B}}{\Downarrow}}
+			\namebond[6pt]{1}{2}{$ \upharpoonleft \; \downharpoonright $}
+			\namebond[6pt]{2}{3}{$ \downharpoonleft \; \upharpoonright $}
+			\namebond[6pt]{3}{4}{$ \upharpoonleft \; \downharpoonright $}
+		}% 
+		\hfill%
+		\subfloat[][high-energy case]{%
+			\chemfig{@{1}\chemabove{H_{A}}{\Downarrow}-@{2}C-@{3}C-@{4}\chemabove{H_{B}}{\Downarrow}}
+			\namebond[6pt]{1}{2}{$ \upharpoonleft \; \downharpoonright $}
+			\namebond[6pt]{2}{3}{$ \downharpoonleft \; \upharpoonright $}
+			\namebond[6pt]{3}{4}{$ \upharpoonleft \; \downharpoonright $}
+		}%
+		\hspace*{\fill}% 
+	\caption{Illustration of nuclear spin--spin interaction transmitted via polarization of bonding electrons. 
+	The two electrons about each carbon will tend to be parallel, since this arrangement minimizes the electron--electron repulsion (Hund's rule for electrons in degenerate orbitals).}
+	\label{fig:j_coupling}
+\end{figure}
+
+% subsection spin_spin_splitting (end)
+
+% \subsection{Keto--Enol Tautomerism} % (fold)
+% \label{sub:keto_enol_tautomerism}
+%
+% \begin{figure}[h]
+% 	\centering
+% 		\chemnameinit{}
+% 		\schemestart
+% 			\chemname{\chemfig{H_3C-C(=[2]O)-CH_3}}{acetone\\(keto form)}
+% 			\arrow{<=>}
+% 			\chemname{\chemfig{H_2C=C(-[2]OH)-CH_3}}{\vphantom{acetone}\\(enol form)}
+% 		\schemestop
+% 		\chemnameinit{}
+% 	\caption{Tautomeric conversion of acetone.}
+% 	\label{fig:acetone_tautomer}
+% \end{figure}
+%
+% It is well known that ketones such as acetone have an isomeric structure, resulting from proton movement, called the enol tautomer, and unsaturated alcohol, shown in \cref{fig:acetone_tautomer}.
+% For acetone and the majority of cases in which this keto--enol tautomerism is possible, the keto form is far more stable and little, if any, enol can be detected.
+% However, with \iupac{\b-diketones} and \iupac{\b-ketoesters}, factors such as intramolecular hydrogen bonding and conjugation increase the stability of the enol form; causing the equilibrium to be shifted significantly to the right.
+%
+% \begin{figure}[ht]
+% 	\centering
+% 		\chemnameinit{}
+% 		\schemestart
+% 			\definesubmol{&}{-[,,,,draw=none]}
+% 			\chemname{
+% 				\chemfig{R*6(!&!&R''-C(=O)-C(-[:120]H)(-[:60]R')-C(=O)-)}
+% 				}{keto}
+% 			\arrow{<=>[*{0}\( k_1 \)][*{0}\( k_{-1} \)]}[-90,1]
+% 			\chemleft[
+% 				\subscheme{
+% 					\chemname{
+% 						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')=O-[,,,,dash pattern=on 2pt off 2pt]H-O-)}
+% 					}{enol 1}
+% 					\arrow{<=>[\( k_2 \)][\( k_{-2} \)]}
+% 					\chemname{
+% 						\chemfig{R-[:30]C*6(=C(-[6]R')-C(-[:-30]R'')-O-H-[,,,,dash pattern=on 2pt off 2pt]O=)}
+% 					}{enol 2}
+% 				}
+% 			\chemright]
+% 		\schemestop
+% 		\chemnameinit{}
+% 	\caption{Resonance structures of keto--enol tautomers}
+% 	\label{fig:enol_resonance}
+% \end{figure}
+%
+% The proton chemical environment are quite different for the keto and enol tautomers, and the interconversion rate constants \( k_1 \) and \( k_{-1} \) between these forms are small enough that distinct NMR spectra are obtained for both forms.
+% In principle, the two enols are also distinguishable when \( \ch{R'} \ne \ch{R''} \).
+% However, the intramolecular \ch{OH} proton transfer is quite rapid at normal temperatures, so that a single (average) \ch{OH} resonance is observed.
+% In general, such averaging occurs when the conversion rates \( k_2 \) and \( k_{-2} \) (in \si{\Hz}) exceed the frequency separation \( \nu_1 - \nu_2 \) (also in \si{\Hz}) of the \ch{OH} resonance for the two enol forms.\autocite{pople1959nmr,slichter1990mr}
+% The magnetic field at the \ch{OH} proton is thus averaged and resonance occurs at the average frequency, \( \br{\nu_1 + \nu_2}/2 \).
+% Similarly rapid rotation about the \ch{C-C} bonds of the keto form explains why spectra due to different keto rotational conformers are not observed.
+% Thus distinct spectra are expected only for the two tautomers, and tese can be used to determine the equilibrium constant for keto-to-enol conversion:
+% \begin{equation}
+% 	K_c = \frac{[\mtext{enol}]}{[\mtext{keto}]} \, ,
+% 	\label{eq:eq_const}
+% \end{equation}
+% where brackets denote concentrations in any convenient units.
+%
+% The keto arrangement shown in \cref{fig:enol_resonance} is the configuration which is electrostatically most favorable, but the steric repulsions between \ch{R} and \ch{R''} groups will be larger for this keto form than for the enol configuration.
+% Indeed, many experimental studies have confirmed that the enol concentration is larger when \ch{R} and \ch{R''} are bulky.\autocite{burdett1964a}
+% This steric effect is less important in the \iupac{\b-ketoesters}, in which the \ch{R...R''} separation is greater.
+% For both \iupac{\b-ketoesters} and \iupac{\b-diketones}, \chemalpha{} substitution of large \ch{R'} groups results in steric hindrance between \ch{R'} and \ch{R} (or \ch{R''}) groups, particularly for the enol tautomer, whose concentration is thereby reduced.
+% Inductive effects have also been explored; in general, \chemalpha{} substitution of electron-withdrawing groups such as \ch{-Cl} or \ch{-CF_3} favor the enol form.\autocite{burdett1964a}
+%
+% The solvent plays an important role in determining \( K_c \).
+% This can occur through specific solute--solvent interactions such as hydrogen bonding or charge transfer.
+% In addition, the solvent can reduce solute--solute interactions by dilution and thereby change the equilibrium if such interactions are different in enol--enol, enol--keto, or keto--keto dimers.
+% Finally, the dielectric constant of the solution will depend on the solvent and one can expect the more polar tautomeri form to be favored by polar solvents.
+% Some of these aspects are explored in this experiment.
+%
+% % subsection keto_enol_tautomerism (end)
+
+\subsection{Rotational Energy Barrier} % (fold)
+\label{sub:rotational_energy_barrier}
+
+In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo chemical exchange through a process analogous to a \cis--\trans isomerization, where the product is chemically identical to the reactant.
+\begin{figure}[htb]
+	\centering
+		\schemestart
+			\chemfig{H_3C-[:60]C(=[:120]O)-N(-[:60]{(}CH_3{)}_{A})-[:-60]{(}CH_3{)}_{B}}
+			\arrow{<=>}
+			\chemfig{H_3C-[:60]C(=[:120]O)-N(-[:60]{(}CH_3{)}_{B})-[:-60]{(}CH_3{)}_{A}}
+		\schemestop
+	\caption{Isomerization of dimethylacetamide}
+	\label{fig:methyl_exchange}
+\end{figure}
+Due to the characteristic period of the NMR measurement, a large range of reaction rates relevant in the chemical laboratory is easily accessible (\SIrange{e-1}{e-5}{\Hz}).
+In addition, rotational barriers in the range of \SIrange{3}{20}{\kilo\cal\per\mol} can be studied by this method.\autocite{bovey69} 
+
+\subsection{Arrhenius and Eyring equations} % (fold)
+\label{ssub:arrhenius_and_eyring_equations}
+
+The Arrhenius equation (\cref{eq:arrhenius}) describes the temperature dependence of reaction rates. 
+It provides a simple, empirical method for finding the activation energy for a process by observing the change in reaction rate as a function of temperature. 
+\begin{equation}
+  k = A \exp{\frac{-E_\mtext{a}}{RT}}
+  \label{eq:arrhenius}
+\end{equation}
+As stated earlier, \( k \) is the rate constant of the reaction. \( T \) is the absolute temperature (in \si{\K}), \( A \) is a pre-exponential factor, constant and specific to each reaction, \( E_\mtext{a} \) is the activation energy for the process (with the same units as \( RT \)), and \( R \) is the universal gas constant. 
+By taking the natural logarithm of each side and rearranging a bit, the equation can be transformed into the following:
+\begin{equation}
+  \ln{k} = \frac{-E_\mtext{a}}{R} \frac{1}{T} + \ln{A} \, .
+  \label{eq:arrhenius_linear}
+\end{equation}
+This version makes \( \ln{k} \) a linear function of \( T^{-1} \) with a slope of \( -E_\mtext{a}/R \), resulting in a much easier task of curve-fitting. 
+
+An extension of the Arrhenius equation, the Eyring equation (\cref{eq:eyring}), is used in Transition State Theory to describe the enthalpy (\enthalpy*{1}), entropy (\entropy*{1}), and Gibbs free energy (\gibbs*{1}) of the transition state. 
+\begin{equation}
+  k = \kappa \frac{k_B T}{h} \exp{\frac{\gibbs*{1}}{RT}}
+  \label{eq:eyring}
+\end{equation}
+Recall that \( k_B \) and \( h \) are Boltzmann's constant and Planck's constant, respectively. 
+The constant \( \kappa \) represents the \emph{transmission coefficient} and accounts for the possibility that a complex might cross back through a transition state without becoming a product. 
+The transmission coefficient is generally assumed to be \num{1}. 
+If we recall that \gibbs*{1} can be expressed as \( \gibbs*{1} = \enthalpy*{1} + T \entropy*{1} \), \cref{eq:eyring} becomes 
+\begin{equation}
+  k = \kappa \frac{k_B T}{h} \exp{\frac{\entropy*{1}}{R}} \exp{-\frac{\enthalpy*{1}}{R T}} \, .
+  \label{eq:eyring_2}
+\end{equation}
+Again, if we take the natural logarithm of \cref{eq:eyring_2}, we obtain
+\begin{equation}
+  \ln{\frac{k}{T}} = \frac{-\enthalpy*{1}}{R} \frac{1}{T} 
+    + \ln{\frac{\kappa \k_B}{h}} + \frac{\entropy*{1}}{R} \, .
+  \label{eq:eyring_linear}
+\end{equation}
+With this form, we can fit a straight line to the reaction rate data as a function of \( 1/T \) and solve for \gibbs*{1}, \enthalpy*{1}, and \entropy*{1}. 
+% subsubsection arrhenius_and_eyring_equations (end)
+
+% subsection rotational_energy_barrier (end)
+
+\subsection{Line Shape Analysis} % (fold)
+\label{sub:line_shape_analysis}
+
+% If two groups of chemically equivalent nuclei are exchanged by an intramolecular process, the NMR spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{
+%   A typical value for \( \increment\nu \) is about \SI{10}{\hertz}.
+%   }
+% The effects of exchange at several temperatures on the linewidths at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) are shown in \cref{fig:lineshapes}.
+At low temperatures, the exchange is slow and \( k \ll \increment\nu \).
+% The spectrum thus consists of two sharp singlets at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) (\cref{fig:lineshapes_a}).
+At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes_d}).
+There is also an intermediate temperature range over which the spectrumconsists of two significantly broadened overlapping lines (\cref{fig:lineshapes_b}).
+
+Usually, spin--spin and spin--lattice relaxation determine the width of an NMR absorption peak.\autocite{levitt08a}
+Here, we are concerned with the additional effect of exchange of two groups of chemically equivalent nuclei on linewidth.
+The Heisenberg uncertainty principle states that the product of the uncertainty in the measurement of the energy of a particular state, \( \increment E \), and the uncertainty in the lifetime of the state, \( \increment t \), is approximately equal to the reduced Planck's constant, \( \hslash = h/\br{2\pi} \):
+\begin{equation}
+  \increment E \increment t \simeq \hslash \, .
+  \label{eq:heisenberg}
+\end{equation}
+Since 
+\begin{equation}
+  \increment E = h \increment \nu_{1/2} \, ,
+  \label{eq:width1}
+\end{equation}
+where \( \increment \nu_{1/2} \), the absorption linewidth for the transition, is inversely proportional to the lifetime of the excited state:
+\begin{equation}
+  \increment \nu_{1/2} 
+    = \frac{\increment E}{h} 
+    = \frac{\increment E \increment t}{h \increment t} 
+    = \frac{1}{2 \pi \increment t} \, .
+  \label{eq:width2}
+\end{equation}
+An exact analysis of the line broadening produced by the exchange process is derived from the Bloch equations.\autocite{bovey69}
+The Bloch equations describe the motion of the bulk magnetic moment of a sample in the presence of a static field, \( B_0 \), and a rotating field, \( B_1 \), perpendicular to \( B_0 \). 
+
+The exact function for the lineshape\autocite{carrington67} in the case of two equivalent exchanging groups with no coupling is given by 
+% \begin{equation}
+%   g\br{\nu} = \frac{K \tau \br{\nu_\ch{A} - \nu_{\ch{B}}}^2}{
+%   \br{\frac{1}{2}\br{\nu_{\ch{A}} - \nu_{\ch{B}}} - \nu}^2 + \br{2 \pi \tau \br{\nu_{\ch{A}} - \nu} \br{\nu_{\ch{B}} - \nu}}^2} \, ,
+%   \label{eq:lineshape}
+% \end{equation}
+where \( g\br{\nu} \) is the intensity at the frequency, \( \nu \), \( K \) is a normalization constant, and \( \tau = 1/\br{2k} \), where \( k \) is the rate constant fro the exchange. 
+% The variables \( \tau \), \( \nu_\ch{A} \), and \( \nu_\ch{B} \) are functions of temperature and cannot be determined separately.
+Values for these three may be estimated with a fitting algorithm\sidenote{Such as the \href{https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html}{Scipy optimization library}.} to generate a curve-of-best fit for \( g\br{\nu} \). 
+Alternatively, various approximations can be made which apply over different ranges of exchange rates. 
+
+% subsection line_shape_analysis (end)
+
+\subsection{Approximate Methods for Evaluation of Rate Constants\autocite{johnson65}} % (fold)
+\label{sub:approximate_methods_for_evaluation_of_rate_constants_autocite_johnson66}
+
+Direct calculation of the lifetime of a specific spin state from \cref{eq:lineshape} can be made over a limited temperature range.  
+Beyond a certain temperature, the rate of exchange is so fast that the magnetic environments of the two sets of nuclei are identical and any possible distinction between the two sets of nuclei is lost. 
+Thus we have only one set of spins with a lifetime determined by the spin--spin and spin--lattice relaxation mechanisms. 
+
+As the temperature is varied from values at which the rate of exchange is low through values of intermediate exchange rates, to rapid exchange, a series of approximations is available for the calculation of lifetimes.
+although these approximate methods provide somewhat less accurate results than does \cref{eq:lineshape}, they present the student with a meaningful treatment of the data obtained by an NMR study of a chemical rate process. 
+
+\subsection{Slow and Intermediate Exchange} % (fold)
+\label{ssub:slow_and_intermediate_exchange}
+
+At slow exchange rates, the spectrum consists of two lines. 
+% In this region, \( \tau \gg \br{\nu_\ch{A}}^-1 \), and \cref{eq:lineshape} reduces to
+% \begin{equation}
+%   g\br{\nu}_{\ch{A}} = g\br{\nu}_{\ch{B}} = \frac{K T'_{2\ch{A}}}{1 + \br{T'_{2\ch{A}} \br{\nu_{\ch{A}} - \nu}}^2} \, ,
+%   \label{eq:slow_exch_peak}
+% \end{equation}
+% where \( T'_{2\ch{A}} \) is the spin--spin relaxation time.
+% Comparison of \cref{eq:slow_exch} to the exact function shows that the linewidth of the line at \( \nu_{\ch{A}} \) is
+% \begin{equation}
+%   \br{\increment \nu_\ch{A}}_{1/2} = \frac{1}{\pi} \br{\frac{1}{T'_{2\ch{A}}} + \frac{1}{\tau_\ch{A}}} \, .
+%   \label{eq:slow_exch_width}
+% \end{equation}
+% In the absence of exchange, the linewidth is \( \br{\increment \nu_0}_{1/2} = \br{\pi T'_{2\ch{A}}}^{-1} \).
+% Exchange results in \emph{broadening} equal to \( \br{\pi \tau_\ch{A}}^{-1} \).
+A value for \( k \) (\( =1/\br{2\tau} \)) is determined by comparing linewidths at half height of exchanging peaks to those of peaks recorded at temperatures where the rate of exchange is very small:
+% \begin{equation}
+%   k = \pi \br{ \br{ \increment \nu_e }_{1/2} - \br{\increment \nu_0}_{1/2}} \, .
+%   \label{eq:slow_exch_k_1}
+% \end{equation}
+For slow exchange, the rate can also be related to the change in \emph{peak separation}. 
+\Cref{eq:slow_exch_k_2} applies over the limited range where there is extensive overlap between the two separate peaks, but where they have not yet coalesced (see below):
+\begin{equation}
+  k = \frac{\pi}{\sqrt{2}} \sqrt{\increment \nu_0^2 - \increment \nu_e^2} \, ,
+  \label{eq:slow_exch_k_2}
+\end{equation}
+where \( \increment\nu_i \) is the peak separation in \si{\Hz}, and the subscripts (\( i = e \) or \num{0}) have the previously defined meanings.\sidenote{In other words, \( \increment \nu_e \) should range from \( \increment \nu_0 \)at very low temperatures to \num{0} at high temperatures.}
+
+A third method applies in the slow exchange region. 
+In the \emph{ratio method}, \( k \) is calculated from the ratio of the intensities of the peaks, \( I_\mtext{max} \), to the intensity midway between the peaks, \( I_\mtext{min} \), \( r = I_\mtext{max} / I_\mtext{min} \) and 
+\begin{equation}
+  k = \frac{\pi \increment \nu_0}{\sqrt{2}} \br{ r + \sqrt{ r^2 - r}}^{-1/2} \, .
+  \label{eq:slow_exch_k_3}
+\end{equation}
+
+% subsubsection slow_and_intermediate_exchange (end)
+
+\subsection{Coalescence Temperature} % (fold)
+\label{ssub:coalescence_temperature}
+
+The coalescence temperature is defined as the temperature at which the appearance of the spectrum changes from that of two separate peaks to that of a single, flat-topped peak (see \cref{fig:lineshapes_c}). 
+At this temperature, building on \cref{eq:slow_exch_k_3}, 
+\begin{equation}
+  k = \frac{\pi \increment \nu_0}{\sqrt{2}} \, .
+  \label{eq:intermed_exch_k}
+\end{equation}
+
+% subsubsection coalescence_temperature (end)
+
+\subsection{Fast Exchange} % (fold)
+\label{ssub:fast_exchange}
+
+At temperatures above the coalescence temperature, the spectrum consists of a single peak. 
+In this region, \( \tau \ll \br{\nu_{\ch{A}} - \nu_{\ch{B}}}^{-1} \) and \cref{eq:lineshape} reduces to
+\begin{equation}
+  g\br{\nu} = \frac{K T'_2}{1 + \pi T'_2 \br{\nu_{\ch{A}} + \nu_{\ch{B}} - 2 \nu}^2} \, .
+  \label{eq:fast_exch_lineshape}
+\end{equation}
+If the signal is not completely collapsed, i.e., the process is slow enough to contribute to its width but is still well beyond the rate corresponding to separate signals, the following approximation results:
+% \begin{equation}
+%   k = \frac{\pi \increment \nu_0^2}{2} \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}}^{-1}
+%   \label{eq:fast_exch_k}
+% \end{equation}
+% subsubsection fast_exchange (end)
+
+% subsection approximate_methods_for_evaluation_of_rate_constants_autocite_johnson66 (end)
+% section theory (end)
+
+\pagebreak
+
+\section{Safety Precautions} %(fold)
+\label{sec:safety}
+
+Dimethyl sulfoxide (DMSO, \ch{(CH3)2SO}) is relatively non-toxic, but can rapidly carry other compounds through the skin. 
+Gloves should be worn whenever handling it. 
+\iupac{\N,\N-dimethylacetamide} (DMA, \ch{CH3C(O)N(CH3)2}) is toxic and students should avoid inhalation and skin contact. 
+Carry out all solution preparations in a fume hood or well-ventilated area. 
+Dispose of waste chemicals as instructed. 
+% section safety (end)
+
+
+\section{Procedure} % (fold)
+\label{sec:procedure}
+
+\begin{enumerate}
+	\item Prepare a \SI{15}{vol\percent} solution of \ch{DMA} and \ch{DMSO-d6} in  a \SIrange{1.5}{2.0}{\mL} microfuge tube. 
+	Use a \SI{1000}{\uL} micropipettor to the add an appropriate amount (\SI{\sim600}{\uL}) of the solution to a clean NMR tube. 
+	\item Record \NMR* spectra for the solution at \SI{10}{\kelvin} increments from \SIrange{293}{403}{\kelvin}. 
+	\item Peak widths, positions, and intensities should be measured using the TopSpin software on the NMR lab computers and this data should be exported with the spectra for later analysis. 
+\end{enumerate}
+
+% section procedure (end)
+
+\section{Data Analysis} % (fold)
+\label{sec:data_analysis}
+
+\begin{enumerate}
+	\item Correctly assign all peaks in the spectrum using \cref{tab:chem_shifts} and other NMR reference sources.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
+	Mark solvent peaks with an asterisk (*). If splitting patterns deviate from your expectations, discuss possible reasons for the deviation. 
+	\item The data extracted from TopSpin should be split into three grups corresponding to slow/intermediate exchange, coalescence temperature, and fast exchange. 
+	\item Using \cref{eq:slow_exch_k_1} through \cref{eq:fast_exch_k}, to calculate values for \( k \) at each temperature. 
+	\item Create a plot of \( \ln{k} \)  as a function of \( 1/T \). 
+  The slope of this plot yields a value for \gibbs*{1}. 
+  Compare this value to literature values for this rotational barrier. 
+	\item Values for \enthalpy*{1} and \entropy*{1} can be calculated from the value obtained for \gibbs*{1} in the previous step. 
+  Error propagation formulae for these values have been published in \textcite{morse94nmr}.
+\end{enumerate}
+
+% section data_analysis (end)
+
+\section{Questions and Further Thoughts} % (fold)
+\label{sec:questions_and_further_thoughts}
+
+\begin{enumerate}
+	\item Briefly discuss your assignments of chemical shifts and spin--spin splitting patterns of \iupac{\N,\N-dimethylacetamide}. 
+	\item Compare your values of \gibbs*{1} with those for the gas phase (see values in \textcite{jarek97nmr}).
+	What solvent properties might account for any differences you observe?
+\end{enumerate}
+
+% section questions_and_further_thoughts (end)
+
+\section{Lab Report Guidelines} % (fold)
+\label{sec:lab_report_guidelines}
+
+Your lab report should consist of the following parts:
+\begin{description}
+	\item[Title, Author and Date]
+	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
+	\item[Results and Discussion] This should include an overview of the analyzed data and responses to the questions worked into a natrual narrative.
+	\item[References]
+	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
+	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
+\end{description}
+
+\noindent You do \emph{not} need to include uncertainty calculations for this lab. 
+
+% section lab_report_guidelines (end)
