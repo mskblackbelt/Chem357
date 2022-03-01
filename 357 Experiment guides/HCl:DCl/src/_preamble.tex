@@ -48,7 +48,28 @@
   numbersep=2em,
 }
 
+%% TODO One of these is incorrect… but one seems to be necessary for loading external files while the other is for inline syntax. 
 \lstdefinestyle{gaussian}{
+  language=Clean,
+  % keywordstyle=\bfseries,
+  commentstyle=\slshape,
+  % stringstyle=\ttfamily,
+  numbers=left,
+  firstnumber=1,
+  stepnumber=2,
+  numberfirstline=true,
+  numbersep=2em,
+  numberstyle=\tiny,
+  breaklines=true,
+  breakautoindent=true,
+  tabsize=2,
+  basicstyle=\ttfamily\small,
+  showspaces=false,
+  showstringspaces=false,
+  morecomment=[s]{<}{>}
+}
+
+\lstdefinelanguage{gaussian}{
   language=Clean,
   % keywordstyle=\bfseries,
   commentstyle=\slshape,

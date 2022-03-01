@@ -357,7 +357,7 @@ Here is an example header for the input file for this calculation.
 Line 3 sets the theory level and basis set to reasonable values for our computational abilities and time. 
 Line 4 tells Gaussian to \Verb{opt}imize the geometry, then do a \Verb{freq}uency analysis including \Verb{anharm}onic and \Verb{vib}rational-\Verb{rot}ational coupling terms. 
 You will need to replace all items in angle brackets with appropriate data.
-Note the addition of the \lstinline{(Iso=<mass-num>)} option after the element labels.\sidenote{i.e., \lstinline{<atom1>(Iso=<mass_num>)} should become \lstinline{He(Iso=3)} for a \ch{^3He} atom)} 
+Note the addition of the \lstinline[language=gaussian]{(Iso=<mass-num>)} option after the element labels.\sidenote{i.e., \lstinline[language=gaussian]{<atom1>(Iso=<mass_num>)} should become \lstinline[language=gaussian]{He(Iso=3)} for a \ch{^3He} atom)} 
 By inserting the relevant value (total number of protons and neutrons) for your isotope (\num{2} for deuterium), you can tell Gaussian to calculate using a different atomic mass. 
 
 You will need to import the files into your Jupyter notebook the same way you imported the files for the \ch{H3O+} molecule in the Introduction to Computational Chemistry lab. 
