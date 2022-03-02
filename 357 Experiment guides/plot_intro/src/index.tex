@@ -179,7 +179,7 @@ Implement this using the following code:\sidenote{A couple of notes on Python fe
 \begin{itemize}
   \item everything following the number sign (\emph{\#}) on a line is considered a \emph{comment}, meaning that it isn't evaluated.
   This is a great way to document your code as you work.
-  \item The \href{https://docs.python.org/3.6/reference/lexical_analysis.html#f-strings}{``f-strings''} feature was introduced in Python 3.6.
+  \item The \href{https://docs.python.org/3.6/reference/lexical_analysis.html\#f-strings}{``f-strings''} feature was introduced in Python 3.6.
   They are a far more convenient way to included code in printed strings, and result in much more readable code.
   Use them if you have the option, I won't bother teaching you older methods of formatting strings.
   \item Line 3 assigns multiple variables at once by using \href{https://eng.libretexts.org/Bookshelves/Computer_Science/Book\%3A_Python_for_Everybody_(Severance)/10\%3A_Tuples/10.03\%3A_Tuple_Assignment}{tuple assignment}.
@@ -187,14 +187,14 @@ Implement this using the following code:\sidenote{A couple of notes on Python fe
 \end{itemize}
 }
 \begin{pyinput}
-# Fitting using the `numpy.polyfit()` function
-# Function returns fit coefficiences (1d array of values) and an n x n covariance matrix
+\# Fitting using the `numpy.polyfit()` function
+\# Function returns fit coefficiences (1d array of values) and an n x n covariance matrix
 fit_coeff, fit_cov = np.polyfit(data["X"], data["Y"], 1, cov=True)
 
-# The standard error of each coefficient is just the square root of that diagonal element.
+\# The standard error of each coefficient is just the square root of that diagonal element.
 fit_err = np.sqrt(np.diag(fit_cov))
 
-# Use formatted strings (f-strings) to display values with useful labels
+\# Use formatted strings (f-strings) to display values with useful labels
 print(f"slope: {fit_coeff[0]}, std. err.: {fit_err[0]}\n\
 intercept: {fit_coeff[1]}, std. err.: {fit_err[1]}")
 \end{pyinput}
@@ -211,20 +211,20 @@ Now we want to calculate and print a linear fit and corresponding error for each
 The columns in \Verb{anscombe} should have the names ``x1'', ``y1'', ``x2'', ``y2'', etc.
 For convenience, I've created a small loop for you to use on your data.
 This allows us to perform repetitive operations without worrying about being consistent in our typing from operation to operation.\sidenote{If it's correct for the first set of data, it will be correct for each subsequent one}
-\begin{pyinput}
-# We will make a loop to make this less repetitive (and reduce our chances of making an error)
-fits = []
-for x, y in (('x1','y1'),('x2','y2'),('x3','y3'),('x4','y4')):
-    fit_coeff, fit_cov = np.polyfit(anscombe[x], anscombe[y], 1, cov=True)
-    fit_err = np.sqrt(np.diag(fit_cov))
-    fits.append([fit_coeff,fit_err])
-
-# This operation makes my point regarding this data more clear, as you'll see
-with np.printoptions(precision=2):
-    print("Fit, Std. Err.")
-    for x in fits:
-        print(x)
-\end{pyinput}
+% \begin{pyinput}
+% # We will make a loop to make this less repetitive (and reduce our chances of making an error)
+% fits = []
+% for x, y in (('x1','y1'),('x2','y2'),('x3','y3'),('x4','y4')):
+%     fit_coeff, fit_cov = np.polyfit(anscombe[x], anscombe[y], 1, cov=True)
+%     fit_err = np.sqrt(np.diag(fit_cov))
+%     fits.append([fit_coeff,fit_err])
+%
+% # This operation makes my point regarding this data more clear, as you'll see
+% with np.printoptions(precision=2):
+%     print("Fit, Std. Err.")
+%     for x in fits:
+%         print(x)
+% \end{pyinput}
 
 Clearly, the data sets are different… You can see that from the numbers in the table.
 So what's going on?
@@ -242,7 +242,7 @@ It is such a valuable dataset that the \Verb{seaborn} library is installed with 
 
 Start a new section titled ``Plotting Spectra'' and import the file \Verb{ftir_data.csv}.
 Print out the top of the dataframe using the command \pyinline{df.head()}, where \Verb{df} is the name of your dataframe.
-Notice that we have data in the form ``Wavenumber (cm\textasciicircum-1}})'', ``Transmittance (\%)''.
+Notice that we have data in the form ``Wavenumber (cm\textasciicircum{-1})'', ``Transmittance (\%)''.
 
 There is a very simple syntax in Pandas for making a new column:
 \begin{pyinput}
