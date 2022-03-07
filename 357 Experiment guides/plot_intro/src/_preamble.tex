@@ -1,7 +1,254 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
-\input{../../header.tex}
+% \input{../../header.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%% PACKAGES
+%%%%%%%%%%%%%%%%%%
+
+
+%% debugging / diagnostics
+\RequirePackage[l2tabu,orthodox]{nag} % nags user about obsolete and improper syntax
+
+\usepackage{xparse} % provides high-level interface for producing document-level commands
+	% via \[Declare/New/Renew/Provide/etc]DocumentCommand
+	% allows for more than one optional argument in commands
+
+\usepackage{iftex,ifluatex,ifxetex,ifdraft} % check if a document is being processed with pdfTeX, or XeTEX, or LuaTEX
+\newif\ifxetexorluatex % a new conditional starts as false, true if using XeTeX OR LuaTeX
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0
+   \xetexorluatextrue
+\fi
+
+%% fonts and encoding 
+
+% standard and structural packages
+
+% \newcommand\bmmax{4} % increase max number of bm font allocations. default 4?
+% \newcommand\hmmax{1} % increase max number of hm font allocations. default 3?
+% \usepackage{bm} % provides \bm command for robustly bolding math characters
+
+%%%%%%%%%%%%%%%%%%%%%% Additional math fonts %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{amssymb} % for \mathbb (upper case only), \mathfrak fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype} % improves kerning in certain cases. 
+	% recommended to disable protrusion in table of contents!
+
+%% Latex interface 
+
+% \usepackage{letltxmacro} % provides \LetLtxMacro command for correct renaming of commands
+% \usepackage{etoolbox} % provides many useful programming tools,
+	% e.g. \ifdefempty{cs}{true}{false}
+
+
+
+%% media interface
+
+\usepackage{graphicx} % support the \includegraphics command and options
+% \usepackage{subfig} % Support for subfigures and subcaptions
+% 	\captionsetup[subfloat]{position=bottom}
+% % \makeatletter%
+% % \@ifclassloaded{tufte-handout}% xcolor is pre-loaded with the tufte-latex package
+% %   {
+% 	% \ifxetexorluatex % if lua- or xelatex http://tex.stackexchange.com/a/140164/1913
+% 		\newcommand{\textools}[2][5]{%
+% 			\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+% 		}
+% 		\renewcommand{\allcapsspacing}[1]{\textools[15]{#1}}
+% 		\renewcommand{\smallcapsspacing}[1]{\textools[10]{#1}}
+% 		\renewcommand{\allcaps}[1]{\textools[15]{\MakeTextUppercase{#1}}}
+% 		\renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+% 		\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+% 	\else
+% 	\fi
+% }%
+%   {\usepackage[dvipsnames,svgnames,table,hyperref]{xcolor}
+% 	% provides access to large number of colors and related features
+% 	% see end notes for lists of available colors
+% 	}%
+% \makeatother%
+% \usepackage{svg} % provides \includesvg command for svg figures.
+% \usepackage{pgfplots} % for plotting in tikzpicture environment
+	% \pgfplotsset{compat=1.16} % required to select newest version
+\usepackage{tikzscale} % allows \includegraphics{*.tikz} and scaling of TiKZ images
+
+
+%% math interface
+
+\usepackage{amsmath} % for nice math commands and environments
+% \usepackage{mathtools} % extends amsmath with bug fixes and useful commands, e.g.
+	% \shortintertext for short interjections in align environment,
+	% \prescript{t}{b}{X} for simple, nicely aligned math pre-(super/sub)scripts
+	% \Aboxed{...} for boxing full lines in 'align' environment
+\usepackage{array} % improves array support, esp. in tabular env. 
+	% see also xtab.sty
+\usepackage{booktabs} % allows for improved spacing in tabular env. 
+	% use \toprule, \*midrule, \bottomrule instead of \hline
+	% see also ctable.sty
+
+% \usepackage{derivative} % provides \odv, \pdv, \odif, \pdif
+% \usepackage{bropd} % provides \br command which simplifies nesting of bracketed terms
+% 	% e.g. \br{\br{x-a}^2+\br{y-b}^2} produces \left[ \left( x-a \right)^2 + \left( y-b \right)^2 \right]
+
+
+%% Science and programming packages
+\usepackage{fvextra} % for verbatim and comment environments with \Verb
+\usepackage{siunitx}
+% \usepackage{chemmacros} % for writing chemical formulas with \ch, e.g. \ch{AgCl2-} or \ch{^{227}_{90}Th+}
+% 	\usechemmodule{
+% 		spectroscopy, % provides
+%     thermodynamics, % provides state variables and equations
+%     units, % provides \[mM]olar, \Torr, \atm, \cal, \cmc, \MolMass
+% 		} % also loads siunitx and chemformula
+% 	\DeclareSIUnit\ppm{ppm}
+%   \sisetup{% siunit package options
+% 			per-mode = symbol,%
+% 			inter-unit-product=\ensuremath{{}\!\cdot\!{}},%
+% 			separate-uncertainty,%
+% 			multi-part-units = single,%
+% 			retain-explicit-plus,%
+% 			list-final-separator={, and },%
+% 			math-celsius = °\text{C}, % for temperatures
+% 			text-celsius = °C,
+% 			math-degree = °, % for angles
+% 			text-degree = °}%
+
+
+% \usepackage{physics} % provides streamlined interface with many commands to simplify
+	% writing standard physics notation (bra-kets, derivatives, etc.)
+	% differentials and derivatives: \dd[n]{x}, \dv[n]{f}{x}, \dv{x}, \pdv{f}{x}{y}, \var{Q}, \fdv{F}{g}
+	% bra-ket notation: \bra, \ket, \braket, \dyad, \matrixel 
+	% \qty(x) for delimited quantities
+	% \abs, \norm, \eval, \order ,\comm, \acomm
+	% vectors: \vb, \va, vu, \vdot, \cross, \grad, \div, \curl, \laplacian
+	% largely replaces and adds basic math functions with auto-delimiters: trig, linear algebra, etc.
+		% no inverse hyperbolic trig? 
+	% in particular adds \tr, \Tr, \rank, \erf, \Res, \pv / \PV, \Re, \Im
+	% auto padding text: \qq{string}
+	% matrix quantities: \mqty(a & b \\ c & d) or \mqty[x \\ y], Pauli \pmat{n}, diagonal matrices \mqty(\dmat{1,2&3\\4&5}), anti-diagonal \admat
+
+%% misc packages
+
+% \usepackage{datetime} % allows easy formatting of dates, e.g. \formatdate{dd}{mm}{yyyy}
+%\usepackage[inline]{enumitem} % allows for custom labels on enumerated lists
+	% e.g. \begin{enumerate}[label=\textbf{(\alph*)}]
+	% label options are: \alph, \Alph, \arabic, \roman, and \Roman
+	% inline option creates '*' versions of enumerate, itemize, description 
+		% which can be inlined within the text of a paragraph. 
+% \usepackage{outlines} % provides 'outline[style]' environment, allowing for subitems in lists
+	% e.g. \begin{outline} \1 item \2 subitem \3[A)] subsubitem \1 item \end{outline}
+	% or with other style: \begin{outline}[enumerate], etc
+
+% \usepackage{rotating}
+	% provides environments for rotating arbitrary objects, e.g. sideways, turn[ang], rotate[ang]
+	% also provides macro \turnbox{ang}{stuff}
+%\usepackage{ctable} % allows for footnotes under table and properly spaced caption above 
+	% must be loaded after tikz
+	% incorporates (..?)
+% \usepackage{framed} % provides boxed 'framed' environment for easily boxing text
+\usepackage{tcolorbox}
+	\tcbuselibrary{skins, breakable, xparse, minted}
+	% provides fancier boxes than regular \makebox, \fbox, etc.
+	% e.g. \doublebox, \ovalbox, \shadowbox
+	% Can use `\tcbuselibrary{listings}` to use the listings library, 
+		% doesn't require a language to be defined. 
+% \usepackage{empheq} % provides 'empheq' environment
+% 	% for improved control over shape, size, color of framed boxes, e.g.
+% \newcommand{\boxedeq}[2]{
+% 	\begin{empheq}[box={\fboxsep=6pt\fbox}]{align}\label{#1}#2\end{empheq}
+% }
+% \newcommand{\coloredeq}[2]{
+% 	\begin{empheq}[box=\colorbox{lightgreen}]{align}\label{#1}#2\end{empheq}
+% }
+
+
+%% document interface 
+
+% \usepackage{footnote} %
+\usepackage{hyperref} % adds hyperlinks and outline to PDF documents
+	\hypersetup{%
+		pdfencoding=auto,%
+		psdextra,%
+		pdfusetitle,%
+		colorlinks=true,%
+		linkcolor=BrickRed, %
+		citecolor=Green, %
+		filecolor=Mulberry, %
+		urlcolor=NavyBlue, %
+		menucolor=BrickRed, %
+		runcolor=Mulberry, %
+		linkbordercolor=BrickRed, %
+		citebordercolor=Green, %
+		filebordercolor=Mulberry, %
+		urlbordercolor=NavyBlue, %
+		menubordercolor=BrickRed, %
+		runbordercolor=Mulberry %
+		} %
+	% options enable enhanced unicode and math support in PDF outlines [causes conflict with \C command?]
+\usepackage{cleveref} % provides \cref command which inserts contextually correct word in front of ref.
+	% e.g. \cref{eq:myeq} --> Equation 1.2, or so
+\usepackage{bookmark} % improves package hyperref's bookmarking. 
+	% properties such as style and color can be set. Generates bookmarks in first run. 
+
+%% font packages -- load fontenc, then inputenc, then lmodern. 
+% see http://tex.stackexchange.com/a/44699
+\usepackage{fontspec}
+\usepackage[math-style=ISO]{unicode-math} 
+\ifdraft{}{
+	\setmainfont{STIX2Text}[
+		Extension={.otf},
+		UprightFont={*-Regular},
+		BoldFont={*-Bold},
+		ItalicFont={*-Italic},
+		BoldItalicFont={*-BoldItalic},]
+	\setmathfont{STIX2Math}[
+		Extension={.otf}]
+}
+	% \renewcommand{\vb}[1]{\symbf{#1}} % fix vector command from physics package to work with unicode-math
+
+
+%% load later packages
+% \usepackage{lineno} % provides line numbers in main text for reference and peer review
+	% activated by calling \linenumbers in document
+% \usepackage[textsize=footnotesize]{todonotes}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%
+%% COMMANDS
+%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\mtext}[1]{{\textnormal{#1}}} % for writing text within math mode, e.g. for subscripts
+\LetLtxMacro{\mtext}{\text} % legacy alias for \mtext
+% \LetLtxMacro{\opname}{\operatorname} % custom operator names
+% %\newcommand{\tr}{\opname{tr}} % for trace
+% %\newcommand{\rank}{\opname{rank}} % for rank
+% \newcommand{\diag}{\opname{diag}} % i.e. \diag(\lambda_1, \dots, \lambda_n)
+% \LetLtxMacro{\fancyRe}{\real} % already renamed from physics.sty
+% \LetLtxMacro{\fancyIm}{\imaginary} % see above
+% \renewcommand{\Re}{\opname{Re}}
+% \renewcommand{\Im}{\opname{Im}}
+% \renewcommand{\Res}{\opname*{Res}} % for residue function (handles limits properly)
+% \newcommand{\inv}{^{-1}}
+% \newcommand{\sgn}{\opname{sgn}} % sign/signum function
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\GammaFunc}{\symup{\Gamma}}
+\newcommand{\iu}{\TextOrMath{$\mtext{i}$}{\mtext{i}\mkern1mu}}
+%
+% \newcommand{\laplacian}{\nabla^2}
+
+%% pre-defined colors
+% standard: black, blue, brown, cyan, darkgray, gray, green, lightgray, lime, magenta, olive, orange, pink, purple, red, teal, violet, white, yellow
+%
+% dvips: Apricot, Aquamarine, Bittersweet, Black, Blue, BlueGreen, BlueViolet, BrickRed, Brown, BurntOrange, CadetBlue, CarnationPink, Cerulean, CornflowerBlue, Cyan, Dandelion, DarkOrchid, Emerald, ForestGreen, Fuchsia, Goldenrod, Gray, Green, GreenYellow, JungleGreen, Lavender, LimeGreen, Magenta, Mahogany, Maroon, Melon, MidnightBlue, Mulberry, NavyBlue, OliveGreen, Orange, OrangeRed, Orchid, Peach, Periwinkle, PineGreen, Plum, ProcessBlue, Purple, RawSienna, Red, RedOrange, RedViolet, Rhodamine, RoyalBlue, RoyalPurple, RubineRed, Salmon, SeaGreen, Sepia, SkyBlue, SpringGreen, Tan, TealBlue, Thistle, Turquoise, Violet, VioletRed, White, WildStrawberry, Yellow, YellowGreen, YellowOrange
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage[mackeys=text]{menukeys}
-\tcbuselibrary{minted}
+	% \tcbuselibrary{minted}
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
