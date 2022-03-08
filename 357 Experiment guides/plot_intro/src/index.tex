@@ -186,18 +186,20 @@ Implement this using the following code:\sidenote{A couple of notes on Python fe
   Don't worry too much about the mechanics of this, just know that it's a handy tool when the right side of your assignment puts out multiple items.
 \end{itemize}
 }
+\begin{figure}
 \begin{pyinput}
-\# Fitting using the `numpy.polyfit()` function
-\# Function returns fit coefficiences (1d array of values) and an n x n covariance matrix
+# Fitting using the `numpy.polyfit()` function
+# Function returns fit coefficiences (1d array of values) and an n x n covariance matrix
 fit_coeff, fit_cov = np.polyfit(data["X"], data["Y"], 1, cov=True)
 
-\# The standard error of each coefficient is just the square root of that diagonal element.
+# The standard error of each coefficient is just the square root of that diagonal element.
 fit_err = np.sqrt(np.diag(fit_cov))
 
-\# Use formatted strings (f-strings) to display values with useful labels
+# Use formatted strings (f-strings) to display values with useful labels
 print(f"slope: {fit_coeff[0]}, std. err.: {fit_err[0]}\n\
 intercept: {fit_coeff[1]}, std. err.: {fit_err[1]}")
 \end{pyinput}
+\end{figure}
 
 % section fitting-data (end)
 
