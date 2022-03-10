@@ -1,17 +1,26 @@
+% TODO: Remove section on chem shift?
+% Create Zeeman level splitting for 3/2 nucleus
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
-\usepackage[subpreambles,sort]{standalone}
-\input{header.tex}
+% Uncomment if compilation doesn't work for standalone inclusions
+% \usepackage[subpreambles,print,sort]{standalone}
+\usepackage{standalone}
+\input{../header.tex}
   \pgfplotsset{compat=1.18}
+	\usetikzlibrary{decorations.markings}
+	\usetikzlibrary{math}
+	\usetikzlibrary{calc}
+	\usepgfplotslibrary {groupplots}
+
 
 %%%%%%% ChemMacros options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
 \DeclareSIUnit\gauss{G}
-\usechemmodule{thermodynamics}
+% \usechemmodule{thermodynamics}
   \RenewChemState{\gibbs}{symbol=G, unit=\kilo\joule\per\mole, superscript-right=\transitionstatesymbol}
   \RenewChemState{\enthalpy}{symbol=H, unit=\kilo\joule\per\mole, superscript-right=\transitionstatesymbol}
   \RenewChemState{\entropy}{symbol=S, unit=\kilo\joule\per\kelvin\per\mole, superscript-right=\transitionstatesymbol}
   
-\usechemmodule{polymers}
+% \usechemmodule{polymers}
 \setchemfig{atom style={scale=0.80}}
 \newcommand\namebond[4][5pt]{\chemmove{\path(#2)--(#3)node[midway,sloped,yshift=#1]{#4};}}
 \newcommand{\headercell}[1]{\multicolumn{2}{c}{\bfseries #1}}
@@ -43,12 +52,12 @@
 	    }%
 	  }%
 	}
-	
-	% Add a section for cited bibliography entries. 
+
+	% Add a section for cited bibliography entries.
   % At the end, create a second bibliography for uncited items (Further Reading).
 	\DeclareBibliographyCategory{cited}
 	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
-	
+
   % Define a style for the Further Reading section
   \defbibenvironment{nolabelbib}
     {\list
@@ -59,7 +68,7 @@
         \setlength{\parsep}{\bibparsep}}}
     {\endlist}
     {\item}
-  
+
   % Remove URL from citations if DOI is present.
 	\AtEveryBibitem{%
 	  \iffieldundef{doi}{ % do nothing if true
@@ -71,7 +80,7 @@
 % (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{NMR Determination of Keto--Enol Equilibrium Constants}
+\title{NMR Determination of Rotational Energy Barrier Equilibrium Constants}
 
 \author{Dustin Wheeler}
 
@@ -94,7 +103,7 @@ In this experiment, the barrier to rotation in \iupac{\N,\N-dimethylacetamide} c
 
 \begin{marginfigure}
   \centering
-   \input{figures/zeeman_splitting.tikz}
+   % \input{figures/zeeman_splitting.tikz}
   \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
   \label{fig:quad_splitting}
 \end{marginfigure}
@@ -108,13 +117,13 @@ Substitution of the charge \( e \) and mass of a proton, \( m_\mtext{p} \), give
 The symbol \( \mu_N \) is the unit of nuclear magnetic moment and is smaller than the electronic Bohr magneton (\( \mu_B \)) by the electron-to-proton mass ratio (\num{\sim1800}). 
 
 The nuclear moment will interact with a local \emph{magnetic induction} (flux density)\sidenote{
-The vector quantity \( \vb{B} \) is called either the \emph{magnetic induction} or the \emph{magnetic flux density}, although the term \emph{magnetic field strength} is more commonly used.
-Unfortunately, the name \emph{magnetic field strength} was given to \( \vb{H} \) at a time when \( \vb{H} \) was considered to be the fundamental magnetic-field vector.
-It is now known that \( \vb{B} \) is the fundamental vector (analogous to \( \vb{E} \), the electric-field vector).
-To add to the confusion, \( \vb{B} = \vb{H} \) in a vacuum when CGS units are used.
-In the internationally-recognized SI system, \( \vb{B} = \mu_0 \vb{H} \) in a vacuum, and the vacuum permeability \( \mu_0 = \qty{4\pi e-7}{\henry\per\m} \).
-In SI units, \( \vb{B} \) is expressed in tesla (\( \qty{1}{\tesla} = \qty{1}{\weber\per\meter\squared} = \qty{1e4}{\gauss}\)) and \( \vb{H} \) is expressed in \unit{\A\per\m}.
-In many texts, \( \vb{B} \) is loosely called the \emph{magnetic field}.
+	The vector quantity \( \vb{B} \) is called either the \emph{magnetic induction} or the \emph{magnetic flux density}, although the term \emph{magnetic field strength} is more commonly used.
+	Unfortunately, the name \emph{magnetic field strength} was given to \( \vb{H} \) at a time when \( \vb{H} \) was considered to be the fundamental magnetic-field vector.
+	It is now known that \( \vb{B} \) is the fundamental vector (analogous to \( \vb{E} \), the electric-field vector).
+	To add to the confusion, \( \vb{B} = \vb{H} \) in a vacuum when CGS units are used.
+	In the internationally-recognized SI system, \( \vb{B} = \mu_0 \vb{H} \) in a vacuum, and the vacuum permeability \( \mu_0 = \qty{4\pi e-7}{\henry\per\m} \).
+	In SI units, \( \vb{B} \) is expressed in tesla (\( \qty{1}{\tesla} = \qty{1}{\weber\per\meter\squared} = \qty{1e4}{\gauss}\)) and \( \vb{H} \) is expressed in \unit{\A\per\m}.
+	In many texts, \( \vb{B} \) is loosely called the \emph{magnetic field}.
 }, 
 \( B_\mtext{loc} \), to cause an energy change (the Zeeman effect)
 \begin{equation}
@@ -130,7 +139,7 @@ In this case, the resonant frequency is given by
 	\label{eq:res_freq}
 \end{equation}
 For protons, \( \nu = \num{4.26e7} \cdot B_\mtext{loc} \), where \( \nu \) is expressed in hertz and \( B_\mtext{loc} \) is expressed in tesla. For typical fields of \qtyrange{1}{20}{\tesla}, \( \nu \) falls in the radio-frequency region (\qtyrange{10}{1000}{\MHz}). 
-In practice, values of \( B_0 \) (the external applied field) are chosen to fix \( \nu \) to some convenient value (e.g., \qtylist{60;100;200}{\MHz}). 
+In practice, values of \( B_0 \) (the external applied field) are chosen to fix \( \nu \) to some convenient value (e.g., \qtylist{400;600;800}{\MHz}). 
 
 % subsection magnetic_moments (end)
 
@@ -316,7 +325,7 @@ It should be mentioned that such regular splitting and intensity patterns are ex
 The spectra for this weakly coupled case are termed \emph{first order.}
 Since the difference \( \nu_\mtext{A} - \nu_\mtext{B} \) (in \unit{\Hz}) increases with field while \( J_\mtext{AB} \) does not, NMR spectra obtained with a high-field instrument (\qty{600}{\MHz}) are often easier to interpret than those from a low-field spectrometer (\qty{>200}{\MHz}). 
 However, even if the multiplets are not well separated, it is still possible to deduced accurate chemical shifts and \( J \) values using slightly more involved procedures, which are outlined in most texts on NMR spectroscopy.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
-Such an exercise can be done as an optional part of this experiment, although it will not be necessary for the determination of equilibrium constants. 
+%Such an exercise can be done as an optional part of this experiment, although it will not be necessary for the determination of equilibrium constants. 
 
 The mechanism of spin--spin coupling is known to be indirect and to involve the electrons in the bonds between interacting nuclei. 
 The spin of nucleus A is preferentially coupled antiparallel to the nearest bonding electron through the \emph{Fermi contact interaction}, which is significant only when the electron density is nonzero at the first nucleus.\sidenote{
@@ -430,7 +439,6 @@ Thus NMR spectra can provide detailed structural information about large and com
 \subsection{Rotational Energy Barrier} % (fold)
 \label{sub:rotational_energy_barrier}
 
-In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo chemical exchange through a process analogous to a \cis--\trans isomerization, where the product is chemically identical to the reactant.
 \begin{figure}[htb]
 	\centering
 		\schemestart
@@ -441,10 +449,11 @@ In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo
 	\caption{Isomerization of dimethylacetamide}
 	\label{fig:methyl_exchange}
 \end{figure}
-Due to the characteristic period of the NMR measurement, a large range of reaction rates relevant in the chemical laboratory is easily accessible (\qtyrange{e-1}{e-5}{\Hertz}).
+In \iupac{\N,\N-dimethylacetamide}, the two \iupac{\N-methyl} groups can undergo chemical exchange through a process analogous to a \cis--\trans{} isomerization, where the product is chemically identical to the reactant.
+Due to the characteristic period of the NMR measurement, a large range of reaction rates relevant in the chemical laboratory is easily accessible (\qtyrange{e-1}{e-5}{\hertz}).
 In addition, rotational barriers in the range of \qtyrange{3}{20}{\kilo\cal\per\mol} can be studied by this method.\autocite{bovey69} 
 
-\subsubsection{Arrhenius and Eyring equations} % (fold)
+\subsection{Arrhenius and Eyring equations} % (fold)
 \label{ssub:arrhenius_and_eyring_equations}
 
 The Arrhenius equation (\cref{eq:arrhenius}) describes the temperature dependence of reaction rates. 

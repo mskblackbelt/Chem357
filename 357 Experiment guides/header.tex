@@ -172,25 +172,32 @@
 
 \usepackage{footnote} % 
 \usepackage{hyperref} % adds hyperlinks and outline to PDF documents
-	\hypersetup{%
-		pdfencoding=auto,%
-		psdextra,%
-		pdfusetitle,%
-		colorlinks=true,%
-		linkcolor=BrickRed, %
-		citecolor=Green, %
-		filecolor=Mulberry, %
-		urlcolor=NavyBlue, %
-		menucolor=BrickRed, %
-		runcolor=Mulberry, %
-		linkbordercolor=BrickRed, %
-		citebordercolor=Green, %
-		filebordercolor=Mulberry, %
-		urlbordercolor=NavyBlue, %
-		menubordercolor=BrickRed, %
-		runbordercolor=Mulberry %
-		} %
+\hypersetup{%
+	pdfencoding=auto,%
+	psdextra,%
+	colorlinks=true,%
+	linkcolor=BrickRed, %
+	citecolor=Green, %
+	filecolor=Mulberry, %
+	urlcolor=NavyBlue, %
+	menucolor=BrickRed, %
+	runcolor=Mulberry, %
+	linkbordercolor=BrickRed, %
+	citebordercolor=Green, %
+	filebordercolor=Mulberry, %
+	urlbordercolor=NavyBlue, %
+	menubordercolor=BrickRed, %
+	runbordercolor=Mulberry %
+}
+\makeatletter%
+\@ifclassloaded{tufte-handout}% hyperref is pre-loaded with some options by the tufte-latex package
+  {}%
+  {
+	\hypersetup{pdfusetitle} %
 	% options enable enhanced unicode and math support in PDF outlines [causes conflict with \C command?]
+	}%
+\makeatother%
+
 \usepackage{cleveref} % provides \cref command which inserts contextually correct word in front of ref.
 	% e.g. \cref{eq:myeq} --> Equation 1.2, or so
 \usepackage{bookmark} % improves package hyperref's bookmarking. 
