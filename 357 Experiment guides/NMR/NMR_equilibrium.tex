@@ -11,7 +11,6 @@
 	\usetikzlibrary{calc}
 	\usepgfplotslibrary {groupplots}
 
-
 %%%%%%% ChemMacros options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
 \DeclareSIUnit\gauss{G}
@@ -30,6 +29,25 @@
 % (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\titleclass{subsubsection}{straight}[subsection]
+
+\newcounter{subsubsection}[subsubsection]
+\renewcommandthesubsubsection{thesubsubsection.arabic{subsubsubsection}}
+
+\titleformat{subsubsection}
+  {normalfontnormalsizebfseries}{thesubsubsection}{1em}{}
+\titlespacing*{subsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\itshape}}
+\deftoclevel@subsubsection{3}
+\defl@subsubsection{@dottedtocline{4}{7em}{4em}}
+\makeatother
+                                     
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
 \usepackage[%
@@ -498,9 +516,9 @@ With this form, we can fit a straight line to the reaction rate data as a functi
 \label{sub:line_shape_analysis}
 
 If two groups of chemically equivalent nuclei are exchanged by an intramolecular process, the NMR spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{A typical value for \( \increment\nu \) is about \qty{10}{\hertz}.} 
-The effects of exchange at several temperatures on the linewidths at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) are shown in \cref{fig:lineshapes}. 
+The effects of exchange at several temperatures on the linewidths at \( \nu_{\ch{A}} \) and \( \nu_{\ch{B}} \) are shown in \cref{fig:lineshapes}. 
 At low temperatures, the exchange is slow and \( k \ll \increment\nu \). 
-The spectrum thus consists of two sharp singlets at \( \nu_\ch{A} \) and \( \nu_\ch{B} \) (\cref{fig:lineshapes_a}). 
+The spectrum thus consists of two sharp singlets at \( \nu_{\ch{A}} \) and \( \nu_{\ch{B}} \) (\cref{fig:lineshapes_a}). 
 At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes_d}). 
 There is also an intermediate temperature range over which the spectrum consists of two significantly broadened overlapping lines (\cref{fig:lineshapes_b}).
 
@@ -529,12 +547,12 @@ The Bloch equations describe the motion of the bulk magnetic moment of a sample 
 
 The exact function for the lineshape\autocite{carrington67} in the case of two equivalent exchanging groups with no coupling is given by 
 \begin{equation}
-  g\br{\nu} = \frac{K \tau \br{\nu_\ch{A} - \nu_{\ch{B}}}^2}{
+  g\br{\nu} = \frac{K \tau \br{\nu_{\ch{A}} - \nu_{\ch{B}}}^2}{
   \br{\frac{1}{2}\br{\nu_{\ch{A}} - \nu_{\ch{B}}} - \nu}^2 + \br{2 \pi \tau \br{\nu_{\ch{A}} - \nu} \br{\nu_{\ch{B}} - \nu}}^2} \, ,
   \label{eq:lineshape}
 \end{equation}
 where \( g\br{\nu} \) is the intensity at the frequency, \( \nu \), \( K \) is a normalization constant, and \( \tau = 1/\br{2k} \), where \( k \) is the rate constant fro the exchange. 
-The variables \( \tau \), \( \nu_\ch{A} \), and \( \nu_\ch{B} \) are functions of temperature and cannot be determined separately. 
+The variables \( \tau \), \( \nu_{\ch{A}} \), and \( \nu_{\ch{B}} \) are functions of temperature and cannot be determined separately. 
 Values for these three may be estimated with a fitting algorithm\sidenote{Such as the \href{https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html}{Scipy optimization library}.} to generate a curve-of-best fit for \( g\br{\nu} \). 
 Alternatively, various approximations can be made which apply over different ranges of exchange rates. 
 
@@ -554,7 +572,7 @@ although these approximate methods provide somewhat less accurate results than d
 \label{ssub:slow_and_intermediate_exchange}
 
 At slow exchange rates, the spectrum consists of two lines. 
-In this region, \( \tau \gg \br{\nu_\ch{A}}^-1 \), and \cref{eq:lineshape} reduces to 
+In this region, \( \tau \gg \br{\nu_{\ch{A}}}^-1 \), and \cref{eq:lineshape} reduces to 
 \begin{equation}
   g\br{\nu}_{\ch{A}} = g\br{\nu}_{\ch{B}} = \frac{K T'_{2\ch{A}}}{1 + \br{T'_{2\ch{A}} \br{\nu_{\ch{A}} - \nu}}^2} \, ,
   \label{eq:slow_exch_peak}
@@ -562,11 +580,11 @@ In this region, \( \tau \gg \br{\nu_\ch{A}}^-1 \), and \cref{eq:lineshape} reduc
 where \( T'_{2\ch{A}} \) is the spin--spin relaxation time. 
 Comparison of \cref{eq:slow_exch} to the exact function shows that the linewidth of the line at \( \nu_{\ch{A}} \) is
 \begin{equation}
-  \br{\increment \nu_\ch{A}}_{1/2} = \frac{1}{\pi} \br{\frac{1}{T'_{2\ch{A}}} + \frac{1}{\tau_\ch{A}}} \, .
+  \br{\increment \nu_{\ch{A}}}_{1/2} = \frac{1}{\pi} \br{\frac{1}{T'_{2\ch{A}}} + \frac{1}{\tau_{\ch{A}}}} \, .
   \label{eq:slow_exch_width}
 \end{equation}
 In the absence of exchange, the linewidth is \( \br{\increment \nu_0}_{1/2} = \br{\pi T'_{2\ch{A}}}^{-1} \). 
-Exchange results in \emph{broadening} equal to \( \br{\pi \tau_\ch{A}}^{-1} \). 
+Exchange results in \emph{broadening} equal to \( \br{\pi \tau_{\ch{A}}}^{-1} \). 
 A value for \( k \) (\( =1/\br{2\tau} \)) is determined by comparing linewidths at half height of exchanging peaks to those of peaks recorded at temperatures where the rate of exchange is very small:
 \begin{equation}
   k = \pi \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}} \, .
@@ -578,7 +596,7 @@ For slow exchange, the rate can also be related to the change in \emph{peak sepa
   k = \frac{\pi}{\sqrt{2}} \sqrt{\increment \nu_0^2 - \increment \nu_e^2} \, ,
   \label{eq:slow_exch_k_2}
 \end{equation}
-where \( \increment\nu_i \) is the peak separation in \unit{\Hz}, and the subscripts (\( i = e \) or \num{0}) have the previously defined meanings.\sidenote{In other words, \( \increment \nu_e \) should range from \( \increment \nu_0 \)at very low temperatures to \num{0} at high temperatures.}
+where \( \increment\nu_i \) is the peak separation in \unit{\Hz}, and the subscripts (\( i = e \) or \num{0}) have the previously defined meanings.\sidenote{In other words, \( \increment \nu_e \) should range from \( \increment \nu_0 \) at very low temperatures to \num{0} at high temperatures.}
 
 A third method applies in the slow exchange region. 
 In the \emph{ratio method}, \( k \) is calculated from the ratio of the intensities of the peaks, \( I_\mtext{max} \), to the intensity midway between the peaks, \( I_\mtext{min} \), \( r = I_\mtext{max} / I_\mtext{min} \) and 

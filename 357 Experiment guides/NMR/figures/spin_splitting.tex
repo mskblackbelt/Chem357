@@ -6,52 +6,6 @@
 \usetikzlibrary{calc}
 \usepackage{siunitx,chemmacros}
 \begin{document}
-%% Create single x label for grouped plots  
-\makeatletter
-\pgfplotsset{
-    groupplot xlabel/.initial={},
-    every groupplot x label/.style={
-        at={
-            ($(
-                {\pgfplots@group@name\space c1r\pgfplots@group@rows.west} |- 
-                {\pgfplots@group@name\space c1r\pgfplots@group@rows.outer south}
-            )!0.5!(
-                {\pgfplots@group@name\space c\pgfplots@group@columns r\pgfplots@group@rows.east} |- 
-                {\pgfplots@group@name\space c\pgfplots@group@columns r\pgfplots@group@rows.outer south}
-            ) -(0.0,0.5)$)
-            },
-        anchor=north,
-        align=center,
-    },
-    groupplot ylabel/.initial={},
-    every groupplot y label/.style={
-            rotate=90,
-        at={
-            ($(
-                {\pgfplots@group@name\space c1r1.north} -|
-                {\pgfplots@group@name\space c1r1.outer west}
-            )!0.5!(
-                {\pgfplots@group@name\space c1r\pgfplots@group@rows.south} -|
-                {\pgfplots@group@name\space c1r\pgfplots@group@rows.outer west}
-            )$)
-        },
-        anchor=south
-    },
-    execute at end groupplot/.code={%
-      \node [/pgfplots/every groupplot x label]
-        {\pgfkeysvalueof{/pgfplots/groupplot xlabel}};  
-      \node [/pgfplots/every groupplot y label]
-        {\pgfkeysvalueof{/pgfplots/groupplot ylabel}};
-    }
-}
-
-\def\endpgfplots@environment@groupplot{%
-    \endpgfplots@environment@opt%
-    \pgfkeys{/pgfplots/execute at end groupplot}%
-    \endgroup%
-}
-\makeatother
-
 %% Create style for NMR spectra (color cycle, x-axis label, tick precision)
 \pgfplotsset{
   nmr/.style={
@@ -101,18 +55,20 @@
     scale only axis,}
     
 \begin{tikzpicture}
-  \begin{groupplot}[group style={
+  \begin{groupplot}[
+    group style={
       group size=2 by 1,
       xticklabels at=edge bottom,
       horizontal sep=0pt,
       every plot/.style={nmr}
     },
-    groupplot xlabel={
-      $\delta \, (\unit{ppm})$ \\ $\Leftarrow \nu, \, B_\textup{loc}$},
+    % groupplot xlabel={
+    %   $\delta \, (\unit{ppm})$ \\ $\Leftarrow \nu, \, B_\textup{loc}$},
     ymin=-0.08, ymax=6.75,
   ]
   
   \nextgroupplot[
+    alias=plota,
     xmin=9.67,xmax=9.87,
     % ymin=-0.08, ymax=1.8,
     axis x line   = bottom,
@@ -123,6 +79,8 @@
     ytick     = \empty,
     x dir      = reverse,
     axis x discontinuity=crunch,
+    % xlabel={
+    %   $\delta \, (\unit{ppm}) \\ \Leftarrow \nu, \, B_\textup{loc}$},
     width=0.55\textwidth,
   ]
     
@@ -162,7 +120,7 @@
       \dright=\pkctd-\lvwidth;
     }
     
-    {\addplot table from {Figures/CH3CHO_nmr_simsc2.dat};
+    {\addplot table from {figures/CH3CHO_nmr_simsc2.dat};
       \node (fragment) at (\pkctr,5.0) {\ch{-CHO}};
       \node[align=center,left=-4pt] (CHO) at (\aleft,4.5) [red]{\ch{CHO}\\spin};
       \node[align=center] (CH3) at (\pkctr,4.5) [blue]{\ch{CH3}\\spins};
@@ -194,7 +152,7 @@
       \coordinate (De1) at (\dright,\levde);
       \coordinate (De2) at (\dleft,\levde);
       \coordinate (De3) at (\pkctd, \levde);
-    };
+    }
     \begin{scope}[thick] 
       \draw[thin,dashed] (01) -- (02) node[left=1pt] 
         [red]{$\uparrow$};
@@ -225,6 +183,7 @@
     \end{scope}
 
   \nextgroupplot[
+    alias=plotb,
     xmin=2.15,xmax=2.26,
     % ymin=-0.08, ymax=1.8,
   	axis x line = bottom,
@@ -266,7 +225,7 @@
       \bright=\pkctb-\lvwidth;
     }
     
-    {\addplot table from {Figures/CH3CHO_nmr_simsc1.dat};
+    {\addplot table from {figures/CH3CHO_nmr_simsc1.dat};
       \node (fragment) at (\pkctr,5.0) {\ch{-CH3}};
       \node[align=center,left=-2pt] (CH3) at (\aleft,4.0) 
         [red]{\ch{CH3}\\spins};
@@ -303,7 +262,7 @@
       \coordinate (B41) at (\bright,\levb4);
       \coordinate (B42) at (\bleft,\levb4);
       \coordinate (B43) at (\pkctb, \levb4);
-    };
+    }
     \begin{scope}[thick] 
       \draw[dashed,thin] (011) -- (012) node[left=1pt] 
         [red]{$\uparrow\uparrow\uparrow$};
@@ -338,6 +297,10 @@
     \end{scope}
     
   \end{groupplot}
+  \path (plota.below south west)-- (plotb.below south east) 
+    coordinate[midway](legendpos);
+  \node[align=center,anchor=north](legend) at (legendpos) 
+    {$\delta \, (\unit{ppm})$ \\ $\Leftarrow \nu, \, B_\textup{loc}$};
 \end{tikzpicture}
 	
 \end{document}
