@@ -124,7 +124,7 @@
 			separate-uncertainty-units = single,%
 			retain-explicit-plus,%
 			list-final-separator={, and },%
-      input-digits = 0123456789\pi% necessary to use \pi in SI entries, affects rounding of digits. 
+      input-digits = 0123456789 \mitpi% necessary to use \pi in SI entries, affects rounding of digits. 
       }%
 
 %% Fix for old definition of \qty in physics package
@@ -261,6 +261,7 @@
 \DeclareMathOperator{\erfc}{erfc}
 \DeclareMathOperator{\GammaFunc}{\symup{\Gamma}}
 \newcommand{\iu}{\TextOrMath{$\mtext{i}$}{\mtext{i}\mkern1mu}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %
 %
 % %%%%%%%%%%%%%%%%%%%%%
