@@ -29,25 +29,6 @@
 % (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\titleclass{subsubsection}{straight}[subsection]
-
-\newcounter{subsubsection}[subsubsection]
-\renewcommandthesubsubsection{thesubsubsection.arabic{subsubsubsection}}
-
-\titleformat{subsubsection}
-  {normalfontnormalsizebfseries}{thesubsubsection}{1em}{}
-\titlespacing*{subsubsection}
-{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
-\makeatletter
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\itshape}}
-\deftoclevel@subsubsection{3}
-\defl@subsubsection{@dottedtocline{4}{7em}{4em}}
-\makeatother
-                                     
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
 \usepackage[%
@@ -133,7 +114,7 @@ The magnetic moment of a nucleus with nuclear spin quantum number \( I \) is
 where \( g_N \) is the nuclear \( g \) factor (\num{5.5856} for a proton) and \( \mu_N = e h / \br{4 \pi m_\mtext{p}} \) is the nuclear magneton.
 Substitution of the charge \( e \) and mass of a proton, \( m_\mtext{p} \), gives the value of \qty{5.051e-27}{\joule\per\tesla} for \( \mu_N \). 
 The symbol \( \mu_N \) is the unit of nuclear magnetic moment and is smaller than the electronic Bohr magneton (\( \mu_B \)) by the electron-to-proton mass ratio (\num{\sim1800}). 
-
+\
 The nuclear moment will interact with a local \emph{magnetic induction} (flux density)\sidenote{
 	The vector quantity \( \vb{B} \) is called either the \emph{magnetic induction} or the \emph{magnetic flux density}, although the term \emph{magnetic field strength} is more commonly used.
 	Unfortunately, the name \emph{magnetic field strength} was given to \( \vb{H} \) at a time when \( \vb{H} \) was considered to be the fundamental magnetic-field vector.
@@ -508,7 +489,7 @@ Again, if we take the natural logarithm of \cref{eq:eyring_2}, we obtain
   \label{eq:eyring_linear}
 \end{equation}
 With this form, we can fit a straight line to the reaction rate data as a function of \( 1/T \) and solve for \gibbs*{1}, \enthalpy*{1}, and \entropy*{1}. 
-% subsubsection arrhenius_and_eyring_equations (end)
+% subsection arrhenius_and_eyring_equations (end)
 
 % subsection rotational_energy_barrier (end)
 
@@ -568,9 +549,8 @@ Thus we have only one set of spins with a lifetime determined by the spin--spin 
 As the temperature is varied from values at which the rate of exchange is low through values of intermediate exchange rates, to rapid exchange, a series of approximations is available for the calculation of lifetimes.
 although these approximate methods provide somewhat less accurate results than does \cref{eq:lineshape}, they present the student with a meaningful treatment of the data obtained by an NMR study of a chemical rate process. 
 
-\subsubsection{Slow and Intermediate Exchange} % (fold)
-\label{ssub:slow_and_intermediate_exchange}
-
+\begin{description}
+	\item[Slow and Intermediate Exchange] 
 At slow exchange rates, the spectrum consists of two lines. 
 In this region, \( \tau \gg \br{\nu_{\ch{A}}}^-1 \), and \cref{eq:lineshape} reduces to 
 \begin{equation}
@@ -605,35 +585,30 @@ In the \emph{ratio method}, \( k \) is calculated from the ratio of the intensit
   \label{eq:slow_exch_k_3}
 \end{equation}
 
-% subsubsection slow_and_intermediate_exchange (end)
+	\item[Coalescence Temperature]
 
-\subsubsection{Coalescence Temperature} % (fold)
-\label{ssub:coalescence_temperature}
-
-The coalescence temperature is defined as the temperature at which the appearance of the spectrum changes from that of two separate peaks to that of a single, flat-topped peak (see \cref{fig:lineshapes_c}). 
+	The coalescence temperature is defined as the temperature at which the appearance of the spectrum changes from that of two separate peaks to that of a single, flat-topped peak (see \cref{fig:lineshapes_c}). 
 At this temperature, building on \cref{eq:slow_exch_k_3}, 
-\begin{equation}
-  k = \frac{\pi \increment \nu_0}{\sqrt{2}} \, .
-  \label{eq:intermed_exch_k}
-\end{equation}
+	\begin{equation}
+  	k = \frac{\pi \increment \nu_0}{\sqrt{2}} \, .
+  	\label{eq:intermed_exch_k}
+	\end{equation}
 
-% subsubsection coalescence_temperature (end)
+	\item[Fast Exchange]
 
-\subsubsection{Fast Exchange} % (fold)
-\label{ssub:fast_exchange}
+	At temperatures above the coalescence temperature, the spectrum consists of a single peak. 
+	In this region, \( \tau \ll \br{\nu_{\ch{A}} - \nu_{\ch{B}}}^{-1} \) and \cref{eq:lineshape} reduces to
+	\begin{equation}
+		g\br{\nu} = \frac{K T'_2}{1 + \pi T'_2 \br{\nu_{\ch{A}} + \nu_{\ch{B}} - 2 \nu}^2} \, .
+		\label{eq:fast_exch_lineshape}
+	\end{equation}
+	If the signal is not completely collapsed, i.e., the process is slow enough to contribute to its width but is still well beyond the rate corresponding to separate signals, the following approximation results:
+	\begin{equation}
+		k = \frac{\pi \increment \nu_0^2}{2} \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}}^{-1}
+		\label{eq:fast_exch_k}
+	\end{equation}
 
-At temperatures above the coalescence temperature, the spectrum consists of a single peak. 
-In this region, \( \tau \ll \br{\nu_{\ch{A}} - \nu_{\ch{B}}}^{-1} \) and \cref{eq:lineshape} reduces to
-\begin{equation}
-  g\br{\nu} = \frac{K T'_2}{1 + \pi T'_2 \br{\nu_{\ch{A}} + \nu_{\ch{B}} - 2 \nu}^2} \, .
-  \label{eq:fast_exch_lineshape}
-\end{equation}
-If the signal is not completely collapsed, i.e., the process is slow enough to contribute to its width but is still well beyond the rate corresponding to separate signals, the following approximation results:
-\begin{equation}
-  k = \frac{\pi \increment \nu_0^2}{2} \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}}^{-1}
-  \label{eq:fast_exch_k}
-\end{equation}
-% subsubsection fast_exchange (end)
+\end{description}
 
 % subsection approximate_methods_for_evaluation_of_rate_constants_autocite_johnson66 (end)
 % section theory (end)
