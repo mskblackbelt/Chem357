@@ -33,7 +33,7 @@ The nuclear moment will interact with a local \emph{magnetic induction} (flux de
 	Unfortunately, the name \emph{magnetic field strength} was given to \( \vb{H} \) at a time when \( \vb{H} \) was considered to be the fundamental magnetic-field vector.
 	It is now known that \( \vb{B} \) is the fundamental vector (analogous to \( \vb{E} \), the electric-field vector).
 	To add to the confusion, \( \vb{B} = \vb{H} \) in a vacuum when CGS units are used.
-	In the internationally-recognized SI system, \( \vb{B} = \mu_0 \vb{H} \) in a vacuum, and the vacuum permeability \( \mu_0 = \SI{4\pi e-7}{\henry\per\m} \).
+	In the internationally-recognized SI system, \( \vb{B} = \mu_0 \vb{H} \) in a vacuum, and the vacuum permeability \( \mu_0 = \SI{4 \pi e-7}{\henry\per\m} \).
 	In SI units, \( \vb{B} \) is expressed in tesla (\( \SI{1}{\tesla} = \SI{1}{\weber\per\meter\squared} = \SI{1e4}{\gauss}\)) and \( \vb{H} \) is expressed in \si{\A\per\m}.
 	In many texts, \( \vb{B} \) is loosely called the \emph{magnetic field}.
 }, 
@@ -140,8 +140,8 @@ Nuclei such as \ch{^{19}F}, \ch{^{13}C}, and \ch{^{11}B} have more local electro
 Long-range \emph{deshielding} can occur in aromatic and other molecules with delocalized \( \pi \) electrons. 
 For example, when the plane of the benzene molecule is oriented perpendicular to \( B_0 \), circulation of the \( \pi \) electrons produces a ring current, illustrated in \cref{fig:shielding}. 
 This ring current induces a secondary field at the protons that is aligned \emph{parallel} to \( B_0 \) and results in a higher local field for the protons. 
-This induced field changes with benzen orientation, but does not average to zero, since it is not spherically symmetric. 
-Because of this net deshielding effect, the resonance of the benzene protons occurs at a relatively low external field. 
+This induced field changes with benzene orientation, but does not average to zero, since it is not spherically symmetric. 
+Because of this net deshielding effect, the resonance of the benzene protons occurs at a relatively high frequency. 
 The proton chemical shift \( \delta  \) for benzene is \SI{7.27}{\ppm}, much higher in frequency from the value \( \delta = \SI{1.43}{\ppm} \) that is observed for cyclohexane, in which ring currents do not occur. 
 Similar deshielding values of \( \delta \) for different functional groups are shown in \cref{tab:chem_shifts}, and additional values are available in refs.~\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,sdbs2020,aldrich1993nmr}.
 Although the resonances change somewhat for different compounds, the range for a given functional group is usually small and \( \delta \) values are widely used for structural characterization in organic chemistry. 
@@ -197,7 +197,7 @@ However, these splittings are symmetric for upper and lower energy states, so no
 	\centering
 	\begin{tabular}{@{}cS@{}} 
 		\toprule
-		\bfseries Coupling & {\( \bm{J} \, (\si{\textbf{Hz}}) \)} \\
+		\bfseries Coupling & {\( \symbfit{J} \, (\si{\textbf{Hz}}) \)} \\
 		\midrule 
 		\addlinespace[1em]
 		\chemfig{C(-[1]H)(-[3])(-[5])(-[7]H)} & \numrange{-20}{5} \\
@@ -398,7 +398,7 @@ If we recall that \gibbs*{1} can be expressed as \( \gibbs*{1} = \enthalpy*{1} +
 Again, if we take the natural logarithm of \cref{eq:eyring_2}, we obtain
 \begin{equation}
   \ln{\frac{k}{T}} = \frac{-\enthalpy*{1}}{R} \frac{1}{T} 
-    + \ln{\frac{\kappa \k_B}{h}} + \frac{\entropy*{1}}{R} \, .
+    + \ln{\frac{\kappa k_B}{h}} + \frac{\entropy*{1}}{R} \, .
   \label{eq:eyring_linear}
 \end{equation}
 With this form, we can fit a straight line to the reaction rate data as a function of \( 1/T \) and solve for \gibbs*{1}, \enthalpy*{1}, and \entropy*{1}. 
@@ -480,7 +480,7 @@ In the absence of exchange, the linewidth is \( \br{\increment \nu_0}_{1/2} = \b
 Exchange results in \emph{broadening} equal to \( \br{\pi \tau_{\ch{A}}}^{-1} \). 
 A value for \( k \) (\( =1/\br{2\tau} \)) is determined by comparing linewidths at half height of exchanging peaks to those of peaks recorded at temperatures where the rate of exchange is very small:
 \begin{equation}
-  k = \pi \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}} \, .
+  k = \pi [(\increment \nu_e)_{1/2} - (\increment \nu_0)_{1/2}] \, .
   \label{eq:slow_exch_k_1}
 \end{equation}
 For slow exchange, the rate can also be related to the change in \emph{peak separation}. 
@@ -517,7 +517,7 @@ At this temperature, building on \cref{eq:slow_exch_k_3},
 	\end{equation}
 	If the signal is not completely collapsed, i.e., the process is slow enough to contribute to its width but is still well beyond the rate corresponding to separate signals, the following approximation results:
 	\begin{equation}
-		k = \frac{\pi \increment \nu_0^2}{2} \br{\br{\increment \nu_e}_{1/2} - \br{\increment \nu_0}_{1/2}}^{-1}
+		k = \frac{\pi \increment \nu_0^2}{2} [(\increment \nu_e)_{1/2} - (\increment \nu_0)_{1/2}]^{-1}
 		\label{eq:fast_exch_k}
 	\end{equation}
 

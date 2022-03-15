@@ -141,7 +141,9 @@
 			math-celsius = °\text{C}, % for temperatures
 			text-celsius = °C,
 			math-degree = °, % for angles
-			text-degree = °}%
+			text-degree = °,%
+			% input-digits = 0123456789 \mitpi% necessary to use \pi in SI entries, affects rounding of digits.
+			}%
 
 
 \usepackage{physics} % provides streamlined interface with many commands to simplify
@@ -223,7 +225,7 @@
 %% font packages -- load fontenc, then inputenc, then lmodern. 
 % see http://tex.stackexchange.com/a/44699
 \usepackage{fontspec}
-\usepackage[math-style=ISO]{unicode-math} 
+\usepackage[math-style=ISO,mathrm=sym]{unicode-math} 
 \ifdraft{}{
 	\setmainfont{STIX2Text}[
 		Extension={.otf},
