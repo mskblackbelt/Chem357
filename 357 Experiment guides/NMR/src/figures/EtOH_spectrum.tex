@@ -1,11 +1,9 @@
 \documentclass{standalone}
-% \input{header.tex}
 \usepackage{pgfplots}
-\pgfplotsset{compat=newest}
+\pgfplotsset{compat=1.16}
 \usetikzlibrary{math}
 \usepackage{siunitx,chemmacros}
 \begin{document}
-
 \pgfplotsset{
   every axis legend/.append style =
     {
@@ -36,7 +34,7 @@
       % The labels apply to all plots of this type.
       % Notice that in this case the zero is TMS, but that
       % will depend on the experiment.
-      xlabel = $\delta \, (\si{ppm})$,
+      xlabel = $\delta \, (\unit{ppm})$,
     },
 }
 
