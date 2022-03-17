@@ -1,19 +1,12 @@
 \documentclass{standalone}
+\usepackage{amsmath}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.16}
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{math}
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
-% \usepackage{siunitx,chemmacros}
 \begin{document}
-
-%%%%%%% Zeeman levels %%%%%%%
-\pgfmathdeclarefunction{level}{1}{%
-  \pgfmathparse{%
-    (#1*#1)
-    }%
-}
 
 \pgfplotsset{
     width=0.95\textwidth,
@@ -21,35 +14,29 @@
 		
 \begin{tikzpicture}
 	\begin{axis}[
-		axis lines = {left, bottom},
+		axis lines = {left},
 		smooth,
 		thick,
 		xlabel = {Magnetic Field, $B_0$}, 
 		ylabel = Energy, 
 		ticks = none,
 		no markers, 
-		xmin=0, xmax=10.5,
-		ymin=-15.2, ymax=15.2,
-		scale=0.5]
+		xmin=0, xmax=13,
+		ymin=-18, ymax=20,
+		scale=1.0]
 
 		\pgfplotsinvokeforeach{0,...,3}{
 			\addplot [very thick, black, samples=50, domain=0:10] {(#1 - 3/2) * x};
-			\pgfmathparse{#1-3/2}
-			\node (#1) at (axis cs: {10.2},{10*(#1-3/2)}) {\pgfmathresult};
+			\node (#1) at (axis cs: {10.5},{10*(#1-3/2)}) {\(\frac{\pgfmathparse{int(2*#1-3)} \pgfmathresult}{2}\)};
 		}
 
 		% Annotation lines and arrows
 		\pgfplotsinvokeforeach{0,...,2}{
 			\draw[Stealth-Stealth] (axis cs: {9},{9*(#1-3/2)}) -- (axis cs: {9},{9*(#1-1/2)});
 		}
-		% \draw[dashed] (axis cs: {-0.75},{-\De}) -- (axis cs: {\re},{-\De});
-		% \draw[dashed] (axis cs: {-0.25},{energyho(0)}) -- (axis cs: {rminho(energyho(0)},{energyho(0)});
-		% \node	(De)	at	(axis cs: {-0.75},{-\De/2})	{$D_e$};
-		% \node	(Do)	at	(axis cs: {-0.25},{energyho(0)/2})	{$D_0$};
-		% \draw[<-]	(axis cs: {-0.75},{-\De}) -- (De);
-		% \draw[->]	(De) -- (axis cs: {-0.75},{0});
-		% \draw[<-]	(axis cs: {-0.25},{energyho(0)}) -- (Do);
-		% \draw[->]	(Do) -- (axis cs: {-0.25},{0});
+
+		\node[right]	(Ez)	at	(axis cs: {9},{0})	[align=left]{$\Delta E_\text{Z} = h \nu$};
+		\node (mS) at (axis cs: {10.5},{18.5}) {\(m_I\)};
 	\end{axis}
 \end{tikzpicture}	
 \end{document}

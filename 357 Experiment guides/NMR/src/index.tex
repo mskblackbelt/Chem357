@@ -15,7 +15,7 @@ In this experiment, the barrier to rotation in \iupac{\N,\N-dimethylacetamide} c
 
 \begin{marginfigure}
   \centering
-   % \input{figures/zeeman_splitting.tikz}
+  \input{figures/zeeman_splitting.tex}
   \caption{Energy levels and allowed transitions of a nucleus with \( I = 3/2 \) in a magnetic induction of magnitude \( B \).}
   \label{fig:quad_splitting}
 \end{marginfigure}
@@ -409,6 +409,11 @@ With this form, we can fit a straight line to the reaction rate data as a functi
 \subsection{Line Shape Analysis} % (fold)
 \label{sub:line_shape_analysis}
 
+\begin{figure*}
+	\input{lineshapes.tex}
+	\caption{Effect of exchange of chemically equivalent nuclei on NMR line shapes.}
+	\label{fig:lineshapes}
+\end{figure*}
 If two groups of chemically equivalent nuclei are exchanged by an intramolecular process, the NMR spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{A typical value for \( \increment\nu \) is about \SI{10}{\hertz}.} 
 The effects of exchange at several temperatures on the linewidths at \( \nu_{\ch{A}} \) and \( \nu_{\ch{B}} \) are shown in \cref{fig:lineshapes}. 
 At low temperatures, the exchange is slow and \( k \ll \increment\nu \). 

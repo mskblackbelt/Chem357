@@ -3,8 +3,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-npts = 5000
-xdata = np.linspace(-500,500,npts)
+npts = 500
+xdata = np.linspace(-5,5,npts)
 
 def lineshape(nu, nuA, nuB, tau):
     numerator = tau * (nuA - nuB)**2
@@ -13,7 +13,7 @@ def lineshape(nu, nuA, nuB, tau):
     return numerator / denominator
     
 
-ydata = lineshape(xdata, -200, 200, 0.00055)
+ydata = lineshape(xdata, -2, 2, 0.5)
 
 def find_intersections(x, y, C):
     # Contains numpy indexing tricks that can be hard to reproduce
@@ -29,12 +29,12 @@ C = 0.5 * np.max(ydata)
 
 xint, yint = find_intersections(xdata, ydata, C)
 
-# plt.figure()
-# plt.plot(xdata, ydata)
-# plt.plot(xint, yint, 'ro')
-# plt.show()
+plt.figure()
+plt.plot(xdata, ydata)
+plt.plot(xint, yint, 'ro')
+plt.show()
 
 specdata = np.c_[xdata,ydata]
 intdata = np.c_[xint,yint]
-np.savetxt("coalesc_spec.csv", specdata, delimiter=',', header="Frequency, Signal")
-np.savetxt("coalesc_int.csv", intdata, delimiter=',', header="Frequency, Signal")
+np.savetxt("src/figures/slow_spec.csv", specdata, fmt="%5f", delimiter='\t')
+np.savetxt("src/figures/slow_int.csv", intdata, fmt="%5f", delimiter='\t')
