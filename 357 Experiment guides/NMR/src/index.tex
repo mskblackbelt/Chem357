@@ -409,17 +409,17 @@ With this form, we can fit a straight line to the reaction rate data as a functi
 \subsection{Line Shape Analysis} % (fold)
 \label{sub:line_shape_analysis}
 
-\begin{figure*}
-	\input{lineshapes.tex}
+\begin{figure}
+	\input{figures/lineshapes.tex}
 	\caption{Effect of exchange of chemically equivalent nuclei on NMR line shapes.}
 	\label{fig:lineshapes}
-\end{figure*}
+\end{figure}
 If two groups of chemically equivalent nuclei are exchanged by an intramolecular process, the NMR spectrum is a function of the difference in their resonance frequencies, \( \nu_{\ch{A}} - \nu_{\ch{B}} = \increment\nu \), and of the rate of exchange, \( k \).\sidenote{A typical value for \( \increment\nu \) is about \SI{10}{\hertz}.} 
 The effects of exchange at several temperatures on the linewidths at \( \nu_{\ch{A}} \) and \( \nu_{\ch{B}} \) are shown in \cref{fig:lineshapes}. 
 At low temperatures, the exchange is slow and \( k \ll \increment\nu \). 
-The spectrum thus consists of two sharp singlets at \( \nu_{\ch{A}} \) and \( \nu_{\ch{B}} \) (\cref{fig:lineshapes_a}). 
-At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes_d}). 
-There is also an intermediate temperature range over which the spectrum consists of two significantly broadened overlapping lines (\cref{fig:lineshapes_b}).
+The spectrum thus consists of two sharp singlets at \( \nu_{\ch{A}} \) and \( \nu_{\ch{B}} \) (\cref{fig:lineshapes}a). 
+At high temperatures, the exchange is fast (i.e., \( k \gg \increment\nu \)) and a single sharp peak is observed (\cref{fig:lineshapes}b). 
+There is also an intermediate temperature range over which the spectrum consists of two significantly broadened overlapping lines (\cref{fig:lineshapes}b).
 
 Usually, spin--spin and spin--lattice relaxation determine the width of an NMR absorption peak.\autocite{levitt08a}
 Here, we are concerned with the additional effect of exchange of two groups of chemically equivalent nuclei on linewidth.
@@ -505,7 +505,7 @@ In the \emph{ratio method}, \( k \) is calculated from the ratio of the intensit
 
 	\item[Coalescence Temperature]
 
-	The coalescence temperature is defined as the temperature at which the appearance of the spectrum changes from that of two separate peaks to that of a single, flat-topped peak (see \cref{fig:lineshapes_c}). 
+	The coalescence temperature is defined as the temperature at which the appearance of the spectrum changes from that of two separate peaks to that of a single, flat-topped peak (see \cref{fig:lineshapes}c). 
 At this temperature, building on \cref{eq:slow_exch_k_3}, 
 	\begin{equation}
   	k = \frac{\pi \increment \nu_0}{\sqrt{2}} \, .
@@ -594,7 +594,7 @@ Your lab report should consist of the following parts:
 	\item[Results and Discussion] This should include an overview of the analyzed data and responses to the questions worked into a natrual narrative.
 	\item[References]
 	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
-	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
+	Include any additional files and code that you used to generate your graphs.
 \end{description}
 
 \noindent You do \emph{not} need to include uncertainty calculations for this lab. 
