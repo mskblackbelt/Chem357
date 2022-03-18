@@ -3,6 +3,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from pathlib import Path
+dname = Path(__file__).parent.resolve()
+
+
 npts = 500
 xdata = np.linspace(-5,5,npts)
 
@@ -11,9 +15,6 @@ def lineshape(nu, nuA, nuB, tau):
     denominator = (0.5 * (nuA + nuB) - nu)**2 + \
         (2 * np.pi * tau * (nuA - nu) * (nuB - nu))**2
     return numerator / denominator
-    
-
-ydata = lineshape(xdata, -2, 2, 0.5)
 
 def find_intersections(x, y, C):
     # Contains numpy indexing tricks that can be hard to reproduce
@@ -24,17 +25,28 @@ def find_intersections(x, y, C):
     return x_intersections, y_intersections
 
 
-# Intersection point (half height)
-C = 0.5 * np.max(ydata)
+taus = [0.5, 0.12, 0.056, 0.005]
+prefixes = ["slow", "interm", "coalesc", "fast"]    
+params = zip(taus, prefixes)
 
-xint, yint = find_intersections(xdata, ydata, C)
+for tau, name in params:
+    ydata = lineshape(xdata, -2, 2, tau)
+    ydata = ydata / ydata.max()
 
-plt.figure()
-plt.plot(xdata, ydata)
-plt.plot(xint, yint, 'ro')
-plt.show()
+    # Intersection point (half height)
+    C = 0.5 * np.max(ydata)
 
-specdata = np.c_[xdata,ydata]
-intdata = np.c_[xint,yint]
-np.savetxt("src/figures/slow_spec.csv", specdata, fmt="%5f", delimiter='\t')
-np.savetxt("src/figures/slow_int.csv", intdata, fmt="%5f", delimiter='\t')
+    xint, yint = find_intersections(xdata, ydata, C)
+
+    plt.figure()
+    plt.plot(xdata, ydata)
+    plt.plot(xint, yint, 'ro')
+    plt.title(name.capitalize())
+    plt.show()
+
+    specdata = np.c_[xdata,ydata]
+    intdata = np.c_[xint,yint]
+    spec_file = name + "_spec.csv"
+    int_file = name + "_int.csv"    
+    np.savetxt(dname / spec_file, specdata, fmt="%5f", delimiter='\t')
+    np.savetxt(dname / int_file, intdata, fmt="%5f", delimiter='\t')
