@@ -106,7 +106,7 @@
 			\draw[blue!30] (axis cs: {\re},{energymo(#1)}) -- (axis cs: {rmaxmo(energymo(#1))},{energymo(#1)});
 		}
 		\pgfplotsinvokeforeach{0,...,10}{
-			\draw (axis cs: {rmaxmo( energymo(#1) )},{energymo(#1)}) -- (axis cs: {rmaxmo( energymo(#1) )},{energymo(#1)}) node (m#1) [node font=\scriptsize, at end, xshift=1em] {$v = #1$};
+			\draw (axis cs: {rmaxmo( energymo(#1) )},{energymo(#1)}) -- (axis cs: {rmaxmo( energymo(#1) )},{energymo(#1)}) node (m#1) [node font=\scriptsize, at end, xshift=2em] {$v = #1$};
 		}
 		
 		\addplot +[thick, samples=50, blue, domain=0.05:9] {Umo(x)};
