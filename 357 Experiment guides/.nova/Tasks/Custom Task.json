@@ -1,0 +1,12 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "export PATH=\"$PYENV_ROOT\/versions\/miniconda3-4.5.4\/envs\/tectonic2\/bin:$PATH\"\ncd \"$FILE_PATH\"\/..\ntectonic -X build --open"
+    }
+  },
+  "environment" : {
+    "FILE_PATH" : "${FileDirname}"
+  },
+  "openLogOnRun" : "fail"
+}
