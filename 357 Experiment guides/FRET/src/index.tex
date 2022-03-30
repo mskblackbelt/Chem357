@@ -174,7 +174,7 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 	You should add the \iupac{urea} and phosphates to an empty volumetric flask and add water up to the mark. 
 	This solution is called urea/\ch{KP_{\emph{i}}}. 
 	\label{step:urea_stock}
-	\item Prepare a stock solution (\SI{0.8}{\mL} of \SI{\sim500}{\milli\Molar}) of cyt \emph{c} (CAS 9007-43-6) in \ch{KP_{\emph{i}}} (\( \varepsilon_{410} \) for cyt \emph{c} in this solution is \SI{\sim105000}{\per\Molar\per\cm}, \( \varepsilon_{530} \) is \SI{11200}{\per\Molar\per\cm}).
+	\item Prepare a stock solution (\SI{0.8}{\mL} of \SI{\sim500}{\micro\Molar}) of cyt \emph{c} (CAS 9007-43-6) in \ch{KP_{\emph{i}}} (\( \varepsilon_{410} \) for cyt \emph{c} in this solution is \SI{\sim105000}{\per\Molar\per\cm}, \( \varepsilon_{530} \) is \SI{11200}{\per\Molar\per\cm}).
 	\label{step:cyt_c_stock}
 	\item Prepare several samples of \SI{\sim10}{\micro\Molar} cyt \emph{c} (\SI{1.5}{\mL} each) by mixing the appropriate amounts of stock solution from \cref{step:cyt_c_stock} with stock solutions made in \cref{step:buffer_stock,step:urea_stock} to achieve final urea concentrations of \SIrange{0.0}{10.0}{\Molar} in \SI{1.0}{\Molar} increments. 
 	You should have \num{11} samples in \num{11} plastic Eppendorf tubes.
@@ -206,8 +206,8 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 % subsection part_b_determination_of_the_forster_distance (end)
 
 % section procedure (end)
-\section{Data Analysis} % (fold)
-\label{sec:data_analysis}
+\section{Part C: Data Analysis} % (fold)
+\label{sec:part_c_data_analysis}
 
 \begin{enumerate}
 	\item To obtain an unfolding curve, subtract the background fluorescence spectra of the buffer (\ch{KP_{\emph{i}}} or \iupac{urea}/\ch{KP_{\emph{i}}}) from the corresponding protein fluorescence spectra to obtain a corrected fluorescence spectrum. 
@@ -215,16 +215,16 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 	\begin{description}
 		\item [Spectrum A:] raw fluorescence from cyt \emph{c} in buffer/denaturant
 		\item [Spectrum B:] raw fluorescence from buffer/denaturant
-		\item [Corrected Spectrum:] Spectrum A \( - \) Spectrum B
+		\item [Corrected Spectrum:] \( \text{Spectrum A} - \text{Spectrum B} \)
 	\end{description}
-	The fluorescence intensity of the corrected spectrum at \SI{350}{\nm} should then be normalized for protein concentration (via the absorption value at \SI{530}{\nm}) and ploted as a function of \iupac{urea} concentration. 
+	The fluorescence intensity of the corrected spectrum at \SI{350}{\nm} should then be normalized for protein concentration (via the absorption value at \SI{530}{\nm}) and plotted as a function of \iupac{urea} concentration. 
 	The \emph{y}-axis should be scaled from \numrange{0}{1}. 
 	What is the free energy of unfolding?
 	You will need \cref{eq:gibbs_h2o,eq:conc_frac}. 
 	Fitting your data to \cref{eq:fold_frac} is best accomplished with advanced analytical software; the fitting routines in the SciPy library are well-suited to this task. 
 	\label{step:spec_fit}
-	\item If time permits, note the change in the absorption spectra as a function of denaturant concentration to generate an unfolding curve and determine the free energy of unfolding for cyt \emph{c}. 
-	How do these results differ from \cref{step:spec_fit} and what are some possible origins of the differences (if any)?
+	\item Plot the change in the absorption spectra as a function of denaturant concentration to generate an unfolding curve and determine the free energy of unfolding for cyt \emph{c}.
+	\label{step:abs_fit}
 	\item Use the fluorescence spectrum collected in \cref{step:nata_spectrum} along with the absorption spectrum of \SI{\sim10}{\micro\Molar} cyt \emph{c} (\SI{0.0}{\Molar} \iupac{urea}) from \cref{step:spec_fit} to calculate the Förster distance of the Trp--heme pair. 
 	You will need \cref{eq:forster_dist,eq:overlap_int}.
 	Determination of the integrated areas can be done numerically as a sum or using the integration functions built in to SciPy.\sidenote{Additional pertinent information for this system: 
@@ -238,31 +238,24 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 	This is the theoretical distance dependence of energy transfer for the donor--acceptor pair. 
 	\item Use \cref{eq:dist_efficiency,eq:spec_efficiency} and the corrected and (concentration) normalized spectra from \cref{step:fluor_spec} to determine the distance between Trp-59 and the heme group as a function of denaturant concentration. 
 	For \( F_\mtext{D} \), use the fluorescence intensity of NATA at the same concentration as the cyt \emph{c} samples. 
-	Compare the distance between Trp-59 and the heme group for the fully folded protein (\SI{0.0}{\Molar} \iupac{urea}) with distances obtained from the known crystal structure (\href{https://www.rcsb.org/structure/1hrc}{PDB: 1HRC}). 
-	How do these compare?
-	\item What assumptions are made to determine \gibbs*[subscript-right=\ch{H2O}]{} from part A and intramolecular distances from part C\@? 
+	\item What assumptions are made to determine \gibbs*[subscript-right=\ch{H2O}]{} from part A and intramolecular distances from part C? 
 	Do these assumptions conflict?
 \end{enumerate}
 
-% section data_analysis (end)
+% section part_c_data_analysis (end)
 
 \section{Questions and Further Thoughts} % (fold)
 \label{sec:questions_and_further_thoughts}
 
 \begin{enumerate}
-	\item 
+	\item What is the source of the large peak at \SI{\sim323}{\nm} in the spectra of the buffers (\ch{KP_{\emph{i}}} and \iupac{urea}/\ch{KP_{\emph{i}}}) as well as in some of the cyt \emph{c} samples?
+	What could you do to verify (experimentally) the source of this peak?
+	\item How do the results of unfolding with \cref{step:abs_fit} differ from those obtained in \cref{step:spec_fit} and what are some possible origins of the differences (if any)?
+	\item Compare the distance between Trp-59 and the heme group for the fully folded protein (\SI{0.0}{\Molar} \iupac{urea}) with distances obtained from the known crystal structure (\href{https://www.rcsb.org/structure/1hrc}{PDB: 1HRC}). 
+	How do these compare?
+	\item What assumptions are made to determine \gibbs*[subscript-right=\ch{H2O}]{} from part A and intramolecular distances from part C? 
+	Do these assumptions conflict?
+
 \end{enumerate}
 
 % section questions_and_further_thoughts (end)
-
-\nocite{*}
-\printbibliography[category=cited]% default title for `article` class: "References"
-
-\DeclareFieldFormat{labelnumberwidth}{\textbullet}
-\printbibliography[%
-  title={Further Reading},%
-  resetnumbers,%
-  omitnumbers,%
-	notcategory=cited,%
-	]
-	
