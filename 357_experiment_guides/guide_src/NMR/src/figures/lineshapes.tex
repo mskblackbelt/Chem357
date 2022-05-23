@@ -41,10 +41,10 @@
 	  \begin{axis}[nmr, axis lines = none,]
       \addplot table from {figures/slow_spec.csv}; 
       \addplot [only marks, mark=|, mark size=5pt] table from {figures/slow_int.csv}
-        node [pos=0,    pin=180: $(\Delta\nu_\text{A})^0_{1/2}$, ->] {}
+        node [pos=0,    pin=180: $(\Delta\nu_\text{A})_0^{1/2}$, ->] {}
         node [pos=.25,  pin=0: ] {}
         node [pos=.75,  pin=180: ] {}
-        node [pos=2.1,  pin=0: $(\Delta\nu_\text{B})^0_{1/2}$ ] {}
+        node [pos=2.1,  pin=0: $(\Delta\nu_\text{B})_0^{1/2}$ ] {}
         ;
       \draw [thick,dashed] (-2,0.05) -- (-2,1) node [pos=0,anchor=north] {$\nu_\text{A}$};
       \draw [thick,dashed] (2,0.05) -- (2,1) node [pos=0,anchor=north] {$\nu_\text{B}$};
@@ -56,10 +56,10 @@
 	  \begin{axis}[nmr, axis lines = none,]
       \addplot table from {figures/interm_spec.csv}; 
       \addplot [only marks, mark=|, mark size=5pt] table from {figures/interm_int.csv}
-        node [pos=0, pin=180: $(\Delta\nu_\text{A})^\text{e}_{1/2}$] {}
+        node [pos=0, pin=180: $(\Delta\nu_\text{A})_\text{e}^{1/2}$] {}
         node [pos=.25, pin=0: ] {}
         node [pos=.75,  pin=180: ] {}
-        node [pos=2.1,  pin=0: $(\Delta\nu_\text{B})^\text{e}_{1/2}$] {}
+        node [pos=2.1,  pin=0: $(\Delta\nu_\text{B})_\text{e}^{1/2}$] {}
       ;
       \draw [thick,dashed] (-1.75,0.05) -- (-1.75,1) node [pos=0,anchor=north] {$\nu_\text{A}$};
       \draw [thick,-Stealth] (1.75,0.05) -- (1.75,1) node [pos=0,anchor=north] {$I_\text{max}$};
@@ -78,7 +78,7 @@
 	  \begin{axis}[nmr, axis lines = none,]
       \addplot table from {figures/fast_spec.csv}; 
       \addplot [only marks, mark=|, mark size=5pt] table from {figures/fast_int.csv}
-        node [pos=0, pin=180: $(\Delta\nu)^\text{e}_{1/2}$] {}
+        node [pos=0, pin=180: $(\Delta\nu)_\text{e}^{1/2}$] {}
         node [pos=.75,  pin=0: ] {}
       ;
       \draw [thick,dashed] (0,0.02) -- (0,1) node [pos=0,anchor=north] {$\frac{1}{2}(\nu_\text{A} + \nu_\text{B})$};
