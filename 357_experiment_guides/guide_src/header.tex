@@ -98,7 +98,7 @@
 % 	% see end notes for lists of available colors
 % 	}%
 % \makeatother%
-\usepackage{svg} % provides \includesvg command for svg figures. 
+% \usepackage{svg} % provides \includesvg command for svg figures. 
 \usepackage{pgfplots} % for plotting in tikzpicture environment
 	\pgfplotsset{compat=1.16} % required to select newest version
 \usepackage{tikzscale} % allows \includegraphics{*.tikz} and scaling of TiKZ images
@@ -227,14 +227,13 @@
 \usepackage{fontspec}
 \usepackage[math-style=ISO,mathrm=sym]{unicode-math} 
 \ifdraft{}{
-	\setmainfont{STIX2Text}[
+	\setmainfont{STIXTwoText}[
 		Extension={.otf},
 		UprightFont={*-Regular},
 		BoldFont={*-Bold},
 		ItalicFont={*-Italic},
 		BoldItalicFont={*-BoldItalic},]
-	\setmathfont{STIX2Math}[
-		Extension={.otf}]
+	\setmathfont{STIXTwoMath-Regular.otf}
 }
 	\renewcommand{\vb}[1]{\symbf{#1}} % fix vector command from physics package to work with unicode-math
 
