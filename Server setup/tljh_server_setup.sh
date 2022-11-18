@@ -61,7 +61,7 @@ do
 done
 
 ## Create skeleton user folder for new JupyterHub users
-sudo cp /etc/skel /etc/skel-tljh
+sudo cp -r /etc/skel /etc/skel-tljh
 
 sudo mkdir -p /srv/shared/{data,submissions}
 
@@ -123,6 +123,7 @@ sudo tljh-config set https.tls.cert "$cert_file"
 # Upgrade mamba, pip, conda to latest versions
 sudo /opt/tljh/user/bin/mamba upgrade -y mamba conda pip
 
+# TODO: update to Node v.16+
 # Configure JupyterLab templates
 # Install node.js v.12
 # Instructions from https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
@@ -141,7 +142,7 @@ echo "Location of Jupyter templates folder: "
 read template_folder
 sudo mkdir -p "$template_dir"
 if [[ -d "$template_folder" ]]; then
-  sudo cp "$template_folder" "$template_dir"
+  sudo cp -r "$template_folder" "$template_dir"
 fi
 sudo tljh-config set c.JupyterLabTemplates.template_dirs "$template_dir"
 
@@ -151,22 +152,23 @@ read env_file_loc
 sudo /opt/tljh/user/bin/conda env create -f="$env_file_loc"
 
 # Add conda commands to /etc/skel-tljh/.bashrc
-sudo cat <<- EOF >> /etc/skel/.profile
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/tljh/user/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-		eval "$__conda_setup"
-else
-		if [ -f "/opt/tljh/user/etc/profile.d/conda.sh" ]; then
-				. "/opt/tljh/user/etc/profile.d/conda.sh"
-		else
-				export PATH="/opt/tljh/user/bin:$PATH"
-		fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-EOF
+if [[ -f "/etc/skel/.profile" ]]
+  sudo cat <<- EOF >> /etc/skel/.profile
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/opt/tljh/user/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+		  eval "$__conda_setup"
+  else
+		  if [ -f "/opt/tljh/user/etc/profile.d/conda.sh" ]; then
+				  . "/opt/tljh/user/etc/profile.d/conda.sh"
+		  else
+				  export PATH="/opt/tljh/user/bin:$PATH"
+		  fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+  EOF
 fi
 
 # Install jupyterlab extension for OpenChemistry 
