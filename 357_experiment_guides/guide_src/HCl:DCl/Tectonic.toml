@@ -6,3 +6,4 @@ bundle = 'https://data1.fullyjustified.net/tlextras-2022.0r0.tar'
 name = 'HCl_DCl'
 type = 'pdf'
 shell_escape = true
+shell_escape_cwd = ".."

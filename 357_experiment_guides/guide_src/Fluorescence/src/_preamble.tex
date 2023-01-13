@@ -3,6 +3,11 @@
 	\DeclareSIUnit\poise{poise}
 	\DeclareSIUnit\erg{erg}
 	\DeclareSIUnit\psig{psig}
+	\derivset{\odv}[
+		delims-eval=(), 
+		delims-eval-/=()
+	]
+
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
@@ -14,7 +19,7 @@
   hyperref,
   backend=biber,
 	]{biblatex}
-	\addbibresource{../../pchem_bib.bib}
+	\addbibresource{pchem_bib.bib}
 
 	% Filter bibliography file to only include entries matching keyword.
 	\DeclareSourcemap{%

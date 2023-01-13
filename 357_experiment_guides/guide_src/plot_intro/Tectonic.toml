@@ -6,4 +6,4 @@ bundle = 'https://data1.fullyjustified.net/tlextras-2022.0r0.tar'
 name = 'Plot_Intro'
 type = 'pdf'
 shell_escape = true
-shell_escape_cwd = '/Users/mskblackbelt/iCloud Drive/Teaching/Chem357/Instructor_resources/357_experiment_guides/guide_src'
+shell_escape_cwd = '..'

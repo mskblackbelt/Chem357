@@ -48,14 +48,14 @@ Upon addition of a chemical denaturant to unfold the protein, the rise in fluore
 \subsection{Förster Resonance Energy Transfer} % (fold)
 \label{sub:forster_resonance_energy_transfer}
 
-According to Förster’s theory on energy transfer, the rate of energy transfer \( k_\mtext{T} \) is related to the lifetime of the donor in the absence of acceptor (\( \tau_\mtext{D} \)) and the distance between the donor and acceptor (\( r \)) via
+According to Förster's theory on energy transfer, the rate of energy transfer \( k_\mtext{T} \) is related to the lifetime of the donor in the absence of acceptor (\( \tau_\mtext{D} \)) and the distance between the donor and acceptor (\( r \)) via
 \begin{equation}
 	k_\mtext{T}\br{r} = \frac{1}{\tau_\mtext{D}} \br{\frac{R_0}{r}}^6 \, .
 \end{equation}
-The Förster distance, \( R_0 \), is the critical distance for energy transfer, and is defined as the distance at which the efficiency of energy transfer is \SI{50}{\percent}. 
+The Förster distance, \( R_0 \), is the critical distance for energy transfer, and is defined as the distance at which the efficiency of energy transfer is \qty{50}{\percent}. 
 Förster distances typically range from \SIrange{20}{60}{\angstrom}, and can be calculated using the relationship
 \begin{equation}
-	{R_0}^6 = \br{\SI{8.79e23}{\angstrom^6\Molar\per\cm\cubed}}
+	{R_0}^6 = \br{\qty{8.79e23}{\angstrom^6\molar\per\cm\cubed}}
 							\br{\kappa^2 n^{-4} \Phi_\mtext{D} J_\mtext{DA}} \, ,
   \label{eq:forster_dist}
 \end{equation}
@@ -64,11 +64,11 @@ The numerical prefactor depends on the units of the overlap integral, which can 
 \begin{equation}
 	J_\mtext{DA} = \frac{\int F_\mtext{D}\br{\lambda}
 											 \varepsilon_\mtext{A}\br{\lambda} 
-											 \lambda^4 \dd\lambda}
-											{\int F_\mtext{D}\br{\lambda}\dd\lambda} \, .
+											 \lambda^4 \odif\lambda}
+											{\int F_\mtext{D}\br{\lambda}\odif\lambda} \, .
   \label{eq:overlap_int}
 \end{equation}
-Here, \( J_\mtext{DA} \) is in \si{\per\Molar\cmc}, \( \lambda \) is in units of \si{\cm}, \( F_\mtext{D}\br{\lambda} \) is the fluorescence of the donor in the absence of the acceptor, and \( \varepsilon_\mtext{A}\br{\lambda} \) is the extinction coefficient of the acceptor in units of \si{\per\Molar\per\cm} at wavelength \( \lambda \). The energy transfer efficiency, \( E \), is defined by the following relationship:
+Here, \( J_\mtext{DA} \) is in \unit{\per\molar\cmc}, \( \lambda \) is in units of \unit{\cm}, \( F_\mtext{D}\br{\lambda} \) is the fluorescence of the donor in the absence of the acceptor, and \( \varepsilon_\mtext{A}\br{\lambda} \) is the extinction coefficient of the acceptor in units of \unit{\per\molar\per\cm} at wavelength \( \lambda \). The energy transfer efficiency, \( E \), is defined by the following relationship:
 \begin{equation}
 	E = \frac{{R_0}^6}{{R_0}^6 + r^6} \, .
 	\label{eq:dist_efficiency}
@@ -114,7 +114,7 @@ A theoretical treatment described by \textcite{pace86,jones97} approximates a li
 where \( m \) reflects the rate of change of the Gibbs energy with respect to denaturant concentration and \( C \) is the molar concentration of denaturant. 
 The denaturant concentration that gives rise to equal populations of folded and unfolded proteins is referred to as the midpoint concentration, \( C_\mtext{m} \). 
 
-Here, \( m \) (\si{\kilo\cal\per\Molar\per\mole}) describes the rate of change of the free energy of denaturant with respect to denaturant concentration and \( C \) (\si{\Molar}) is the molar concentration of denaturant.  
+Here, \( m \) (\unit{\kilo\cal\per\molar\per\mole}) describes the rate of change of the free energy of denaturant with respect to denaturant concentration and \( C \) (\unit{\molar}) is the molar concentration of denaturant.  
 
 The denaturant concentration that gives rise to equal populations of folded and unfolded proteins is referred to as the midpoint concentration, \( C_\mtext{m} \).  At \( C_\mtext{m} \), the free energy of unfolding is zero so that
 \begin{equation}
@@ -164,25 +164,25 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 
 \begin{enumerate}
 	\item Turn on the instrumentation (fluorescence and absorption spectrometers) immediately upon arriving in the laboratory to allow the electronics to warm up and stabilize. 
-	\item Prepare a stock solution (\SI{50}{\mL}) of \SI{20}{\milli\Molar} \pH{7.4} phosphate buffer. 
+	\item Prepare a stock solution (\qty{50}{\mL}) of \qty{20}{\milli\molar} \pH{7.4} phosphate buffer. 
 	This buffer is called \ch{KP_{\emph{i}}}. 
 	Both components of the conjugate acid--base pair should be weighed out separately to obtain the desired ratio and then dissolved in water. 
 	Use \iupac{potassium phosphate monobasic} (CAS 7778-77-0) and \iupac{potassium phosphate dibasic} (CAS 7758-11-4).
 	\label{step:buffer_stock}
-	\item Prepare a stock solution (\SI{50}{\mL}) of \SI{10.0}{\Molar} \iupac{urea} (CAS 75-13-6) in \SI{20}{\milli\Molar} \ch{KP_{\emph{i}}}. 
+	\item Prepare a stock solution (\qty{50}{\mL}) of \qty{10.0}{\molar} \iupac{urea} (CAS 75-13-6) in \qty{20}{\milli\molar} \ch{KP_{\emph{i}}}. 
 	You should add the \iupac{urea} and phosphates to an empty volumetric flask and add water up to the mark. 
 	This solution is called urea/\ch{KP_{\emph{i}}}. 
 	\label{step:urea_stock}
-	\item Prepare a stock solution (\SI{0.8}{\mL} of \SI{\sim500}{\micro\Molar}) of cyt \emph{c} (CAS 9007-43-6) in \ch{KP_{\emph{i}}} (\( \varepsilon_{410} \) for cyt \emph{c} in this solution is \SI{\sim105000}{\per\Molar\per\cm}, \( \varepsilon_{530} \) is \SI{11200}{\per\Molar\per\cm}).
+	\item Prepare a stock solution (\qty{0.8}{\mL} of \qty{\sim500}{\micro\molar}) of cyt \emph{c} (CAS 9007-43-6) in \ch{KP_{\emph{i}}} (\( \varepsilon_{410} \) for cyt \emph{c} in this solution is \qty{\sim105000}{\per\molar\per\cm}, \( \varepsilon_{530} \) is \qty{11200}{\per\molar\per\cm}).
 	\label{step:cyt_c_stock}
-	\item Prepare several samples of \SI{\sim10}{\micro\Molar} cyt \emph{c} (\SI{1.5}{\mL} each) by mixing the appropriate amounts of stock solution from \cref{step:cyt_c_stock} with stock solutions made in \cref{step:buffer_stock,step:urea_stock} to achieve final urea concentrations of \SIrange{0.0}{10.0}{\Molar} in \SI{1.0}{\Molar} increments. 
+	\item Prepare several samples of \qty{\sim10}{\micro\molar} cyt \emph{c} (\qty{1.5}{\mL} each) by mixing the appropriate amounts of stock solution from \cref{step:cyt_c_stock} with stock solutions made in \cref{step:buffer_stock,step:urea_stock} to achieve final urea concentrations of \SIrange{0.0}{10.0}{\molar} in \qty{1.0}{\molar} increments. 
 	You should have \num{11} samples in \num{11} plastic Eppendorf tubes.
 	\label{step:sample_prep}
 	\item Record fluorescence and absorption spectra of \ch{KP_{\emph{i}}}, \iupac{urea}/\ch{KP_{\emph{i}}}, and each of the \num{11} samples prepared in \cref{step:sample_prep}. 
-	The fluorescence spectra should be recorded with \( \lambda_\mtext{ex} \) set to \SI{290}{\nm} and \( \lambda_\mtext{det} \) should be scanned from \SIrange{305}{500}{\nm}. 
-	Use ``high'' sensitivity and \SI{5}{\nm} slits for both excitation and emission. 
+	The fluorescence spectra should be recorded with \( \lambda_\mtext{ex} \) set to \qty{290}{\nm} and \( \lambda_\mtext{det} \) should be scanned from \SIrange{305}{500}{\nm}. 
+	Use ``high'' sensitivity and \qty{5}{\nm} slits for both excitation and emission. 
 	These spectra will be used to determine the free energy of unfolding of cyt \emph{c} using fluorescence shanges of Trp-59 as the probe. 
-	You will see a large peak at \SI{\sim323}{\nm} in the spectra of the buffers (\ch{KP_{\emph{i}}} and \iupac{urea}/\ch{KP_{\emph{i}}}) as well as in some of your cyt \emph{c} samples. 
+	You will see a large peak at \qty{\sim323}{\nm} in the spectra of the buffers (\ch{KP_{\emph{i}}} and \iupac{urea}/\ch{KP_{\emph{i}}}) as well as in some of your cyt \emph{c} samples. 
 	Discuss the origin of this peak with your lab instructor. 
 	\label{step:fluor_spec}
 \end{enumerate}
@@ -193,10 +193,10 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 \label{sub:part_b_determination_of_the_forster_distance}
 
 \begin{enumerate}
-	\item Prepare \SI{5}{\mL} of a \SI{\sim10}{\micro\Molar} solution of the tryptophan model compound, \iupac{\N-acetyl-tryptophanamide} (NATA, CAS 2382-79-8) in \ch{KP_{\emph{i}}}. 
+	\item Prepare \qty{5}{\mL} of a \qty{\sim10}{\micro\molar} solution of the tryptophan model compound, \iupac{\N-acetyl-tryptophanamide} (NATA, CAS 2382-79-8) in \ch{KP_{\emph{i}}}. 
 	The actual concentration is not important, as long as you are not saturating the fluorometer detector. 
-	You may need to start with a concentrated stock solution of NATA and dilute it to the desired \SI{\sim10}{\micro\Molar}. 
-	Regardless of how you prepare the sample, you must determine the actual concentration based on the value for the extinction coefficient at \SI{280}{\nm} (\( \varepsilon_{280} \) for NATA is \SI{5630}{\per\Molar\per\cm}).
+	You may need to start with a concentrated stock solution of NATA and dilute it to the desired \qty{\sim10}{\micro\molar}. 
+	Regardless of how you prepare the sample, you must determine the actual concentration based on the value for the extinction coefficient at \qty{280}{\nm} (\( \varepsilon_{280} \) for NATA is \qty{5630}{\per\molar\per\cm}).
 	\label{step:nata_prep}
 	\item Measure absorption and fluorescence spectra of the solution prepared in \cref{step:nata_prep}.
 	\label{step:nata_spectrum} 
@@ -214,9 +214,9 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 	\begin{description}
 		\item [Spectrum A:] raw fluorescence from cyt \emph{c} in buffer/denaturant
 		\item [Spectrum B:] raw fluorescence from buffer/denaturant
-		\item [Corrected Spectrum:] \( \text{Spectrum A} - \text{Spectrum B} \)
+		\item [Corrected Spectrum:] \( \mtext{Spectrum A} - \mtext{Spectrum B} \)
 	\end{description}
-	The fluorescence intensity of the corrected spectrum at \SI{350}{\nm} should then be normalized for protein concentration (via the absorption value at \SI{530}{\nm}) and plotted as a function of \iupac{urea} concentration. 
+	The fluorescence intensity of the corrected spectrum at \qty{350}{\nm} should then be normalized for protein concentration (via the absorption value at \qty{530}{\nm}) and plotted as a function of \iupac{urea} concentration. 
 	The \emph{y}-axis should be scaled from \numrange{0}{1}. 
 	What is the free energy of unfolding?
 	You will need \cref{eq:gibbs_h2o,eq:conc_frac}. 
@@ -224,7 +224,7 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 	\label{step:spec_fit}
 	\item Plot the change in the absorption spectra as a function of denaturant concentration to generate an unfolding curve and determine the free energy of unfolding for cyt \emph{c}.
 	\label{step:abs_fit}
-	\item Use the fluorescence spectrum collected in \cref{step:nata_spectrum} along with the absorption spectrum of \SI{\sim10}{\micro\Molar} cyt \emph{c} (\SI{0.0}{\Molar} \iupac{urea}) from \cref{step:spec_fit} to calculate the Förster distance of the Trp--heme pair. 
+	\item Use the fluorescence spectrum collected in \cref{step:nata_spectrum} along with the absorption spectrum of \qty{\sim10}{\micro\molar} cyt \emph{c} (\qty{0.0}{\molar} \iupac{urea}) from \cref{step:spec_fit} to calculate the Förster distance of the Trp--heme pair. 
 	You will need \cref{eq:forster_dist,eq:overlap_int}.
 	Determination of the integrated areas can be done numerically as a sum or using the integration functions built in to SciPy.\sidenote{Additional pertinent information for this system: 
 	\begin{gather}
@@ -245,10 +245,10 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 \label{sec:questions_and_further_thoughts}
 
 \begin{enumerate}
-	\item What is the source of the large peak at \SI{\sim323}{\nm} in the spectra of the buffers (\ch{KP_{\emph{i}}} and \iupac{urea}/\ch{KP_{\emph{i}}}) as well as in some of the cyt \emph{c} samples?
+	\item What is the source of the large peak at \qty{\sim323}{\nm} in the spectra of the buffers (\ch{KP_{\emph{i}}} and \iupac{urea}/\ch{KP_{\emph{i}}}) as well as in some of the cyt \emph{c} samples?
 	What could you do to verify (experimentally) the source of this peak?
 	\item How do the results of unfolding with \cref{step:abs_fit} differ from those obtained in \cref{step:spec_fit} and what are some possible origins of the differences (if any)?
-	\item Compare the distance between Trp-59 and the heme group for the fully folded protein (\SI{0.0}{\Molar} \iupac{urea}) with distances obtained from the known crystal structure (\href{https://www.rcsb.org/structure/1hrc}{PDB: 1HRC}). 
+	\item Compare the distance between Trp-59 and the heme group for the fully folded protein (\qty{0.0}{\molar} \iupac{urea}) with distances obtained from the known crystal structure (\href{https://www.rcsb.org/structure/1hrc}{PDB: 1HRC}). 
 	How do these compare?
 	\item What assumptions are made to determine \gibbs*[subscript-right=\ch{H2O}]{} from part A and intramolecular distances from part C? 
 	Do these assumptions conflict?

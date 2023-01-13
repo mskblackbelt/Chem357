@@ -16,7 +16,7 @@ It is a good practice to perform each calculation a separate directory. The calc
 	
 By convention, the input file is named \Verb{input.com}, though any name will work. 
 The basic input file is shown below.\sidenote{Content wrapped in angle brackets (\Verb{<*>}) should be \textbf{replaced} with the desired value and the angle brackets should be \textbf{removed} (they are not a recognized Gaussian input), e.g., \Verb{<basis>} \( \Rightarrow \) \Verb{STO-3G}.}
-This file starts a calculation on two processors using \SI{400}{\mega\byte} of memory. 
+This file starts a calculation on two processors using \qty{400}{\mega\byte} of memory. 
 The output will be redirected to the \Verb{input.log} output file. 
 This file contains the basic information and results of the calculation such as the total energy, atomic forces, and so forth. 
 Additional output files might be generated according to the specified settings. 
@@ -48,7 +48,7 @@ label=lst:gauss_samp]
   \item[your-comment] This line, surrounded by two empty lines, holds your comment, usually a description of the molecule and/or calculation to be performed. 
   \item[charge] The \Verb{charge} keyword should be substituted with the total (integer-valued) charge of your system. 
   \item[multiplicity] The \Verb{multiplicity} keyword should be substituted with the multiplicity of your system (\( 2\mtext{S}+1 \), where \( \mtext{S} \) is total spin). This should always be an integer.
-  \item[atomX <X> <Y> <Z>] This block specifies the geometry of the system. You can use either the atomic symbol (e.g., \Verb{C}) or the atomic number (e.g., \Verb{6}) to specify the atom type, followed by it's cartesian coordinates in units of Angstroms (\si{\angstrom}).\sidenote{Use a decimal-valued coordinate, even if it is a whole number (\Verb{0.0}, not \Verb{0}).} This block must be followed by an empty line. 
+  \item[atomX <X> <Y> <Z>] This block specifies the geometry of the system. You can use either the atomic symbol (e.g., \Verb{C}) or the atomic number (e.g., \Verb{6}) to specify the atom type, followed by it's cartesian coordinates in units of Angstroms (\unit{\angstrom}).\sidenote{Use a decimal-valued coordinate, even if it is a whole number (\Verb{0.0}, not \Verb{0}).} This block must be followed by an empty line. 
 \end{description}
 
 Remember, there are no bonds (sticks) in quantum chemistry. The bonding is the result of the respective positions of atoms in space. The `stick' visible in visualization programs is simply a rendering for more intuitive display. A sample input for a square-planar molecule can be found at the end of the section (with all values filled in). 

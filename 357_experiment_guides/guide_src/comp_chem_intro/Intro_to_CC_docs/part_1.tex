@@ -58,7 +58,7 @@ From a technical perspective, we will learn how to compose input files, run basi
     \Verb{SCF Done: E(UHF) = #####  A.U. after X cycles}
   
     This is the computed electronic energy of the H atom using Hartree-Fock theory in the STO-3G basis set. 
-    Compare it with the exact result for the hydrogen atom (\(\SI{0.5}{\hartree} \approx  \SI{13.6057}{\eV} \approx \SI{313.7545}{\kcal\per\mol}\)).\sidenote{
+    Compare it with the exact result for the hydrogen atom (\(\qty{0.5}{\hartree} \approx  \qty{13.6057}{\eV} \approx \qty{313.7545}{\kcal\per\mol}\)).\sidenote{
       \textbf{TIP}: In later exercises, to find this value quickly and efficiently, use the command \bashinline[fontsize=\footnotesize]{grep "Done" input.log}. 
       The \Verb{grep} command searches the \Verb{input.log} file looking for the phrase ``Done''  and outputs each line containing that phrase. 
       Since the file contains only one such a phrase (it solved the electron-theory problem only once), there is only one such line. 
@@ -83,7 +83,7 @@ Next, execute the script by typing:
 The script will iterate over the specified methods and tested basis sets (STO-3G, cc-pV\emph{x}Z, where \( x = \)D, T, Q) and create nested directories for each method/basis set pair. 
 Next, it will execute the calculations. 
 Finally, it creates a \Verb{performance.dat} file which contains a list of basis sets, number of basis functions in the set, and the computed energy for different methods. 
-Use this data to prepare a plot in your Jupyter notebook showing the convergence of different methods to the exact value of \SI{0.5}{Ha}.
+Use this data to prepare a plot in your Jupyter notebook showing the convergence of different methods to the exact value of \qty{0.5}{Ha}.
 Do all of them converge correctly to the same solution? 
 The details of the listed theoretical methods to evaluate electron--electron interactions and why they converge to different values for the apparently trivial one-electron system are beyond this tutorial and will be covered in lecture later this semester. 
 

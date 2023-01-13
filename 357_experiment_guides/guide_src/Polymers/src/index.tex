@@ -32,16 +32,16 @@ In this application, for example, viscosity data can provide important informati
 			\node	(G)	at	(2,0.5)	{};
 			\node	(H)	at	(1,0.5)	{};
 		\node(I)	at	(-0.75,1)	{};
-		\node(J)	at	(-0.75,1.75)	{$\dd{z}$};
+		\node(J)	at	(-0.75,1.75)	{$\odif{z}$};
 		\node(K)	at	(-0.75,2.5)	{};
-		\node(L)	at	(1.5,2.6)	{$\dd{A}$};
+		\node(L)	at	(1.5,2.6)	{$\odif{A}$};
 		
 		% Draw axes, arrows
 		\draw[thick]	(-1.8,0.5)	--	(-1.8,1.5) node[left]{$z$}	--	(-1.8,2.5);
 		\draw[thick]	(-1,0)	--	(1,0) node[below]{$x$}	--	(3,0);
 		\draw	(J)	--	(I);
 		\draw	(J)	--	(K);
-		\draw[very thick]	(C)	--	(2.8,2.0) node[right]{$v_x + \dd{v_x}$};
+		\draw[very thick]	(C)	--	(2.8,2.0) node[right]{$v_x + \odif{v_x}$};
 		\draw[very thick]	(G)	--	(2.5,0.5) node[right]{$v_x$};
 		\draw[very thick]	(3.5,1.25)	--	(4,1.25)node[above]{flow}	--	(4.5,1.25);
 
@@ -53,7 +53,7 @@ In this application, for example, viscosity data can provide important informati
 		\draw	(1.3,2.6)	to [out=180,in=90]	(1,2.25);
 	\end{tikzpicture}
 	\label{fig:viscous_flow}
-	\caption{In viscous flow, a sheet of fluid having cross-sectional area \( \dd{A} \) is subjected to a force that causes it to move faster by an amount \( \dd{V} \) than an equivalent, adjacent sheet separated by a distance \( \dd{z} \). 
+	\caption{In viscous flow, a sheet of fluid having cross-sectional area \( \odif{A} \) is subjected to a force that causes it to move faster by an amount \( \odif{V} \) than an equivalent, adjacent sheet separated by a distance \( \odif{z} \). 
 	The planes of the sheets are normal to the flow direction.}
 \end{figure}
 Considered macroscopically, viscosity is a frictional force that arises from the directed motion of molecules past each other in the liquid state. 
@@ -62,29 +62,29 @@ These forces are appreciable; they are manifest, for example, as latent heat of 
 The mathematical treatment of viscosity is best introduced by looking at \cref{fig:viscous_flow}.
 
 A liquid is presumed to be flowing smoothly in the \( x \)-direction. 
-Imagine that the liquid is composed of sheets of infinitesimal cross section \( \dd{A} \) that are oriented in the \( xy \)-plane, and that each sheet flows tangentially to its surface area, in the positive \( x \)-direction. 
-If a given sheet is kept at a velocity \( v \), such that it exceeds the velocity of an adjacent sheet by an amount \( \dd{v} \), and the adjacent sheet is displaced by a distance \( \dd{z} \) the force required (per unit area) to maintain the motion of the given sheet, \( \dd{f_x} \), is given by
+Imagine that the liquid is composed of sheets of infinitesimal cross section \( \odif{A} \) that are oriented in the \( xy \)-plane, and that each sheet flows tangentially to its surface area, in the positive \( x \)-direction. 
+If a given sheet is kept at a velocity \( v \), such that it exceeds the velocity of an adjacent sheet by an amount \( \odif{v} \), and the adjacent sheet is displaced by a distance \( \odif{z} \) the force required (per unit area) to maintain the motion of the given sheet, \( \odif{f_x} \), is given by
 \begin{equation}
-	\dv{f_x}{A} = \eta \br{ \pdv{v_x}{z}}_z \, .
+	\odv{f_x}{A} = \eta \pdv{v_x}{z}_{z} \, .
 	\label{eq:layer_flow}
 \end{equation}
-The partial derivative, \( \br{\pdv*{v_x}{z}}_z \), is the tangential velocity gradient, and \( \eta \), the proportionality constant between \( f_x \) and this gradient, is now defined as the \emph{viscosity coefficient}. 
-From \cref{eq:layer_flow}, it can be seen that the SI dimensions of the viscosity coefficient are \si{\kg \per \m \per \s}. \Cref{eq:layer_flow} is called Newton's law of viscous flow. 
+The partial derivative, \( \pdv{v_x}/{z}_{z} \), is the tangential velocity gradient, and \( \eta \), the proportionality constant between \( f_x \) and this gradient, is now defined as the \emph{viscosity coefficient}. 
+From \cref{eq:layer_flow}, it can be seen that the SI dimensions of the viscosity coefficient are \unit{\kg \per \m \per \s}. \Cref{eq:layer_flow} is called Newton's law of viscous flow. 
 Fluids that behave according to \cref{eq:layer_flow} are called Newtonian fluids and are said to undergo \emph{laminar} flow. 
 Cases of non-laminar, or non-Newtonian flow (at ordinary temperatures and pressures) are unusual but not uncommon (e.g., ``silly putty'').
 Materials whose viscosity decreases at high shear rates (e.g., paints that ``thin out'' as they are applied with a brush but then stiffen when quiescent) are examples of non-Newtonian fluids.
 
 With respect to this experiment, a useful application of \cref{eq:layer_flow} to the case of mass transport through a circular tube of small internal diameter was derived by French physicist Jean Léonard Marie Poiseuille in 1844:
 \begin{equation}
-	\dv{V}{t} = \frac{\pi r^4 \increment P}{8 \eta L} \, ,
+	\odv{V}{t} = \frac{\pi r^4 \increment P}{8 \eta L} \, ,
 	\label{eq:tube_flow}
 \end{equation}
-where \( \dv*{V}{t} \) is the volume flow rate of the liquid emerging from the tube, and \( r \) and \( L \) are, respectively, the radius and length of the tube.
+where \( \odv{V}/{t} \) is the volume flow rate of the liquid emerging from the tube, and \( r \) and \( L \) are, respectively, the radius and length of the tube.
 The quantity \( \increment P \) is the pressure difference across the ends of the tube and is the driving force for the bulk flow. 
 \Cref{eq:tube_flow} assumes that the flow rate is slow and uniform. 
-The viscosity coefficient, \( \eta \), is called the poise in recognition of Poiseuille, and has cgs units.\sidenote{One poise, \si{\poise}, is \SI{1}{\g \per \cm \per \s}, or \SI{1}{\dyne \s}.}
-For convenience, the centipoise (\si{\centi\poise}, \SI{e-2}{\poise}), was often used to report viscosity. 
-In SI units, the viscosity coefficient is \si{\kg \per\m \per\s}, or \SI{1}{\Pa \s}, and \( \SI{1e-3}{\Pa} = \SI{1}{\milli\Pa} = \SI{1}{\centi\poise} \).
+The viscosity coefficient, \( \eta \), is called the poise in recognition of Poiseuille, and has cgs units.\sidenote{One poise, \unit{\poise}, is \qty{1}{\g \per \cm \per \s}, or \qty{1}{\dyne \s}.}
+For convenience, the centipoise (\unit{\centi\poise}, \qty{e-2}{\poise}), was often used to report viscosity. 
+In SI units, the viscosity coefficient is \unit{\kg \per\m \per\s}, or \qty{1}{\Pa \s}, and \( \qty{1e-3}{\Pa} = \qty{1}{\milli\Pa} = \qty{1}{\centi\poise} \).
 For many common liquids at room temperature, viscosities are about \SIrange{0.2}{4}{\milli\Pa}. 
 
 
@@ -192,7 +192,7 @@ Thus, if you measure the flow time, \( t \), for a liquid having a density \( \r
 where \( \eta_\mtext{ref} \), \( \rho_\mtext{ref} \), and \( t_\mtext{ref} \) are the viscosity, density, and flow time of the \emph{reference} liquid, usually water. 
 It is important that you carry out the set of measurements at a known and controlled temperature; hence, the \( \eta_\mtext{ref} \) value pertains to this temperature. 
 For highly precise determinations of viscosity a kinetic-energy correction term must be subtracted from \cref{eq:viscometer_visc2}. 
-Because this correction is usually less than \SI{1}{\percent} of the quantity \( \br{c \rho t} \), it can be ignored.
+Because this correction is usually less than \qty{1}{\percent} of the quantity \( \br{c \rho t} \), it can be ignored.
 
 % section the_ostwald_viscometer (end)
 
@@ -228,7 +228,7 @@ The colligative nature of \( \eta_\mtext{sp} \) is explicit in \cref{eq:frac_vis
 
 Another quantity that will prove to be very useful is the \emph{intrinsic viscosity}, \( [\eta] \) (sometimes referred to as the Staudinger index):
 \begin{equation}
-	[\eta] \equiv \lim_{c_m \to 0}\br{\frac{\eta_\mtext{sp}}{c_m}} = \frac{10\pi R^3}{3 m} \qquad \si{\cm\cubed \per \g}
+	[\eta] \equiv \lim_{c_m \to 0}\br{\frac{\eta_\mtext{sp}}{c_m}} = \frac{10\pi R^3}{3 m} \qquad \unit{\cm\cubed \per \g}
 	\label{eq:staud_ind1}
 \end{equation}
 The limit of infinite dilution \( \br{ c_m \to 0} \) is required to define a viscosity property that is intrinsic to the solute (in the given solvent), i.e., independent of the concentration. 
@@ -243,7 +243,7 @@ This concentration dependence is observed to follow the relation
 where \( k_\mtext{Hug} \), known as the Huggins constant, has a value of about \num{2} for rigid, uncharged spheres, and about \num{0.35} for flexible polymers in a ``good'' solvent.\autocite{tanford61} 
 The higher-order term in \( c_m \) in \cref{eq:conc_dep} can often be neglected. 
 From \cref{eq:frac_visc3} we can see that the ratio \( \eta_\mtext{sp}/c_m \) is not a colligative quantity; it is equal to an intrinsic property of the solute itself, namely, \( 10 \pi R^3 / 3 m \). 
-The intrinsic viscosity has dimensions of \si{\cm\cubed \per\g} and is perhaps analogous to a molar volume. 
+The intrinsic viscosity has dimensions of \unit{\cm\cubed \per\g} and is perhaps analogous to a molar volume. 
 Because both \( \eta_\mtext{sp} \) and \( c_m \) are experimental quantities, \cref{eq:conc_dep} can be used to obtain \( [\eta] \) by extrapolation to zero concentration.
 
 It is interesting to note that, if \( R \) is known, \cref{eq:staud_ind1} can be used to determine \( m \), the molecular mass of the solute, from \( [\eta] \). 
@@ -257,7 +257,7 @@ Remember that the value of \( R \) in \cref{eq:frac_visc2,eq:frac_visc3,eq:staud
 This effective radius is referred to as the \emph{hydrodynamic radius} and can, in principle, vary for a given solute from solvent to solvent depending on what shape the solute adopts in a particular solvent, that is, the extent to which solvent molecules penetrate or stick to the solute.
 
 Another complication that can be anticipated in applying \cref{eq:staud_ind1} to molecules is that the assumption of spherical geometry may be invalid in some cases. 
-Deviations from spherical geometry would manifest themselves theoretically in that \( C \) (in \cref{eq:frac_visc1}) would have values other than \num{5/2}. 
+Deviations from spherical geometry would manifest themselves theoretically in that \( C \) (in \cref{eq:frac_visc1}) would have values other than \num[parse-numbers=false]{5/2}. 
 In principle, this can be accounted for if the correct \emph{solvated} molecular shape (oblate or prolate spheroid, oblong, etc.) is known.
 
 A more serious problem encountered in dealing with high polymers is the fact that these systems consist of polymers of various chain lengths. 
@@ -310,7 +310,7 @@ in which the sum over all the point masses, \( m_i \) (atoms), of the molecule, 
 We can calculate \( I \) only if we adopt some (static) structural model of the polymer. 
 If we substitute the radius of gyration for the unique-valued radius \( R \) in \cref{eq:staud_ind1}, we have
 \begin{equation}
-	[\eta] = \frac{N_A 10 \pi R_g^3}{3 M} \qquad \si{\cm\cubed \per \g} \, ,
+	[\eta] = \frac{N_A 10 \pi R_g^3}{3 M} \qquad \unit{\cm\cubed \per \g} \, ,
 	\label{eq:staud_ind2}
 \end{equation}
 where \( M \), the molecular weight (along with \( N_A \)) replaces the molecular mass, \( m \).
@@ -386,28 +386,28 @@ This volume cannot be occupied because the segments of the polymer avoid each ot
 
 A more general relationship between the intrinsic viscosity and molecular weight is provided by the Mark-Houwink equation:
 \begin{equation}
-	[\eta] = K M^a \qquad \si{\cm\cubed \per \g} \, ,
+	[\eta] = K M^a \qquad \unit{\cm\cubed \per \g} \, ,
 	\label{eq:mark_houwink}
 \end{equation}
 where \( K \) and \( a \) are parameters that depend on the particular polymer, the solvent medium, and the temperature. 
 Typically, \( a \) ranges from \numrange{0.5}{0.8}.\sidenote{See \cref{eq:staud_ind3}} 
 The Mark-Houwink parameters are obtained from log-log plots of \( [\eta] \) vs. \( M \) for a series of monodisperse polymers. 
 Agreement between \( K \) and \( a \) values obtained by different workers is often apparently poor.\autocite{immergut75} 
-For example, for PVOH in water at \SI{25}{\celsius}, the following parameters showing in \cref{tab:pvoh_mh_param} have been reported. 
+For example, for PVOH in water at \qty{25}{\celsius}, the following parameters showing in \cref{tab:pvoh_mh_param} have been reported. 
 \begin{table}[hb]
 	\centering
 	\sisetup{table-number-alignment = center}
 		\begin{tabular}{SSSr}%
 			\toprule
 			{\( K \)}	&	{\( a \)}	&	{Molecular Weight Range}	&	Source	\\
-			{(\si{\cm\cubed\per\g})}	&		&	{(\si{\kilo\dalton})}	&			\\
+			{(\unit{\cm\cubed\per\g})}	&		&	{(\unit{\kilo\dalton})}	&			\\
 			\midrule
 			0.020			&	0.76	&	\numrange{6}{210}	&	{\autocite{flory48,flory50}}	\\
 			0.30			&	0.50	&	\numrange{9}{170}	&	{\autocite{dialer52}}				\\
 			0.14			&	0.6		&	\numrange{10}{70}	&	{\autocite{dieu54}}					\\
 			\bottomrule
 		\end{tabular}
-	\caption{Mark-Houwink parameters for PVOH in water at \SI{25}{\celsius}.}
+	\caption{Mark-Houwink parameters for PVOH in water at \qty{25}{\celsius}.}
 	\label{tab:pvoh_mh_param}
 \end{table}
 
@@ -417,7 +417,7 @@ We can obtain the molecular weight in explicit form from \cref{eq:mark_houwink}:
 	M_v = \br{\frac{[\eta]}{K}}^{1/a} \, .
 	\label{eq:vol_avg_weight}
 \end{equation}
-This expression (in which \( [\eta] \) has dimensions of \si{\cm\cubed \per \g}) is the computational basis of the experiment; it can be applied to \emph{poly}disperse PVOH (which is used in this experiment), but the molecular weight obtained from \cref{eq:vol_avg_weight} is a \emph{viscosity-average} molecular weight, \( M_v \). 
+This expression (in which \( [\eta] \) has dimensions of \unit{\cm\cubed \per \g}) is the computational basis of the experiment; it can be applied to \emph{poly}disperse PVOH (which is used in this experiment), but the molecular weight obtained from \cref{eq:vol_avg_weight} is a \emph{viscosity-average} molecular weight, \( M_v \). 
 Statistically, this quantity is different from the \emph{number-average} molecular weight, \( M_n \), which is obtained, for example, from osmotic pressure measurements. 
 \( M_n \) is defined as 
 \begin{equation}
@@ -432,7 +432,7 @@ where \( f_i \) is the fraction of polymers having molecular weight \( M_i \); t
 	\label{eq:mol_weight_ratio}
 \end{equation}
 where \( a \) is the same parameter used in \cref{eq:mark_houwink} and \( \GammaFunc\br{x} \) denotes the \emph{gamma function}, whose value (for a given \( x \)) can be obtained from mathematical tables. 
-For example, for \( a = 0.76 \) (for PVOH in water at \SI{25}{\celsius}),\autocite{flory48} the ratio in \cref{eq:mol_weight_ratio} is 
+For example, for \( a = 0.76 \) (for PVOH in water at \qty{25}{\celsius}),\autocite{flory48} the ratio in \cref{eq:mol_weight_ratio} is 
 \begin{equation}
 	\frac{M_v}{M_n} \equiv S = 1.89 \, .
 	\label{eq:mol_weight_ratio_ex}
@@ -507,7 +507,7 @@ This results in a decreases in the (average) molecular weight of the polymer, an
 	\label{fig:diol_cleavage}
 \end{figure}
 
-If we assume that the cleavage reaction is \SI{100}{\percent} effective (so that all the \iupac{1,2-diol} linkages are cleaved), the increase in the number of solute molecules in the solution after treatment with \ch{KIO4} divided by the total number of monomer units represented in the polymer sample is equal to the ratio of \iupac{1,2-diol} structures to the total \iupac{1,2-diol} \emph{and} \iupac{1,3-diol} arrangements in the system. 
+If we assume that the cleavage reaction is \qty{100}{\percent} effective (so that all the \iupac{1,2-diol} linkages are cleaved), the increase in the number of solute molecules in the solution after treatment with \ch{KIO4} divided by the total number of monomer units represented in the polymer sample is equal to the ratio of \iupac{1,2-diol} structures to the total \iupac{1,2-diol} \emph{and} \iupac{1,3-diol} arrangements in the system. 
 This ratio, which is defined here as \( f \), can be expressed as
 \begin{equation}
 	f = \frac{\frac{1}{M_n'} - \frac{1}{M_n^0}}{\frac{1}{M^0}} \, ,
@@ -515,7 +515,7 @@ This ratio, which is defined here as \( f \), can be expressed as
 \end{equation}
 where \( M_n^0 \) and \( M_n' \) are the number-average molecular weights of the polymer in the sample before
 and after the \ch{KIO4} cleavage respectively. 
-\( M^0 \) is the molecular weight of the monomer unit (\ch{CH2CHOH}), which is \SI{44}{\dalton}. 
+\( M^0 \) is the molecular weight of the monomer unit (\ch{CH2CHOH}), which is \qty{44}{\dalton}. 
 Using the relationship between the number average and viscosity-average molecular weight for PVOH,\sidenote{See \cref{eq:mol_weight_ratio_ex}} we get the following expression for the head-to-head fraction:
 \begin{equation}
 	f = S M^0 \br{\frac{1}{M_v'} - \frac{1}{M_v^0}}\, .
@@ -550,7 +550,7 @@ If the viscometer appears to be dirty, do not proceed with the experiment.
 Either obtain a clean one, or take the time to clean your viscometer thoroughly. 
 Consult your instructor. 
 If you do not remember how to use the viscometer, review the material in Experiment 16, or ask your instructor for this information. 
-A stock solution of PVOH in water (\( c_m \approx \SI{0.016}{\g \per \mL} \)) should be available; if it is not, you will be told how to prepare this solution. 
+A stock solution of PVOH in water (\( c_m \approx \qty{0.016}{\g \per \mL} \)) should be available; if it is not, you will be told how to prepare this solution. 
 This PVOH must have been appropriately filtered before use; undissolved particles will clog the viscometer. 
 You will measure the viscosities of PVOH solutions of three or four different concentrations for both the cleaved and uncleaved polymers. 
 You will calibrate the viscometer using pure water. 
@@ -560,10 +560,10 @@ Temperature control for each of these measurements is important.
 \label{sub:required_equipment}
 
 \begin{itemize}
-	\item (2) \SI{100}{\mL} volumetric flask
-	\item (6) \SI{50}{\mL} volumetric flasks
-	\item (1) \SI{50}{\mL} volumetric pipet
-	\item (1) \SI{50}{\mL} graduated cylinder
+	\item (2) \qty{100}{\mL} volumetric flask
+	\item (6) \qty{50}{\mL} volumetric flasks
+	\item (1) \qty{50}{\mL} volumetric pipet
+	\item (1) \qty{50}{\mL} graduated cylinder
 	\item (1) pipet filler
 	\item (1) Ostwald viscometer
 	\item (1) temperature-controlled water bath
@@ -572,7 +572,7 @@ Temperature control for each of these measurements is important.
 % subsection required_equipment (end)
 
 \begin{enumerate}
-	\item Prepare \SI{100}{\mL} of a \SI{50}{\percent} solution of the PVOH stock solution. 
+	\item Prepare \qty{100}{\mL} of a \qty{50}{\percent} solution of the PVOH stock solution. 
 	You will use this to prepare the diluted samples of the uncleaved polymer for measurement. 
 	Use purified (DI, RO, or distilled) water for the dilution in the volumetric flask. 
 	Cap and invert it several times gently. 
@@ -580,19 +580,19 @@ Temperature control for each of these measurements is important.
 	Because the polymer tends to adhere to the surface of glassware, rinse the pipet with water, then acetone, immediately after use. 
 	Aspirate dry. 
 	Follow this procedure whenever using glassware with PVOH solutions.
-	\item To prepare the cleaved polymer, pipet \SI{50}{\mL} of the stock solution into a 100-mL volumetric flask. 
-	Add \SI{0.25}{\g} of \ch{KIO4} and about \SI{20}{\mL} of deionized water. 
+	\item To prepare the cleaved polymer, pipet \qty{50}{\mL} of the stock solution into a 100-mL volumetric flask. 
+	Add \qty{0.25}{\g} of \ch{KIO4} and about \qty{20}{\mL} of deionized water. 
 	Cap and swirl the liquid a few times. 
-	Place the mixture in a hot-water bath (\SI{\sim70}{\celsius}) for several minutes until the solid dissolves; periodically mix the solution if necessary. 
+	Place the mixture in a hot-water bath (\qty{\sim70}{\celsius}) for several minutes until the solid dissolves; periodically mix the solution if necessary. 
 	After the solid has dissolved, remove the flask and let it cool to room temperature, then fill to the mark with deionized water. 
 	Gently invert it several times. Label the flask.
-	\item There are now two PVOH solutions (one cleaved and one uncleaved), each with \( c_m \) of about \SI{0.0080}{\g \per \mL}. 
-	From each of these, prepare \SI{50}{\mL} of solutions corresponding to \SIlist{80;60;40}{\percent} of that concentration. 
-	Make up the \SI{40}{\percent} solution from the \SI{80}{\percent} solution. 
+	\item There are now two PVOH solutions (one cleaved and one uncleaved), each with \( c_m \) of about \qty{0.0080}{\g \per \mL}. 
+	From each of these, prepare \qty{50}{\mL} of solutions corresponding to \SIlist{80;60;40}{\percent} of that concentration. 
+	Make up the \qty{40}{\percent} solution from the \qty{80}{\percent} solution. 
 	Label these new samples immediately after preparation. 
-	Place them all in a \SI{25}{\celsius} bath.
+	Place them all in a \qty{25}{\celsius} bath.
 	\item Calibrate the viscometer with purified water. 
-	Pipet \SI{5}{\mL} of water into the viscometer, which is clamped and held in a \SI{25}{\celsius} bath. 
+	Pipet \qty{5}{\mL} of water into the viscometer, which is clamped and held in a \qty{25}{\celsius} bath. 
 	Using a pipet bulb, carefully ``push'' the water up through the capillary tube until it is above the upper fiducial mark. 
 	Remove the bulb and allow the water to drain. 
 	Start the timer or stopwatch exactly as the water meniscus passes the upper fiducial mark; stop the timer just as the meniscus passes the lower mark. 
@@ -612,10 +612,10 @@ Temperature control for each of these measurements is important.
 
 \begin{enumerate}
 	\item Calibrate the viscometer. 
-	Determine the constant \( k_\mtext{inst} \) in \cref{eq:viscometer_visc2} from the mean flow time of water and its density and viscosity at \SI{25}{\celsius}.
+	Determine the constant \( k_\mtext{inst} \) in \cref{eq:viscometer_visc2} from the mean flow time of water and its density and viscosity at \qty{25}{\celsius}.
 	\item Determine and tabulate the viscosities and specific viscosities of the PVOH samples. 
 	Assume they have densities equal to that of pure water. 
-	In the same table list the bulk \( c_m \) values (\si{\g \per \mL}) of the PVOH samples.
+	In the same table list the bulk \( c_m \) values (\unit{\g \per \mL}) of the PVOH samples.
 	\item For each sample determine \( [\eta] \) for the uncleaved and cleaved polymer. 
 	Also determine the Huggins constant.\sidenote{See \cref{eq:conc_dep}}
 	\item Choose a set of \( K \) and \( a \) values, and using the appropriate relations, determine values of \( M_v \) for the uncleaved and cleaved PVOH, as well as the head-to-head ratio, \( f \). 
@@ -636,7 +636,7 @@ Temperature control for each of these measurements is important.
 	Is this a good assumption for a polymer such as PVOH? 
 	For what sort of macromolecule would you expect this assumption to be poor?
 	\item How would the structure of a polymer such as PVOH in the vapor phase differ from that in aqueous solution?
-	\item The intrinsic viscosity of a sample of polydisperse PVOH in water was determined to be \SI{86}{\cm\cubed \per \g} at \SI{298}{\K}. 
+	\item The intrinsic viscosity of a sample of polydisperse PVOH in water was determined to be \qty{86}{\cm\cubed \per \g} at \qty{298}{\K}. 
 	Using the information in \cref{tab:pvoh_mh_param} and \cref{eq:mark_houwink}, the Mark-Houwink equation, what range of molecular weights can be reported for the polymer?
 \end{enumerate}
 % section questions_and_further_thoughts (end)

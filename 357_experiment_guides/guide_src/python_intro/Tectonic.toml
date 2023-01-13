@@ -3,6 +3,7 @@ name = 'Python Intro'
 bundle = 'https://data1.fullyjustified.net/tlextras-2022.0r0.tar'
 
 [[output]]
-name = 'default'
+name = 'Python_Intro'
 type = 'pdf'
 shell_escape = true
+shell_escape_cwd = ".."

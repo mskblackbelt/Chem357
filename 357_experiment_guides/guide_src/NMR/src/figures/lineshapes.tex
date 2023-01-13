@@ -41,14 +41,14 @@
 	  \begin{axis}[nmr, axis lines = none,]
       \addplot table from {figures/slow_spec.csv}; 
       \addplot [only marks, mark=|, mark size=5pt] table from {figures/slow_int.csv}
-        node [pos=0,    pin=180: $(\Delta\nu_\text{A})_0^{1/2}$, ->] {}
+        node [pos=0,    pin=180: $(\Delta\nu_\mathup{A})_0^{1/2}$, ->] {}
         node [pos=.25,  pin=0: ] {}
         node [pos=.75,  pin=180: ] {}
-        node [pos=2.1,  pin=0: $(\Delta\nu_\text{B})_0^{1/2}$ ] {}
+        node [pos=2.1,  pin=0: $(\Delta\nu_\mathup{B})_0^{1/2}$ ] {}
         ;
-      \draw [thick,dashed] (-2,0.05) -- (-2,1) node [pos=0,anchor=north] {$\nu_\text{A}$};
-      \draw [thick,dashed] (2,0.05) -- (2,1) node [pos=0,anchor=north] {$\nu_\text{B}$};
-      \draw [black, thick, Bar-Bar] (-2,1.1) -- (2, 1.1) node[pos=0.5,anchor=south] {$\Delta\nu_0 = \nu_\text{A} - \nu_\text{B}$};
+      \draw [thick,dashed] (-2,0.05) -- (-2,1) node [pos=0,anchor=north] {$\nu_\mathup{A}$};
+      \draw [thick,dashed] (2,0.05) -- (2,1) node [pos=0,anchor=north] {$\nu_\mathup{B}$};
+      \draw [black, thick, Bar-Bar] (-2,1.1) -- (2, 1.1) node[pos=0.5,anchor=south] {$\Delta\nu_0 = \nu_\mathup{A} - \nu_\mathup{B}$};
       \node[align=left,anchor=west] at (-5.5,1.2) {a) Slow exchange};
 		\end{axis}
     \\
@@ -56,15 +56,15 @@
 	  \begin{axis}[nmr, axis lines = none,]
       \addplot table from {figures/interm_spec.csv}; 
       \addplot [only marks, mark=|, mark size=5pt] table from {figures/interm_int.csv}
-        node [pos=0, pin=180: $(\Delta\nu_\text{A})_\text{e}^{1/2}$] {}
+        node [pos=0, pin=180: $(\Delta\nu_\mathup{A})_\mathup{e}^{1/2}$] {}
         node [pos=.25, pin=0: ] {}
         node [pos=.75,  pin=180: ] {}
-        node [pos=2.1,  pin=0: $(\Delta\nu_\text{B})_\text{e}^{1/2}$] {}
+        node [pos=2.1,  pin=0: $(\Delta\nu_\mathup{B})_\mathup{e}^{1/2}$] {}
       ;
-      \draw [thick,dashed] (-1.75,0.05) -- (-1.75,1) node [pos=0,anchor=north] {$\nu_\text{A}$};
-      \draw [thick,-Stealth] (1.75,0.05) -- (1.75,1) node [pos=0,anchor=north] {$I_\text{max}$};
-      \draw [thick,-Stealth] (0,0.05) -- (0,0.38) node [pos=0,anchor=north] {$I_\text{min}$};
-      \draw [black, thick, Bar-Bar] (-1.75,1.1) -- (1.75, 1.1) node[pos=0.5,anchor=south] {$\Delta\nu_\text{e}$};
+      \draw [thick,dashed] (-1.75,0.05) -- (-1.75,1) node [pos=0,anchor=north] {$\nu_\mathup{A}$};
+      \draw [thick,-Stealth] (1.75,0.05) -- (1.75,1) node [pos=0,anchor=north] {$I_\mathup{max}$};
+      \draw [thick,-Stealth] (0,0.05) -- (0,0.38) node [pos=0,anchor=north] {$I_\mathup{min}$};
+      \draw [black, thick, Bar-Bar] (-1.75,1.1) -- (1.75, 1.1) node[pos=0.5,anchor=south] {$\Delta\nu_\mathup{e}$};
       \node[align=left,anchor=west] at (-5.5,1.2) {b) Intermediate};
 		\end{axis}
     \\
@@ -78,10 +78,10 @@
 	  \begin{axis}[nmr, axis lines = none,]
       \addplot table from {figures/fast_spec.csv}; 
       \addplot [only marks, mark=|, mark size=5pt] table from {figures/fast_int.csv}
-        node [pos=0, pin=180: $(\Delta\nu)_\text{e}^{1/2}$] {}
+        node [pos=0, pin=180: $(\Delta\nu)_\mathup{e}^{1/2}$] {}
         node [pos=.75,  pin=0: ] {}
       ;
-      \draw [thick,dashed] (0,0.02) -- (0,1) node [pos=0,anchor=north] {$\frac{1}{2}(\nu_\text{A} + \nu_\text{B})$};
+      \draw [thick,dashed] (0,0.02) -- (0,1) node [pos=0,anchor=north] {$\frac{1}{2}(\nu_\mathup{A} + \nu_\mathup{B})$};
       \draw [thick, -Stealth] (5,-0.2) -- (-5,-0.2) node [pos=0.5, anchor=north] {$\nu$, (Hz)};
       \node[align=left,anchor=west] at (-5.5,1) {d) Fast exchange};
 		\end{axis}
