@@ -88,43 +88,6 @@ In SI units, the viscosity coefficient is \unit{\kg \per\m \per\s}, or \qty{1}{\
 For many common liquids at room temperature, viscosities are about \SIrange{0.2}{4}{\milli\Pa}. 
 
 
-
-%% The following sections are unecessary if the mixture-of-liquids experiments are skipped. 
-% \subsection{Mixtures} % (fold)
-% \label{sec:mixtures}
-%
-% From the way viscosity is defined, it follows that a mobile liquid is one that has a relatively low viscosity.
-% Another useful parameter that applies to fluid mobility is \emph{fluidity}, \( F \), which is simply the reciprocal of the viscosity coefficient:
-% \begin{equation}
-% 	F = \frac{1}{\eta} \, .
-% 	\label{eq:fluidity}
-% \end{equation}
-% One particular advantage to the use of fluidity is that the fluidities of mixed solutions of non-associating liquids are often found (empirically) to be additive.
-% Thus for a binary solution of liquids \ch{A} and \ch{B}, each pure liquid having fluidities \( F_{\ch{A}}^\bullet \) and \( F_{\ch{B}}^\bullet \), respectively, the fluidity of a mixture containing mole fractions \( \chi_{\ch{A}} \) and \( \chi_{\ch{B}} \) may be approximated as
-% \begin{equation}
-% 	F \simeq \chi_{\ch{A}} F_{\ch{A}}^\bullet + \chi_{\ch{B}} F_{\ch{B}}^\bullet \, ,
-% 	\label{eq:mixture_fluidity}
-% \end{equation}
-% i.e., a mole-fraction-weighted linear combination of the pure liquid fluidities. The viscosity of the mixture is
-% \begin{equation}
-% 	\eta \simeq \frac{1}{\chi_{\ch{A}} F_{\ch{A}}^\bullet + \chi_{\ch{B}} F_{\ch{B}}^\bullet} =
-% 		\frac{1}{\chi_{\ch{A}} / \eta_{\ch{A}}^\bullet + \chi_{\ch{B}} / \eta_{\ch{B}}^\bullet}
-% 	\label{eq:mixture_viscosity}
-% \end{equation}
-% and is obviously not linear in the composition variable, \( \chi_{\ch{A}} \) (or \( \chi_{\ch{B}} \)).
-% Another approach for expressing the viscosity of a mixture is the following, proposed by Kendall (1913).
-% For a binary solution,
-% \begin{equation}
-% 	\ln{\eta} = \chi_{\ch{A}} \ln{\eta_{\ch{A}}^\bullet} + \chi_{\ch{B}} \ln{\eta_{\ch{B}}^\bullet} \, .
-% 	\label{eq:mixture_visc_ln}
-% \end{equation}
-%
-% In this context, an \emph{ideal solution} can be defined as one in which the interaction energies between the constituents are the same as those between the pure components.
-% More specifically, it is assumed that in such a mixture the intermolecular interactions between identical molecules (e.g., \ch{A-A} and \ch{B-B}) are equal to those between different molecules (\ch{A-B}).
-% The failure of component fluidities to be additive in the mixed state arises, then, either from the formation of association complexes between the components or from the destruction of such complexes that may be present in the pure component(s) after the pure components are mixed. Under these circumstances \cref{eq:mixture_viscosity,eq:mixture_visc_ln} would not be valid.
-%
-% % subsection mixtures (end)
-%
 \subsection{Temperature Dependence of Viscosity} % (fold)
 \label{sub:temperature_dependence_of_viscosity}
 
@@ -328,9 +291,9 @@ The reasons for these discrepancies have to do with the nature of solvation and 
 Thus, the molecules of a ``good'' solvent enter into the polymer coils to maximize solvolytic associations, and the polymer expands. 
 Looked at another way, the polymer ``swells'' our into the solvent. 
 In a ``poor'' solvent, on the other hand, the polymer knots up into itself and avoids the interactions with the solvent molecules. 
-As you might expect, the solubility of a given polymer is larger in a good solvent than in a poor one.\sidenote{See \cref{fig:poly_solv}} 
+As you might expect, the solubility of a given polymer is larger in a good solvent than in a poor one, as illustrated in \cref{fig:poly_solv}. 
 
-\begin{marginfigure}[-6.0in]
+\begin{marginfigure}
 	\centering
 	\subfloat[][good solvent]{%
 		\begin{tikzpicture}

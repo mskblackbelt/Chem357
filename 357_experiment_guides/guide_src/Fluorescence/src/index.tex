@@ -34,7 +34,7 @@ We can represent these processes by the following kinetic scheme:
 \begin{align}
 \begin{split}
 	\ch{A_{solv} + B_{solv} <=>[$k\sb{1}$][$k\sb{-1}$] (A-B)_{solv}} \, , \\
-	\ch{(A-B)_{solv} ->[$k\sb{2}$] \mtext{product(s)}} \, ,
+	\ch{(A-B)_{solv} ->[$k\sb{2}$] \text{product(s)}} \, ,
 \end{split}
 \label{eq:rxn_scheme}
 \end{align}
@@ -175,7 +175,7 @@ This approach, developed by Einstein using Stokes's law, allows the diffusion co
 	\label{eq:rateapprox}
 \end{equation}
 where \( \overline{R} = k_\mtext{B} N_\mtext{A} \) is the ideal gas constant.%
-\sidenote[][-6\baselineskip]{
+\sidenote{
 	Note the distinction between \( \overline{R} \) and \( R \). 
 	\( \overline{R} \) appears \emph{only} in this equation and refers to the gas constant. 
 	Everywhere else, \( R \) is the summed ``collision radii'' of the interacting species. 
@@ -209,10 +209,10 @@ A reverse electron transfer then restores the two molecules to their neutral spe
 
 The bimolecular quenching reaction shown above, however, competes with the intrinsic first-order fluorescence decay of \ch{A\!^*} and thus reduces the probability that the \ch{A\!^*} species will emit a photon. A more complete scheme is thus
 \begin{align*}
-	\ch{A 			&	&	->[\hphantom{\(k\sb{r}\)}]&	&	&	A\!^*&														&"(photoexcitation)"} \\
-	\ch{A\!^* 		&	&	->[\(k\sb{\mtext{r}}\)]&	&	&						A + \(h\nu\sb{\mtext{f}}\)&							&"(fluorescence)"} \\
-	\ch{A\!^* 		&	&	->[\(k\sb{\mtext{nr}}\)]&	&	&						A&															&"(nonradiative~decay)"} \\
-	\ch{A\!^* + Q	&	&	->[\(k\sb{\mtext{q}}\)]&	&	&						"electron~transfer" + "\ldots"&	&"(quenching)"}
+	\ch{A 			&	& ->[\hphantom{\(k\sb{r}\)}]&	&	&	A\!^*							&	&"(photoexcitation)"} 	\\
+	\ch{A\!^* 		&	& ->[\(k\sb{\mtext{r}}\)]	&	&	&	A + \(h\nu\sb{\mtext{f}}\)		&	&"(fluorescence)"} 		\\
+	\ch{A\!^* 		&	& ->[\(k\sb{\mtext{nr}}\)]	&	&	&	A								&	&"(nonradiative~decay)"}\\
+	\ch{A\!^* + Q	&	& ->[\(k\sb{\mtext{q}}\)]	&	&	&	"electron~transfer" + "\ldots"	&	&"(quenching)"}
 \end{align*}
 
 If a solution containing \ch{A} and \ch{Q} is irradiated with a \emph{steady-state} light source (at a wavelength where \ch{A} absorbs), a very small time-independent concentration of \ch{A\!^*} is produced. 
@@ -239,7 +239,7 @@ Identifying \( 1/(k_\mtext{r} + k_\mtext{nr}) \) as the reciprocal of the \emph{
 It predicts that a plot of \( I_0/I - 1 \) vs. \ch{[Q]} should be linear, having an intercept of zero and a slope equal to \( k_\mtext{q} \tau_0 \). 
 The latter is called the Stern-Volmer constant, \( K_\mtext{SV} \) (units of \unit{\per\molar}). 
 If fluorescence quenching is diffusion-controlled (which is the case in the anthracene/\ch{CBr4} system), \( k_\mtext{q} \) can be identified with \( k_1 \) (see \cref{eq:rxn_scheme,%
-eq:k_obs,eq:rateconst1,eq:rateconst2,eq:rateapprox}).\sidenote[][-9\baselineskip]{
+eq:k_obs,eq:rateconst1,eq:rateconst2,eq:rateapprox}).\sidenote[][-12\baselineskip]{
 	The first Stern-Volmer Equation \cref{eq:sv_rel} is generally applicable because it makes no assumptions about the quenching rate constant \( k_\mtext{q} \). 
 	Since we are dealing with a diffusion-controlled reaction, we can identify \( k_\mtext{q} \) with the diffusion-controlled rate constant, \( k_1 \), from \cref{eq:rateconst1,eq:rateconst2,eq:rateapprox}. 
 	It should therefore be straightforward to measure the fluorescence emission of some analyte \ch{A} as we change the concentration of the quencher \ch{Q}, and fit the data to \cref{eq:sv_rel} to obtain a value for \( k_1 \). 
@@ -396,7 +396,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
 	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius} and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
-  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-5\baselineskip]{
+  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][0\baselineskip]{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
 		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		\textcite{ware66} reported a value of \( D = \qty{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \qty{25}{\celsius}. 
