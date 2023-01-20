@@ -138,23 +138,23 @@ Thus
 \end{equation}
 where \( N_\mtext{A} \) is Avogadro's number. 
 The units shown (and factor of 1000) pertain if \( C_0 \) is expressed in molarity (\unit{\mol\per\liter}) and \( R \) and \( D \) are expressed in \unit{\cm} and \unit{\cm\squared \per \s}, respectively.\sidenote{
-To convert from \unit{molecules} to \unit{\molar}, we need to acount for the number of particles in a \unit{mole} (Avogadro's number) and convert from our molecular length units (\unit{\cm}) to proper volume units. It's useful to know that \( \qty{1}{\L} =\qty{1}{\dm\cubed} \).}
+To convert from \unit{molecules} to \unit{\Molar}, we need to account for the number of particles in a \unit{mole} (Avogadro's number) and convert from our molecular length units (\unit{\cm}) to proper volume units. It's useful to know that \( \qty{1}{\L} =\qty{1}{\dm\cubed} \) and hence molarity can be expressed as \unit{\molar}.}
 \Cref{eq:rxnbound} indicates that the flux (molecules per unit area per second) is actually time-dependent. 
 This time dependence comes from \( R/\sqrt{\pi D t} \), which is sometimes referred to as the \emph{transient term}. 
 Physically, the transient term accounts for the fact that initially nearby reactant molecules do not have to diffuse through the bulk medium in order to react. 
 After a short time, however, these nearby reactant molecules are depleted, and the flux approaches a constant, or steady-state, value, \( 4\pi R D N_\mtext{A} C_0 / 1000 \). 
 This can be seen mathematically in that time is represented in \cref{eq:rxnbound} as \( \sqrt{t} \). 
 
-Because \( J_R \) represents the rate of passage of one of the reactants (having a bulk concentration \( C_0 \) in \unit{\molar}) through a spherical reaction surface with the other reactant at the center, the rate of the reaction represented by \cref{eq:rxn_scheme} is merely \( J_R \) itself. 
+Because \( J_R \) represents the rate of passage of one of the reactants (having a bulk concentration \( C_0 \) in \unit{\Molar}) through a spherical reaction surface with the other reactant at the center, the rate of the reaction represented by \cref{eq:rxn_scheme} is merely \( J_R \) itself. 
 Hence, the bimolecular, diffusion-controlled rate constant \( k_1 \) is \( J_R/C_0 \),
 \begin{equation}
-	k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \unit{\per\molar \per\s} \, .
+	k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \br{ 1 + \frac{R}{\sqrt{\pi D t}}} \qquad \unit{\per\Molar \per\s} \, .
 	\label{eq:rateconst1}
 \end{equation} 
 This rate constant is not a true \emph{constant}, however, because of the transient term. 
 However, as \( t \) becomes large enough,
 \begin{equation}
-	\lim_{t \to \infty} k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \qquad \unit{\per\molar \per\s} \, ,
+	\lim_{t \to \infty} k_1 = \frac{4 \pi R D N_\mtext{A}}{1000} \qquad \unit{\per\Molar \per\s} \, ,
 	\label{eq:rateconst2}
 \end{equation}
 and \cref{eq:rateconst2} can be used to determine the diffusion-controlled rate constant if the mutual diffusion constant \( (D_\mtext{A} + D_\mtext{B}) \) and collision radii \( (R_\mtext{A} + R_\mtext{B}) \) are known.\sidenote[][-13\baselineskip]{
@@ -166,12 +166,12 @@ and \cref{eq:rateconst2} can be used to determine the diffusion-controlled rate 
 	As these pairs react, this population is depleted, leaving behind reactants that are farther apart and thus need to undergo diffusion. 
 	Thus, the transient term dies out and the reaction finally reaches a purely diffusion controlled regime, described by the rate constant in \cref{eq:rateconst2}.
 	}
-We emphasize again that the units of \( k_1 \) presented above are \unit{\per\molar \per \s}, if \( R \) and \( D \) are expressed in \unit{\cm} and \unit{\cm\squared \per \s}, respectively. 
+We emphasize again that the units of \( k_1 \) presented above are \unit{\per\Molar \per \s}, if \( R \) and \( D \) are expressed in \unit{\cm} and \unit{\cm\squared \per \s}, respectively. 
 
 Often, however, \( R \) and \( D \) are not known, and an indirect method is used to estimate \( k_1 \). 
 This approach, developed by Einstein using Stokes's law, allows the diffusion coefficient to be expressed in terms of a bulk property, the solvent viscosity, \( \eta \). Thus
 \begin{equation}
-	k \simeq \frac{8 \overline{R} T}{3 \eta} \qquad \unit{\per\molar \per \s} \, ,
+	k \simeq \frac{8 \overline{R} T}{3 \eta} \qquad \unit{\per\Molar \per \s} \, ,
 	\label{eq:rateapprox}
 \end{equation}
 where \( \overline{R} = k_\mtext{B} N_\mtext{A} \) is the ideal gas constant.%
@@ -237,7 +237,7 @@ Identifying \( 1/(k_\mtext{r} + k_\mtext{nr}) \) as the reciprocal of the \emph{
 
 \Cref{eq:sv_rel} is known as the steady-state Stern-Volmer (S-V) relation as applied to fluorescence quenching. 
 It predicts that a plot of \( I_0/I - 1 \) vs. \ch{[Q]} should be linear, having an intercept of zero and a slope equal to \( k_\mtext{q} \tau_0 \). 
-The latter is called the Stern-Volmer constant, \( K_\mtext{SV} \) (units of \unit{\per\molar}). 
+The latter is called the Stern-Volmer constant, \( K_\mtext{SV} \) (units of \unit{\per\Molar}). 
 If fluorescence quenching is diffusion-controlled (which is the case in the anthracene/\ch{CBr4} system), \( k_\mtext{q} \) can be identified with \( k_1 \) (see \cref{eq:rxn_scheme,%
 eq:k_obs,eq:rateconst1,eq:rateconst2,eq:rateapprox}).\sidenote[][-12\baselineskip]{
 	The first Stern-Volmer Equation \cref{eq:sv_rel} is generally applicable because it makes no assumptions about the quenching rate constant \( k_\mtext{q} \). 
@@ -346,8 +346,8 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 
 
 \begin{enumerate}
-	\item Using freshly sublimed or purified anthracene and \ch{CBr4}, prepare \qty{250}{\mL} of \qty{\sim1.00E-4}{\molar} solution of anthracene (\ch{AN}) in spectrometric (or fluorometric) quality \emph{n-}hexane. 
-	Using this solution as ``solvent,'' prepare \qty{25}{\mL} of \qty{\sim1.50E-2}{\molar} ``stock'' solution of \ch{CBr4}.
+	\item Using freshly sublimed or purified anthracene and \ch{CBr4}, prepare \qty{250}{\mL} of \qty{\sim1.00E-4}{\Molar} solution of anthracene (\ch{AN}) in spectrometric (or fluorometric) quality \emph{n-}hexane. 
+	Using this solution as ``solvent,'' prepare \qty{25}{\mL} of \qty{\sim1.50E-2}{\Molar} ``stock'' solution of \ch{CBr4}.
 	\item Prepare at least eight dilutions of the \ch{AN}/\ch{CBr4} stock solution using the \ch{AN} solution as solvent.
 	The most dilute should be \qty{5}{\percent}, and the rest should be nearly evenly spaced up to the stock-solution value. 
 	A volume of \qty{10}{\mL} of each solution is appropriate. 
@@ -387,7 +387,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 \section{Data Analysis} % (fold)
 \label{sec:data_analysis}
 \begin{enumerate}
-	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\molar}).\marginnote{This is a good place to practice with the Pandas library. 
+	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).\marginnote{This is a good place to practice with the Pandas library. 
   All of your spectra should use the same wavelength range, so you can import the CSV data and set the index column to the wavelength.
   You can then find the wavelength for the maximum fluorescence and grab the intensity at that wavelength for each sample.}
 	\item Plot a graph of  \( I_0/I \)  vs. \ch{[Q]}. 
