@@ -100,13 +100,13 @@ The simplest model of protein folding/unfolding describes a two-state system of 
 \begin{equation}
   \ch{F <=> U} 
 \end{equation}
-The equilibrium consant and free energy of unfolding are then given as 
+The equilibrium constant and free energy of unfolding are then given as 
 \begin{align}
 	K_\mtext{eq} &= \frac{\ch{[U]}}{\ch{[F]}} \qquad \mtext{and} \\
 	{}\gibbs*[subscript-right=\ch{U}]{} &= -RT \ln{K_\mtext{eq}} = -RT \ln{\frac{\ch{[U]}}{\ch{[F]}}} \, ,
 \end{align}
 where \gibbs*[subscript-right=\ch{U}]{} is the free energy of unfolding in the presence of the denaturant. 
-Here, we are interested in the free energy of unfolding in the absence of denturant. 
+Here, we are interested in the free energy of unfolding in the absence of denaturant. 
 A theoretical treatment described by \textcite{pace86,jones97} approximates a linear perturbation of free energy as a function of denaturant concentration wherein extrapolation of this relationship to zero denaturant concentration gives rise to the free energy of unfolding in the absence of denaturant, \gibbs*[subscript-right=\ch{H2O}]{}:
 \begin{equation}
 	\gibbs*[subscript-right=\ch{U}]{} = \gibbs*[subscript-right=\ch{H2O}]{} - m C \, ,
@@ -127,12 +127,12 @@ Using the definition of fraction of unfolded molecules, \( f \), given by:
 	f = \frac{\ch{[U]}}{\ch{[U]} + \ch{[F]}} \, ,
 	\label{eq:conc_frac}
 \end{equation}
-it is relatively straighforward to obtain the following equation:
+it is relatively straightforward to obtain the following equation:
 \begin{equation}
 	f = \frac{ \exp\br{ -m \br{\frac{C_\mtext{m} - C}{RT}}}}{1 + \exp\br{-m \br{\frac{C_\mtext{m} - C}{RT}}}} \, .
 	\label{eq:fold_frac}
 \end{equation}
-Experimental data points in an unfolding curve are fit to \cref{eq:fold_frac}, with \( f \) and \( C \) as dependent and independed variables, respectively, to yield values for \( m \) and \( C_\mtext{m} \). 
+Experimental data points in an unfolding curve are fit to \cref{eq:fold_frac}, with \( f \) and \( C \) as dependent and independent variables, respectively, to yield values for \( m \) and \( C_\mtext{m} \). 
 Knowledge of the variables \( m \) and \( C_\mtext{m} \) then allows for determination of the Gibbs energy of unfolding in the absence of denaturant, \gibbs*[subscript-right=\ch{H2O}], using \cref{eq:gibbs_h2o}.
 
 % subsection free_energy_of_protein_unfolding (end)
@@ -181,7 +181,7 @@ Finally, in the analysis, you will combine the knowledge gained in parts A and B
 	\item Record fluorescence and absorption spectra of \ch{KP_{\emph{i}}}, \iupac{urea}/\ch{KP_{\emph{i}}}, and each of the \num{11} samples prepared in \cref{step:sample_prep}. 
 	The fluorescence spectra should be recorded with \( \lambda_\mtext{ex} \) set to \qty{290}{\nm} and \( \lambda_\mtext{det} \) should be scanned from \SIrange{305}{500}{\nm}. 
 	Use ``high'' sensitivity and \qty{5}{\nm} slits for both excitation and emission. 
-	These spectra will be used to determine the free energy of unfolding of cyt \emph{c} using fluorescence shanges of Trp-59 as the probe. 
+	These spectra will be used to determine the free energy of unfolding of cyt \emph{c} using fluorescence changes of Trp-59 as the probe. 
 	You will see a large peak at \qty{\sim323}{\nm} in the spectra of the buffers (\ch{KP_{\emph{i}}} and \iupac{urea}/\ch{KP_{\emph{i}}}) as well as in some of your cyt \emph{c} samples. 
 	Discuss the origin of this peak with your lab instructor. 
 	\label{step:fluor_spec}
