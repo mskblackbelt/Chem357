@@ -112,7 +112,7 @@ Once you have the data columns, create a new scatter plot from the data.
 The Pandas library automatically incorporates basic plotting functions from the Matplotlib library, so data in a DataFrame can be plotted by using the \pyinline{plot()} function on a given DataFrame.
 In your case, you need only type \pyinline{data.plot()} and evaluate the cell to see a plot of the data.\sidenote{
 	\emph{n.b.:}   Pandas is designed first as a tool for finance and business  operations.
-	The default settings for plots are often inappropriate for  scientific plots, so some tweaking may be necessary.}
+	The default settings for plots are often inappropriate for  scientific plots, so some tweaking is often necessary.}
 While you are exploring data, the default appearance is fine, but you'll probably want to start customizing the appearance of plots when you get them ready for publication.
 
 Notice that the plot isn't plotting column X against column Y, but instead is plotting X and Y against the \emph{index} (the bold column of numbers on the left side of the displayed data).
@@ -123,7 +123,7 @@ data1 = pd.read_csv("raw_data/data.txt", sep="\t", index_col="X")
 data1.plot()
 \end{pyinput}
 This method is useful if you know the structure of the data ahead of time (and when you have a clear index column, such as a time index, wavelength, or frequency).
-The second way to fix the plot is to define the \emph{x} and \emph{y} data in the arguments of the \pyinline{plot()} function.
+The second way to fix the plot is to define the \(x\) and \(y\) data in the arguments of the \pyinline{plot()} function.
 The \pyinline{plot()} function takes a number of arguments (you can see them quickly by pressing \keys{Shift + Tab} inside of the parentheses), including arguments for features like plot type (e.g., \pyinline{kind="scatter"}), plot title (e.g., \pyinline{title="My Plot"}), and axes labels (e.g., \pyinline{xlabel="Time", ylabel="Effort"}).
 
 With this in mind, create a scatter plot (\pyinline{kind="scatter"}) of Y and a function of X, give the plot a title (``X vs. Y'' is fine) and label each axis (``X'', ``Y'').
