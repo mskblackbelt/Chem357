@@ -67,7 +67,7 @@ Here are the important parts of a plot, along with a brief description and guide
 Your first task is to take the data in the file \texttt{data.txt} and import it into a new Jupyter notebook.\sidenote{
 Note: prior to performing the following exercises, you should run through the \href{https://jupyter-notebook.readthedocs.io/en/stable/notebook.html}{introductory documentation to Jupyter} to familiarize yourself with the concepts and interface.}
 
-As the first step, please use this link to clone the files into your Jupyter directory:\\ \href{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2F357_plot_intro&urlpath=lab%2Ftree%2F357_plot_intro%2Fplot_intro_template.ipynb&branch=main}{\texttt{https://tinyurl.com/chem357-plotting}}\\
+As the first step, please use this link to clone the files into your Jupyter directory:\\ \href{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2F357_plot_intro&urlpath=lab%2Ftree%2F357_plot_intro%2Fplot_intro_template.ipynb&branch=main}{\texttt{https://bit.ly/chem357-plot-intro}}\\
 This link will direct your browser to the class JupyterHub and download a folder containing a number of resources you'll need for this exercise.
 
 The folder \Verb{raw_data} contains a few datasets in various formats.
@@ -126,7 +126,8 @@ This method is useful if you know the structure of the data ahead of time (and w
 The second way to fix the plot is to define the \(x\) and \(y\) data in the arguments of the \pyinline{plot()} function.
 The \pyinline{plot()} function takes a number of arguments (you can see them quickly by pressing \keys{Shift + Tab} inside of the parentheses), including arguments for features like plot type (e.g., \pyinline{kind="scatter"}), plot title (e.g., \pyinline{title="My Plot"}), and axes labels (e.g., \pyinline{xlabel="Time", ylabel="Effort"}).
 
-With this in mind, create a scatter plot (\pyinline{kind="scatter"}) of Y and a function of X, give the plot a title (``X vs. Y'' is fine) and label each axis (``X'', ``Y'').
+With this in mind, create a scatter plot (\pyinline{kind="scatter"}) of Y and a function of X, give the plot a title (``X vs. Y'' is fine) and label each axis (``X'', ``Y''). 
+You'll need to use the \Verb{data} object and explicitly set the \(x\) and \(y\) values for the plot (\emph{e.g.,} \pyinline{df.plot(x= , y= , …)}).
 
 \subsection{Polishing Plot Appearance} % (fold)
 \label{sub:polishing_plot_appearance}
