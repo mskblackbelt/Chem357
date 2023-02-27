@@ -371,9 +371,8 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Using exactly the same settings as in step 4, measure the  fluorescence intensity of the most dilute and subsequently more concentrated \ch{AN}/\ch{CBr4} solutions. 
 	You must deaerate each sample in a consistent procedure (i.e., identical bubbling time). 
 	If you have any doubt as to the steadiness of the exciting source, switch back to the \ch{AN} sample and compare its maximum intensity with that of the first sample run.
-	\item As you examine increasingly more concentrated samples, the fluorescence intensity will diminish to the point that you may need to increase the instrument gain (i.e., signal amplification) to ensure maximal reading sensitivity. 
-	Establish the background, or ``dark check,'' when the instrument sensitivity is changed.
-  This gain should result in a linear increase in signal, but you should take spectra of one concentration twice (once at each gain level) to provide a way to scale your spectra. 
+	\item If your spectrometer has a manual control for the shutter, make sure it is \emph{closed} until you're ready to start each measurement, at which point you should open it. 
+	When the measurement is complete, close the shutter to prepare the spectrometer for the next sample. 	
 	\item Keep in mind the following procedural points: 
 	\begin{enumerate}
 		\item The temperature of the sample should be held constant within \SIrange{0.5}{1.0}{\celsius}; 
@@ -386,28 +385,29 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 
 \section{Data Analysis} % (fold)
 \label{sec:data_analysis}
-\begin{enumerate}
-	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).\marginnote{This is a good place to practice with the Pandas library. 
+\marginnote{This is a good place to practice with the Pandas library. 
   All of your spectra should use the same wavelength range, so you can import the CSV data and set the index column to the wavelength.
   You can then find the wavelength for the maximum fluorescence and grab the intensity at that wavelength for each sample.}
+\begin{enumerate}
+	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).
 	\item Plot a graph of  \( I_0/I \)  vs. \ch{[Q]}. 
 	Note that \( I_0 \) is simply the value of the unquenched fluorescence peak (when \( \ch{[Q]} = 0 \)). 
 	This is your experimental quenching curve or Stern-Volmer plot, and we will now see how it corresponds to the two limits of the quenching model (with and without the transient term), as well as the SES equation.
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
-	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius} and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
+	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius}), and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
-  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][0\baselineskip]{
+  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-6\baselineskip]{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
 		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		\textcite{ware66} reported a value of \( D = \qty{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \qty{25}{\celsius}. 
 		To obtain \( D \) for \emph{n}-hexane at some other temperature, assume that \( D \) is proportional to \( T/\eta \). 
 		They also reported a value of \( \tau_0 = \qty{5.52e-9}{\s} \). You can assume this to be temperature independent.
 	} 
-	What is the collision radius calculated this way (including the unit)?\sidenote{%
-	\textbf{Keep track of your units, especially \emph{moles} vs. \emph{molecules}.}}
+	What is the collision radius calculated this way (including the unit)?\sidenote{
+		\textbf{Keep track of your units, especially \emph{moles} vs. \emph{molecules}.}
+	}
 	\item Using the \( k_1 \) you just calculated from the SES equation, superimpose the straight line obtained from \cref{eq:sv_rel} onto your Stern-Volmer plot. You’ll need the lifetime, \( \tau_0 \).\sidenote{
-  To do this, you'll need to generate a set of \(x\)-values for your function, then apply your function to those values. 
-  The help page for \( \erfc(x) \) linked above shows how to do this for that particular function. }
+		To do this, you'll need to generate a set of \(x\)-values for your function, then apply your function to those values.   The help page for \( \erfc(x) \) linked above shows how to do this for that particular function. }
 	Describe the relationship between this line and the experimental data points, if any.
 	\item Now we will consider the Stern-Volmer plot obtained when we ignore the transient term. 
 	Remember that this condition holds at low concentrations. 
@@ -419,9 +419,8 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	You’ll need the lifetime from the manual again. 
 	From that value of \( k_1 \), calculate another value for the collision radius, \( R \), using \cref{eq:rateconst2}. How do these values of \( k_1 \) and \( R \) compare to the values calculated from the SES equation in step 3?
 	\item Now we can examine the entire data set, which includes effects due to the transient-term, in order to extract a third value of \( R \) directly. 
-	We will do this by fitting our data to \cref{eq:sv_step_rel} using a ``nonlinear regression analysis'' with \( R \) as the only parameter.%
-	\sidenote{%
-    To perform this step with Python, you will need to use the SciPy library. 
+	We will do this by fitting our data to \cref{eq:sv_step_rel} using a ``nonlinear regression analysis'' with \( R \) as the only parameter.\sidenote{
+		To perform this step with Python, you will need to use the SciPy library. 
 		Instructions and an example can be found in the SciPy Documentation under \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html}{scipy.optimize.curve\_fit}. 
 	} 
 	Just make sure you realize that the parameter \( R \) enters into \cref{eq:sv_step_rel} directly in the numerator, as well as through the denominator \( Y \) due to the \( R \) dependence of \( a \) and \( b \). 
