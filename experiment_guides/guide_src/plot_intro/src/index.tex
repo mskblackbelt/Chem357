@@ -87,8 +87,8 @@ In the notebook, execute the code cell under the ``Library Import'' section.
 They generally cover a specific area or hold to a theme.
 In our notebook template, we use the following:
 \begin{description}
-  \item[\href{http://numpy.org/}{Numpy}] A general purpose numerical library that speeds up number based operations, allows functions to operate on lists of numbers, and gives a large collection of useful mathematical functions (things like polynomial fitting, matrix operations, and common algebraic and trigonometric functions). The core functionality is based around Numpy arrays, very fast n-dimensional arrays of data (a core requirement for scientific computation).
-  \item[\href{https://scipy.org/scipylib/index.html}{Scipy}] A fundamental library for scientific computing, builds on the Numpy library but includes numeric integration routines, non-linear curve fitting routines, interpolation, numerical optimization, and statistics.
+  \item[\href{http://numpy.org/}{NumPy}] A general purpose numerical library that speeds up number based operations, allows functions to operate on lists of numbers, and gives a large collection of useful mathematical functions (things like polynomial fitting, matrix operations, and common algebraic and trigonometric functions). The core functionality is based around NumPy arrays, very fast _n_-dimensional arrays of data (a core requirement for scientific computation).
+  \item[\href{https://scipy.org/scipylib/index.html}{SciPy}] A fundamental library for scientific computing, builds on the NumPy library but includes numeric integration routines, non-linear curve fitting routines, interpolation, numerical optimization, and statistics.
   \item[\href{http://pandas.pydata.org/}{Pandas}] A data management library that offers functions for importing, tidying, organizing, and filtering data using the DataFrame construct. Excellent resource for 2-dimensional data, starts breaking down with more dimensions (look at the \href{http://xarray.pydata.org/}{xarray} package, which is built on top of Pandas, for this purpose).
   \item[\href{http://matplotlib.org/}{Matplotlib}] A comprehensive library for creating static, animated, and interactive visualizations in Python. It has become the de-facto standard library for plot visualizations in Python.
   \item[\href{https://seaborn.pydata.org}{Seaborn}] A collection of routines and formats built on top of Matplotlib that provides a high-level interface for drawing attractive and informative statistical graphics.
@@ -162,16 +162,17 @@ It is generally inappropriate for spectral data, but very good for visual statis
 \label{fitting-data}
 
 Now that you have a trendline, it's time to get some information about it.
-The Numpy library is a fundamental library in the numeric python community.
-It contains a vast array of functions and structures that are used by \emph{many} other libraries.\sidenote{The Numpy library (shortened to \Verb{np} by convention) has a host of useful functions, including a number of common mathematical functions.
+The NumPy library is a fundamental library in the numeric python community.
+It contains a vast array of functions and structures that are used by \emph{many} other libraries.\sidenote{The NumPy library (shortened to \Verb{np} by convention) has a host of useful functions, including a number of common mathematical functions.
   The square root function is one of these (\Verb{np.sqrt(num)}).
   Another useful one (that you'll need later) is \Verb{np.log10(num)}.}
-One useful function in Numpy is the \href{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}{\pyinline{polyfit()}} function, which calculates a polynomial of best fit using a linear least-squares method.
+One useful function in NumPy is the \href{https://numpy.org/doc/stable/reference/generated/numpy.polynomial.polynomial.Polynomial.fit.html#numpy.polynomial.polynomial.Polynomial.fit}{\pyinline{Polynomial.fit()}} function, which calculates a polynomial of best fit using a linear least-squares method.
 Examples can be seen on the linked page, but we will run through the simplest example, a straight line.
 
-To use the \pyinline{polyfit()} function, you need to specify the data (``X'' and ``Y'') and the degree of the polynomial (\num{1}).
-All other arguments are optional, and just giving these three arguments will return the coefficients of the polynomial from the highest power to the lowest (\( c_n, c_{n-1}, \ldots, c_1, c_0 \)).
-The optional argument \pyinline{cov=True} will return the \href{https://en.wikipedia.org/wiki/Covariance_matrix}{\emph{covariance matrix}}, the diagonal values of which are the variances for each coefficient.
+The \pyinline{fit()} function is really a \emph{method} of the \pyinline{Polynomial} class, meaning it is a function attached to a specific type of object (a Polynomial object). To access it, it's easiest if we import just the \pyinline{Polynomial} class with \pyinline{import numpy.polynomial.Polynomial as P}. 
+To use the \pyinline{P.fit()} function, you need to specify the data (``X'' and ``Y'') and the degree of the polynomial (\num{1}).
+All other arguments are optional, and just giving these three arguments will return a polynomial object ordered from lowest power to highest (\( c_0*x^0, c_{1}*x^1, \ldots, c_{n-1}*x^{n-1}, c_{n}*x^n \)).
+The optional argument \pyinline{full=True} will return the full fit statistics as \pyinline{[resid, rank, sv, rcond]}, including the \href{https://en.wikipedia.org/wiki/Covariance_matrix}{\emph{covariance matrix}}, the diagonal values of which are the variances for each coefficient.
 
 These (or, more precisely, their square roots) help you to see how ``good'' the returned fit is.
 Please read the help page to learn what statistics are returned and in what form.\sidenote[][-2\baselineskip]{If you're interested in doing more statistical modeling in Python, the \href{https://www.statsmodels.org/}{Statsmodel} package offers a number of descriptive statistics and flexible models.}
