@@ -6,4 +6,3 @@ bundle = 'https://data1.fullyjustified.net/tlextras-2022.0r0.tar'
 name = 'NMR_equilibrium'
 type = 'pdf'
 shell_escape = true
-shell_escape_cwd = ".."
