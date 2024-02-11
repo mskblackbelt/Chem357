@@ -591,7 +591,9 @@ Temperature control for each of these measurements is important.
 \label{sec:questions_and_further_thoughts}
 
 \begin{enumerate}
-	\item Consult a table of mathematical functions,\sidenote{These can be physical tables, or values coded in the gamma function built into a software library like SciPy, found at \Verb{scipy.special.gamma}.} and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited within and following \cref{eq:mol_weight_ratio_ex}.
+	\item Consult a table of mathematical functions,\sidenote{
+		These can be physical tables or values coded into a software library like SciPy. SciPy documentation on the function can be found at \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html}{\Verb{scipy.special.gamma}}. You should look through the help page to see how the gamma function is defined (it's closely related to factorials) and look at the examples at the bottom of the page to see how it's used.
+	} and using the appropriate gamma functions and \cref{eq:mol_weight_ratio}, verify the values of \( S \) cited within and following \cref{eq:mol_weight_ratio_ex}.
 	\item Using the definition of \( f \),\sidenote{See the discussion before \cref{eq:frac_glycol}} derive \cref{eq:frac_glycol} and use the result in \cref{eq:mol_weight_ratio_ex} to obtain \cref{eq:h2h_frac}.
 	\item Viscosity measurements are often performed on proteins and other biopolymers. 
 	What experiments could be carried out on such molecules to examine the effect of solution conditions (e.g., ionic strength, or \ch{\pH}) on the extent of denaturation (breakdown of the biologically active structure)?
@@ -607,13 +609,13 @@ Temperature control for each of these measurements is important.
 \section{Lab Report Guidelines} % (fold)
 \label{sec:lab_report_guidelines}
 
-As previously stated, your lab report should consist of the following parts:
+Your lab report should consist of the following parts:
 \begin{description}
 	\item[Title, Author and Date]
-	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
+	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. Note the values written on your viscometer and how time was tracked. 
 	\item[Results and Discussion] This should include answers to the questions in the section ``Questions and Further Thoughts''. This should not be a separate section, but should instead be included organically in the discussion as a way of filling it out. You should include any experimental uncertainties and report the uncertainty in your final values. Calculations of uncertainties (including propagation of error) should be included in your supporting materials. 
 	\item[References]
-	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand (scanned or photographed copies are fine, so long as they are legible). 
-	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
+	\item[Appendix] At the very end of your report, include examples of any calculations that you did. If you performed any derivations by hand, you may attach a picture of the work, but you should try to perform all your work digitally. 
+	Make sure any data analysis done with Python is clearly annotated so the reader understands what steps you took. 
 \end{description}
 % section lab_report_guidelines (end)

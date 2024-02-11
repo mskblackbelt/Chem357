@@ -1,17 +1,9 @@
-%TODO Make sure to link help page for scipy.special.erfc
-%TODO Change instrumental instructions to
-%	- Remove guidance about changing PMT voltage (keep at high value for all experiments)
-%	- Add in comment to check baseline zero level before beginning
-
-\maketitle% this prints the handout title, author, and date
+\maketitle % this prints the handout title, author, and date
 
 \begin{abstract}
 \noindent
 The objective of this lab is to determine the rate constant and collision diameter of a diffusion-controlled reaction (photoexcited anthracene with carbon tetrabromide, \ch{CBr4}) using the technique of fluorescence quenching.\thanks{Transcribed (with corrections) from \textcite{halpern97}.}
 \end{abstract}
-
-%\printclassoptions
-
 
 \section{Introduction} % (fold)
 \label{sec:intro}
@@ -126,7 +118,9 @@ The solution of Fick's second law for this set of boundary conditions (first ren
 \begin{equation}
 	C(r, t) = C_0 \br{ 1 - \frac{R}{r} \erfc\br{ \frac{r-R}{2 \sqrt{D t} }}} \, , 
 \end{equation}
-in which \( \erfc(x) \) is the \emph{complementary error function}, \( 1 - \erf(x) \), defined as
+in which \( \erfc(x) \) is the \emph{complementary error function},\sidenote{
+	This is available in the SciPy special functions module as \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.erfc.html}{\Verb{erfc}}. Browse the help page for details on the function and its use.
+} \( 1 - \erf(x) \), defined as
 \[
 	\erfc(x) \equiv 1 - \frac{2}{\sqrt{\pi}}\int_0^x \exp\br{ -y^2 } \odif{y} \, .
 \]
@@ -346,6 +340,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 
 
 \begin{enumerate}
+	\item Make sure the fluorimeter is turned on and warmed up before taking any spectra. Once the instrument is warmed up, you'll want to check the baseline zero level prior to collecting any data. 
 	\item Using freshly sublimed or purified anthracene and \ch{CBr4}, prepare \qty{250}{\mL} of \qty{\sim1.00E-4}{\Molar} solution of anthracene (\ch{AN}) in spectrometric (or fluorometric) quality \emph{n-}hexane. 
 	Using this solution as ``solvent,'' prepare \qty{25}{\mL} of \qty{\sim1.50E-2}{\Molar} ``stock'' solution of \ch{CBr4}.
 	\item Prepare at least eight dilutions of the \ch{AN}/\ch{CBr4} stock solution using the \ch{AN} solution as solvent.
@@ -357,20 +352,20 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	Avoid using an excessive flow rate that will cause the solution to splatter from the cell or to otherwise result in undue solvent evaporation. 
 	Promptly stopper the cell.
 	\item Record the full fluorescence spectrum using the instrumental conditions previously outlined by the instructor.\sidenote{
-\begin{tabular}{lr}
-  \toprule
-  Parameter & Value\\
-  \midrule
-  \( \lambda_\mtext{exc} \) & \qty{283}{\nm}\\
-  \( \lambda_\mtext{det} \) & \SIrange{350}{550}{\nm}\\
-  Scan speed & \qty{300}{\nm\per\min}\\
-  Slit width & \qty{2.5}{\nm}\\
-  \bottomrule
-\end{tabular}}
+		\begin{tabular}{lr}
+  		\toprule
+  		Parameter & Value\\
+  		\midrule
+  		\( \lambda_\mtext{exc} \) 	& \qty{283}{\nm}			\\
+  		\( \lambda_\mtext{det} \) 	& \SIrange{350}{550}{\nm}	\\
+  		Scan speed 					& \qty{300}{\nm\per\min}	\\
+  		Slit width 					& \qty{2.5}{\nm}			\\
+  		\bottomrule
+		\end{tabular}}
 	Make sure the spectrum record is labeled.
 	\item Using exactly the same settings as in step 4, measure the  fluorescence intensity of the most dilute and subsequently more concentrated \ch{AN}/\ch{CBr4} solutions. 
 	You must deaerate each sample in a consistent procedure (i.e., identical bubbling time). 
-	If you have any doubt as to the steadiness of the exciting source, switch back to the \ch{AN} sample and compare its maximum intensity with that of the first sample run.
+	If you have any doubt as to the steadiness of the exciting source, switch back to the pure \ch{AN} sample and compare its maximum intensity with that of the first sample run.
 	\item If your spectrometer has a manual control for the shutter, make sure it is \emph{closed} until you're ready to start each measurement, at which point you should open it. 
 	When the measurement is complete, close the shutter to prepare the spectrometer for the next sample. 	
 	\item Keep in mind the following procedural points: 
@@ -385,9 +380,8 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 
 \section{Data Analysis} % (fold)
 \label{sec:data_analysis}
-\marginnote{This is a good place to practice with the Pandas library. 
-  All of your spectra should use the same wavelength range, so you can import the CSV data and set the index column to the wavelength.
-  You can then find the wavelength for the maximum fluorescence and grab the intensity at that wavelength for each sample.}
+\marginnote{ 
+	You can then find the wavelength for the maximum fluorescence and grab the intensity at that wavelength for each sample.}
 \begin{enumerate}
 	\item Tabulate your data as \( I \) (the anthracene fluorescence at \num{398} or \qty{399}{\nm}) and \ch{[Q]} (the \ch{CBr4} concentration, in \unit{\Molar}).
 	\item Plot a graph of  \( I_0/I \)  vs. \ch{[Q]}. 
@@ -396,16 +390,14 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
 	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius}), and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
-  Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-6\baselineskip]{
+	Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-6\baselineskip]{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
 		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		\textcite{ware66} reported a value of \( D = \qty{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \qty{25}{\celsius}. 
 		To obtain \( D \) for \emph{n}-hexane at some other temperature, assume that \( D \) is proportional to \( T/\eta \). 
-		They also reported a value of \( \tau_0 = \qty{5.52e-9}{\s} \). You can assume this to be temperature independent.
-	} 
+		They also reported a value of \( \tau_0 = \qty{5.52e-9}{\s} \). You can assume this to be temperature independent.} 
 	What is the collision radius calculated this way (including the unit)?\sidenote{
-		\textbf{Keep track of your units, especially \emph{moles} vs. \emph{molecules}.}
-	}
+		\textbf{Keep track of your units, especially \emph{moles} vs. \emph{molecules}.}}
 	\item Using the \( k_1 \) you just calculated from the SES equation, superimpose the straight line obtained from \cref{eq:sv_rel} onto your Stern-Volmer plot. You’ll need the lifetime, \( \tau_0 \).\sidenote{
 		To do this, you'll need to generate a set of \(x\)-values for your function, then apply your function to those values.   The help page for \( \erfc(x) \) linked above shows how to do this for that particular function. }
 	Describe the relationship between this line and the experimental data points, if any.
@@ -420,9 +412,8 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	From that value of \( k_1 \), calculate another value for the collision radius, \( R \), using \cref{eq:rateconst2}. How do these values of \( k_1 \) and \( R \) compare to the values calculated from the SES equation in step 3?
 	\item Now we can examine the entire data set, which includes effects due to the transient-term, in order to extract a third value of \( R \) directly. 
 	We will do this by fitting our data to \cref{eq:sv_step_rel} using a ``nonlinear regression analysis'' with \( R \) as the only parameter.\sidenote{
-		To perform this step with Python, you will need to use the SciPy library. 
-		Instructions and an example can be found in the SciPy Documentation under \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html}{scipy.optimize.curve\_fit}. 
-	} 
+		To perform this step with Python, you will need to use the \Verb{curve_fit()} module from the SciPy library. 
+		Instructions and an example can be found in the SciPy Documentation under \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html}{scipy.optimize.curve\_fit}.} 
 	Just make sure you realize that the parameter \( R \) enters into \cref{eq:sv_step_rel} directly in the numerator, as well as through the denominator \( Y \) due to the \( R \) dependence of \( a \) and \( b \). 
 	Thus, you need to make sure that all of these parts of the equation refer to the same variable for \( R \) so that it is varied consistently throughout. 
 	Make sure that you use \( \erfc() \) and not \( \erf() \). 
