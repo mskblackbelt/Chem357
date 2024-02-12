@@ -1,0 +1,116 @@
+%!TEX root = ./Intro_to_CC.tex
+
+\section{Problem 2: Hydrogen Fluoride (HF): bond length and dipole moment} \label{sec:problemII}
+
+\subsection*{Hydrogen Fluoride (HF)}
+
+In the exercise, we will calculate the binding curve, atomization energy (\( \increment H_\mtext{at} \)), and dipole moment for the hydrogen fluoride (HF) molecule with two methods. 
+From a technical perspective, this exercise teaches how simple shell scripting can be used to make your (computational) life easier. 
+
+\begin{enumerate} 
+  \item The first task of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations. 
+  Start by creating an input file (name it \Verb{input.temp}) which contains a F atom in the center of the coordinate system and a H atom at distance \Verb{DIST} along the \emph{z-}axis. 
+  \Verb{DIST} is a variable name for the H-F distance in different computational steps. 
+  Please note that HF is a neutral closed-shell system (i.e., correctly assign the multiplicity). 
+
+The template file should specify the method and the basis set used for computation. 
+In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. 
+Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise. 
+
+\item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \qty{0.7}{\angstrom} and \qty{1.3}{\angstrom} with \qty{0.1}{\angstrom} steps, and a denser step width of \qty{0.02}{\angstrom} between \qty{0.85}{\angstrom} and \qty{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
+   \begin{itemize}
+   \item create a unique directory for each computation
+   \item copies your template input file
+   \item replace the bond distance place holder \texttt{DIST} with the bond distance
+   \item start G16 calculations
+   \item \texttt{grep} for distance/energy and write it to a respective file. 
+   \end{itemize}}
+   
+Run the bash script \bashinline{bash run.sh}, which will run the calculations and return you a file with a bond length vs energy. 
+Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
+
+\item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
+In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms. Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set. 
+
+%\begin{tip}
+%\textbf{Note:}\newline
+%Atoms are highly symmetric systems, often with multiple degenerate solutions. In the case of fluorine, for example, the unpaired p-electron might sit in the $p_x$, $p_y$, or $p_z$ orbital. All three solutions are equivalent. If the calculation is started unbiased, it might converge to a superposition of these three cases, which is a saddle point on the potential energy surface and results in partial electron occupations. Although in DFT non-integer occupations are in principle allowed, one should be very suspicious when obtaining such a solution for non-metallic systems. Typically, solutions exist that are lower in energy. They can be found by breaking the inherent symmetry of the problem, for example by applying a small external field at the beginning of the SCF cycle.
+%\end{tip}
+
+%To break the inherent symmetry of an atom and ensure integer occupation, set the keyword \texttt{switch\_external\_pert 10 safe}. This means that for 10 iterations, a small external field in the z-direction is applied and then switched off. Usually, this is sufficient to perturb the SCF out of the symmetric solution and towards the correct electronic structure.
+Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by subtracting the free-atom energies from the predicted total energy of HF (i.e., the minimum total energy found when varying bond distances).
+
+\begin{equation}
+ \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
+\end{equation}
+
+How does this compare to the experimental value of \(\increment H_\mtext{at}=\qty{135.2}{\kcal\per\mol}\) (\qty{5.86}{\eV})? 
+
+\item Now, let us look at the dipole moment. Search for the corresponding line in the output file. 
+You can use a grep function for this task: 
+\begin{bashinput}
+  grep "Dipole" file-name -A1 | grep "Tot" | ¬awk '{print $8}'  
+\end{bashinput}
+The above command is a great example of an ugly ``bash one-liner'' that does the job and you don't question it.
+You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote[][-5\baselineskip]{Briefly:
+\begin{itemize}
+  \item \Verb{-A1} in the first \Verb{grep} command tells it to output one \textbf{(1)} line \textbf{a}fter the search term in addition to the line with the search term. 
+  \item The next \Verb{grep} command just grabs the lines containing \textbf{Tot}al values. 
+  \item \Verb{tail -n1} grabs the indicated \textbf{n}umber of lines (\textbf{1}) at the end of the input.
+  \item \Verb{awk} is a ``pattern-directed scanning and processing language'' used in the Unix ecosystem. This command tells \Verb{awk} to print out the eighth record on each line of the input (the default record separator is a single space). 
+\end{itemize}}
+If you want to find the whole list of dipoles (from each folder beginning with ``dist\_'' in your directory), you can run the following:\sidenote{
+If you want to get really fancy (by which I mean, cut down on the amount of task switch you need to do), you can run Bash commands inside of your Jupyter notebook. 
+Just prefix the command with \Verb{!} and run the cell. 
+For example, a cell containing \Verb{!ls} would list the contents of your current directory as output in your notebook.
+You can assign that output to a python variable by placing the exclamation point after the assignment equals sign: \Verb{my_dir_list = !ls}. 
+Since you'll need to use this list of dipoles in your notebook, it's worth trying to run the \Verb{grep} function in your notebook to capture the list all at once.
+Just make sure you get the right path to the directory… check the contents of your directory with \Verb{!ls path/to/directory}.}
+\begin{bashinput}
+  grep Dipole dist*/*.log -A1 | grep Tot | awk '{print $9}'
+\end{bashinput}
+How does the dipole at the equilibrium distance compare with the experimental value of \qty{1.82}{debye}? 
+Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 
+Do you expect this trend to continue at large distances?  Why or why not?
+
+\item Next, repeat the bond length determination using \Verb{PBE1PBE} method and same basis set. 
+In order to do so, modify the input template, \Verb{mv} all the results into \Verb{HF} directory (\bashinline{mkdir HF; mv dist_* HF/}) and rerun the bash script. 
+In addition, you need to compute energies for hydrogen (H) and fluorine (F) again using new method. 
+How does the optimal bond length, atomization energy and dipole moment change?
+In the lab report, prepare a plot with both dissociation curves, dipole moments and computed atomization energies. 
+
+\end{enumerate}
+
+%\subsection*{Optional: Charge partition schemes.}
+%Chemical reactivity and many physical properties are often explained in terms of atomic charges. However, atomic charges are not physical observables, since no unique operator exists to determine this quantity. They rather depend on the chosen charge partition scheme. The charge partition schemes that is probably most commonly used is Mulliken \cite{mulliken1955epa}. In FHI-aims, you can request it by specifying
+%\texttt{output mulliken}  
+%in \controlin{}.
+%
+%For the equilibrium structure of HF, compute the atomic charges with this scheme using \texttt{pbe0}. Use the charges to calculate the dipole moment $\mu$ in the point dipole approximation. In this approximation, for a two atom system, the dipole moment is defined as:
+%\begin{equation}
+%\mu = q \cdot \left|  \vec{r_H} - \vec{r_F} \right|
+%\end{equation}
+%where $q$ is the atomic partial charge and $\vec{r_H}$ and $\vec{r_F}$ are the atomic positions of the atoms. The absolute value of the difference $ \left|  \vec{r_H} - \vec{r_F} \right|$ is the distance between hydrogen and fluorine.  Compare the dipole moment to the one computed by FHI-aims. How do they compare?
+%
+%\section{Problem III: Molecular oxygen - a critical look \textcolor{red}{!}} \label{sec:problemIII}
+%
+%An important part of every calculation is to always look critically at the output and ensure that the result is reasonable. For some systems, defaults may not be adequate, or assumptions which commonly work well may prove to be wrong. A prime example is the the treatment of spin in systems with degenerate orbitals, such as O$_2$.
+%
+%\task{[\textbf{Educational Objectives:}] 
+%  \begin{itemize}
+%\item  Do not trust default settings blindly
+%\item See the effect of an incorrect spin-treatment
+%  \end{itemize}%
+%}
+%%
+%\noindent
+%
+%\textbf{Tasks}
+%\begin{enumerate}
+%\item Set up a calculation for O$_2$ similar to the previous exercise, but leave out the \texttt{ spin} keyword in \controlin{}.  Look at the output file to find out which spin treatment is used by default.
+%\item Look at the output file and find the occupation numbers of the Kohn-Sham orbitals.  Does this make sense here?
+%\item Using \texttt{pbe} and \texttt{pbe0}, calculate the binding curve in the interval  $[0.8 , 1.6 ]$~\AA~ with a stepwidth of 0.1~\AA~ as before. Also, calculate the atomization energy ($\increment H_{at}$). 
+%\item Repeat the calculation with \texttt{spin collinear} and \texttt{default\_initial\_moment 2.0} - is Hund's rule now fulfilled? Compare the results: Do both spin settings yield the same equilibrium bond length? Calculate the difference in the total energy at the equilibrium bond length. Which one is lower? How does it compare to the experimental value of 1.21 \AA? How does the atomization energy ($\increment H_{at}$) compare to the experimental value of 5.18 eV?
+%\end{enumerate}
+%
+%Note: The oxygen atom is a notoriously difficult case to converge. If you have problems with it, try using the linear mixer for the SCF by including  the keyword \texttt{mixer linear} in \controlin{}. The linear mixer is guaranteed to converge, but usually requires much more iterations than the default (Pulay) mixing scheme.

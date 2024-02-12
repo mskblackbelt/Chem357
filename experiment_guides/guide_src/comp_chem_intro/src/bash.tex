@@ -1,0 +1,105 @@
+%!TEX root = ./Intro_to_CC.tex 
+
+\subsection{Appendix I: Bash and vi}
+\label{app:bash}
+
+Bash is a Unix shell and command language for the GNU Project and the default shell on Linux and OS X systems. We will use it to execute most programs and exercises. Below you find a list of the most import commands. Items in quotes indicate user-selected input (a directory/file name, a string of text, etc.). Bash furthermore offers a full programming language (often implemented via shell scripts) to automate tasks, e.g., via loops.
+\marginnote[-4\baselineskip]{
+A note on \emph{relative} and \emph{absolute} paths: Say you were giving directions to a location. You have two methods you can describe getting to the location:
+\begin{itemize}
+  \item Relative to where you stand, or
+  \item Relative to a landmark.
+\end{itemize}
+Both descriptions get you to the same location, but the former only works from your current location (``take a left, then a right, go through two lights then take another right'' wouldn't necessarily work from the next town over, but works from where you stand).
+
+In file systems, if you have \Verb{/home/user/documents/data.txt}, that's an absolute path (the starting \Verb{/} indicates the root of the drive). If you have \Verb{documents/data.txt}, it will only work so long as you're starting from \Verb{/home/user}. If you start in \Verb{/home/user/documents} you would need a \Verb{../} to get there correctly using the relative path. 
+
+However, no matter where you are on the hard drive, \Verb{/home/user/documents/data.txt} is a definitive way to get to that file.} 
+
+\begin{itemize}
+  \item \textbf{Basic navigation:}
+  \begin{description}[
+    font=\ttfamily\upshape,
+    align=left,
+    style=nextline,
+    itemindent=*
+    ]
+    \item[ls] list all files and folders 
+    \item[ls "dir-name"] list files in the directory.
+    \item[ls -lh] Detailed (\textbf{l}ong) list, \textbf{h}uman readable
+    \item[ls -l mypics/*.jpg] list only the jpeg files in the ``mypics'' directory
+    \item[cd "folderName"] change directory
+    \item[cd ..] go up one folder, tip: string together multiple folders \Verb{../../..}
+  \end{description}
+  
+  \item \textbf{Basic file operations:}
+  \begin{description}[
+    font=\ttfamily\upshape,
+    align=left,
+    style=nextline,
+    itemindent=*
+    ]
+    \item[cat "file"] show all contents of a file
+    \item[head "file"] show the top 10 lines of a file
+    \item[tail -n5 "file"] show the last 5 lines of a file
+
+    \item[mkdir "dir-name"] creates a new directory entitled ``dir-name'' (called folder in Windows and macOS) 
+    \item[cp "file1" "file2"] - copy ``file1'' to ``file2'' 
+    \item[cp image.jpg mypics/] - copy the file ``image.jpg'' to the ``mypics'' directory 
+    \item[cp *.txt stuff/] copy all of files ending with ``.txt'' to the directory ``stuff''
+
+    \item[mv "file1" "file2"] move (rename) ``file1'' to ``file2''
+    \item[mv "file1" "dir-name>/"] move ``file1'' to directory ``dir-name'' 
+    \item[mv "folderName/" ..] move directory up one level
+
+    \item[rm "file1"] delete ``file1'' 
+    \item[rm -r "junk\_stuff"] delete directory ``junk\_stuff'' and all files contained in it
+  \end{description}
+  
+  \item \textbf{Extract, sort, and filter data:}
+  \begin{description}[
+    font=\ttfamily\upshape,
+    align=left,
+    style=nextline,
+    itemindent=*
+    ]
+    \item[grep "someText" "file1"] search for the text ``someText'' in ``file1''.\sidenote{If your input has spaces, enclosing the input in double quotes (\Verb{"}) will preserve the spaces, e.g.,\Verb{"}Some quoted text\Verb{"}.} The \Verb{-i} flag tells grep to \textbf{i}gnore letter case (upper/lower).
+    \item[grep -r "text" "folderName/"] return a list of lines in files contained in ``folderName'' with occurrences of ``text''
+  \end{description}
+  
+  \item \textbf{Flow redirection and chain commands - redirecting results of commands:}
+  \begin{description}[
+    font=\ttfamily\upshape,
+    align=left,
+    style=nextline,
+    itemindent=*
+    ]
+    \item[>] at the end of a command to redirect the result to a file
+    \item[>>] at the end of a command to append the result to the end of a file
+    \item[|] at the end of a command to send the output to another command
+    \item[\&] run the command in the background 
+  \end{description}
+  
+  \item \textbf{Basic control:}
+  \begin{description}[
+    font=\upshape,
+    align=left,
+    style=nextline,
+    itemindent=*
+    ]
+    \item[\keys{\tab}] auto completion of file or command
+    \item[\keys{\arrowkeyup}/\keys{\arrowkeydown}] See previous/next commands
+    \item[\keys{\ctrl+R}] reverse search history
+    \item[\keys{\ctrl+L}] clear the terminal
+    \item[\Verb{!!}] repeat last command 
+  \end{description}
+\end{itemize}
+
+\textbf{vi} is a terminal-based file edit program. By typing \Verb{vi} you open the program and create a new file that can be save later. By typing \Verb{vi "fileName"} , you open ``fileName'' to edit it. If ``fileName'' doesn't exist, you will create the new file and edit it immediately with this program. 
+
+The editor, despite its simplicity in appearance, is a very powerful terminal-based tool with numerous key-bindings. Therefore, be careful what you press. In order to start editing the file, you first need to press \keys{I} (`\textbf{i}nsert') and then you can start typing. In order to save the file, press the \keys{Esc} key to exit the editing mode, then type \Verb{:} (\keys{\shift+;}) to enter the command mode in the bottom of the editor and type \Verb{wq} (for `\textbf{w}rite \textbf{q}uit'). Confirm with Enter. If you want to quit without saving the file, type \Verb{q!} in command mode. 
+
+
+
+
+

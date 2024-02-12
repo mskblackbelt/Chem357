@@ -1,0 +1,42 @@
+\maketitle
+
+\begin{abstract}
+  This tutorial aims to give a basic introduction to electronic structure calculations for very simple systems.\thanks{Adapted from \textcite{marianski19}.} 
+  As every quantum chemistry code has its own philosophy, this tutorial should familiarize you with the general-purpose \href{https://psicode.org/}{Psi4} software.
+  The experiments will also demonstrate the predictive power of quantum-chemical calculations. 	
+	
+  First, the basic structure of interacting with Psi4 will be explained, along with some very basic concepts in computational chemistry.
+  The second part will introduce the concept of scanning along a binding curve and computing observable quantities.
+  The third part introduces geometric optimization of a small molecule and how to assess reliability of the result. 
+
+  \begin{enumerate}[
+	  label=Prob. \Roman*:,
+	  align=left,
+	  leftmargin=*,
+	  itemindent=\parsep
+	]
+	\item \hyperref[sec:problemI]{The hydrogen atom}
+	\item \hyperref[sec:problemII]{Hydrofluoric acid: bond length and dipole moment}	      
+	\item \hyperref[sec:problemIII]{Hydronium cation: geometry relaxation, vibrations, and PES}
+  \end{enumerate}
+
+As the first step, please use this link to clone the files into your Jupyter directory:\\  \href{https://sugarcube.hunter.cuny.edu/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2Fmskblackbelt%2Fpchem_comp-chem_template&urlpath=lab%2Ftree%2Fpchem_comp-chem_template%2FCompChem_template.ipynb&branch=main}{\texttt{https://tinyurl.com/chem357-compchem}}
+\marginnote[-4\baselineskip]{While going through this document, do \textbf{not} try to copy and paste the code in this PDF into your input files. PDFs are full of invisible formatting characters that can change the meaning of parts of your input files.}
+
+This guide is meant to be used \emph{in tandem} with the Jupyter notebook contained in the cloned folder (``CompChem\_template.ipynb''). 
+That notebook has a number of cells pre-populated for your convenience. Make sure you read the notes and comments in the notebook as you go through the lab and fill in any blanks before executing the cells. 
+\end{abstract}
+
+
+
+\input{Intro}
+\input{part_1}
+\input{part_2}
+\input{part_3}
+\clearpage
+% 
+\appendix
+\include{bash}
+%\include{vi}
+
+\vfill

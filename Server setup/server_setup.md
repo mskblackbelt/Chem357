@@ -29,43 +29,10 @@ Gaussian install: <https://gaussian.com/g16/g16bin_install.pdf>
 
 ## Install JupyterHub via [The Littlest JupyterHub](https://tljh.jupyter.org/en/latest/install/custom-server.html)
 
-- `curl -L https://tljh.jupyter.org/bootstrap.py | sudo -E python3 - --user-requirements-txt-url https://raw.githubusercontent.com/mskblackbelt/Chem357/main/Server%20setup/pchem2-requirements.txt`	
-- Set up server for HTTPS traffic
-	- Generate a TLS key and certificate
-	  - `sudo openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout /etc/ssl/private/<key-name>.key -out /etc/ssl/certs/<cert-name>.crt`
-	- Enable https: `sudo tljh-config set https.enabled true`
-	- Set https port: `sudo tljh-config set https.port 443`
-	- Set key and certificate locations in TLJH
-	  - `sudo tljh-config set https.tls.key <key-location>`
-	  - `sudo tljh-config set https.tls.cert <cert-location>`
-- Modify tljh/user.py to add specific skel folder and groups to new users, reformat with `black`
-```
-user_file="/opt/tljh/hub/lib/python3.?/site-packages/tljh/user.py"
-sudo sed -i "s/\(\"--create-home\"\)/\1, \"--skel\", \"\/etc\/skel-tljh\", \"--groups\", \"$gauss_group\"/" "$user_file"
-sudo /opt/tljh/user/bin/black $user_file
-```
-
-- Misc. JupyterHub settings
-	- Set up NativeAuthenticator for the Hub
-	- Set default interface to JupyterLab 
-	- Set CPU and memory limits for notebook servers
-	- Set directories for JupyterLab template files
-	- Set up HTTPS for the Hub server
-	- Set cull timeout for notebooks
-```bash
-sudo tljh-config set auth.type nativeauthenticator.NativeAuthenticator
-sudo tljh-config set c.Authenticator.check_common_password True
-sudo tljh-config set user_environment.default_app jupyterlab
-sudo tljh-config set limits.cpu 4
-sudo tljh-config set limits.memory 3G
-sudo tljh-config set c.JupyterLabTemplates.template_dirs "/opt/tljh/user/share/jupyter/notebook_templates"
-sudo tljh-config set https.enabled true
-sudo tljh-config set https.port 443
-sudo tljh-config set https.tls.key /etc/mycerts/mydomain.key
-sudo tljh-config set https.tls.cert /etc/mycerts/mydomain.pem
-sudo tljh-config set services.cull.timeout 1800
-```
-
+- `curl -L https://tljh.jupyter.org/bootstrap.py | sudo -E python3 - --admin <admin_user_name>`
+- TLJH settings
+  - `sudo tljh-config set auth.type nativeauthenticator.NativeAuthenticator`
+  - `sudo tljh-config set user_environment.default_app jupyterlab`
 - Upgrade mamba (`sudo -E mamba upgrade --all`)
 - Create new conda environment for notebook use
   - `sudo -E conda env create -f=/path/to/environment.yml`

@@ -1,0 +1,136 @@
+% Code modified from answer at https://tex.stackexchange.com/q/150960/27032
+
+%%%%%%% Harmonic Potential %%%%%%%%%%%%%%
+%%%%%%% Define Potential Function %%%%%%%
+\pgfmathsetmacro{\De}{10}
+\pgfmathsetmacro{\re}{1}
+\pgfmathsetmacro{\a}{1}
+\pgfmathdeclarefunction{Uho}{1}{%
+  \pgfmathparse{%
+    \De*((#1 - \re)^2 - 1 )
+    }%
+}
+%%%%%%% Energy Levels %%%%%%%
+% energies are given as multiples of \hbar \omega_0 with
+% \omega_0 = \a*sqrt(2*\De/\m), where m is the (reduced) mass of the diatomic molecule
+% \De above is really \De/(\hbar*\omega)
+\pgfmathdeclarefunction{energyho}{1}{%
+  \pgfmathparse{%
+    -\De+(#1+0.5)
+    }%
+}%Upper limit on classical bound state of a given energy
+\pgfmathdeclarefunction{rmaxho}{1}{%
+  \pgfmathparse{%
+    (\re + sqrt(#1/\De + 1))/\a
+		% (\a*\re+ln( - (\De+sqrt(\De*(#1+\De)))/#1 ) )/\a
+    }%
+}
+%Lower limit on classical bound state of a given energy
+\pgfmathdeclarefunction{rminho}{1}{%
+  \pgfmathparse{%
+    (\re - sqrt(#1/\De + 1))/\a
+		% (\a*\re+ln( (-\De+sqrt(\De*(#1+\De)))/#1 ) )/\a
+    }%
+}
+
+%%%%%%% Morse Potential %%%%%%%%%%%%%%%%%
+%%%%%%% Define Potential Function %%%%%%%
+\pgfmathsetmacro{\De}{10}
+\pgfmathsetmacro{\re}{1}
+\pgfmathsetmacro{\a}{1}
+\pgfmathdeclarefunction{Umo}{1}{%
+  \pgfmathparse{%
+    \De*((1-exp(-\a*(#1-\re)))^2-1)
+    }%
+}
+%%%%%%% Energy Levels %%%%%%%
+% energies are given as multiples of \hbar \omega_0 with
+% \omega_0 = \a*sqrt(2*\De/\m), where m is the (reduced) mass of the diatomic molecule
+% \De above is really \De/(\hbar*\omega)
+\pgfmathdeclarefunction{energymo}{1}{%
+  \pgfmathparse{%
+    -\De+(#1+0.5) - (#1+0.5)^2/(4*\De)
+    }%
+}
+%Upper limit on classical bound state of a given energy
+\pgfmathdeclarefunction{rmaxmo}{1}{%
+  \pgfmathparse{%
+    (\a*\re+ln( - (\De+sqrt(\De*(#1+\De)))/#1 ) )/\a
+    }%
+}
+%Lower limit on classical bound state of a given energy
+\pgfmathdeclarefunction{rminmo}{1}{%
+  \pgfmathparse{%
+    (\a*\re+ln( (-\De+sqrt(\De*(#1+\De)))/#1 ) )/\a
+    }%
+}
+
+
+\begin{tikzpicture}
+	\begin{axis}[
+		axis lines = left,
+		smooth,
+		thick,
+		xlabel = $r / r_e$, 
+		ylabel = $E / h \nu_0$, 
+		minor tick num =1, 
+		grid=none, 
+		no markers, 
+		every axis x label/.style={at={(ticklabel cs:0.5)},anchor=near ticklabel},
+		every axis y label/.style={at={(ticklabel cs:0.5)},rotate=90, anchor=near ticklabel},
+		xmin=-1.25, xmax=9.7,
+		ymin=-10.5, ymax=6.9,
+		scale=1.7]
+		
+		% \foreach inside axis environment was tricky, see https://tex.stackexchange.com/a/17817/27032
+		% Harmonic potential and vibrational levels
+		\pgfplotsinvokeforeach{0,...,13}{
+			\draw[red!30] (axis cs: {rminho( energyho(#1) )},{energyho(#1)}) -- (axis cs: {\re},{energyho(#1)});
+		}
+		\addplot +[thick, samples=50, red, domain=-0.75:2.75] {Uho(x)};
+		\node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 3.3,5.75) {
+			Harmonic potential: \\ 
+			\(\quad U_\mtext{HO}(r) = D_e \br{ -a\br{r-r_e}^2 - 1 }\) 
+		};
+		\node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 3.3,3) {
+			Energy levels: \\ 
+			\(\quad E_n = -D_e + h \nu_0 \br{v + 1/2}\) \vspace{1mm}
+		};
+		
+    \node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 4.5,-2) {
+			For both: \( a = 2\pi\nu_0 \sqrt{\frac{\mu}{2 D_e}}\)
+    };
+    
+		% Morse potential and vibrational levels
+		\pgfplotsinvokeforeach{0,...,18}{
+			\draw[blue!30] (axis cs: {\re},{energymo(#1)}) -- (axis cs: {rmaxmo(energymo(#1))},{energymo(#1)});
+		}
+		\pgfplotsinvokeforeach{0,...,10}{
+			\draw (axis cs: {rmaxmo( energymo(#1) )},{energymo(#1)}) -- (axis cs: {rmaxmo( energymo(#1) )},{energymo(#1)}) node (m#1) [node font=\scriptsize, at end, xshift=2em] {$v = #1$};
+		}
+		
+		\addplot +[thick, samples=50, blue, domain=0.05:9] {Umo(x)};
+		\node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 3.3,-5.5) {
+			Morse potential: \\ 
+			\(\quad U_\mtext{Morse}(r) = D_e \br{ \br{1 - {e^{-a \br{r - r_e}}}}^{2} - 1}\) 
+		};
+		\node[style={align=left}, font=\footnotesize, anchor=west] at (axis cs: 3.3,-8.5) {
+			Energy levels: \\ 
+			\( \begin{aligned}
+					\quad E_n = -D_e &+ h \nu_0 \br{v+1/2} \\ 
+						&\quad + \frac{\br{h \nu_0 \br{v+1/2}}^2}{4 D_e}
+			\end{aligned} \) 
+		};
+		
+		% Annotation lines and arrows
+		\draw[dashed] (axis cs: {-1.25},{0}) -- (axis cs: {9},{0})  node [node font=\small,above left] {\emph{Dissociation Energy}};
+		\draw[dashed] (axis cs: {-0.75},{-\De}) -- (axis cs: {\re},{-\De});
+		\draw[dashed] (axis cs: {-0.25},{energyho(0)}) -- (axis cs: {rminho( energyho(0)},{energyho(0)});
+		\node	(De)	at	(axis cs: {-0.75},{-\De/2})	{$D_e$};
+		\node	(Do)	at	(axis cs: {-0.25},{energyho(0)/2})	{$D_0$};
+		\draw[<-]	(axis cs: {-0.75},{-\De}) -- (De);
+		\draw[->]	(De) -- (axis cs: {-0.75},{0});
+		\draw[<-]	(axis cs: {-0.25},{energyho(0)}) -- (Do);
+		\draw[->]	(Do) -- (axis cs: {-0.25},{0});
+	\end{axis}
+\end{tikzpicture}

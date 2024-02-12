@@ -1,0 +1,87 @@
+% TODO: Remove section on chem shift?
+% Create Zeeman level splitting for 3/2 nucleus
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+% Uncomment if compilation doesn't work for standalone inclusions
+% \usepackage[subpreambles,print,sort]{standalone}
+\usepackage{standalone}
+\input{../../header.tex}
+\usepackage{chemfig}
+  \pgfplotsset{compat=1.16}
+	\usetikzlibrary{decorations.markings,arrows.meta}
+	\usetikzlibrary{math}
+	\usetikzlibrary{calc}
+	\usepgfplotslibrary{groupplots}
+
+%%%%%%% ChemMacros options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\DeclareSIUnit\gauss{G}
+\usechemmodule{thermodynamics}
+  \RenewChemState{\gibbs}{symbol=G, unit=\kilo\joule\per\mole, superscript-right=\transitionstatesymbol}
+  \RenewChemState{\enthalpy}{symbol=H, unit=\kilo\joule\per\mole, superscript-right=\transitionstatesymbol}
+  \RenewChemState{\entropy}{symbol=S, unit=\kilo\joule\per\kelvin\per\mole, superscript-right=\transitionstatesymbol}
+  
+\usechemmodule{polymers}
+\setchemfig{atom style={scale=0.80}}
+\newcommand\namebond[4][5pt]{\chemmove{\path(#2)--(#3)node[midway,sloped,yshift=#1]{#4};}}
+\newcommand{\headercell}[1]{\multicolumn{2}{c}{\bfseries #1}}
+\RenewChemIUPAC\ortho{\emph{ortho}}
+\RenewChemIUPAC\meta{\emph{meta}}
+\RenewChemIUPAC\para{\emph{para}}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+	]{biblatex}
+	\addbibresource{pchem_bib.bib}
+
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=nmr, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
+	}
+
+	% Add a section for cited bibliography entries.
+  % At the end, create a second bibliography for uncited items (Further Reading).
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+
+  % Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{ % do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{NMR Determination of Rotational Energy Barrier Equilibrium Constants}
+
+\author{Dustin Wheeler}
+
+\begin{document}

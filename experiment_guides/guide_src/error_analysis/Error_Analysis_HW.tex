@@ -1,0 +1,255 @@
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+\input{../header.tex}
+\usepackage{pgfplotstable}
+  \pgfplotsset{compat=1.18} 
+  \usetikzlibrary{tikzmark}
+  \pgfplotsset{
+    label style={font=\Large},
+    tick label style={font=\Large}
+  }
+  
+\crefformat{problem}{prob.~(#2#1#3)}
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+	]{biblatex}
+	\addbibresource{pchem_bib.bib}
+
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=errors, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
+	}
+	
+	% Add a section for cited bibliography entries. 
+  % At the end, create a second bibliography for uncited items (Further Reading).
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+  
+  % Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{ % do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Introduction to Error Analysis}
+
+\author{Dustin Wheeler}
+
+\begin{document}
+
+\maketitle
+
+\section{Homework Problems: Error Propagation} % (fold)
+\label{sec:homework_problems_error_propagation}
+
+\begin{enumerate}
+	\item In each of the following cases, determine the answer and its error, assuming that the errors to the relevant quantities involved in the calculation are uncorrelated (i.e., the errors add in quadrature).\marginnote{This problem is from \textcite{lyons1991data}.}
+	\begin{enumerate}
+		\item Determine the distance between the points \( \br{\num{0.0(2)}, \num{0.0(3)}} \) and \( \br{\num{3.0(3)}, \num{4.0(2)}} \), and the angle that the line joining them makes with the \( x \) axis. 
+		\item The number, \( N \), of particles surviving a distance, \( x \), in a medium is given by \[ 
+		N_0 \exp\br{-x/\lambda} \, ,
+		\] 
+		where \( N_0 \) is the number of particles at \( x = 0 \) and \( \lambda \) is the mean free path of a particle. 
+		What is \( N \) if \( N_0=\num{1000(5)e6} \), \( x = \qty{1.00(1)}{\m} \), and \( \lambda = \qty{0.25(6)}{\m} \)?
+		
+		\item A particle travels along a straight-line trajectory given by \[
+		 y = a + bx \, .
+		 \] 
+		If \( a = \qty{2.5(3)}{\m} \) and \( b = \num{5.0(1)e-2} \), what is the value of \( y \) at:
+		\begin{enumerate}
+			\item \( x = \qty{4}{\m} \) and
+			
+			\item \( x = \qty{4.0(1)}{\m} \)?
+		\end{enumerate}
+		
+		\item The molar specific heat, \( c_{\textsc{m}} \), of a metal at low temperature, \( T \), is given by \[
+			c_{\textsc{m}} = a T + b T^3 \, .
+		\]
+		If \( a = \qty{1.35(5)}{\mJ\per\mol\K^2} \), \( b = \qty{0.021(1)}{\mJ\per\mol\K^4} \), and \( T = \qty{5.0(5)}{\K} \), what is the value of \( c_{\textsc{m}} \)?
+	\end{enumerate}
+	
+	\item\marginnote{The following problems come from \textcite{taylor1997error}.} Evaluate each of the following:
+	\begin{enumerate}
+		\item \( \br{\num{5.6(7)} + \num{3.70(3)}} \)
+		
+		\item \( \br{\num{5.6(7)} + \num{2.3(1)}} \)
+		
+		\item \( \br{\num{5.6(7)} + \num{4.1(2)}} \)
+		
+		\item \( \br{\num{5.6(7)} + \num{1.9(3)}} \)
+	\end{enumerate}
+	For each sum, consider both the case that the original uncertainties are independent and random (``errors add in quadrature'') and that they are not (``errors add directly''). 
+	Assuming the uncertainties are needed with only one significant figure, identify those cases in which the second of the original uncertainties can be ignored entirely. 
+	If you decide to do the additions in quadrature on a calculator, note that the conversion from rectangular to polar coordinates automatically calculates \( \sqrt{x^2 + y^2} \) for a given \( x \) and \( y \). 
+	
+	\item A student makes the following measurements:
+		\begin{align*}
+			a &= \qty{5(1)}{\cm} \\
+			b &= \qty{18(2)}{\cm} \\
+			c &= \qty{12(1)}{\cm} \\
+			t &= \qty{2.0(5)}{\s} \\
+			m &= \qty{18(1)}{\g} 
+		\end{align*}
+	\begin{enumerate}
+		\item Use the provisional rules (eqs. 3.4 and 3.8 in the text) to compute the following quantities with their absolute and relative uncertainties (assuming the errors are correlated, \emph{i.e., not} independent and random):
+		\begin{enumerate}
+			\item \( a + b + c \)
+			\item \( a + b - c \)
+			\item \( ct \)
+			\item \( mb/t \)
+		\end{enumerate}
+	
+		\item Repeat the problem assuming that the original uncertainties \emph{are} independent and random. 
+		Arrange your answers in a table to compare the two different methods of propagating errors. 
+	\end{enumerate}
+	
+	\begin{figure*}[tb]
+		\centering
+		\pgfdeclarelayer{background}
+		\pgfdeclarelayer{foreground}
+		\pgfsetlayers{background,main,foreground}
+			\begin{tikzpicture}
+				\begin{pgfonlayer}{background}
+					\begin{axis}[
+						name=calibCurve,
+						axis line style=semithick,
+						width=5in,
+						height=3.5in,
+						xlabel={Deflection \( \theta \) (degrees)},
+						xmin=50.01, xmax=55,
+						xtick={50,51,52,53,54,55},
+						extra x ticks={51,52,53,54},
+						xtick align=inside,
+						ylabel={Wavelength \( \lambda \) (\unit{\nm})},
+						ymin=400, ymax=700,
+						ytick align=inside,
+						ytick={400,450,500,550,600,650,700},
+						extra y ticks={500,600},
+						minor tick num=4,
+						extra tick style={grid=major}
+						]
+						\addplot [black, very thick, domain=50:55] {12 * (exp(-0.62 * (x-55)) - 1.75 * (x-54.5)) + 400};
+						\coordinate (insetPosition) at (rel axis cs:0.97,0.95);
+					\end{axis}
+				\end{pgfonlayer}
+
+				\begin{pgfonlayer}{foreground}
+					\begin{axis}[
+						name=insetAxis,
+						at={(insetPosition)},
+						anchor={outer north east},
+						axis background/.style={fill=white},
+						width=2.5in,
+						height=2in,
+						xtick={52.4,52.6,52.8,53.0},
+						extra x ticks={52.5,52.6,52.7,52.8},
+						extra x tick labels={},
+						xmin=52.4, xmax=52.9,
+						ytick={475,480,485,490,495,500,505},
+						yticklabel={\pgfmathparse{mod(\ticknum+1,2)==0?int(5*\ticknum+475):}\pgfmathresult},
+						extra y ticks={480,490,500},
+						ymin=475, ymax=505,
+						anchor=north east,
+						minor tick num=9,
+						tick label style={font=\small},
+						extra tick style={grid=major},
+						extra y tick labels={},
+						]
+						\addplot [black, very thick, domain=52.4:52.9] {12 * (exp(-0.62 * (x-55)) - 1.75 * (x-54.5)) + 400};
+					\end{axis}
+				\end{pgfonlayer}
+
+				\begin{pgfonlayer}{main}
+					\fill [black!0] ([shift={(+2pt,+2pt)}] insetAxis.outer south west)
+						rectangle	([shift={(+2pt,+2pt)}] insetAxis.outer north east);
+				\end{pgfonlayer}
+
+			\end{tikzpicture}
+		\caption{Calibration curve of wavelength \( \lambda \) against deflection \( \theta \) for \cref{prob:spec}.}
+		\label{fig:calib}
+	\end{figure*}
+	\item \label[problem]{prob:spec} A spectrometer is a device for separating the different wavelengths in a beam of light and measuring the wavelengths. 
+	It deflects the different wavelengths through different angles \( \theta \), and, if the relation between the angle \( \theta \) and the wavelength \( \lambda \) is known, the experimenter can find \( \lambda \) by measuring \( \theta \). 
+	Careful measurements with a certain spectrometer have established the calibration curve shown in \cref{fig:calib}; this figure is simply a graph of \( \lambda \) (in nanometers, \unit{\nm}) agains \( \theta \), obtained by measuring \( \theta \) for several accurately known wavelengths \( \lambda \). 
+	A student directs a narrow beam of light from a hydrogen lamp through this spectrometer and finds that the light consists of just three well-defined wavelengths; that is, she sees three narrow beams (one red, one turquoise, and one violet) emerging at three different angles. 
+	She measures those angles as
+	\begin{align*}
+		\theta_1 &= \qty{51.0(2)}{\degree} \\
+		\theta_2 &= \qty{52.6(2)}{\degree} \\
+		\theta_3 &= \qty{54.0(2)}{\degree} \\
+	\end{align*}
+	\begin{enumerate}
+		\item \label[problem]{prob:calib} Use the calibration curve in \cref{fig:calib} to find the corresponding wavelengths \( \lambda_1 \), \( \lambda_2 \), and \( \lambda_3 \) with their uncertainties. 
+		\item According to theory, these wavelengths should be \qtylist{656;486;434}{\nm}. 
+		Are the student's measurements in satisfactory agreement with these theoretical values?
+		\item \label[problem]{prob:zoomed} If the spectrometer has a vernier scale to read the angles, the angles can be measured with an uncertainty of \ang{0.05} or even less. 
+		Let us suppose the three measurements above have uncertainties of \qty{\pm0.05}{\degree}. Given this new, smaller uncertainty in the angles and \emph{without drawing any more lines on the graph,} use your answers from \cref{prob:calib} to find the new uncertainties in the three wavelengths, explaining clearly how you do it.\footnote{Hint: the calibration curve is nearly straight in the vicinity of any one measurement.}
+		\item To take advantage of more accurate measurements, an experimenter may need to enlarge the calibration curve. 
+		The inset in \cref{fig:calib} is an enlargement in the vicinity of the angle \( \theta_2 \). 
+		Use this graph to find the wavelength \( \lambda_2 \) if \( \theta_2 \) has been measured as \qty{52.72(5)}{\degree}; check that your prediction for the uncertainty of \( \lambda_2 \) in \cref{prob:zoomed} was correct. 
+	\end{enumerate}
+	
+	\item If you measure two independent variables as \[
+		x = \num{6.0(1)} \quad \text{and} \quad y = \num{3.0(1)} \, ,
+	\]
+	and use these values to calculate \( q = xy + x^2/y \), what will be your answer and its uncertainty?\marginnote[-4\baselineskip]{You must use the general rule (eq. 3.47 in \textcite{taylor1997error} to find \( \delta q \). To simplify your calculation, do it first by finding the two separate contributions \( \delta q_x \) and \( \delta q_y \) as defined in rules 3.50 and 3.51, then combine them in quadrature.}
+	
+	\item If an object is placed at a distance \( p \) from a lens and an image is formed at a distance \( q \) from the lens, the lens's focal length can be found as\sidenote{This equation follows from the \emph{lens equation}, \( 1/f = (1/p) + (1/q) \).} 
+	\begin{equation}
+		f = \frac{pq}{p + q} \, . 
+		\label[equation]{eq:lens}
+	\end{equation}
+	\begin{enumerate}
+		\item \label[problem]{prob:lens_a} Use the general rule (eq. 3.47) to derive a formula for the uncertainty \( \delta f \) in terms of \( p \), \( q \), and their uncertainties. 
+		
+		\item Starting from \cref{eq:lens} directly, you cannot find \( \delta f \) in steps because \( p \) and \( q \) both appear in numerator and denominator. Show, however, that \( f \) can be rewritten as \[
+			f = \frac{1}{1/p + 1/q} \, .
+		\]
+		Starting from this form, you \emph{can} evaluate \( \delta f \) in steps. Do so, and verify that you get the same answer as in \cref{prob:lens_a}.
+	\end{enumerate}
+\end{enumerate}
+
+
+% section homework_problems_error_propagation (end)
+
+\nocite{*}
+\printbibliography[category=cited]% default title for `article` class: "References"
+
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
+\printbibliography[%
+  title={Further Reading},%
+  resetnumbers,%
+  omitnumbers,%
+	notcategory=cited,%
+	]
+
+\end{document}

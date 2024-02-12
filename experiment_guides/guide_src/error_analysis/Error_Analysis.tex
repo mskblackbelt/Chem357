@@ -1,0 +1,218 @@
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+% \RequirePackage[cache=false]{minted}
+\input{../header.tex}
+% \tcbuselibrary{minted}
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+	style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+	]{biblatex}
+	\addbibresource{pchem_bib.bib}
+
+	% Filter bibliography file to only include entries matching keyword.
+	\DeclareSourcemap{%
+	  \maps[datatype=bibtex]{%
+	    \map{%
+	      \step[nocited, final]%
+	      \step[fieldsource=keywords, notmatch=errors, final]%
+	      \step[entrynull]%
+	    }%
+	  }%
+	}
+	
+	% Add a section for cited bibliography entries. 
+  % At the end, create a second bibliography for uncited items (Further Reading).
+	\DeclareBibliographyCategory{cited}
+	\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+	
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+    {\list
+       {}
+       {\setlength{\leftmargin}{2\bibhang}%
+        \setlength{\itemindent}{-\bibhang}%
+        \setlength{\itemsep}{\bibitemsep}%
+        \setlength{\parsep}{\bibparsep}}}
+    {\endlist}
+    {\item}
+  
+  % Remove URL from citations if DOI is present.
+	\AtEveryBibitem{%
+	  \iffieldundef{doi}{ % do nothing if true
+		}
+		{ % otherwise, clear the URL
+			\clearfield{url}
+		}%
+	}
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Introduction to Error Analysis}
+
+\author{Dustin Wheeler}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	\noindent
+	In this exercise, students will be introduced to basic concepts in scientific error analysis and the propagation of error in calculations. 
+	Upon completion, you should be familiar with the sources of experimental error, be able to track the impact of those errors through a series of calculations, and accurately report the uncertainty in your final reported values. % \thanks{Transcribed (with corrections) from \cite{AuthorA}} 
+\end{abstract}
+
+\section{Introduction} % (fold)
+\label{sec:intro}
+
+This exercise assumes that the reader is familiar with the concepts of \emph{significant figures} and \emph{accuracy} and \emph{precision} as they apply to experimental results. 
+Additionally, the reader should be comfortable with introductory statistical analysis, simple algebra, and (partial) differentiation. 
+
+
+% section intro (end)
+
+\section{Review} % (fold)
+\label{sec:review}
+
+\subsection{Uncertainty} % (fold)
+\label{sub:uncertainty}
+
+Uncertainty, often referred to as \emph{error} in scientific measurements, is an unavoidable fact of life. 
+While it cannot be removed, it can be understood and minimized. 
+To see why it cannot be removed, we have only to ask multiple people to measure the same object with the same ruler. 
+Given a ruler with demarcations down to \qty{1}{\cm} and an object \qty{\sim8.3}{\cm} in length, three students might measure lengths of \SIlist{8.5;8.0;8.2}{\cm}. 
+Naively, we might suggest that we would get better agreement by giving the students a ruler with \unit{\mm}-demarcations. 
+But now, the students might measure \SIlist{8.35;8.30;8.28}{\cm} for the length… we still see disagreement in the value! 
+Eventually, we will get to a point where the demarcations on the ruler are too small for the students to see and have spent a lot of time gaining precision that we might not need.
+Perhaps all we desired was a quick estimate to know if we could place the object in a \qty{10}{\cm} tray. 
+In that case, all we needed was that first measurement and the estimate of \qty{\sim8}{\cm} for the object's length. 
+
+This exercise shows that more precision isn't always necessary and that there is no such thing as \emph{infinite} precision. 
+Uncertainty is a part of the process and we would do best to accept it and move forward. 
+
+% subsection uncertainty (end)
+
+\subsection{Estimation of Measurements} % (fold)
+\label{sub:estimation_of_measurements}
+
+Now that we can see that uncertainty exists, we must find a way to estimate measurements. 
+In the simplest case, where we might take a single measurement, we need a basis from which to start. 
+A good rule of thumb when reading from a scale is to assume an uncertainty of \num{0.2} times the smallest marking on the scale. 
+In this case, the length readings in the previous section should be presented as \qty{8.5(2)}{\cm}. 
+This formatting gives us a way of presenting both our measured value \emph{and} the uncertainty in that measurement. 
+In this way, we can be sure that we are reporting our results in the most complete and informative way possible. 
+If measurements are being read from a digital instrument, estimation of the reading is unnecessary. 
+This does \emph{not} mean that there is no uncertainty! 
+It only means that the uncertainty is not determined by your ability to estimate spacing on a scale, but instead is determined by the electronics that make up the instrument. 
+Manufacturers make their uncertainty values available in most cases\footnote{If they don't make it available, it's time to ask, ``Why not?''}, so you only need to find the reported uncertainty for the instrument and report that value in your measurements. 
+
+% subsection estimation_of_measurements (end)
+
+\subsection{Statistical Analysis of Multiple Measurements} % (fold)
+\label{sub:statistical_analysis_of_multiple_measurements}
+
+In the previous section, we discussed methods to estimate the error of a single measurement. 
+Clearly, we can increase the certainty in our measurement by making multiple measurements. 
+
+Suppose we measure the length of our \qty{8.3}{\cm} object again and have each student repeat the measurement twice. 
+Now our list of numbers is \SIlist{8.5;8.0;8.2;8.3;8.4;8.4}{\cm}. 
+As you will recall from quantitative analysis, we can get the \emph{mean}, \emph{variance}, and \emph{standard deviation} of this measurement. 
+As we see in \cref{eq:avg}, the mean, \( \overline{x} \), of a measurement is simply the sum of all the measurements, \( x_i \), divided by the number of measurements.
+\begin{equation}
+	\overline{x} = \frac{1}{n}\sum_{i=1}^n{x_i}
+	\label{eq:avg}
+\end{equation}
+
+This gives us a single value to use for our estimate, but no indication of the uncertainty in the measurement. 
+The next value we can compute is how far each of our measurements varies from the mean, or the \emph{variance}. 
+The variance is calculated by averaging the square of the distance from each measurement to the mean, shown in \cref{eq:var}. 
+\begin{equation}
+	s^2 = \frac{1}{n-1}\sum_{i=1}^{n}{\br{x_i - \overline{x}}^2}
+	\label{eq:var}
+\end{equation}
+
+Notice that this equation references the \emph{squared} distance from the mean. 
+This is done to prevent errors in the positive direction from canceling out errors in the negative direction.\sidenote[][-4\baselineskip]{
+Notice that it is also scaled by \( \br{n-1} \), rather than by \( n \). This is because the definition for \( \overline{x} \) is already an estimation, so the value for \( s^2 \) is contains some bias based on our sampling of the data. The only way to remove this bias is to know the \emph{true} value of the unknown, \( \mu \), based on every possible sample, to calculate \( sigma \), the \emph{true} variance. This is generally unrealistic, so we use \( \overline{x} \) and scale \( s^2 \) by \( \br{n-1} \).}
+But we'd really like a direct measurement of the deviation from the mean, rather than the squared variance. 
+The definition for variance, \( \sigma^2 \), gives a hint to what a definition for the variance might be. 
+In \cref{eq:stdev}, we see the traditional definition for \emph{standard deviation}. 
+\begin{equation}
+	s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}{\br{x_i - \overline{x}}^2}}
+	\label{eq:stdev}
+\end{equation}
+
+% subsection statistical_analysis_of_multiple_measurements (end)
+
+\subsection{Sources of Uncertainty} % (fold)
+\label{sub:sources_of_uncertainty}
+
+Now that we've established what uncertainty is and how to report it, let's examine some sources and types of uncertainty. 
+Recall that the terms \emph{precision} and \emph{accuracy} have very specific definitions to the experimentalist. 
+If we go back to the picture of the dartboard, we recall that a precise player will have all of their darts clustered in a small area of the board, while an accurate player will have their darts evenly distributed around the center of the board. 
+Only the precise \emph{and} accurate player will have a small cluster of darts near the center of the board. 
+
+In class, we are often repeating well-known experiments or probing a quantity that is both accurately and precisely known. 
+In the research lab, this is rarely the case, and when we are making a measurement, we often don't know what the true value of the measurement should be. 
+In terms of the dartboard, it's as though the board and wall are covered by a black cloth while the throwing occurs. 
+When this is the case, we can't judge our experimental technique based on accuracy and can only rely on the precision of the measurement to guide us. 
+
+With this in mind, we begin to examine factors that will affect the precision and accuracy of our measurements. 
+
+% subsection sources_of_uncertainty (end)
+
+\subsection{Types of Error} % (fold)
+\label{sub:types_of_error}
+
+There are two classes of errors that you'll encounter, \emph{systematic} and \emph{random} errors. Systematic errors cause a loss in accuracy by consistently applying some sort of offset to the measurement. If the source and magnitude of the error are known, the error can be corrected by the researcher. Random errors result in a loss of precision, and can generally only be overcome by increasing the number of measurements or increasing the quality of the measurement method (usually an improvement in instrumentation). 
+
+% subsection types_of_error (end)
+Types/sources of error
+Random (random processes)
+Systematic (method errors)
+Instrumental (Instrumental errors)
+
+Examples
+
+
+
+\subsection{Basic Statistics} % (fold)
+\label{sub:basic_statistics}
+
+Mean, 
+Variance, 
+Standard deviation
+
+Probability distributions
+- Uniform
+- Binomial
+- Normal (Gaussian)
+- Poisson
+
+% subsection basic_statistics (end)
+
+% section review (end)
+
+\section{Propagation of Error} % (fold)
+\label{sec:propagation_of_error}
+
+Simple calculations (rate, area)
+% section propagation_of_error (end)
+
+\nocite{*}
+\printbibliography[category=cited]% default title for `article` class: "References"
+
+\DeclareFieldFormat{labelnumberwidth}{\textbullet}
+\printbibliography[%
+  title={Further Reading},%
+  resetnumbers,%
+  omitnumbers,%
+	notcategory=cited,%
+	]
+
+\end{document}

@@ -1,0 +1,234 @@
+\documentclass{tufte-handout}
+% \input{../header.tex}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage[notextcomp]{stix}
+% \usepackage{lmodern}
+% \setmathfont{euler}
+
+\title{Experiment 6: \\ IR  spectroscopy of proton-bound formate dimer}
+
+\author{Mateusz Marianski }
+
+%\date{28 March 2010} % without \date command, current date is supplied
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx,pgfplots} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{images/}} % set of paths to search for images
+	\pgfplotsset{compat=newest}
+\usepackage{amsmath,bm}  % extended mathematics
+\usepackage{commath} % provides mathematical conventions like \dif for dx in integrals
+\usepackage{booktabs} % book-quality tables
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{cleveref}
+\usepackage{chemmacros}
+	\usechemmodule{spectroscopy, units} % also loads siunitx and chemformula
+	\DeclareSIUnit\poise{poise}
+	\DeclareSIUnit\erg{erg}
+	\DeclareSIUnit\psig{psig}
+
+\input{phys-header.tex}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+The objective of this lab is to model vibrational excitations in proton-bound formate dimer using harmonic and anharmonic potentials \thanks{Adopted from Thomas {\it et. al} doi: 10.1002/anie.201805436}
+\end{abstract}
+
+%\printclassoptions
+
+
+\section{Introduction/Abstract} % (fold)
+The linkage formed when two neutral molecules or two anions are bound to a shared proton is a ubiquitous soft binding motif in condensed-phase chemistry.
+Here we are concerned with the latter case, the simplest example of which is the classic FHF$^-$ anion featuring a three-center, two-electron bond, which accommodates the bridging proton at the midpoint of the heavy atoms. 
+A more chemically significant anionic system involves the conjugate bases of carboxylic acids, RCOO$^-\cdots$H$^{+}\cdots^{-}$OOCR. These complexes are commonly observed, for example, in the anhydrous deprotonation of acidic protons in ionic liquids.
+X-ray structures indicate that the two carboxylate groups binding the extra proton are equivalent, suggesting that, like FHF$^-$, the proton resides at the midway point between two oxygen atoms.
+Similarly, a recent report detailed a protein crystal structure exhibiting equivalent C-O bond lengths in a proton-bound dicarboxylate motif, potentially indicating an equally shared proton.
+Because X-ray analysis does not reveal the location of the bridging proton, here we address its vibrational signature as well as those of the C-O groups residing on the flanking anions to better understand the local mechanics of this linkage. We specifically focus on the isolated RCOO$^-\cdots$H$^{+}\cdots^{-}$OOCR anionic complex (hereafter denoted AHA$^-$) and analyze its vibrational spectrum obtained using a cryogenic ion spectroscopy scheme involving capture and infrared photoexcitation in He droplets at 0.4K.
+
+An interesting aspect of the AHA$^-$ system is that proton attachment to one of the oxygen atoms in the carboxylate head group breaks the symmetry between the two equivalent C-O groups in the carboxylate. 
+This in turn suggests that proton accommodation by the pair of molecular anions requires an intramolecular structural deformation. 
+Thus, in contrast to spectroscopic characterization of the proton-bound neutral complexes, AH$^+$A, which have relied exclusively on the character of the vibrations associated with the bridging proton, the carboxylates offer the opportunity to follow the evolution of the CO$_2^-$ normal modes as the two CO$_2^-$ groups deform to accommodate the bridging proton. 
+This strategy has previously been applied to show that the intramolecular H-bond adopted by deprotonated dodecanedioic acid is, in fact, asymmetrical (that is, with the proton closer to one oxygen atom at the vibrational zero-point level).
+
+
+\pagebreak
+
+\section{Procedure} % (fold)
+\label{sec:procedure}
+
+\subsection{Problem I - Energy-hierarchy and harmonic IR}
+
+The $^{*}$ in text indicate questions that should be answered in discussion for the lab. 
+
+\begin{enumerate}
+	\item In directory {\tt Problem\_I} you will find three directories labeled {\tt conf\_01}, {\tt conf\_02} and {\tt conf\_03}. Each of them hold a {\tt geom.xyz} file with xyz-coordinates of geometry-optimized formate-formic acid dimer (negatively charged ion, abbreviated hereafter as AHA). First, visualize the structures with gaussview (for whatever reason, gaussview cannot open simple xyz-files, and you should open provided sdf file instead. The sdf files will not be needed after it). Which structures are symmetric and share the proton between two formates and which structure is a heterodimer of formic acid-formate $*$? Do not be fooled by 'lines' in the program symbolizing bonds, measure distances between atoms instead.  Assign whether the conformers contains symmetry elements $*$ (plane of symmetry, $C_2$ axis of symmetry, inversion center {\it etc.}). Save an with the molecular structure for the lab report. 	
+	
+	\item The structures are pre-optimized at PBE1PBE/def2TZVP (method and basis set, respectively) level of theory. As your first task, compute molecular vibrations in harmonic approximation for each conformer. In order to do so, prepare an Gaussian input file in each directory with following commands (assign proper charge and multiplicity):
+	
+	{\tt \%nproc=4 \\
+	     \%mem=1000MB \\
+	     \# PBE1PBE/def2TZVP freq  \\
+	     $[$empty-line$]$ \\
+	     conf-XX      \\ 
+	     $[$empty-line$]$ \\
+	     charge multiplicity} 
+	     
+	Next, append the input file with the molecular coordinates with following command:
+	
+	{\tt cat geom.xyz $>>$ input.com }
+	
+	After this, edit the file once again to remove additional lines between charge and xyz-coordinates and to add an extra empty line at the end of the file. 
+	
+	After the input is prepared, you can submit it to Gaussian by typing:
+	
+	{\tt g16 input.com $>$ input.log \&}
+	
+	These calculations will take approximately 10 minutes for each structure. You can follow the output file with a command {\tt tail -f input.log}. 
+	
+	\item When all computations are finished, we will plot the energy-hierarchy of the three conformers. In order to generate the plot, run the python script provided in the directory by typing:
+	
+	{\tt python plot\_zpe.py} 
+	
+	The script will generate a {\tt ZPE.png} file in the directory. Open it by typing {\tt shotwell ZPE.png}. The left part of the plot shows the relative potential energy of the conformers, whereas right part of the plot includes zero-point energy of ground-state vibrational levels in total energy. Which conformers change the most upon addition of zero-point energy? What is the reason for the large stabilization$^*$? 
+	
+	\item Next, Inspect the vibrations of respective conformers 01 and 02 (at this moment you can drop {\tt conf\_03} due to high energy; why is this conformer less stable than conf\_01?$^*$). Open the output log files with gaussview (open a new terminal window and type the command to run the program), open file and then click Results/Vibrations.  For conf\_01, focus on vibrations 6-9 and those associated with stretching of C=O bonds. Animate the vibrations - what are the vibrations 6-9 associated with? For conf\_02, localize the bands associated with proton motions and C=O band vibrations. 
+	
+	\item Next, we are going to compare theoretical spectra with {\it gas-phase} experimental spectrum of the dimer provided in {\tt experimental.dat} file. In order to plot all spectra together, run the plot\_ir.py script provided in the directory by typing:
+	
+	{\tt python plot\_ir.py}
+	
+	This script will generate a ir.png figure in the directory. Open the picture; it shows three theoretical spectra (black lines) compared to the experimental spectrum of AHA (red line, top). Find the positions of the bands you animated in the previous point. Do they match experimental spectrum? Note that the theoretical band position is redshifted by an empirical factor of 0.965 with respect to positions you observed in gaussview. This factor is a common ad-hoc correction to shortcomings of harmonic approximation. 
+	
+	The dashed vertical line shows the position of the most intense experimental band associated with excitations of the shared proton. As you see, the conf\_02 does not feature any vibration in the vicinity of the band. Where are the bands associated with the proton motion and why are there shifted to different wavenumbers$^*$? Conf\_01,  on the other hand, shows intense, but somewhat mismatched bands in the regions below 1000 wn$^{-1}$. We will investigate this mismatch in Problem\_II. Now, we are going to focus on carbonyl-stretching region around 1700 cm$^{-1}$. 
+	
+	\item Next, we want to investigate the origin of bands in 1700 cm$-{-1}$ region. In order to do so, run geometry optimization and freq calculations for formic acid and formate dimer in new directories. Delete respective atoms from provided geometries to generate new files. The command line in input file should read:
+	
+	{\tt \#P PBE1PBE/def2TZVP opt freq}
+	
+	After the calculations are finished, visualize results with gaussiview and find position of $\nu(C=O)$ mode and $\nu_{as}(COO^-)$ in, respectively, formic acid and formate species. Note the numbers and rerun the plot\_ir.py script with following modifiers: 
+	
+	{\tt python plot\_ir.py -a AAA -b BBB} 
+	
+	where AAA and BBB are positions of respective bands in formic acid and formate respectively. The script with generate a new image with these two bands overlaid on the spectra. The lines unravels the identity of two bands in conf\_02, which also confirms the assymetric nature of the dimer. However, in conf\_01, no bands matches the new lines, we find only small bands in between region. What does it tell us about the nature of the dimer$^*$? 
+	
+	\item As the last step, generate the vectors that describe the molecular vibration 6 to 9 in conf\_01. In order to do it, rerun the plot\_ir.py script with following modifier: 
+	
+	{\tt python plot\_ir.py -a AAA -b BBB -p N}
+	
+	where N is respective band number - you need to run the script four times, for the each band separately. The script will generate a series of files called mode\_N.dat that holds the vector that describes the vibrational motion, as well as information about frequency, intensity, force constant and reduced mass. We will need these files for Problem\_II. Copy the files to the {\tt Problem\_II/conf\_01-vib\_modes} directory. 
+	
+	\item For the lab report, include the two figures generated along with pictures of three conformers. Label the respective bands in the IR spectra and answer the questions with $^*$ in the text (The questions are more guidance about the discussion, if you want to learn more about symmetric and asymetric Hydrogen-bond, look into doi: 10.1126/science.1138962 and references herein). 
+
+\end{enumerate}
+	
+	
+	
+\subsection{Problem II - Anharmonic PES}
+
+In this exercise, we are going to investigate the difference between and harmonic and anharmonic treatment of molecular vibrations. This problem is calculations-intense and it will involve some waiting time for the machine to derive respective potentials. Before you start, make sure that you copied the vectors generated in Problem\_I to the conf\_01-vib\_modes directory. 
+
+\begin{enumerate}
+ \item The problem features two python scripts - {\tt create\_PES\_2d.py} and {\tt run\_dvr.py}. First generates the Potential Energy Surface (PES) along the normal modes (vectors) you generated in Problem\_I and compares it with the harmonic potential. It requires specification of number of the grid points and the step size. The latter is a wrapper around {\tt NuSol.py} program, which solves numerically for eigenstates and eigenvalues of the provided potentials. The exercise will deal only with 1d potential, although it is possible to extend the treatment to higher dimensions. 
+ 
+ \item First, create a template input file that will be used in the computations. Use same setup and method/basis set parameters you used in Problem\_I. However, now we want to run single-point calculations for predefined structures, like in H-F experiment. Hence, instead of {\tt opt freq} keywords, use {\tt sp} and {\tt nosymm} keywords (later is needed from ways gaussian handles coordinates). Call the file {\tt input.template}.
+ 
+ \item After creating the template input file, generate the potential along the mode number 6. In order to do so, run following command: 
+ 
+ {\tt python create\_PES\_2d.py -p 6 -g 21 s 0.01 -c 1} 
+ 
+ The modifiers are requesting calculations along normal mode number six, with 21 grid points and step size of 0.01 (the unit on the step size is bit confusing and we will skip the exact discussion). The -c 1 request to run the computations, otherwise the script just does the analysis of existing data. Short help is available upon typing:
+ 
+ {\tt python create\_PES\_2d.py --help} 
+ 
+ The computations will take approximately 15 minutes. The progress should be shown on the screen. 
+ 
+ \item The computations are performed in {\tt PES\_1D} directory. Inside the directory, there is an xyz-file that you can use to visualize the coordinate. 
+ 
+ \item After the calculations finish, an image with harmonic (green) and anharmonic (blue) potentials will be generated ({\tt 1d\_p6.png}) and the data will be saved in pot\_p6.dat files and two .npy files that are used for further computations. Take a look on the potentials and see if there is any difference between harmonic and anharmonic potentials.
+ 
+ \item Next, rerun the calculations for normal mode number 7. Use 19 grid points and the step size of 0.025 instead. After the calculations are finished, compare the new potentials with those for mode number 6. Explain the difference between the potentials$^*$.
+ 
+ \item As the next step, we are going to derive the eigenstates and eigenvalues of the potentials. In order to do it, run the command: 
+ 
+ {\tt python run\_dvr.py -p PPP -g GGG -s SSS -v potential -r red\_mass}
+ 
+ where PPP, GGG and SSS are same values you used in generating the potential, whereas {\tt potential} points to the name of the potential you want to use in calculations and red\_mass is reduced mass of the oscillator which you can find in files holding normal modes. The program might complain about old scipy/numpy/python versions, just press 'y' and confirm with enter. The calculations take fraction of a second. Repeat the calculations for both modes. 
+ 
+ \item The program will generate couple of new files. First, eval\_p\#.dat holds the energies of five lowest vibrational levels (in Hartrees) and evec\_p\#.dat holds the respective eigenfunctions. These values has been added to the plot in the '-estates' version (some of the scaling might have changes). Use the predicted energies of vibrational states to derive excitations energies. Does the anharmonic data agree with harmonic predictions and experimental values$^*$? 
+ {\it MM: Unfortunately, the 1-dimensional anharmonic potentials are not sufficient to properly model the vibrational excitation. Due to strong coupling between vibrational modes of same symmetry, the eigenstates should be modeled on multi-dimensional surface which provides more accurate estimates, however this is beyond the scope of this lab at this point.}
+ 
+ As a sanity check, you can run the program on harmonic potentials as well. The predicted spacing between energy levels should be constant, as expected for harmonic potential, and agree with energies predicted by gaussian. 
+ 
+ \item If you have time, redo the calculations for modes number 8 and 9. For the mode 8, use 15 grid points and step size of 0.01, for mode 9 use 19 grid points and step size of 0.025. 
+ 
+ \item For the lab report, provide plots with potentials and vibrational wave-functions overlaid on them. Compute the energy-level spacing, and compare how it differs between harmonic (quadratic) and anharmonic potentials, including the higher energy states. You will the {\tt pot\_p\#.dat} and {\tt eval\_p\#.dat} files for it. Comment about the changing symmetry of the wave functions. 
+ 
+\end{enumerate}
+
+% section procedure (end)
+
+% section data_analysis (end)
+
+%\section{Questions and Further Thoughts} % (fold)
+%\label{sec:questions_and_further_thoughts}
+%\begin{enumerate}
+%	\item \null 
+%	
+%	
+%	
+%\end{enumerate}
+%% section questions_and_further_thoughts (end)
+%
+%\section{Lab Report Guidelines} % (fold)
+%\label{sec:lab_report_guidelines}
+%
+%Your lab report should consist of the following parts:
+%\begin{description}
+%	\item[Title, Author and Date]
+%	\item[Introduction and Objective] A paragraph describing what we hope to find in this experiment, and how.
+%	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For computational chemistry, it means the software version, methods and basis sets you used. 
+%	\item[Results and Discussion] This should include the following:
+%	\begin{enumerate}
+%		\item A Stern-Volmer graph consisting of:
+%		\begin{enumerate}
+%			\item Your experimental data points
+%			\item The straight line from step 4 corresponding to the SES
+%			\item The tangent line from step 5 corresponding to the steady-state regime near [CBr4] = 0.
+%			\item The theoretical curve from step 6 corresponding to Eq. 15. 
+%			These lines and points should all be styled uniquely to distinguish them, and the equations displayed on or near the chart. 
+%			Label all axes appropriately (with units).
+%		\end{enumerate}
+%		\item A table of \( k_1 \) and \( R \) values calculated in the different ways discussed. 
+%		You don’t calculate \( k_1 \) from \cref{eq:sv_step_rel}, so you will only have two different values for \( k_1 \), but three different values for \( R \) . 
+%		Also give the value of \( D \) that you calculated for \emph{n-}heptane, with proper units (this can be given in a footnote to the table, or just the body of the discussion itself).
+%		\item Estimate the errors in each of these tabulated values as best you can, and include them in the table. 
+%		Do they agree to within the errors or uncertainty? 
+%		Which value of \( R \) should be the most accurate? 
+%		Which do you trust the most based on your handling of the experiment and analysis?
+%		\item What are the approximate radii of the anthracene and \ch{CBr4} molecules? 
+%		Since the observed collision radius, \( R \), should be the sum of these two radii, do your experimental values make sense?
+%		\item Answer any four of the questions in the section ``Questions and Further Thoughts''. This should not be a separate section, but should instead be included organically in the discussion as a way of filling it out.\sidenote{Do \textbf{not} submit a lab report with a section labeled ``Answers to Further Questions'', or some such nonsense… 
+%		Your goal is to present a lab report akin to those presented in scientific journals. 
+%		If you're not familiar with the style, skim the latest issue of \emph{J. Am. Chem. Soc.} or \emph{J. Chem. Phys.}}
+%	\end{enumerate}
+%	\item[Conclusion]
+%	\item[References]
+%	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
+%	Provide digital copies of the Excel (or other) files that you used to generate your graphs.
+%\end{description}
+% section lab_report_guidelines (end)
+
+
+
+%\nocite{*}
+%\bibliography{fluor}
+%\bibliographystyle{plain}
+
+
+\end{document}

@@ -1,20 +1,20 @@
-name: pchem2_lab
+name: pchem2_test
 channels:
-  - defaults
   - conda-forge
   - bioconda
   - psi4
+  - defaults
 dependencies:
   - python>=3.8
-  - pip>=21
-  - jupyterlab>=3 # to root env
+  # - pip # to root env
+  # - jupyterlab>=3 # to root env
   # - jupyterlab_server # to root env
   # - jupyterlab-latex # to root env
   # - jupyterlab_templates # to root env
   # - nbgitpuller # to root env
-  - numpy # to root env
-  - scipy # to root env
-  - matplotlib # to root env
+  # - numpy # to root env
+  # - scipy # to root env
+  # - matplotlib # to root env
   - ipykernel
   - pandas
   - seaborn

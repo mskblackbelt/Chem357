@@ -1,0 +1,29 @@
+%
+%% This file contains common code to fix the Tufte-LaTeX document class
+%
+\usepackage{iftex,ifluatex,ifxetex} % check if a document is being processed with pdfTeX, or XeTEX, or LuaTEX
+\newif\ifxetexorluatex % a new conditional starts as false, true if using XeTeX OR LuaTeX
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0
+   \xetexorluatextrue
+\fi
+%
+%% Bug fix for Tufte class, set up the spacing using fontspec features https://tex.stackexchange.com/questions/200722
+\ifxetexorluatex % if lua- or xelatex http://tex.stackexchange.com/a/140164/1913
+	\newcommand{\textools}[2][5]{%
+		\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+	}
+	\renewcommand{\allcapsspacing}[1]{\textools[15]{#1}}
+	\renewcommand{\smallcapsspacing}[1]{\textools[10]{#1}}
+	\renewcommand{\allcaps}[1]{\textools[15]{\MakeTextUppercase{#1}}}
+	\renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+	\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\else 
+\fi
+
+% \usepackage[natbib,%
+% 						style=nature,%
+% 						sort=none,%
+% 						citestyle=verbose,%
+% 						citecounter,%
+% 						citetracker]{biblatex}
+% \let\citet\footcite

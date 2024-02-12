@@ -1,0 +1,196 @@
+%% Header file cloned from https://github.com/wickles/latex-base
+
+%%%%%%%%%%%%%%%%%%
+%% CONTENTS
+%%%%%%%%%%%%%%%%%%
+% To-do / issues
+% Packages
+% Commands
+% Special Symbols
+% Environments
+% Notes
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%
+%% TO-DO / ISSUES
+%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%
+%% PACKAGES
+%%%%%%%%%%%%%%%%%%
+
+
+%% debugging / diagnostics
+\RequirePackage[l2tabu,orthodox]{nag} % nags user about obsolete and improper syntax
+
+\usepackage{xparse} % provides high-level interface for producing document-level commands
+	% via \[Declare/New/Renew/Provide/etc]DocumentCommand
+	% allows for more than one optional argument in commands
+
+\usepackage{ifdraft}
+
+%% fonts and encoding 
+
+\newcommand{\textools}[2][5]{%
+	\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+	}
+\renewcommand{\allcapsspacing}[1]{\textools[15]{#1}}
+\renewcommand{\smallcapsspacing}[1]{\textools[10]{#1}}
+\renewcommand{\allcaps}[1]{\textools[15]{\MakeTextUppercase{#1}}}
+\renewcommand{\smallcaps}[1]{\textit{#1}} 
+	% Version of Charter font included with macOS 13 doesn't work with \textsc
+	% It uses individual smallcaps glyphs instead. 
+% \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+
+%% font packages -- load fontspec, then select fonts and features. 
+
+\usepackage{fontspec}
+\usepackage[math-style=ISO,mathrm=sym]{unicode-math} 
+\ifdraft{}{
+	\setmainfont{XCharter}
+	\setmathfont{STIX Two Math}
+	\setmonofont{Fira Code}
+}
+
+
+% standard and structural packages
+
+\usepackage{bm} % provides \bm command for robustly bolding math characters
+\usepackage{microtype} % improves kerning in certain cases. 
+	% recommended to disable protrusion in table of contents!
+
+%% Latex interface 
+
+\usepackage{letltxmacro} % provides \LetLtxMacro command for correct renaming of commands
+\usepackage{etoolbox} % provides many useful programming tools, 
+	% e.g. \ifdefempty{cs}{true}{false}
+
+
+
+%% media interface
+
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{subfig} % Support for subfigures and subcaptions
+	\captionsetup[subfloat]{position=bottom}
+\usepackage{pgfplots} % for plotting in tikzpicture environment
+	\pgfplotsset{compat=1.18} % required to select newest version
+\usepackage{tikzscale} % allows \includegraphics{*.tikz} and scaling of TiKZ images
+
+
+%% math interface
+
+\usepackage{amsmath} % for nice math commands and environments
+\usepackage{mathtools} % extends amsmath with bug fixes and useful commands, e.g.
+	% \shortintertext for short interjections in align environment,
+	% \prescript{t}{b}{X} for simple, nicely aligned math pre-(super/sub)scripts
+	% \Aboxed{...} for boxing full lines in 'align' environment
+\usepackage{derivative} % provides \odv, \pdv, \odif, \pdif
+\usepackage{bropd} % provides \br command which simplifies nesting of bracketed terms 
+	% e.g. \br{\br{x-a}^2+\br{y-b}^2} produces \left[ \left( x-a \right)^2 + \left( y-b \right)^2 \right]
+\usepackage{array} % improves array support, esp. in tabular env. 
+	% see also xtab.sty
+\usepackage{booktabs} % allows for improved spacing in tabular env. 
+	% use \toprule, \*midrule, \bottomrule instead of \hline
+
+
+%% Science and programming packages
+\usepackage{fvextra} % for verbatim and comment environments with \Verb
+\usepackage{chemmacros} % for writing chemical formulas with \ch, e.g. \ch{AgCl2-} or \ch{^{227}_{90}Th+}
+	\usechemmodule{
+		spectroscopy, % loads formula and siunitx modules, provides \NMR command.  
+	    thermodynamics, % provides state variables and equations
+    	units, % provides \[mM]olar, \Torr, \atm, \cal, \cmc, \MolMass
+		} % also loads siunitx and chemformula
+	\sisetup{% siunit package options
+		per-mode = symbol,%
+		inter-unit-product=\ensuremath{{}\!\cdot\!{}},%
+		separate-uncertainty,%
+		multi-part-units = single,%
+		retain-explicit-plus,%
+		list-final-separator={, and },%
+		math-celsius = °\text{C}, % for temperatures
+		text-celsius = °C,
+		math-degree = °, % for angles
+		text-degree = °,%
+		input-digits = 0123456789 \pi \mitpi% necessary to use \pi in SI entries, affects rounding of digits.
+		}%
+	\DeclareSIUnit\ppm{ppm}
+	\DeclareSIUnit\angstrom{\text{Å}} % Symbol doesn't exist in STIXTwoMath, need to force text font. 
+	\DeclareSIUnit\wn{cm^{-1}}
+	
+
+%% misc packages
+
+\usepackage{framed} % provides boxed 'framed' environment for easily boxing text 
+\usepackage{tcolorbox}
+	\tcbuselibrary{skins, breakable, xparse, minted}
+	% provides fancier boxes than regular \makebox, \fbox, etc.
+	% e.g. \doublebox, \ovalbox, \shadowbox
+	% Can use `\tcbuselibrary{listings}` to use the listings library, 
+		% doesn't require a language to be defined. 
+\usepackage{empheq} % provides 'empheq' environment 
+	% for improved control over shape, size, color of framed boxes, e.g. 
+\newcommand{\boxedeq}[2]{
+	\begin{empheq}[box={\fboxsep=6pt\fbox}]{align}\label{#1}#2\end{empheq}
+}
+\newcommand{\coloredeq}[2]{
+	\begin{empheq}[box=\colorbox{lightgreen}]{align}\label{#1}#2\end{empheq}
+}
+
+
+%% document interface 
+
+\usepackage{footnote} % 
+\usepackage{hyperref} % adds hyperlinks and outline to PDF documents
+	\hypersetup{%
+		pdfencoding=auto,%
+		psdextra,%
+		pdfusetitle,%
+		colorlinks=true,%
+		linkcolor=BrickRed, %
+		citecolor=Green, %
+		filecolor=Mulberry, %
+		urlcolor=NavyBlue, %
+		menucolor=BrickRed, %
+		runcolor=Mulberry, %
+		linkbordercolor=BrickRed, %
+		citebordercolor=Green, %
+		filebordercolor=Mulberry, %
+		urlbordercolor=NavyBlue, %
+		menubordercolor=BrickRed, %
+		runbordercolor=Mulberry %
+		} %
+	% options enable enhanced unicode and math support in PDF outlines [causes conflict with \C command?]
+\usepackage{cleveref} % provides \cref command which inserts contextually correct word in front of ref.
+	% e.g. \cref{eq:myeq} --> Equation 1.2, or so
+\usepackage{bookmark} % improves package hyperref's bookmarking. 
+	% properties such as style and color can be set. Generates bookmarks in first run. 
+
+
+%% load later packages
+\usepackage[textsize=footnotesize]{todonotes}
+
+
+
+%%%%%%%%%%%%%%%%%%
+%% COMMANDS
+%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mtext}[1]{{\mathup{#1}}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\GammaFunc}{\symup{\Gamma}}
+\DeclareMathOperator{\laplacian}{\nabla^2}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\newcommand{\vb}[1]{\symbfit{#1}}
+
+%% pre-defined colors
+% standard: black, blue, brown, cyan, darkgray, gray, green, lightgray, lime, magenta, olive, orange, pink, purple, red, teal, violet, white, yellow
+%
+% dvips: Apricot, Aquamarine, Bittersweet, Black, Blue, BlueGreen, BlueViolet, BrickRed, Brown, BurntOrange, CadetBlue, CarnationPink, Cerulean, CornflowerBlue, Cyan, Dandelion, DarkOrchid, Emerald, ForestGreen, Fuchsia, Goldenrod, Gray, Green, GreenYellow, JungleGreen, Lavender, LimeGreen, Magenta, Mahogany, Maroon, Melon, MidnightBlue, Mulberry, NavyBlue, OliveGreen, Orange, OrangeRed, Orchid, Peach, Periwinkle, PineGreen, Plum, ProcessBlue, Purple, RawSienna, Red, RedOrange, RedViolet, Rhodamine, RoyalBlue, RoyalPurple, RubineRed, Salmon, SeaGreen, Sepia, SkyBlue, SpringGreen, Tan, TealBlue, Thistle, Turquoise, Violet, VioletRed, White, WildStrawberry, Yellow, YellowGreen, YellowOrange

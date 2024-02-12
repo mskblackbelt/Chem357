@@ -1,0 +1,91 @@
+\documentclass{standalone}
+\usepackage{pgfplots,amsmath}
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{math,arrows.meta}
+% \usepackage{siunitx,chemmacros}
+\begin{document}
+\tikzset{
+  every pin edge/.style={thick,<-,>=Stealth},
+}
+\pgfplotsset{
+  height = 0.4\textwidth,
+  width = 0.95\textwidth,
+  scale only axis,
+}
+
+\pgfplotsset{
+  nmr/.style =
+    {
+      % Using a cycle list just altering colour means that there are no
+      % marks: that is normal for this sort of plot.
+      cycle list name = color list, 
+      every axis plot/.append style = {thick},
+      % Ensure that the x-axis values always have the same number of 
+      % decimal places, to avoid e.g. "1" but "1.2".
+      every x tick label/.append style  =
+        { 
+          /pgf/number format/.cd ,
+           precision = 1 , 
+           fixed         ,
+           zerofill
+        },
+        clip=false,
+      % The labels apply to all plots of this type.
+      % Notice that in this case the zero is TMS, but that
+      % will depend on the experiment.
+    },
+}
+
+\begin{tikzpicture}
+ \matrix {
+	  \begin{axis}[nmr, axis lines = none,]
+      \addplot table from {figures/slow_spec.csv}; 
+      \addplot [only marks, mark=|, mark size=5pt] table from {figures/slow_int.csv}
+        node [pos=0,    pin=180: $(\Delta\nu_{\mathup{A}})_0^{1/2}$, ->] {}
+        node [pos=.25,  pin=0: ] {}
+        node [pos=.75,  pin=180: ] {}
+        node [pos=2.1,  pin=0: $(\Delta\nu_{\mathup{B}})_0^{1/2}$ ] {}
+        ;
+      \draw [thick,dashed] (-2,0.05) -- (-2,1) node [pos=0,anchor=north] {$\nu_{\mathup{A}}$};
+      \draw [thick,dashed] (2,0.05) -- (2,1) node [pos=0,anchor=north] {$\nu_{\mathup{B}}$};
+      \draw [black, thick, Bar-Bar] (-2,1.1) -- (2, 1.1) node[pos=0.5,anchor=south] {$\Delta\nu_0 = \nu_{\mathup{A}} - \nu_{\mathup{B}}$};
+      \node[align=left,anchor=west] at (-5.5,1.2) {a) Slow exchange};
+		\end{axis}
+    \\
+
+	  \begin{axis}[nmr, axis lines = none,]
+      \addplot table from {figures/interm_spec.csv}; 
+      \addplot [only marks, mark=|, mark size=5pt] table from {figures/interm_int.csv}
+        node [pos=0, pin=180: $(\Delta\nu_{\mathup{A}})_{\mathup{e}}^{1/2}$] {}
+        node [pos=.25, pin=0: ] {}
+        node [pos=.75,  pin=180: ] {}
+        node [pos=2.1,  pin=0: $(\Delta\nu_{\mathup{B}})_{\mathup{e}}^{1/2}$] {}
+      ;
+      \draw [thick,dashed] (-1.75,0.05) -- (-1.75,1) node [pos=0,anchor=north] {$\nu_{\mathup{A}}$};
+      \draw [thick,-Stealth] (1.75,0.05) -- (1.75,1) node [pos=0,anchor=north] {$I_{\mathup{max}}$};
+      \draw [thick,-Stealth] (0,0.05) -- (0,0.38) node [pos=0,anchor=north] {$I_{\mathup{min}}$};
+      \draw [black, thick, Bar-Bar] (-1.75,1.1) -- (1.75, 1.1) node[pos=0.5,anchor=south] {$\Delta\nu_{\mathup{e}}$};
+      \node[align=left,anchor=west] at (-5.5,1.2) {b) Intermediate};
+		\end{axis}
+    \\
+
+	  \begin{axis}[nmr, axis lines = none,]
+      \addplot table from {figures/coalesc_spec.csv}; 
+      \node[align=left,anchor=west] at (-5.5,1) {c) Coalescence};
+		\end{axis}
+    \\
+
+	  \begin{axis}[nmr, axis lines = none,]
+      \addplot table from {figures/fast_spec.csv}; 
+      \addplot [only marks, mark=|, mark size=5pt] table from {figures/fast_int.csv}
+        node [pos=0, pin=180: $(\Delta\nu)_{\mathup{e}}^{1/2}$] {}
+        node [pos=.75,  pin=0: ] {}
+      ;
+      \draw [thick,dashed] (0,0.02) -- (0,1) node [pos=0,anchor=north] {$\frac{1}{2}(\nu_{\mathup{A}} + \nu_{\mathup{B}})$};
+      \draw [thick, -Stealth] (5,-0.2) -- (-5,-0.2) node [pos=0.5, anchor=north] {$\nu$, (Hz)};
+      \node[align=left,anchor=west] at (-5.5,1) {d) Fast exchange};
+		\end{axis}
+    \\        
+};
+\end{tikzpicture}
+\end{document}
