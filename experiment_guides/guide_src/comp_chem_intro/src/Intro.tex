@@ -1,0 +1,89 @@
+%!TEX root = ./Intro_to_CC.tex
+
+\section{A first look at the Shell and Psi4}
+
+The work in this lab will take place entirely in a Jupyter notebook. That said, it is sometimes more convenient to manipulate objects on a computer using a Terminal program, especially when we're working with many files and folders, or items on a different computer. You can open Terminal from the JupyterLab launcher or from the menu under \menu{File>New}. 
+You should familiarize yourself with the Bash shell (the most common way to interface with the Terminal) by running through the exercises from DigitalOcean available at \url{https://www.digitalocean.com/community/tutorial_series/getting-started-with-linux},\sidenote{Go ahead and skip the section on Permissions for now, as that can get complicated very quickly.} as the Terminal is another valuable tool in your arsenal as you learn to use computers to their utmost capabilities. 
+
+The most common Bash commands are available for your reference in the appendix. 
+Before starting, make sure you understand how to navigate the file system with \Verb{pwd}, \Verb{ls}, and \Verb{cd}, and that you can copy, move, and remove a sample file using the \Verb{cp}, \Verb{mv}, and \Verb{rm} commands. 
+Also make sure you understand the difference between \emph{relative} and \emph{absolute} file paths.\sidenote{Hint: read the appendix!}
+	
+Psi4 has two ways to run calculations. The first is from the terminal, using a utility called \Verb{psi}. With this method, the user writes an input file (a plain text files with several directives in it), then calls that input file with the \Verb{psi} command. The results are written to a log file which can be referenced later. 
+
+The second method (and the one we will use) is a set of interactive calls available from within a Python session (\emph{i.e.,} within a Jupyter notebook) using the \href{https://psicode.org/psi4manual/master/psiapi.html}{PsiAPI} interface. This means we first need to import Psi4 to make all of the module functions available, but we can use it inside of any valid Python code we might imagine, so everything we've learned about loops, conditional statements, variable management, and plotting will work with the data produced by Psi4. 
+
+Shown below is a sample input for Psi4. 
+
+This code starts a calculation using \qty{500}{\mega\byte} of memory. 
+It then defines a water molecule based on connectivity of each atom to the central oxygen.
+Finally, it computes the energy of the molecule using the \Verb{scf} method and the \Verb{cc-pvdz} basis set. 
+We'll talk about these items later.
+By default, this output isn't \emph{saved} anywhere in a file, only printed in the output of our Jupyter cell and stored as part of the returned variable. 
+The output contains the basic information and results of the calculation such as the total energy, atomic forces, and so forth. 
+Additional output files might be generated according to the specified settings in our input code. 
+Individual components of the input file are described below. 
+\begin{pyinput}[title=Structure of a simple input, 
+label=lst:psi_samp]
+# Sample HF/cc-pVDZ H2O Computation
+
+psi4.set_memory('500 MB')
+
+h2o = psi4.geometry("""
+O
+H 1 0.96
+H 1 0.96 2 104.5
+""")
+
+psi4.set_options({
+    'reference' : 'rhf',
+    'basis'     : 'sto-3g',
+  })
+
+psi4.energy('scf')
+\end{pyinput}
+
+\begin{description}[font=\ttfamily\upshape]
+  \item[set\_memory(inputval)] This optional method sets manages the maximum memory usage during the calculations. The most efficient memory specification is beyond this tutorial. The default value is \qty{500}{\mega\byte}, which should be sufficient for most simple computations. 
+  \item[geometry(geom, name='default')] \Verb{geom} is a string defining the geometry of the molecule. This can be a set of \(xyz\) coordinates for each individual atom or a connectivity graph called a Z-matrix (we'll discuss this later). 
+  \item[reference] This option sets the type of SCF calculation to be performed, dependent on the molecule in question. \Verb{'rhf'} is the default, we'll use \Verb{'uhf'} later. If required, the value for reference will be given in each exercise.
+  \item[basis] Substitute the \Verb{'sto-3g'} word with the desired basis set for the calculation. This specifies a set of basis functions (for instance atomic orbitals, gaussian-type orbitals, plane waves) that will be used to express an electronic configuration. The recommended basis sets are specified in each exercise. 
+  \item[energy(name)] Substitute \Verb{name} with the method of choice for electron--electron interactions. In this tutorial, we will use several methods, namely Hartree-Fock (HF), Møller-Plesset second order perturbation theory  (MP2) and a few density-functionals. The details of each method will be covered in detail during the lecture. This particular calculation is done using the Hartree-Fock version of ``self-consistent field theory'' (hence \Verb{scf}). 
+\end{description}
+
+There are \emph{many} additional parameters that can be specified. Many of them are far beyond the scope of this tutorial, but we will introduce a few more options as we progress.
+% \begin{description}[font=\ttfamily\upshape]
+%   \item[charge] The program will guess the charge of the molecule, but this value can be explicitly set. 
+%   \item[multiplicity] As above, the program will try to guess the spin multiplicity of the system (\( 2\mtext{S}+1 \), where \( \mtext{S} \) is total spin). This should always be an integer. It can be explicitly set if necessary. 
+% \end{description}
+
+Remember, there are no bonds (sticks) in quantum chemistry. The bonding is the result of the respective positions of atoms in space. The `stick' visible in visualization programs is simply a rendering for more intuitive display. 
+
+\subsection{Additional tools and programs}
+
+\begin{description}[font=\bfseries]
+  \item[Bash shell] A short list of the basic bash (command line) commands is given in the appendix. 
+  \item[Text editor] JupyterLab comes with a built-in text editor. Most files can be opened and edited by double-clicking their icon in the file browser panel on the left side of the window. Occasionally, you will run into files with an extension that opens a different program (e.g., CSV files open the CSV viewer, which can't edit by default). In these cases, you'll have to click ``File > Open from Path…'' and give the full path to the file. 
+  New files can be created by clicking ``File > New > Text File'' or clicking on the Text File icon in the launcher. 
+  Another option is the command line text editor \Verb{vim}. 
+  When working from the command line, this program is (almost) always available, regardless of which computer you're using.
+  If you plan on continuing with computer work, it would behoove you to learn the basics of Vim.  
+  A number of introductions to Vim are available online. Two such examples are \url{https://www.openvim.com} and \url{https://vim-adventures.com/}.
+\end{description}
+
+% \begin{gaussinput}[title=A sample \Verb{input.com} file for the \ch{XeF4} molecule.]
+% %nproc=2
+% %mem=400MB
+% # b3lyp 6-31g
+% # sp scf=tight
+% 
+% Xenon tetrafluoride single point DFT calculation
+% 
+% 0 1
+% Xe  0.0   0.0   0.0
+% F   1.0   0.0   0.0
+% F   0.0   1.0   0.0
+% F  -1.0   0.0   0.0
+% F   0.0  -1.0   0.0
+% 
+% \end{gaussinput}

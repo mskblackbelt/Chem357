@@ -1,0 +1,220 @@
+\documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
+\input{header.tex}
+\usepackage[mackeys=text]{menukeys}
+\usepackage{enumitem}
+
+\sisetup{binary-units = true}
+  \DeclareSIUnit\kcal{kcal}
+  \DeclareSIUnit\wn{\raiseto{-1}\cm}
+  \DeclareSIUnit\hartree{Ha}
+
+%%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (fold)
+\usepackage[%
+  style=numeric-comp,%
+  sortcites,%
+  sorting=none,%
+  defernumbers=true,%
+  hyperref,
+  backend=biber,
+  ]{biblatex}
+  \addbibresource{pchem_bib.bib}
+
+  % Filter bibliography file to only include entries matching keyword.
+  \DeclareSourcemap{%
+	\maps[datatype=bibtex]{%
+	  \map{%
+		\step[nocited, final]%
+		\step[fieldsource=keywords, notmatch=compchem, final]%
+		\step[entrynull]%
+	  }%
+	}%
+  }
+
+  % Add a section for cited bibliography entries.
+  % At the end, create a second bibliography for uncited items (Further Reading).
+  \DeclareBibliographyCategory{cited}
+  \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+  % Define a style for the Further Reading section
+  \defbibenvironment{nolabelbib}
+	{\list
+	   {}
+	   {\setlength{\leftmargin}{2\bibhang}%
+		\setlength{\itemindent}{-\bibhang}%
+		\setlength{\itemsep}{\bibitemsep}%
+		\setlength{\parsep}{\bibparsep}}}
+	{\endlist}
+	{\item}
+
+  % Remove URL from citations if DOI is present.
+  \AtEveryBibitem{%
+	\iffieldundef{doi}{ % do nothing if true
+	}
+	{ % otherwise, clear the URL
+	  \clearfield{url}
+	}%
+  }
+% (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Source Code options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Command to insert PROMPT info before shell console input
+\newcommand{\BashFancyFormatLine}{%
+  \def\FancyVerbFormatLine##1{\textcolor{blue}{\small user:\char`\~\$}\ ##1}%
+}
+
+\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
+	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+	\begin{tcbclipinterior}
+	  \fill[red!20!blue!20!white] 
+	  (frame.south west)  rectangle 
+	  ([xshift=1.5em]frame.north west);
+	\end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em
+}
+
+\lstset{
+  breaklines=true,
+  basicstyle=\small,
+  numberstyle=\tiny,
+  numbers=left,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=2em,
+}
+
+\lstdefinestyle{gaussian}{
+  language=Clean,
+  % keywordstyle=\bfseries,
+  commentstyle=\slshape,
+  % stringstyle=\ttfamily,
+  numbers=left,
+  firstnumber=1,
+  stepnumber=2,
+  numberfirstline=true,
+  numbersep=2em,
+  numberstyle=\tiny,
+  breaklines=true,
+  breakautoindent=true,
+  tabsize=2,
+  basicstyle=\ttfamily\small,
+  showspaces=false,
+  showstringspaces=false,
+  morecomment=[s]{<}{>}
+}
+
+\newmintinline{bash}{}
+
+% Hack to force linebreaks at `¬` in bashinputs. From
+% https://tex.stackexchange.com/a/461455/27032
+\AtBeginEnvironment{bashinput}{%
+  \catcode`¬\active
+  \begingroup\lccode`~=`\¬\lowercase{\endgroup\def~{\linebreak}}%
+}
+
+\newtcblisting{bashinput}[1][]{
+  listing engine=minted,
+  minted language=bash, 
+  listing only,
+  minted options={,
+	formatcom=\BashFancyFormatLine
+  },
+  #1
+}
+
+\newtcblisting{gaussinput}[1][]{
+	listing engine=listings,
+	listing only,
+  listing options={
+	style=gaussian
+	},
+  #1
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% Listing settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[red!20!blue!20!white] 
+      (frame.south west)  rectangle 
+      ([xshift=1.5em]frame.north west);
+    \end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em
+}
+
+\lstset{
+  breaklines=true,
+  basicstyle=\small,
+  numberstyle=\tiny,
+  numbers=left,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=2em,
+}
+
+\newmintinline[pyinline]{python}{python3}
+
+%% TColorBox listings don't work correctly with Python code as of 2022-01-13. 
+% Use the \newminted code block below until this is fixed. 
+\newtcblisting{pyinput}[1][]{
+  listing engine=minted,
+  minted language=python3, 
+  listing only,
+  #1
+}
+
+% \definecolor{bg}{rgb}{0.99,0.99,0.95}
+% \newminted[pyinput]{python}{
+%   python3,
+%   frame=single,
+%   rulecolor=teal,
+%   bgcolor=bg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Introduction to Computational Chemistry}
+
+\author{Dustin Wheeler, Mateusz Marianski}
