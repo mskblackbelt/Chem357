@@ -1,84 +1,82 @@
 %!TEX root = ./Intro_to_CC.tex
 
-\section{Problem 2: Hydrogen Fluoride (HF): bond length and dipole moment} \label{sec:problemII}
+\section{Problem II: Hydrofluoric acid (HF) -- bond length and dipole moment} \label{sec:problemII}
 
-\subsection*{Hydrogen Fluoride (HF)}
+\subsection*{The hydrogen fluoride molecule (HF)}
 
 In the exercise, we will calculate the binding curve, atomization energy (\( \increment H_\mtext{at} \)), and dipole moment for the hydrogen fluoride (HF) molecule with two methods. 
-From a technical perspective, this exercise teaches how simple shell scripting can be used to make your (computational) life easier. 
+From a technical perspective, this exercise teaches how to use Python loops to perform repeated computations with Psi4. 
 
 \begin{enumerate} 
-  \item The first task of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations. 
-  Start by creating an input file (name it \Verb{input.temp}) which contains a F atom in the center of the coordinate system and a H atom at distance \Verb{DIST} along the \emph{z-}axis. 
-  \Verb{DIST} is a variable name for the H-F distance in different computational steps. 
-  Please note that HF is a neutral closed-shell system (i.e., correctly assign the multiplicity). 
+  \item The first task of this exercise will be to find learn a bit about the output data from a calculation
+  Start by defining a new hydrogen fluoride molecule. 
+  This is again done for you in the first cell. 
+  You need to fill in values for the molecular charge and the spin multiplicity (defined above).\sidenote{Please note that HF is a neutral, closed-shell system. Use this information when counting electrons and assigning multiplicity.} 
+  The input block also has space for you to specify the method and the basis set used for computation. 
+  In this exercise, use \Verb{HF} (Hartree-Fock) and the \Verb{6-31G(d,p)} basis set. 
+  
+  Notice the geometry is defined in terms of the atomic connectivities (the first atom is the "center", labeled 1, other atoms are labeled sequentially with connectivity assigned by number. The line ``\Verb{H 1 r}'' means that a hydrogen atom is placed distance \(r\) away from atom \num{1}.) The geometry could alternatively be defined explicitly in Cartesian coordinates like so: 
+  \begin{Verbatim}
+  F 0.0 0.0 0.0
+  H 0.0 0.0 r
+  \end{Verbatim}
+  We use the variable \Verb{r} as a placeholder so we can define this distance later in our code.\sidenote{This variable can be anything we like, as long as it's a valid variable name in Python (\emph{i.e.,} \Verb{interatomic_distance} would be perfectly acceptable).}
+  Before we start making multiple calculations, let's make a single one and figure out which computational variables we'd like to collect. 
+  We can set the distance variable to a value with \pyinline{hf_bond.r = 1.0}, then perform our energy calculation (again, making sure to return and store the wavefunction data, just as before.)
+  
+  Once we have this, you can print out all of the data saved in the wavefunction variable with \pyinline{wfn.variables()}.\sidenote{Assuming you named the wavefunction variable \Verb{wfn}.}
+  This will print out all of the properties returned by the current calculation. 
+  The data are returned as dictionary items, with the dictionary key in capital letters and the value given after the colon. 
+  An individual property can be recalled using \pyinline{wfn.property('name')}, where \Verb{'name'} is the (case-insensitive) name of the key. 
+  Go ahead and print out the value for the property \Verb{'current dipole'}. 
+  Notice that the value is returned as a vector: a three-element array of \(x\), \(y\), and \(z\) components. 
+  Recall that, by convention, the principle bond axis of a molecule is defined as \(z\). In a simple diatomic, this is the \emph{only} bond, and so the entirety of the dipole should lie along the \(z\)-axis. 
+  You should verify this by making sure the \(x\) and \(y\) components of the dipole array are zero. 
+  If they are, you can take the following easy shortcut: rather than needing to calculate the total length of the vector (``taking the norm''),\sidenote{Easily done using the NumPy function \Verb{np.linalg.norm}.} you can just grab the \(z\) component as the full magnitude of the dipole vector. 
+  In the rest of this exercise, we'll be using the energy and dipole values from this calculation. 
 
-The template file should specify the method and the basis set used for computation. 
-In this exercise, use \Verb{HF} (Hartree-Fock) and \Verb{6-31G(d,p)} basis set. 
-Use same keywords (\Verb{scf=tight} and \Verb{sp}) from previous exercise. 
+  \item The next step of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations. 
+  Create a loop to calculate the energy of the molecule at a range of  \(r\) values between \qtyrange{0.7}{1.3}{\bohr}. 
+  Save the energy of each calculation as an element in a list, then plot the list of \(r\) values against the list of energies. 
+  The plot should have a distinct minimum. 
+  To extract the minimum value from the energy list, use the \pyinline{min()} and \pyinline{argmin()} functions from NumPy. 
+  Both functions take a list as the input and return the minimum value and index of the minimum value, respectively. 
+  Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
 
-\item Next, take a look at the bash script \bashinline{run_scan.sh}, which runs \Verb{g16} calculations for a series of bond distances between \qty{0.7}{\angstrom} and \qty{1.3}{\angstrom} with \qty{0.1}{\angstrom} steps, and a denser step width of \qty{0.02}{\angstrom} between \qty{0.85}{\angstrom} and \qty{0.95}{\angstrom}.\sidenote{In details, the script performs following tasks:
-   \begin{itemize}
-   \item create a unique directory for each computation
-   \item copies your template input file
-   \item replace the bond distance place holder \texttt{DIST} with the bond distance
-   \item start G16 calculations
-   \item \texttt{grep} for distance/energy and write it to a respective file. 
-   \end{itemize}}
-   
-Run the bash script \bashinline{bash run.sh}, which will run the calculations and return you a file with a bond length vs energy. 
-Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
+  \item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
+  In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms. Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set. 
+  You can look back to our work on the lone hydrogen atom in Problem~I to guide your work. 
 
-\item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).
-In order to calculate \( \increment H_\mtext{at} \), we will also need the total energy of the isolated H and F atoms. Compute the total energies for the single atoms using the methods \Verb{HF} and \Verb{6-31G(d,p)} basis set. 
-
-%\begin{tip}
-%\textbf{Note:}\newline
-%Atoms are highly symmetric systems, often with multiple degenerate solutions. In the case of fluorine, for example, the unpaired p-electron might sit in the $p_x$, $p_y$, or $p_z$ orbital. All three solutions are equivalent. If the calculation is started unbiased, it might converge to a superposition of these three cases, which is a saddle point on the potential energy surface and results in partial electron occupations. Although in DFT non-integer occupations are in principle allowed, one should be very suspicious when obtaining such a solution for non-metallic systems. Typically, solutions exist that are lower in energy. They can be found by breaking the inherent symmetry of the problem, for example by applying a small external field at the beginning of the SCF cycle.
-%\end{tip}
-
-%To break the inherent symmetry of an atom and ensure integer occupation, set the keyword \texttt{switch\_external\_pert 10 safe}. This means that for 10 iterations, a small external field in the z-direction is applied and then switched off. Usually, this is sufficient to perturb the SCF out of the symmetric solution and towards the correct electronic structure.
-Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by subtracting the free-atom energies from the predicted total energy of HF (i.e., the minimum total energy found when varying bond distances).
-
-\begin{equation}
- \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
-\end{equation}
-
-How does this compare to the experimental value of \(\increment H_\mtext{at}=\qty{135.2}{\kcal\per\mol}\) (\qty{5.86}{\eV})? 
-
-\item Now, let us look at the dipole moment. Search for the corresponding line in the output file. 
-You can use a grep function for this task: 
-\begin{bashinput}
-  grep "Dipole" file-name -A1 | grep "Tot" | ¬awk '{print $8}'  
-\end{bashinput}
-The above command is a great example of an ugly ``bash one-liner'' that does the job and you don't question it.
-You can test the one-liner part by part (remove the last pipe(\Verb{|}) and everything following it, check the output, repeat) if you want to understand it better.\sidenote[][-5\baselineskip]{Briefly:
-\begin{itemize}
-  \item \Verb{-A1} in the first \Verb{grep} command tells it to output one \textbf{(1)} line \textbf{a}fter the search term in addition to the line with the search term. 
-  \item The next \Verb{grep} command just grabs the lines containing \textbf{Tot}al values. 
-  \item \Verb{tail -n1} grabs the indicated \textbf{n}umber of lines (\textbf{1}) at the end of the input.
-  \item \Verb{awk} is a ``pattern-directed scanning and processing language'' used in the Unix ecosystem. This command tells \Verb{awk} to print out the eighth record on each line of the input (the default record separator is a single space). 
-\end{itemize}}
-If you want to find the whole list of dipoles (from each folder beginning with ``dist\_'' in your directory), you can run the following:\sidenote{
-If you want to get really fancy (by which I mean, cut down on the amount of task switch you need to do), you can run Bash commands inside of your Jupyter notebook. 
-Just prefix the command with \Verb{!} and run the cell. 
-For example, a cell containing \Verb{!ls} would list the contents of your current directory as output in your notebook.
-You can assign that output to a python variable by placing the exclamation point after the assignment equals sign: \Verb{my_dir_list = !ls}. 
-Since you'll need to use this list of dipoles in your notebook, it's worth trying to run the \Verb{grep} function in your notebook to capture the list all at once.
-Just make sure you get the right path to the directory… check the contents of your directory with \Verb{!ls path/to/directory}.}
-\begin{bashinput}
-  grep Dipole dist*/*.log -A1 | grep Tot | awk '{print $9}'
-\end{bashinput}
-How does the dipole at the equilibrium distance compare with the experimental value of \qty{1.82}{debye}? 
-Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 
-Do you expect this trend to continue at large distances?  Why or why not?
-
-\item Next, repeat the bond length determination using \Verb{PBE1PBE} method and same basis set. 
-In order to do so, modify the input template, \Verb{mv} all the results into \Verb{HF} directory (\bashinline{mkdir HF; mv dist_* HF/}) and rerun the bash script. 
-In addition, you need to compute energies for hydrogen (H) and fluorine (F) again using new method. 
-How does the optimal bond length, atomization energy and dipole moment change?
-In the lab report, prepare a plot with both dissociation curves, dipole moments and computed atomization energies. 
-
+  %\begin{tip}
+  %\textbf{Note:}\newline
+  %Atoms are highly symmetric systems, often with multiple degenerate solutions. In the case of fluorine, for example, the unpaired p-electron might sit in the $p_x$, $p_y$, or $p_z$ orbital. All three solutions are equivalent. If the calculation is started unbiased, it might converge to a superposition of these three cases, which is a saddle point on the potential energy surface and results in partial electron occupations. Although in DFT non-integer occupations are in principle allowed, one should be very suspicious when obtaining such a solution for non-metallic systems. Typically, solutions exist that are lower in energy. They can be found by breaking the inherent symmetry of the problem, for example by applying a small external field at the beginning of the SCF cycle.
+  %\end{tip}
+  
+  %To break the inherent symmetry of an atom and ensure integer occupation, set the keyword \texttt{switch\_external\_pert 10 safe}. This means that for 10 iterations, a small external field in the z-direction is applied and then switched off. Usually, this is sufficient to perturb the SCF out of the symmetric solution and towards the correct electronic structure.
+  
+  Next, calculate the atomization energy (\( \increment H_\mtext{at} \)) of HF by subtracting the free-atom energies from the predicted total energy of HF (\emph{i.e.,} the minimum total energy found when varying bond distances).
+  
+  \begin{equation}
+   \increment H_\mtext{at}= E^\mtext{HF}_\mtext{tot} - E^\mtext{H}_\mtext{atom} - E^\mtext{F}_\mtext{atom}
+  \end{equation}
+  
+  How does this compare to the experimental value of \(\increment H_\mtext{at}=\qty{135.2}{\kcal\per\mol}\) (\qty{5.86}{\eV})? 
+  
+  \item Now, let us look at the dipole moment. 
+  How does the dipole at the equilibrium distance compare with the experimental value of \qty{1.82}{\debye}?\sidenote[][-5\baselineskip]{
+    Psi4 returns values in terms of atomic units. 
+    The debye (\unit{\debye}) is the most commonly used dipole unit, and is one of the few remaining relics in use from the cgs system. 
+    The SI unit of dipole is the coulomb-meter (\unit{\coulomb\meter}), but atomic dipoles are on the order of \qty{1e-30}{\coulomb\meter}, or a quectocoulomb-meter \unit{\quecto\coulomb\meter} (no, I'm not making that prefix up, it's one of the four newest SI prefixes), making it an unwieldy quantity. 
+    The true \emph{atomic} unit of the dipole is \unit{\dipole}, or the product of the charge on one electron multiplied by the Bohr radius.
+  } 
+  Plot the dipole moment vs. the bond distance. You will find a (mostly) linear correspondence. 
+  Do you expect this trend to continue at large distances?  Why or why not?
+  
+  \item Next, repeat the bond length determination using \Verb{PBE0} method and same basis set. 
+  In addition, you need to compute energies for hydrogen (H) and fluorine (F) again using new method. 
+  How does the optimal bond length, atomization energy and dipole moment change?
+  In the lab report, prepare a plot of both dissociation curves, a plot of both dipole moments and a comparison of the two computed atomization energies (and the experimental value). 
+  
 \end{enumerate}
 
 %\subsection*{Optional: Charge partition schemes.}

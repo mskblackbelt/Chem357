@@ -5,9 +5,12 @@
 
 \sisetup{binary-units = true}
   \DeclareSIUnit\kcal{kcal}
-  \DeclareSIUnit\wn{\raiseto{-1}\cm}
-  \DeclareSIUnit\hartree{Ha}
-
+  \DeclareSIUnit\debye{D}
+  \DeclareSIUnit[unit-font-command = \mathit]\bohr{\ensuremath{a_0}}
+  \DeclareSIUnit[unit-font-command = \mathit]\hartree{\ensuremath{E_{\textup{h}}}}
+  \DeclareSIUnit[unit-font-command = \mathit]\dipole{\ensuremath{e a_0}}
+  \DeclareSIPrefix\quecto{q}{-30}
+  
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
 \usepackage[%
@@ -64,46 +67,46 @@
 \newcommand{\BashFancyFormatLine}{%
   \def\FancyVerbFormatLine##1{\textcolor{blue}{\small user:\char`\~\$}\ ##1}%
 }
-
+\tcbuselibrary{minted}
 \tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
-	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
-\tcbset{
-  colback=blue!4!white,
-  colframe=blue!85!black,
-  listing only,
-  left=1.5em,
-  enhanced jigsaw,
-  breakable,
-  overlay={
-	\begin{tcbclipinterior}
-	  \fill[red!20!blue!20!white] 
-	  (frame.south west)  rectangle 
-	  ([xshift=1.5em]frame.north west);
-	\end{tcbclipinterior}}
-}
-\setminted{
-  style=tango,
-  fontsize=\small,
-  breaklines,
-  breakafter=|,
-  autogobble,
-  linenos,
-  numberfirstline=true,
-  firstnumber=1,
-  stepnumber=2,
-  numbersep=1em
-}
+% 	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
+% \tcbset{
+%   colback=blue!4!white,
+%   colframe=blue!85!black,
+%   listing only,
+%   left=1.5em,
+%   enhanced jigsaw,
+%   breakable,
+%   overlay={
+% 	\begin{tcbclipinterior}
+% 	  \fill[red!20!blue!20!white] 
+% 	  (frame.south west)  rectangle 
+% 	  ([xshift=1.5em]frame.north west);
+% 	\end{tcbclipinterior}}
+% }
+% \setminted{
+%   style=tango,
+%   fontsize=\small,
+%   breaklines,
+%   breakafter=|,
+%   autogobble,
+%   linenos,
+%   numberfirstline=true,
+%   firstnumber=1,
+%   stepnumber=2,
+%   numbersep=1em
+% }
 
-\lstset{
-  breaklines=true,
-  basicstyle=\small,
-  numberstyle=\tiny,
-  numbers=left,
-  numberfirstline=true,
-  firstnumber=1,
-  stepnumber=2,
-  numbersep=2em,
-}
+% \lstset{
+%   breaklines=true,
+%   basicstyle=\small,
+%   numberstyle=\tiny,
+%   numbers=left,
+%   numberfirstline=true,
+%   firstnumber=1,
+%   stepnumber=2,
+%   numbersep=2em,
+% }
 
 \lstdefinestyle{gaussian}{
   language=Clean,
@@ -182,16 +185,16 @@
   numbersep=1em
 }
 
-\lstset{
-  breaklines=true,
-  basicstyle=\small,
-  numberstyle=\tiny,
-  numbers=left,
-  numberfirstline=true,
-  firstnumber=1,
-  stepnumber=2,
-  numbersep=2em,
-}
+% \lstset{
+%   breaklines=true,
+%   basicstyle=\small,
+%   numberstyle=\tiny,
+%   numbers=left,
+%   numberfirstline=true,
+%   firstnumber=1,
+%   stepnumber=2,
+%   numbersep=2em,
+% }
 
 \newmintinline[pyinline]{python}{python3}
 
