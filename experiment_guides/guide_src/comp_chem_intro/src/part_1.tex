@@ -29,7 +29,7 @@ psi4.set_options({
   \item Now that we've defined a molecule and basis, we'll tell Psi4 what sort of calculation we'd like to run. 
   To begin, we'll perform a simple energy calculation and ask Psi4 to return the energy and the wavefunction for the system. 
 \begin{pyinput}
-energy, wfn = psi4.energy('hf'+basis, return_wfn=True)
+energy, wfn = psi4.energy('hf/'+basis, return_wfn=True)
 nbf = wfn.basisset().nbf()
 print(f'{energy=}\t{nbf=}')
 \end{pyinput}

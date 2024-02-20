@@ -11,7 +11,6 @@ From a technical perspective, this exercise teaches how to use Python loops to p
   \item The first task of this exercise will be to find learn a bit about the output data from a calculation
   Start by defining a new hydrogen fluoride molecule. 
   This is again done for you in the first cell. 
-  You need to fill in values for the molecular charge and the spin multiplicity (defined above).\sidenote{Please note that HF is a neutral, closed-shell system. Use this information when counting electrons and assigning multiplicity.} 
   The input block also has space for you to specify the method and the basis set used for computation. 
   In this exercise, use \Verb{HF} (Hartree-Fock) and the \Verb{6-31G(d,p)} basis set. 
   
@@ -27,7 +26,7 @@ From a technical perspective, this exercise teaches how to use Python loops to p
   Once we have this, you can print out all of the data saved in the wavefunction variable with \pyinline{wfn.variables()}.\sidenote{Assuming you named the wavefunction variable \Verb{wfn}.}
   This will print out all of the properties returned by the current calculation. 
   The data are returned as dictionary items, with the dictionary key in capital letters and the value given after the colon. 
-  An individual property can be recalled using \pyinline{wfn.property('name')}, where \Verb{'name'} is the (case-insensitive) name of the key. 
+  An individual property can be recalled using \pyinline{wfn.variable('name')}, where \Verb{'name'} is the (case-insensitive) name of the key. 
   Go ahead and print out the value for the property \Verb{'current dipole'}. 
   Notice that the value is returned as a vector: a three-element array of \(x\), \(y\), and \(z\) components. 
   Recall that, by convention, the principle bond axis of a molecule is defined as \(z\). In a simple diatomic, this is the \emph{only} bond, and so the entirety of the dipole should lie along the \(z\)-axis. 
@@ -36,11 +35,18 @@ From a technical perspective, this exercise teaches how to use Python loops to p
   In the rest of this exercise, we'll be using the energy and dipole values from this calculation. 
 
   \item The next step of this exercise will be to find the equilibrium bond distance of hydrogen fluoride (HF) from a series of calculations. 
-  Create a loop to calculate the energy of the molecule at a range of  \(r\) values between \qtyrange{0.7}{1.3}{\bohr}. 
+  Create a loop to calculate the energy of the molecule at a range of  \(r\) values between \qtyrange{0.7}{1.3}{\bohr}.\sidenote{
+    The easiest way to generate this list of values is to use the \pyinline{np.arange(start, stop, step)} function from NumPy. 
+    This function takes (up to) three arguments: start, stop, and step. 
+    If only a single argument is given, it acts just like the \pyinline{range()} function and generates integer values from 0 up to (but not including) the (stop) value given. 
+    If two values are given, it goes from the start to stop in unit steps, and providing all three values goes from start to stop in the requested step size.}
+  A good step size is \num{0.02} (this is the atomic unit of length, \(\unit{\bohr} \simeq \qty{52.9}{\pm}\)).
   Save the energy of each calculation as an element in a list, then plot the list of \(r\) values against the list of energies. 
   The plot should have a distinct minimum. 
-  To extract the minimum value from the energy list, use the \pyinline{min()} and \pyinline{argmin()} functions from NumPy. 
-  Both functions take a list as the input and return the minimum value and index of the minimum value, respectively. 
+  To extract the minimum value from the energy list, use the \pyinline{np.min()} and \pyinline{np.argmin()} functions from NumPy. 
+  Both functions take a list as the input. 
+  The first returns the minimum value of the list, while the second returns the index of the minimum value. 
+  Use the index of the minimum to find the corresponding value in the list of \(r\) values. 
   Which bond length corresponds to the lowest energy? How does the bond length compare to the experimental bond length of \qty{0.917}{\angstrom}?
 
   \item To compare with experimental values, we compute the atomization energy (\( \increment H_\mtext{at} \)).

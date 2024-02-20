@@ -24,7 +24,9 @@ H    0.00    1.06   0.00
   Because \ch{H3O+} carries a charge, we want to tell Psi4 explicitly what values to use for these fields. 
   \begin{description}[font=\ttfamily\upshape]
     \item[charge] The program will guess the charge of the molecule, but this value can be explicitly set. 
-    \item[multiplicity] As above, the program will try to guess the spin multiplicity of the system (\( 2\mtext{S}+1 \), where \( \mtext{S} \) is total spin). This should always be an integer. It can be explicitly set when necessary. 
+    \item[multiplicity] As above, the program will try to guess the spin multiplicity of the system (\( 2\mtext{S}+1 \).\sidenote{
+    \(S\) is the total spin of the system, the sum of all the individual electron spins, \(S = \sum{m_s}\). Multiplicity is an accounting of all the possible spin states of the system.}
+    This should always be an integer. It can be explicitly set when necessary. 
   \end{description}
   We want to relax the geometry and perform the vibrational analysis of the ion. 
   Rather than calculating energy with \pyinline{psi4.energy()}, we'll let Psi4 optimize the geometry, then ask it to perform a frequency analysis on the optimized molecule. 
