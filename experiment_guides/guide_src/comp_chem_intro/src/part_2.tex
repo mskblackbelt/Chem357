@@ -15,10 +15,10 @@ From a technical perspective, this exercise teaches how to use Python loops to p
   In this exercise, use \Verb{HF} (Hartree-Fock) and the \Verb{6-31G(d,p)} basis set. 
   
   Notice the geometry is defined in terms of the atomic connectivities (the first atom is the "center", labeled 1, other atoms are labeled sequentially with connectivity assigned by number. The line ``\Verb{H 1 r}'' means that a hydrogen atom is placed distance \(r\) away from atom \num{1}.) The geometry could alternatively be defined explicitly in Cartesian coordinates like so: 
-  \begin{Verbatim}
+  \begin{geominput}[title=Cartesian geometry definition]
   F 0.0 0.0 0.0
   H 0.0 0.0 r
-  \end{Verbatim}
+  \end{geominput}
   We use the variable \Verb{r} as a placeholder so we can define this distance later in our code.\sidenote{This variable can be anything we like, as long as it's a valid variable name in Python (\emph{i.e.,} \Verb{interatomic_distance} would be perfectly acceptable).}
   Before we start making multiple calculations, let's make a single one and figure out which computational variables we'd like to collect. 
   We can set the distance variable to a value with \pyinline{hf_bond.r = 1.0}, then perform our energy calculation (again, making sure to return and store the wavefunction data, just as before.)

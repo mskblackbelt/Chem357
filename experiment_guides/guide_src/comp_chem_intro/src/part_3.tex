@@ -10,13 +10,13 @@ Specifically, we will relax the \ch{H3O^+} molecule starting from an initial pla
 \begin{enumerate}
 
   \item The planar \ch{H3O+} geometry has been provided in the file \Verb{geom_planar.xyz}.
-  \begin{gaussinput}[title=Contents of \Verb{geom_planar.xyz}]
+  \begin{geominput}[title=Contents of \Verb{geom_planar.xyz}]
 O    0.00    0.00   0.00
 H    0.92   -0.53   0.00
 H   -0.92   -0.53   0.00
 H    0.00    1.06   0.00
 
-  \end{gaussinput}
+  \end{geominput}
   
   \item We'll create a Psi4 molecule based on the example provided in Problem~1.  
   Use the \Verb{HF} level of theory and the \Verb{6-31G(d,p)} basis set. 
@@ -56,13 +56,13 @@ H    0.00    1.06   0.00
 \subsection*{Pyramidal hydronium cation}
 
 Next, repeat the calculations for a pyramidal hydronium cation: 
-\begin{gaussinput}[title=Contents of \Verb{geom_pyramidal.xyz}]
+\begin{geominput}[title=Contents of \Verb{geom_pyramidal.xyz}]
 O    0.00   0.00   0.00 
 H    0.92  -0.53  -0.66 
 H   -0.92  -0.53  -0.66 
 H    0.00   1.06  -0.66 
 
-\end{gaussinput}
+\end{geominput}
 It's probably easiest to copy the group of cells from the planar section, then work through each one and modify the ``planar'' values to be ``pyramidal''. 
 Visualize the results again using the steps from the previous section. 
 You should see the \ch{H3O+} in a pyramidal conformation now.  
@@ -82,14 +82,14 @@ If you open it, you should see that the \( xyz \)-cartesian coordinates have bee
 The \( z \)-matrix allows precise control of the geometry within single calculations.
 
 \makeatletter
-\begin{gaussinput}[title=\(z\)-matrix in the PES input file]
-@H                         
-O   1 a                    
-H   2 a   1 HOX            
-H   2 a   1 HOX   3  120.0 
-H   2 a   1 HOX   3 -120.0 
+\begin{geominput}[title=\(z\)-matrix in the PES input file]
+@H                               
+O   1   a                        
+H   2   a   1   HOX              
+H   2   a   1   HOX   3    120.0 
+H   2   a   1   HOX   3   -120.0 
 
-\end{gaussinput}
+\end{geominput}
 \makeatother
   
 \begin{marginfigure}[-12\baselineskip]
