@@ -91,6 +91,10 @@ Grading
 
 <!--BREAK-->
 
+<!-- TODO: Need to decide how summaries are graded… Need a way to include some written response 
+    in the grade, but not a full discussion. Are all the questions in the lab guide appropriate 
+    for a summary? Need to edit question list. -->
+
 ## Description of Experiments ##
 
 Introduction to Data Analysis and Plotting 
@@ -145,6 +149,7 @@ Final Presentations
 [teams-link]: https://teams.microsoft.com/l/team/19%3AJPSY6YvMwlPW3FIf81HWMtX-uMai5ioGFgFRG9uHICA1%40thread.tacv2/conversations?groupId=da9c9005-d007-4d40-bc7c-092005d38ddb&tenantId=6f60f0b3-5f06-4e09-9715-989dba8cc7d8
 [ms-teams]: https://teams.microsoft.com
 [bb-announce]: http://bb.hunter.cuny.edu
+[jpca-home]: https://pubs.acs.org/journal/jpcafh
 [jpca-auth-info]: https://pubs.acs.org/page/jpcafh/submission/authors.html
 [jpca-auth-guide]: https://publish.acs.org/publish/author_guidelines?coden=jpcafh
 [cuny-harassment]: http://www.cuny.edu/about/administration/offices/la/Policy-on-Sexual-Misconduct-12-1-14-with-links.pdf
