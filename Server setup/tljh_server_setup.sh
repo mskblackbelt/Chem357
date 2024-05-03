@@ -18,15 +18,16 @@ sudo apt-get install curl git python3 python3-dev
 # TODO: create requirements file with packages required in base environment? Need to pass as URL
 curl -L https://tljh.jupyter.org/bootstrap.py | sudo -E python3 - 
 
-# TODO: modify tljh/user.py to add specific skel folder and groups to new users
-sudo sed -i s/("--create-home")/$1, "--skel /etc/skel-tljh", "--groups gaussian"/ /opt/tljh/??
+# Modify tljh/user.py to add specific skel folder and groups to new users
+sudo find /opt/tljh -name user.py | xargs grep -l 'create-home' | sudo xargs sed -i 's/\(\"--create-home\"\)/\1, \"--skel \/etc\/skel-tljh\", \"--groups gaussian\"/'
 
 ## Configure TLJH via tljh-config
 
 # Enable NativeAuthenticator to create new Linux users
 sudo tljh-config set auth.type nativeauthenticator.NativeAuthenticator
 
-# Make JupyterLab the default interface
+## Will be the default in a future release (after 1.0.0b)
+# Make JupyterLab the default interface 
 sudo tljh-config set user_environment.default_app jupyterlab
 
 # Prompt for admin username for TLJH
@@ -36,48 +37,57 @@ sudo tljh-config add-item users.admin $users
 
 
 
-# TODO: upgrade mamba, pip, conda to latest versions?
-# TODO: check location of mamba binary
-# sudo /opt/tljh/user/bin/mamba upgrade -y mamba conda pip
+# Upgrade mamba, pip, conda to latest versions?
+sudo /opt/tljh/user/bin/mamba upgrade -y mamba conda pip
 
 # TODO: Install packages in base conda environment (if not implemented during installation)
+sudo /opt/tljh/user/bin/mamba install -y ipykernel
 
 # Install computation conda env (prompt for file path first)
 read -p "Location of environment.yml file: " env_file_loc
 sudo /opt/tljh/user/bin/conda env create -f="$env_file_loc"
 
-# TODO: Install jupyterlab extension for OpenChemistry (need to know location of conda binary… or activate conda env?)
-
 # Configure JupyterLab templates
 sudo /opt/tljh/user/bin/jupyter serverextension enable --py jupyterlab_templates
 
-# TODO: place desired templates in appropriate location
+# TODO: place desired templates in appropriate location 
+# 	/opt/tljh/user/etc/jupyter/notebook_templates
+# TODO: disable or remove templates in default directories
+# To disable, add a file called .jupyterlab_templates_ignore to the folder 
+# containing the unwanted templates.
+# sudo -E touch /opt/tljh/user/lib/python3.*/site-packages/jupyterlab_templates/\
+#  {extension/notebook_templates/jupyterlab_templates,templates/jupyterlab_templates}/\
+#  .jupyterlab_templates_ignore
 
-# TODO: give access to the new python kernel for pchem users
-sudo /opt/tljh/user/bin/python3 -m ipython kernel install --name "pchem2" --display-name "Python (PChem Lab)" --sys-prefix
+# TODO: Update and build @openchemistry/jupyterlab extension, 
+# link in to pchem2 environment with `sudo jupyter labextension link .`
+# Clone forked version from https://github.com/mskblackbelt/jupyterlab_cjson
+# `npm install`, `npm run build`, `sudo -E jupyter labextension link .` from 
+# base conda environment.
+
+# Give access to the new python kernel for pchem users
+sudo /opt/tljh/user/envs/pchem2/bin/python3 -m ipykernel install --name "pchem2" --display-name "Python (PChem Lab)" --prefix=/opt/tljh/user/share/jupyter/kernels
 
 ## Create skeleton user folder for new JupyterHub users
-
-sudo cp /etc/skel /etc/skel-tljh
+if [! -d /etc/skel-tljh]; then
+	sudo cp /etc/skel /etc/skel-tljh
+fi
 
 sudo mkdir -p /srv/shared/{data,submissions}
 
+sudo ln -s -f /srv/shared /etc/skel-tljh
 
+## Configure for using Gaussian16
 
-sudo ln -s /srv/shared /etc/skel-tljh
-sudo ln -s /srv/data /etc/skel-tljh
-
-## Install Gaussian16
-
-# Create g16 user group, take ownership of $GAUSS_SCRDIR, $g16root/g16 folders
-# Export Gaussian information to skeleton .profile
-sudo cat << EOF >> /etc/skel-tljh/.profile
-## Bash setup commands for g16
-export g16root="/usr/bin" 
-export GAUSS_SCRDIR="/scrach-data/g16-scratch"
-
-source $g16root/g16/bsd/g16.profile
-EOF
+# # Create g16 user group, take ownership of $GAUSS_SCRDIR, $g16root/g16 folders
+# # Export Gaussian information to skeleton .profile
+# sudo cat << EOF >> /etc/skel-tljh/.profile
+# ## Bash setup commands for g16
+# export g16root="/usr/bin" 
+# export GAUSS_SCRDIR="/scrach-data/g16-scratch"
+# 
+# source $g16root/g16/bsd/g16.profile
+# EOF
 
 # Restart TLJH and Traefik on completion
 sudo service jupyterhub restart

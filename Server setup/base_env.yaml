@@ -4,13 +4,9 @@ channels:
   - defaults
 dependencies:
   # - python>=3.8
-  - pip
-  - jupyterlab>=3
   - jupyterlab_server
   - jupyterlab-latex
   - jupyterlab_templates
+  - jupyterlab-myst
   - ipykernel
   - nbgitpuller
-  - numpy 
-  - scipy
-  - matplotlib

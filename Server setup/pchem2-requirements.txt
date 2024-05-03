@@ -1,10 +1,7 @@
-pip
-jupyterlab
-jupyterlab_server
+ipykernel
+black
 jupyterlab-latex
 jupyterlab_templates
 jupyterlab-spellchecker
-ipykernel
-nbgitpuller
-black
+jupyterlab-myst
 jupyterlab-git
