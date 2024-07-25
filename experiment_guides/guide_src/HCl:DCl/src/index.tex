@@ -1,5 +1,4 @@
 %TODO 
-% - Check for updated libraries (cclib, etc.)
 % - Verify synthesis instruction
 % - Update experimental setup diagram with backflow trap
 
@@ -74,7 +73,7 @@ where \( c \) is the speed of light in \unit{\cm \per \s}, \( \widetilde{\nu}_e 
 \end{equation}
 
 The first and third terms on the right-hand side of \cref{eq:vib_rot_energies} are the harmonic-oscillator and rigid-rotor terms with \( r = r_e \).
-The second term (containing the \emph{anharmonicity constant}, \( \chi_e \)) takes into account the effect of anharmonicity on the vibrational levels. 
+The second term (containing the \emph{anharmonicity constant}, \( \nu_e\chi_e \)) takes into account the effect of anharmonicity on the vibrational levels. 
 Since the real potential, \( U\br{r} \), for a molecule differs from a harmonic potential, \( U_\mtext{HO} \), the real vibrational levels are not quite those given by \cref{eq:ho_energies} and a correction term is required.\sidenote{See \cref{fig:potential_curves}} 
 The fourth term (involving the \emph{centrifugal distortion constant}, \( D_J \)) accounts for the effects of centrifugal stretching on the rotational levels. 
 Since a chemical bond is not truly rigid but more like a stiff spring, it stretches somewhat when the molecule rotates. 
@@ -85,7 +84,7 @@ The constant \( \alpha_e \) is also quite small, but this term should not be neg
 
 \begin{figure}[tb]
   \centering
-    \includegraphics[width=0.9\textwidth]{images/potentials.tikz}
+    \includegraphics[width=0.95\textwidth]{images/potentials.tikz}
   \caption{Schematic diagram showing potential energy curves as a function of internuclear separation, \( r \), for a diatomic molecule.
 		The curve for a harmonic oscillator is depicted in red while the Morse potential is drawn in blue.
 		Vibrational levels are shown for each.
@@ -177,7 +176,7 @@ A closer approximation to the solid curve can be obtained by adding cubic and hi
 \end{equation}
 Although somewhat complicated, it can be shown~\autocite{herzberg89,levine75} that the \( c_1 \) and \( c_2 \) terms yield, as the first correction to the energy levels, precisely the \( -\widetilde{\nu}_e \chi_e \br{v + {1}/{2}}^2 \) term given in \cref{eq:vib_rot_energies}. 
 A similar conclusion is reached if \( U\br{r} \) is taken to have the Morse potential form given by\sidenote{
-	The parameter \( a \) is determined by equating \( k_e \) to the curvature of the Morse potential at \( r = r_e \), yielding
+	The parameter \( a \) (in units of \unit{1/\angstrom}) is determined by equating \( k_e \) to the curvature of the Morse potential at \( r = r_e \), yielding
 		\[
 		  a = \sqrt{\frac{k_e}{2 D_e}} \, .
 		\]
@@ -185,7 +184,7 @@ A similar conclusion is reached if \( U\br{r} \) is taken to have the Morse pote
 	It provides a very good approximation to the real potential energy curve at all distances except \( r \ll r_e \), a region of no practical significance. 
 } 
 \begin{equation}
-	U\br{r} = D_e \br{\br{1 - \exp{-a\br{r - r_e}}}^2 - 1} \, .
+	U\br{r} = D_e \br{\br{1 - \exp\br{-a\br{r - r_e}}}^2 - 1} \, .
 	\label{eq_morse_potential}
 \end{equation}
 In both cases, the mass dependence of \( \widetilde{\nu}_e \chi_e \) is found to be greater than for \( \widetilde{\nu}_e \) and is
@@ -272,7 +271,7 @@ where \( u = h \nu / \br{kT} = h c \widetilde{\nu} / \br{k T} = 143.88 \widetild
 This experiment must be performed with an IR spectrometer capable of medium to high resolution (\( > \qty{2}{\wn} \) resolution). 
 A high-quality grating spectrometer and most FTIR instruments are generally capable of this, and FTIR instruments don't require calibration with external gas standards. 
 
-The infrared gas cell is constructed from a short (\qtyrange{5}{10}{\cm}) length of large-diameter (\qtyrange{4}{5}{\cm}) Pyrex tubing with a vacuum stopcock attached. 
+The infrared gas cell is constructed from a short (\qtyrange{5}{10}{\cm}) length of large-diameter (\qtyrange{2}{4}{\cm}) Pyrex tubing with a vacuum stopcock attached. 
 Infrared-transparent windows are clamped agains O-rings at the ends of the cell or are sealed on the ends with Glyptal resin. 
 For studies concentrating on the region \SIrange{4000}{500}{\wn}, \ch{NaCl} windows will suffice. 
 When the spectrum of interest extends down to \qty{\sim400}{\wn}, \ch{KBr} windows are necessary. 
@@ -285,7 +284,7 @@ In the present experiment, inert sapphire windows with transmission down to \qty
 Before beginning the synthesis, power on the FTIR. 
 % A 50-mL two-neck round-bottom flask and a 10-cm air condenser should be washed thoroughly with soap and water followed by several rinses with distilled water.
 % Then, the glassware  should be dried in an oven for approximately \qty{10}{\minute} at a temperature near \qty{110}{\celsius}.
-Prior to starting, purge the 5-cm gas cell (Thermo Fisher) with nitrogen gas to clean out the cell.
+Prior to starting, purge the 10-cm gas cell (Thorlabs) with nitrogen gas to clean out the cell.
 This can be accomplished by attaching the tubing from the nitrogen tank regulator to one of the glass ports on the gas cell. 
 Open both stopcocks on the gas cell and slowly open the needle valve on the nitrogen tank\sidenote{Ask the instructor if you are unfamiliar with the use of a regulator.} until a steady stream of gas is exiting the open port of the gas cell. 
 After allowing the gas to flow for \qty{2}{\minute}, close the stopcock on the gas cell port releasing the gas and immediately close the stopcock on the port receiving the flowing gas, effectively sealing the gas cell. 
@@ -294,9 +293,9 @@ Remove the tubing from the gas cell port and take the gas cell to the FTIR to ob
 Return the gas cell to the fume hood for the gas synthesis. 
 
 % By this time, the glassware in the oven should be dry. Remove the dry glassware and place on a piece of paper towel to cool for another \qty{10}{\minute} (or until cool to the touch).
-Prepare an indicator solution by dissolving \numrange{3}{4} drops of bromcresol green in \qty{300}{\mL} of DI water in a \qty{400}{\mL} beaker. 
+Prepare an indicator solution by dissolving \numrange{2}{4} drops of bromcresol green in \qty{150}{\mL} of DI water in a \qty{200}{\mL} beaker. 
 Attach Tygon tubing to the two stems of the gas cell, lubricating with glycerin to help the tubing slide on the glass. 
-Take the end of one tube and submerge it in your indicator solution.\sidenote{This will fill two roles: as a bubbler, it will prevent atmospheric gases from diffusing back into the cell; and as an indicator, it will show when sufficient \ch{HCl} has passed through the cell. \ch{HCl} is highly soluble in water, so the gaseous \ch{HCl} will quickly acidify the water.} 
+Take the end of one tube and connect it to your water trap. The tubing exiting your water trap should be submerged in your indicator solution.\sidenote{This will fill two roles: as a bubbler, it will prevent atmospheric gases from diffusing back into the cell; and as an indicator, it will show when sufficient \ch{HCl} has passed through the cell. \ch{HCl} is highly soluble in water, so the gaseous \ch{HCl} will quickly acidify the water.} 
 
 To set up the rest of the apparatus, clamp a \qty{50}{\mL} round-bottom flask to a ring stand. 
 Place \qty{\sim5}{\mL} of \ch{D2O} with \qty{\sim5}{\mL} concentrated \ch{HCl} in the round-bottom flask.
@@ -306,17 +305,17 @@ Insert the end of the second tube (attached to the gas cell) into another stoppe
 % Mix \qty{\sim5}{\mL} of \ch{D2O} with \qty{\sim5}{\mL} concentrated \ch{HCl},\sidenote{this is easiest to do in a small beaker}, then pour the mixture into the round-bottom flask via the second neck.
 % Finally, insert another stopper with a hole into the second neck of the flask.
 %
-% With a disposable plastic pipette, obtain \qty{\sim 1}{\mL} of concentrated \ch{H2SO4}.
-% Insert the pipette (\textbf{carefully} so as not to prematurely inject it) into the hole of the second stopper.
-% Once you have verified that all of the holes are plugged, squeeze \numrange{1}{2} drops of sulfuric acid into the solution.
-% You should see vigorous bubbling in the flask.
-% At this point, open the stoppers on the gas cell.
-% Continue to \emph{slowly} add sulfuric acid drop-wise to the flask, watching the bubbles evolving in the indicator.
-
-Suspend the round-bottom flask in a water bath held around \qty{80}{\celsius}. 
-Gaseous \ch{HCl} will slowly evolve from the solution and bubble through the indicator solution. 
-When the indicator changes color from blue to green/yellow, close the stopcocks on the gas cell and remove the round-bottom flask from the water bath. 
-This procedure should take \qty{\sim20}{\min}. 
+With a disposable plastic pipette, obtain \qty{\sim 2}{\mL} of concentrated \ch{H2SO4}.
+Insert the pipette (\textbf{carefully} so as not to prematurely inject it) into the hole of the second stopper in the round-bottom flask.
+Once you have verified that all of the holes are plugged, squeeze \numrange{1}{2} drops of sulfuric acid into the solution.
+You should see vigorous bubbling in the flask.
+At this point, open the stoppers on the gas cell.
+Continue to \emph{slowly} add sulfuric acid drop-wise to the flask, watching the bubbles evolving in the indicator.
+% Suspend the round-bottom flask in a water bath held around \qty{80}{\celsius}. 
+% Gaseous \ch{HCl} will slowly evolve from the solution and bubble through the indicator solution. 
+When the indicator changes color from blue to green/yellow, close the stopcocks on the gas cell and remove the tubing. % This procedure should take \qty{\sim20}{\min}. 
+While the cell is still in the hood, briefly vent the cell to decrease the pressure inside the cell (we want to let out the excess \ch{HCl} vapor, but not let atmospheric gases diffuse in). 
+Lower gas pressure in the cell will result in narrower spectral lines due to decreased collision broadening. 
 Carefully remove the tubes from the gas cell and proceed to the spectrometer for analysis. 
 
 Make sure the experimental settings in the FTIR software are appropriate. 
@@ -339,39 +338,66 @@ An arrangement for filling the cell is shown in \cref{fig:cell_filling}.
 \label{sub:theoretical_calculations}
 
 The following work will be done during the second week of this lab. 
-You will need to calculate the physical properties of \ch{HCl} and \ch{DCl} using Gaussian~\autocite{gaussian16}, including the potential energy, equilibrium bond length, and the predicted vibrational and rotational energies for the molecule.
+You will need to calculate the physical properties of \ch{HCl} and \ch{DCl} using Psi4~\autocite{psi42012}, including the potential energy, equilibrium bond length, and the predicted vibrational and rotational energies for the molecule.
 
-Using Gaussian, calculate the potential well for the \ch{HCl} molecule. 
+Using Psi4, calculate the potential well for the \ch{HCl} molecule. 
 Because of the methods used for calculation, the mass of the nuclei doesn't influence geometry, so results will be the same for the four isotopologues. 
-To simplify this process, you can use the \Verb{scan} trick from from the \ch{H3O+} PES scan in the Introduction to Computational Chemistry lab.
-A number of files are available for your use in the \Verb{hcl-dcl_lab} folder in JupyterLab. 
+We performed a nearly identical calculation when doing the bond scan exercise on \ch{HF}. 
+% A number of files are available for your use in the \Verb{hcl-dcl_lab} folder in JupyterLab. 
 % These files should be available for you in the \Verb|PChem_Lab| folder on the desktop, but a copy is also available on Blackboard.
-You will need to modify the scan parameters in the \Verb{hcl_bond.com} file (printed below).
+You will need to modify the scan parameters for the Python input printed below.
 The selected basis set and level of theory make this a quick calculation, so you can set the scan parameters quite large. 
-I recommend scanning from \qtyrange{0.6}{4.5}{\angstrom} in steps less than \qty{0.05}{\angstrom}. 
+I recommend scanning from \qtyrange{0.6}{3.5}{\angstrom} in steps less than \qty{0.05}{\angstrom}. 
 With this resolution, you should obtain a plot that gives good fidelity around the minimum while showing realistic behavior at long bond lengths. 
-\gaussfileinput[title=Contents of \Verb{hcl_bond.com}]{Gaussian_simulations/hcl_bond.com}
+% \gaussfileinput[title=Contents of \Verb{hcl_bond.com}]{Gaussian_simulations/hcl_bond.com}
+\begin{pyinput}
+method_list = ['hf', 'remp2', 'pbe0']
+basis = '6-311+g(d,p)'
 
-Once you have calculated the potential energy surface for the molecule, perform an optimization and frequency analysis of the \ch{HCl} molecule.\sidenote{As outlined for \ch{H3O+} in Problem 3 in the Introduction to Computational Chemistry lab.} 
-You need to do this for \ch{H^{35}Cl}, \ch{H^{37}Cl}, \ch{D^{35}Cl}, and \ch{D^{37}Cl}. 
-Here is an example header for the input file for this calculation. 
+hcl = psi4.geometry("""
+H
+Cl  1  r
+""")
 
-\gaussfileinput[title=Template Gaussian input file vibrotational calculations on a diatomic molecule.]{Gaussian_simulations/sample.com}
+r_vals = np.arange(0.6, 3.5, 0.05)
+hcl_bond = dict()
 
-Line 3 sets the theory level and basis set to reasonable values for our computational abilities and time. 
-Line 4 tells Gaussian to \Verb{opt}imize the geometry, then do a \Verb{freq}uency analysis including \Verb{anharm}onic and \Verb{vib}rational-\Verb{rot}ational coupling terms. 
-You will need to replace all items in angle brackets with appropriate data.
-Note the addition of the \lstinline[language=gaussian]{(Iso=<mass-num>)} option after the element labels.\sidenote{i.e., \lstinline[language=gaussian]{<atom1>(Iso=<mass_num>)} should become \lstinline[language=gaussian]{He(Iso=3)} for a \ch{^3He} atom)} 
-By inserting the relevant value (total number of protons and neutrons) for your isotope (\num{2} for deuterium), you can tell Gaussian to calculate using a different atomic mass. 
+for method in method_list:
+    energies = []
+    for dist in r_vals:
+        hcl.r = dist
+        hcl.update_geometry()
+        e = psi4.energy(method+'/'+basis)
+        energies.append(e)
+    hcl_bond[method] = np.array(energies)
 
-You will need to import the files into your Jupyter notebook the same way you imported the files for the \ch{H3O+} molecule in the Introduction to Computational Chemistry lab. 
-From there, you need to extract the values for the equilibrium bond length, \( r_0 \), and zero-point energy \( D_e \). 
+\end{pyinput}
 
-You will need to search the output file for the relevant information on the energy of the ground state (relative to the zero-point energy), \( D_0 \), and the vibrational and rotational energies, \( \widetilde{\nu}_e \) and \( B_e \) (\Verb{cclib} doesn't yet parse these values).
-The vibrational and rotational constants are listed in tables under the heading ``Vibrational Energies at Anharmonic Level''.
-You will need to find the \emph{two} values for the first-mode vibrational energy: one calculated using a harmonic analysis, the second incorporating the effects of anharmonicity.
-In this same section will be equilibrium rotational constants for the two degenerate rotational modes (labeled \Verb|Ba(y)| and \Verb|Ca(z)|) and the energy (relative to the zero-point energy) of the ground state \( (D_0) \).\sidenote{All energy values are listed in \unit{\wn}.}
+Once you have calculated the potential energy surface for the molecule, you'll need to perform a frequency analysis of the \ch{HCl} molecule. 
+You can use the \Verb{psi4.diatomic.anharmonicity()} function to calculate all the required constants for the molecule. 
+The function takes a list of bond lengths and a list of energies as inputs, and outputs a dictionary of constants. 
+Optionally, you can define the molecule used for computation. 
+In the example shown below, if you leave \Verb{mol=} blank (in other words, accepting the default value), Psi4 will use the last defined molecule.
+This can sometimes lead to unexpected results… better to explicitly define your molecule.   
+For your lists of bond lengths and energies, use the \Verb{'pbe0'} data from the bond analysis performed previously so you don't need to recalculate the potential energy curve for each isotopologue (the values won't change anyway, since Psi4 doesn't account for isotopic differences in energy calculations). 
+You need to get anharmonicity constants for \ch{H^{35}Cl}, \ch{H^{37}Cl}, \ch{D^{35}Cl}, and \ch{D^{37}Cl}, so setting up a loop and saving the results in a dictionary will reduce the amount of repetition in your code.
+Here is an example of the calculation for \ch{H^{35}Cl}:
 
+\begin{pyinput}
+h35cl = psi4.geometry("""
+Cl@34.968852682
+H@1.0078 1 1.0
+""")
+
+# The next step would be a good place to wrap your loop around to calculate all four 
+hcl_consts['h35cl'] = psi4.diatomic.anharmonicity(r_vals, hcl_bond['pbe0'], mol=h35cl)
+\end{pyinput}
+
+Notice how isotopes are defined in Psi4. 
+You'll need to look up appropriate isotopic masses for your four atoms and use that data to define the four required molecules. 
+Notice that the \(z\)-matrix for the isotope has the separation between the two atoms set to \num{1.0}. There is no need to create this molecule in its equilibrium geometry, as the anharmonicity calculation will return the equilibrium value as one of the dictionary entries. 
+
+Note that the units are not given with the constants. In general, Psi4 provides energies in hartrees, bond lengths in Ångstroms, vibrational constants in wavenumbers, and rotational constants are in hertz. 
 % subsection theoretical_calculations (end)
 
 % section procedure (end)
@@ -380,20 +406,21 @@ In this same section will be equilibrium rotational constants for the two degene
 \label{sec:data_analysis}
 
 \begin{enumerate}
-	\item Select your best \ch{HCl} and \ch{DCl} spectra and index the lines with the appropriate \( m \) values, as seen in \cref{fig:typ_spectrum}. 
+	\item Import your \ch{HCl} and \ch{DCl} spectra and index the lines with the appropriate \( m \) values, as seen in \cref{fig:typ_spectrum}. 
 	If the \ch{^{35}Cl}/\ch{^{37}Cl} splitting is seen, index both sets, but be sure to separate them appropriately.
 	Make a table of these \( m \) values and the corresponding frequencies, \( \widetilde{\nu}\br{m} \). 
 	Express the frequencies in \unit{\wn} to the tenth of a \unit{\wn}. 
 	Then, list the differences between adjacent lines, \( \increment{\widetilde{\nu}}\br{m} \), which will be roughly \( 2 B_e \), but will vary with \( m \). 
-	\item Plot \( \increment{\widetilde{\nu}}\br{m} \) against \( m \) and plot the trendline for the series. 
+	\item Plot \( \increment{\widetilde{\nu}}\br{m} \) against \( m \).
 	If any values seem out of line, check the calculation for that cell. 
-	\item Carry out a multiple linear least-squares fit to the data using \cref{eq:both_branches1} to determine \( \widetilde{\nu}_0 \), \( B_e \), \( \alpha_e \), and their standard errors. 
+	\item Carry out a polynomial least-squares fit to the data using \cref{eq:both_branches1} to determine \( \widetilde{\nu}_0 \), \( B_e \), \( \alpha_e \), and their standard errors. 
 	Repeat this fitting procedure using \cref{eq:both_branches2}, noting that high \( m \) transitions will be the most important ones in determining \( D_J \), due to its \( m^3 \) dependence. 
-	\item Using your values of \( \widetilde{\nu}_0 \) for \ch{HCl} and \ch{DCl}, determine \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \) for \ch{HCl}. From \( \widetilde{\nu}_e \), calculate \( k \) for \ch{HCl}. 
+	\item Using your values of \( \widetilde{\nu}_0 \) for \ch{HCl} and \ch{DCl}, determine \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \) for the various molecules. From \( \widetilde{\nu}_e \), calculate \( k \) for \ch{HCl}. 
 	\item Calculate \( I_e \), the moment of inertia, and \( r_e \), the internuclear distance, for both \ch{HCl} and \ch{DCl}. 
-	Tabulate your results, along with your estimates  of the experimental uncertainty. Compare your results with literature values found in \textcite{kerr82}. 
-	\item Using your value of \( \widetilde{\nu}_0 \) for \ch{HCl}, calculate \( \widetilde{C}_v\br{\mtext{vib}} \) at \qty{298}{\K} and at \qty{1000}{\K} from \cref{eq:vib_part_func2}. 
-	Compare the spectroscopic value \( \widetilde{C}_v = 5/2 R + \widetilde{C}_v(\mtext{vib}) \) with the experimental \( \widetilde{C}_v \) value obtained from directly measured values~\autocite{lewis61,spencer48} of \( \widetilde{C}_p \) and the expression \( \widetilde{C}_v = \widetilde{C}_p - R \): \( \widetilde{C}_v = \qty{20.80}{\J \per \mole\K} \) at \qty{298}{K} and \qty{23.20}{\J \per \mol\K} at \qty{1000}{\K}. 
+	Tabulate your experimental and theoretical results, along with your estimates  of the experimental uncertainty. 
+	Compare your results with literature values found in \textcite{kerr82}. 
+	\item Using your value of \( \widetilde{\nu}_0 \) for \ch{HCl}, calculate \( \widetilde{C}_v\br{\text{vib}} \) at \qty{298}{\K} and at \qty{1000}{\K} from \cref{eq:vib_part_func2}. 
+	Compare the spectroscopic value \( \widetilde{C}_v = 5/2 R + \widetilde{C}_v(\text{vib}) \) with the experimental \( \widetilde{C}_v \) value obtained from directly measured values~\autocite{lewis61,spencer48} of \( \widetilde{C}_p \) and the expression \( \widetilde{C}_v = \widetilde{C}_p - R \): \( \widetilde{C}_v = \qty{20.80}{\J \per \mole\K} \) at \qty{298}{K} and \qty{23.20}{\J \per \mol\K} at \qty{1000}{\K}. 
 \end{enumerate}
 % section data_analysis (end)
 
@@ -402,17 +429,17 @@ In this same section will be equilibrium rotational constants for the two degene
 
 \begin{enumerate}
 	\item Compute the ratio of \( B_e^*/B_e \) and compare with the rigid-rotor prediction of \cref{eq:eff_mass_isotope_relation}. 
-	How constant is \( r_e \) for \ch{HCl} and \ch{DCl}?
+	Based on your experimental data, how constant is \( r_e \) for \ch{HCl} and \ch{DCl}?
 	\item Compute \( B_v = B_e - \alpha_e\br{v + \tfrac{1}{2}} \) for the \( v = 0 \), \num{1}, and \num{2} levels of \ch{HCl} and \ch{DCl} and, from these, obtain average \( r_v \) values for these levels. 
 	Comment in your report on the changes in these distances. 
-	\item Compare your \( \widetilde{\nu}_0^*/\widetilde{\nu}_0 \) ratio with the ratio \( \sqrt{\mu/\mu^*} \) expected for a harmonic oscillator. How anharmonic is the \ch{HCl} molecule: i.e., how large is \( \chi_e \)?
+	\item Compare your \( \widetilde{\nu}_0^*/\widetilde{\nu}_0 \) ratio with the ratio \( \sqrt{\mu/\mu^*} \) expected for a harmonic oscillator. How anharmonic is the \ch{HCl} molecule (\emph{i.e.,} how large is \( \nu_e\chi_e \))?
 	\item Use your values of \( \widetilde{\nu}_e \) and \( \widetilde{\nu}_e \chi_e \) and \cref{eq:vib_rot_energies} to predict the frequencies of the first overtone transitions of \ch{HCl} and \ch{DCl} (ignore the rotational terms). 
 	Did you observe any evidence of these overtones in your spectra? 
 	\item Do your spectra show any evidence of a \ch{^{35}Cl}/\ch{^{37}Cl} isotope effect? 
 	Use \cref{eq:eff_mass_isotope_relation} to calculate the splitting expected for this effect for several \emph{P} and \emph{R} branch transitions in \ch{HCl} and \ch{DCl}. 
 	\item Compare your experimental results with the values deduced from your theoretical calculations. 
 	For each calculation, report the values for total energy \( (D_e) \), vibration frequency \( (\widetilde{\nu}_0) \), bond length \( (r_e) \), rotation constant \( B_e \), and centrifugal distortion constant \( D_J \). 
-	Additionally, you should plot the potential energy curve output by Gaussian against the theoretical Morse potential for the molecule. 
+	Additionally, you should plot one of the potential energy curves output by Psi4 against the theoretical Morse potential for the molecule. You will need to think carefully about how to match up units for the two curves. 
 \end{enumerate}
 
 % section questions_and_further_thoughts (end)
@@ -428,7 +455,7 @@ As previously stated, your lab report should consist of the following parts:
 	\item[Results and Discussion] This should include answers to the questions in the section ``Questions and Further Thoughts''. This should not be a separate section, but should instead be included organically in the discussion as a way of filling it out.
 	\item[Conclusion]
 	\item[References]
-	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 
-	Provide digital copies of the Excel (or other) files that you used to generate your graphs and copies of your Gaussian input files.
+	\item[Appendix] Include examples of any calculations that you did by hand. 
+	Provide digital copies of any additional inputs used to generate your information. 
 \end{description}
 % section lab_report_guidelines (end)

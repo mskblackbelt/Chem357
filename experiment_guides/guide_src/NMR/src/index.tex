@@ -382,13 +382,13 @@ This version makes \( \ln{k} \) a linear function of \( T^{-1} \) with a slope o
 
 An extension of the Arrhenius equation, the Eyring equation (\cref{eq:eyring}), is used in Transition State Theory to describe the enthalpy (\enthalpy*{1}), entropy (\entropy*{1}), and Gibbs free energy (\gibbs*{1}) of the transition state. 
 \begin{equation}
-  k = \kappa \frac{k_B T}{h} \exp{\frac{\gibbs*{1}}{RT}}
+  k = \kappa \frac{k_B T}{h} \exp{-\frac{\gibbs*{1}}{RT}}
   \label{eq:eyring}
 \end{equation}
 Recall that \( k_B \) and \( h \) are Boltzmann's constant and Planck's constant, respectively. 
 The constant \( \kappa \) represents the \emph{transmission coefficient} and accounts for the possibility that a complex might cross back through a transition state without becoming a product. 
 The transmission coefficient is generally assumed to be \num{1}. 
-If we recall that \gibbs*{1} can be expressed as \( \gibbs*{1} = \enthalpy*{1} + T \entropy*{1} \), \cref{eq:eyring} becomes 
+If we recall that \gibbs*{1} can be expressed as \( \gibbs*{1} = \enthalpy*{1} - T \entropy*{1} \), \cref{eq:eyring} becomes 
 \begin{equation}
   k = \kappa \frac{k_B T}{h} \exp{\frac{\entropy*{1}}{R}} \exp{-\frac{\enthalpy*{1}}{R T}} \, .
   \label{eq:eyring_2}
@@ -565,10 +565,10 @@ Dispose of waste chemicals as instructed.
 	\item The data extracted from TopSpin should be split into three groups corresponding to slow/intermediate exchange, coalescence temperature, and fast exchange. 
 	\item Using \cref{eq:slow_exch_k_1} through \cref{eq:fast_exch_k}, to calculate values for \( k \) at each temperature. 
 	\item Create a plot of \( \ln{k} \)  as a function of \( 1/T \). 
-  The slope of this plot yields a value for \gibbs*{1}. 
-  Compare this value to literature values for this rotational barrier. 
-	\item Values for \enthalpy*{1} and \entropy*{1} can be calculated from the value obtained for \gibbs*{1} in the previous step. 
-  Error propagation formulae for these values have been published in \textcite{morse94nmr}.
+    The line of best fit of this plot yields a value for \enthalpy*{1} and \entropy*{1}. 
+	\item A value for \gibbs*{1} can be calculated from the values obtained for \enthalpy*{1} and \entropy*{1} in the previous step. 
+    Compare this value to literature values for this rotational barrier. 
+	Error propagation formulae for these values have been published in \textcite{morse94nmr}.
 \end{enumerate}
 
 % section data_analysis (end)
@@ -590,7 +590,7 @@ Dispose of waste chemicals as instructed.
 Your lab report should consist of the following parts:
 \begin{description}
 	\item[Title, Author and Date]
-	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For fluorescence spectroscopy, this especially means the excitation wavelength and slit widths.
+	\item[Experimental Procedure] This should be a very brief general outline of the procedure, written out as a paragraph or two. Give the make and model for any major instruments you used, as well as any important settings. For NMR spectroscopy, this especially means field strength of the magnet or resonant frequency of the nucleus under investigation.
 	\item[Results and Discussion] This should include an overview of the analyzed data and responses to the questions worked into a natural narrative.
 	\item[References]
 	\item[Appendix] At the very end of your report, include examples of any calculations that you did by hand. 

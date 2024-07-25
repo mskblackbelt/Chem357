@@ -1,133 +1,6 @@
 \documentclass[nobib,nofonts,nols,nohyper]{tufte-handout}
-\input{../../header.tex}
+\input{header.tex}
 
-  
-%%%%%%% Listing environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (fold)
-\newcommand{\BashFancyFormatLine}{%
-  \def\FancyVerbFormatLine##1{\textcolor{blue}{\small user:\char`\~\$}\ ##1}%
-}
-
-\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
-	\lstset{morecomment=[s]{<}{>}} % Set comment style for dummy Gaussian input
-\tcbset{
-  colback=blue!4!white,
-  colframe=blue!85!black,
-  listing only,
-  left=1.5em,
-  enhanced jigsaw,
-  breakable,
-  overlay={
-    \begin{tcbclipinterior}
-      \fill[red!20!blue!20!white] 
-      (frame.south west)  rectangle 
-      ([xshift=1.5em]frame.north west);
-    \end{tcbclipinterior}}
-}
-\setminted{
-  style=tango,
-  fontsize=\small,
-  breaklines,
-  breakafter=|,
-  autogobble,
-  linenos,
-  numberfirstline=true,
-  firstnumber=1,
-  stepnumber=2,
-  numbersep=1em
-}
-
-\lstset{
-  breaklines=true,
-  basicstyle=\small,
-  numberstyle=\tiny,
-  numbers=left,
-  numberfirstline=true,
-  firstnumber=1,
-  stepnumber=2,
-  numbersep=2em,
-}
-
-%% TODO One of these is incorrect… but one seems to be necessary for loading external files while the other is for inline syntax. 
-\lstdefinestyle{gaussian}{
-  language=Clean,
-  % keywordstyle=\bfseries,
-  commentstyle=\slshape,
-  % stringstyle=\ttfamily,
-  numbers=left,
-  firstnumber=1,
-  stepnumber=2,
-  numberfirstline=true,
-  numbersep=2em,
-  numberstyle=\tiny,
-  breaklines=true,
-  breakautoindent=true,
-  tabsize=2,
-  basicstyle=\ttfamily\small,
-  showspaces=false,
-  showstringspaces=false,
-  morecomment=[s]{<}{>}
-}
-
-\lstdefinelanguage{gaussian}{
-  language=Clean,
-  % keywordstyle=\bfseries,
-  commentstyle=\slshape,
-  % stringstyle=\ttfamily,
-  numbers=left,
-  firstnumber=1,
-  stepnumber=2,
-  numberfirstline=true,
-  numbersep=2em,
-  numberstyle=\tiny,
-  breaklines=true,
-  breakautoindent=true,
-  tabsize=2,
-  basicstyle=\ttfamily\small,
-  showspaces=false,
-  showstringspaces=false,
-  morecomment=[s]{<}{>}
-}
-
-\newmintinline{bash}{}
-
-% Hack to force linebreaks at `¬` in bashinputs. From
-% https://tex.stackexchange.com/a/461455/27032
-\AtBeginEnvironment{bashinput}{%
-  \catcode`¬\active
-  \begingroup\lccode`~=`\¬\lowercase{\endgroup\def~{\linebreak}}%
-}
-
-\newtcblisting{bashinput}[1][]{
-  listing engine=minted,
-  minted language=bash, 
-  listing only,
-  minted options={,
-    formatcom=\BashFancyFormatLine
-  },
-  #1
-}
-
-\newtcblisting{gaussinput}[1][]{
-	listing engine=listings,
-	listing only,
-  listing options={
-    style=gaussian
-    },
-  #1
-}
-
-\newtcbinputlisting{\gaussfileinput}[2][]{
-	listing file={#2},
-  listing engine=listings,
-	listing only,
-  listing options={
-    style=gaussian
-    },
-  #1
-}
-% (end)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%% Bibliography options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (fold)
@@ -166,6 +39,50 @@
 		}%
 	}
 % (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Source Code options %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tcbuselibrary{minted}
+\tcbuselibrary{listings} % Use listings library for dummy Gaussian input files.
+
+\tcbset{
+  colback=blue!4!white,
+  colframe=blue!85!black,
+  listing only,
+  left=1.5em,
+  enhanced jigsaw,
+  breakable,
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[red!20!blue!20!white] 
+      (frame.south west)  rectangle 
+      ([xshift=1.5em]frame.north west);
+    \end{tcbclipinterior}}
+}
+\setminted{
+  style=tango,
+  fontsize=\small,
+  breaklines,
+  breakafter=|,
+  autogobble,
+  linenos,
+  numberfirstline=true,
+  firstnumber=1,
+  stepnumber=2,
+  numbersep=1em, 
+  showspaces=false
+}
+
+\newmintinline[pyinline]{python}{python3}
+
+\newtcblisting{pyinput}[1][]{
+  listing engine=minted,
+  minted language=python3, 
+  listing only,
+  #1
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Vibrational-Rotational Spectra of HCl and DCl}
