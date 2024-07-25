@@ -1,0 +1,12 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "cd \"$file_folder\"\ntectonic -X build --open"
+    }
+  },
+  "environment" : {
+    "file_folder" : "${FileDirname}"
+  },
+  "openLogOnRun" : "fail"
+}
