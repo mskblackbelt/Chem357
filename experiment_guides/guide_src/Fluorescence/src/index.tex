@@ -233,7 +233,7 @@ Identifying \( 1/(k_\mtext{r} + k_\mtext{nr}) \) as the reciprocal of the \emph{
 It predicts that a plot of \( I_0/I - 1 \) vs. \ch{[Q]} should be linear, having an intercept of zero and a slope equal to \( k_\mtext{q} \tau_0 \). 
 The latter is called the Stern-Volmer constant, \( K_\mtext{SV} \) (units of \unit{\per\Molar}). 
 If fluorescence quenching is diffusion-controlled (which is the case in the anthracene/\ch{CBr4} system), \( k_\mtext{q} \) can be identified with \( k_1 \) (see \cref{eq:rxn_scheme,%
-eq:k_obs,eq:rateconst1,eq:rateconst2,eq:rateapprox}).\sidenote[][-12\baselineskip]{
+eq:k_obs,eq:rateconst1,eq:rateconst2,eq:rateapprox}).\sidenote[][-14\baselineskip]{
 	The first Stern-Volmer Equation \cref{eq:sv_rel} is generally applicable because it makes no assumptions about the quenching rate constant \( k_\mtext{q} \). 
 	Since we are dealing with a diffusion-controlled reaction, we can identify \( k_\mtext{q} \) with the diffusion-controlled rate constant, \( k_1 \), from \cref{eq:rateconst1,eq:rateconst2,eq:rateapprox}. 
 	It should therefore be straightforward to measure the fluorescence emission of some analyte \ch{A} as we change the concentration of the quencher \ch{Q}, and fit the data to \cref{eq:sv_rel} to obtain a value for \( k_1 \). 
@@ -283,7 +283,7 @@ in which
 	a &= \frac{1}{\tau_0} + \frac{4 \pi R D N_\mtext{A}}{1000} \ch{[Q]} \qquad \unit{\per\s} \, ,\\
 	b &= \frac{4 \sqrt{\pi D} R^2 N_\mtext{A}}{1000} \ch{[Q]} \qquad \unit{\sqrt{1\per\s}}\, .
 \end{align*}
-If \( Y = 1 \), \cref{eq:sv_step_rel} reduces to \cref{eq:sv_rel},\sidenote{
+If \( Y = 1 \), \cref{eq:sv_step_rel} reduces to \cref{eq:sv_rel},\sidenote[][-3\baselineskip]{
 	\Cref{eq:sv_step_rel} describes a curved line due to the transient effects that take place very soon after the light source is switched on. 
 	However, this may cause some confusion, because our Stern-Volmer plots do not involve a time variable. How can the transient effects account for this curvature, if there is no explicit time dependence?
 	We touched on the answer to this before, but it is worth emphasizing again. 
@@ -390,7 +390,7 @@ That is, \( R \) should be approximately equal to the sum of the molecular diame
 	\item Begin by considering the Stokes-Einstein-Smoluchowski (SES) equation, \cref{eq:rateapprox}. 
 	Use the gas constant, \( \overline{R} \), the temperature (assume \qty{25}{\celsius}), and the viscosity of \emph{n-}hexane to calculate \( k_1 \). 
 	Use the proper units as described in the manual. 
-	Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote[][-6\baselineskip]{
+	Once you have \( k_1 \), insert it into \cref{eq:rateconst2} to calculate the collision radius \( R \) (don’t mix up \( \overline{R} \) and \( R \)).\sidenote{
 		To do this, you’ll need to calculate the diffusion coefficient, \( D \), for \emph{n-}hexane from the \( D \) known for \emph{n-}heptane. 
 		\textcite{dymond94} gives values for the viscosity of various \emph{n}-alkanes. 
 		\textcite{ware66} reported a value of \( D = \qty{4.35e-5}{\cm\squared \per \s} \) in \emph{n}-heptane at \qty{25}{\celsius}. 
