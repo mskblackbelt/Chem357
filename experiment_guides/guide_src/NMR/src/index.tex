@@ -474,7 +474,7 @@ In this region, \( \tau \gg \br{\nu_{\ch{A}}}^{-1} \), and \cref{eq:lineshape} r
   \label{eq:slow_exch_peak}
 \end{equation}
 where \( T'_{2\ch{A}} \) is the spin--spin relaxation time. 
-Comparison of \cref{eq:slow_exch} to the exact function shows that the linewidth of the line at \( \nu_{\ch{A}} \) is
+Comparison of \cref{eq:slow_exch_peak} to the exact function shows that the linewidth of the line at \( \nu_{\ch{A}} \) is
 \begin{equation}
   \br{\increment \nu_{\ch{A}}}_{1/2} = \frac{1}{\pi} \br{\frac{1}{T'_{2\ch{A}}} + \frac{1}{\tau_{\ch{A}}}} \, .
   \label{eq:slow_exch_width}
@@ -492,7 +492,7 @@ For slow exchange, the rate can also be related to the change in \emph{peak sepa
   k = \frac{\pi}{\sqrt{2}} \sqrt{\increment \nu_0^2 - \increment \nu_e^2} \, ,
   \label{eq:slow_exch_k_2}
 \end{equation}
-where \( \increment\nu_i \) is the peak separation in \unit{\Hz}, and the subscripts (\( i = e \) or \num{0}) have the previously defined meanings.\sidenote{In other words, \( \increment \nu_e \) should range from \( \increment \nu_0 \) at very low temperatures to \num{0} at high temperatures.}
+where \( \increment\nu_i \) is the peak separation in \unit{\Hz}, and the subscripts (\( e \) or \num{0}) have the previously defined meanings.\sidenote{In other words, \( \increment \nu_e \) should range from \( \increment \nu_0 \) at very low temperatures to \num{0} at high temperatures (when the peaks coalesce).}
 
 A third method applies in the slow exchange region. 
 In the \emph{ratio method}, \( k \) is calculated from the ratio of the intensities of the peaks, \( I_\mtext{max} \), to the intensity midway between the peaks, \( I_\mtext{min} \), \( r = I_\mtext{max} / I_\mtext{min} \) and 
@@ -546,7 +546,7 @@ Dispose of waste chemicals as instructed.
 \label{sec:procedure}
 
 \begin{enumerate}
-	\item Prepare a \qty{10}{vol\percent} solution of \ch{DMA} and deuterated solvent (\ch{DMF-d7}, \ch{DMA-d9}, or \ch{pyridine-d5}) in  a \SIrange{1.5}{2.0}{\mL} microfuge tube.
+	\item Prepare a \qty{10}{vol\percent} solution of \ch{DMA} and deuterated solvent (\ch{DMSO-d6}, \ch{DMA-d9}, or \ch{pyridine-d5}) in  a \SIrange{1.5}{2.0}{\mL} microfuge tube.
 	Use a \qty{1000}{\uL} micropipettor to the add an appropriate amount (\qty{\sim600}{\uL}) of the solution to a clean NMR tube. 
 	\item Record \NMR* spectra for the solution at \qty{10}{\kelvin} increments from \SIrange{293}{403}{\kelvin}.
 	Be sure to load your sample in a \emph{ceramic} spinner (the white ones, not the blue ones). 
@@ -561,7 +561,8 @@ Dispose of waste chemicals as instructed.
 
 \begin{enumerate}
 	\item Correctly assign all peaks in the spectrum using \cref{tab:chem_shifts} and other NMR reference sources.\autocite{davis1965advanced,pople1959nmr,silverstein2005spec,burdett1964a,rogers1956a}
-	Mark solvent peaks with an asterisk (*). If splitting patterns deviate from your expectations, discuss possible reasons for the deviation. 
+	Mark any solvent peaks with an asterisk (*). 
+	If splitting patterns deviate from your expectations, discuss possible reasons for the deviation. 
 	\item The data extracted from TopSpin should be split into three groups corresponding to slow/intermediate exchange, coalescence temperature, and fast exchange. 
 	\item Using \cref{eq:slow_exch_k_1} through \cref{eq:fast_exch_k}, to calculate values for \( k \) at each temperature. 
 	\item Create a plot of \( \ln{k} \)  as a function of \( 1/T \). 
