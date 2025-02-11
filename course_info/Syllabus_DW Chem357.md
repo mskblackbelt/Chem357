@@ -37,13 +37,14 @@ Course Materials
 
 : If you are interested in purchasing a physical laboratory book (entirely optional), many of our experiments will be modified from the standard physical chemistry laboratory lab manual by Garland, Nibler, and Shoemaker: _Experiments in Physical Chemistry,_ 7th Ed., 2003, McGraw-Hill, New York, NY.
 
+    
 Web site
-: Course communication, lectures, help sessions, and announcements will be posted on the course page in [Microsoft Teams][ms-teams]. All students should have been invited to the team prior to the start of the semester. 
+: Course communication, lectures, help sessions, and announcements will be posted on the course page in [Microsoft Teams][ms-teams]. All students should have been invited to the team prior to the start of the semester. When logging in to Teams, you must use `@login.cuny.edu` for the user address (same username as your MyHunter account, just a different suffix). For example, if your MyHunter account is `jaylyn.teger14@myhunter.cuny.edu`, your Teams login would be `jaylyn.teger14@login.cuny.edu` with the same password. 
 
 : Computational work for the course will be performed with [JupyterLab][JupyterLab] on shared departmental resources. This server can be accessed at <https://sugarcube.hunter.cuny.edu>. Students will need to create an account using the "Sign up" link below the login window. 
-<!--Instructions on how to access the course website on Blackboard can be found on the [Hunter College BlackBoard Announcement page][bb-announce]. In addition to instructions for individual labs, announcements and additional resources will occasionally be posted on Blackboard. -->
+<!--Instructions on how to access the course website on Brightspace can be found on the [Hunter College Brightspace page][hunter-brightspace]. In addition to instructions for individual labs, announcements and additional resources will occasionally be posted on Blackboard. -->
 
-<!-- BREAK -->
+
 
 Attendance and Tardiness
 : 
@@ -146,9 +147,9 @@ Final Presentations
 : Each group will be assigned a lab from the semester. Groups will create a detailed presentation related to the lab for their instructor and classmates. Presentations will be given at the end of the semester. 
 
 
-[teams-link]: https://teams.microsoft.com/l/team/19%3AJPSY6YvMwlPW3FIf81HWMtX-uMai5ioGFgFRG9uHICA1%40thread.tacv2/conversations?groupId=da9c9005-d007-4d40-bc7c-092005d38ddb&tenantId=6f60f0b3-5f06-4e09-9715-989dba8cc7d8
+[teams-link]: https://teams.microsoft.com/l/team/19%3AmqPJ4Gt1GZuads_k41-Z4aB162dOA2KgSXp2Jkl7BoY1%40thread.tacv2/conversations?groupId=cb85dda2-abe5-4036-99b3-d22726ec1c04&tenantId=6f60f0b3-5f06-4e09-9715-989dba8cc7d8
 [ms-teams]: https://teams.microsoft.com
-[bb-announce]: http://bb.hunter.cuny.edu
+[JupyterLab]: https://jupyterlab.readthedocs.io/en/stable/user/index.html
 [jpca-home]: https://pubs.acs.org/journal/jpcafh
 [jpca-auth-info]: https://pubs.acs.org/page/jpcafh/submission/authors.html
 [jpca-auth-guide]: https://publish.acs.org/publish/author_guidelines?coden=jpcafh

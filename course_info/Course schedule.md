@@ -1,20 +1,20 @@
-| Week 			| Date 		| Groups 1/2 								| Groups 3/4 								| Groups 5/6 								| 
-|:-------		| :------	| ---------									| -----------								| --------- 								| 
-| 1				| 	1/30 	| JupyterLab/Python Tutorial	 			| JupyterLab/Python Tutorial	 			| JupyterLab/Python Tutorial	 			| 
-| 2				| 	2/6 	| Intro. to Plotting/Error Analysis		 	| Intro. to Plotting/Error Analysis		 	| Intro. to Plotting/Error Analysis		 	| 
-| 3				| 	2/20 	| Fluorescence			 		 			| Intro. to Computational Chemistry			| Polymers			 						| 
-| 4				| 	2/27 	| Fluorescence calcs						| Fluorescence			 		 			| Intro. to Computational Chemistry			| 
-| 5				| 	3/5 	| Polymers			 						| Fluorescence calcs						| Fluorescence			 		 			| 
-| 6				| 	3/12 	| Intro. to Computational Chemistry			| Polymers			 						| Fluorescence calcs						| 
-| 7				| 	3/19 	| NMR (HN 1304)			 					| NMR (HN 1304)			 					| NMR (HN 1304)			 					| 
-| 8				| 	3/26 	| NMR calcs 								| NMR calcs 								| NMR calcs 								| 
-| 9				| 	4/2 	| FRET measurements			 				| Off 										| HCl/DCl measurements						| 
-| 10			| 	4/9 	| HCl/DCl measurements						| FRET measurements			 				| HCl/DCl calculations						| 
-| 11 			| 	4/16 	| HCl/DCl calculations						| HCl/DCl measurements						| FRET measurements			 				| 
-| 12 			| 	5/7 	| Off 										| HCl/DCl calculations						| Off 										| 
-| 13			| 	5/14  	| Final Presentations 						| Final Presentations 						| Final Presentations 						| 
-[Schedule for Spring, 2024]
+| Week  | Date 	| Groups 1/2                            | Groups 3/4                            |
+|:----- | :-----| ---------                             | ----------                            |
+| 1     | 1/28 	| JupyterLab/Python Tutorial            | JupyterLab/Python Tutorial            |
+| 2	    | 2/4  	| Intro. to Plotting/Error Analysis     | Intro. to Plotting/Error Analysis     |
+| 3     | 2/11 	| NMR (room HN 1304)                    | NMR (room HN 1304)                    |
+| 4     | 2/25 	| NMR calcs                             | NMR calcs                             |
+| 5     | 3/4  	| Polymers                              | Polymers                              |
+| 6     | 3/11 	| Fluorescence                          | Fluorescence                          |
+| 7     | 3/18 	| Fluorescence calcs                    | Fluorescence calcs                    |
+| 8     | 3/25 	| Intro. to Computational Chemistry     | Intro. to Computational Chemistry     |
+| 9     | 4/1  	| FRET measurements                     | HCl/DCl measurements                  |
+| 10    | 4/8  	| FRET calcs                            | HCl/DCl calculations                  |
+| 11    | 4/22 	| HCl/DCl measurements                  | FRET measurements                     |
+| 12    | 5/6  	| HCl/DCl calculations                  | FRET calcs                            |
+| 13    | 5/13  | Final Presentations                   | Final Presentations                   |
+[Schedule for Spring, 2025]
 
 <!--
-| 14			| 	5/15 	| Checkout 									| Checkout 									| Checkout 									|  
+| 14    | 5/15  | Checkout                              | Checkout                              |
  -->
