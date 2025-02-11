@@ -2,7 +2,7 @@
   "actions" : {
     "build" : {
       "enabled" : true,
-      "script" : "cd \"$file_folder\"\ntectonic -X build --open"
+      "script" : "cd \"$file_folder\"\n\/opt\/homebrew\/bin\/tectonic -X build --open"
     }
   },
   "environment" : {

@@ -2,7 +2,7 @@ Todo: Turn this all into a shell/python script
 
 ## Personal items
 
-Install 
+Install
 
 - bat
 - curl
@@ -57,12 +57,12 @@ P. Chem. environment (base env plus)
 
 - anaconda 2021.11            ??
 - seaborn, pandas
-- cclib			conda-forge 
+- cclib			conda-forge
 - ipympl			conda-forge     ??
-- nmrglue		bioconda 
-- xarray			conda-forge 
-- avogadro		pypi 
-- openchemistry	pypi 
+- nmrglue		bioconda
+- xarray			conda-forge
+- avogadro		pypi
+- openchemistry	pypi
 - psi4      psi
 
 Jupyter labextensions (inside p. chem. env)
@@ -93,7 +93,7 @@ ipython kernel install --name “data-science” --
 - Modify /etc/skel/.profile with g18 commands
 - Link to /srv/shared, /srv/data folders for shared data and submission locations
 - Modify /opt/tljh/user.py and add the following to the `useradd` command
-  - "--skel /etc/skel-tljh" 
+  - "--skel /etc/skel-tljh"
   - "--groups gaussian"
 
 
@@ -107,26 +107,26 @@ The following is unnecessary if users are added to the "gaussian" group
 
 ## DMZ Reverse Proxy setup
 
-ICIT has provisioned a VM running RedHat for us. 
+ICIT has provisioned a VM running RedHat for us.
 
 They request we do the following:
 
 > Mateusz,
-> 
+>
 > Our gateway server in the DMZ will be handling the initial traffic requests and will be the initial HTTPS component of the routing.  The gateway is built to communicate with other servers on the DMZ, so we'll be setting up a virtual server in the DMZ for you.  That server will be managed by you and you'll need to install and configure a load balancer/rev. proxy (e.g. nginx/traefik/apache) to accept traffic from the gateway and proxy on to your lab system.
-> 
+>
 > The communication on the DMZ should be encrypted, so you'll need to generate a self-signed cert to install on whatever reverse proxy you intend to use.  The communication between your DMZ virtual server and the lab machine should also be encrypted, so you'll need a self-signed cert or a Let's Encrypt cert on the lab machine and configure Traefik to use it.
-> 
+>
 > For the public address, we need a hostname to apply to this service (somehostname.hunter.cuny.edu) - do you have something in mind?
-> 
+>
 > Also, the communication between the DMZ virtual server and your lab machine is normally blocked and will need to be enabled.  What we'll need to know is what port you need to connect to on the lab machine.  If you configure Traefik with the SSL cert by following the TLJH guide, then that would be 443.  But if you change it to something else, we'll need to know that.  Just confirm when you have decided and the traffic can be enabled between the two systems.
-> 
+>
 > We'll let you know as soon as the virtual server is ready for you, along with the credentials to access it.
-> 
+>
 > Thank you,
 > Jacob Radford
 
-The (seemingly) easiest guides use `nginx`. Using <https://www.redhat.com/sysadmin/setting-reverse-proxies-nginx> to get going. 
+The (seemingly) easiest guides use `nginx`. Using <https://www.redhat.com/sysadmin/setting-reverse-proxies-nginx> to get going.
 
 - Installed nginx using `dnf install nginx`
 - Start nginx at startup with `sudo systemctl enable --now nginx`
@@ -159,7 +159,7 @@ boolean -m -1 virt_use_nfs
 EOF
 ```
 
-Settings for nginx are located in `/etc/nginx/nginx.conf`. 
+Settings for nginx are located in `/etc/nginx/nginx.conf`.
 
 Contents of `nginx.conf`
 
@@ -254,7 +254,7 @@ Check the following pages for info on setting up JupyterHub with a reverse proxy
 - <https://github.com/jupyterhub/the-littlest-jupyterhub/issues/272>
 - <https://flaviocopes.com/nginx-reverse-proxy/>
 
-## WebMO setup
+## WebMO setup (not implemented)
 
 Install WebMO and TLJH according to instructions. Modify Apache and TLJH as follows:
 
@@ -305,3 +305,10 @@ url = "http://127.0.0.1:8080"
 #### Alternate option
 
 Look into using [jupyter-server-proxy](https://jupyter-server-proxy.readthedocs.io/en/latest/), might just need to define a port and go, ignore all of the Traefik configurations.
+
+Another option is to investigate configurations of nginx with "path-based routing".
+- <https://stackoverflow.com/questions/58379663/domain-redirection-to-tcp-applications-with-different-ports-but-to-the-same-ip>
+- <https://medium.com/cloud-native-daily/path-based-routing-with-nginx-reverse-proxy-for-multiple-applications-in-a-vm-53838169540c>
+- <https://thinkingeek.com/2018/05/19/redirect-parts-website-applications-apache/>
+- <https://blog.sethcorker.com/traefik-routing-for-web-apps/>
+- <https://kagi.com/search?q=tljh+nginx+path-based>

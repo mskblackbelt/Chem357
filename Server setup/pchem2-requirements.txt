@@ -1,5 +1,5 @@
 ipykernel
-black
+ruff
 jupyterlab-latex
 jupyterlab_templates
 jupyterlab-spellchecker

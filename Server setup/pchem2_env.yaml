@@ -4,18 +4,19 @@ channels:
   - nodefaults
 dependencies:
   - pip
-  - conda-forge/label/libint_dev::libint
+  # - libint
   - python=3.10
-  # - ipykernel
   - pytest
+  - hypothesis
   - jupyterlab
+  - tqdm
   - pandas
   - xarray
   - openpyxl
   - tabulate
   - seaborn
-  - cclib>=1.8
-  - psi4>=1.8
+  - cclib
+  - psi4
   - py3dmol
   - nglview
 
