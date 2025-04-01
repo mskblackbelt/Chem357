@@ -1,7 +1,3 @@
-%TODO 
-% - Verify synthesis instruction
-% - Update experimental setup diagram with backflow trap
-
 \maketitle% this prints the handout title, author, and date
 
 \begin{abstract}
@@ -256,10 +252,11 @@ where \( u = h \nu / \br{kT} = h c \widetilde{\nu} / \br{k T} = 143.88 \widetild
 	\item \ch{HCl} is a strong acid should be handled cautiously. 
 	\item All chemical work should be done in the fume hood and gloves should be worn at all times. 
 	\item Always wear safety glasses in the laboratory.
-	\item The cell used to obtain the infrared spectra is valuable and non-replaceable. 
+	\item The cell used to obtain the infrared spectra is expensive and difficult to replace. 
 	Handle it with extreme care. 
-	The windows are made from \ch{NaCl} and are moisture sensitive. 
-	Do not touch the lenses with your fingers or expose them to moisture of any kind. 
+	The windows are made from sapphire.
+	Though they are sturdy and moisture-resistant, you should avoid handling them. 
+	Do not touch the lenses with your fingers and avoid impacts with hard objects. 
 	If the cell filled with HCl breaks outside the fume hood, notify the instructor immediately and clear the area. 
 \end{itemize}
 % section safety (end)
@@ -268,22 +265,49 @@ where \( u = h \nu / \br{kT} = h c \widetilde{\nu} / \br{k T} = 143.88 \widetild
 \section{Procedure} % (fold)
 \label{sec:procedure}
 
-This experiment must be performed with an IR spectrometer capable of medium to high resolution (\( > \qty{2}{\wn} \) resolution). 
+This experiment must be performed with an IR spectrometer capable of medium to high resolution (\( \qty{>2}{\wn} \) resolution). 
 A high-quality grating spectrometer and most FTIR instruments are generally capable of this, and FTIR instruments don't require calibration with external gas standards. 
 
 The infrared gas cell is constructed from a short (\qtyrange{5}{10}{\cm}) length of large-diameter (\qtyrange{2}{4}{\cm}) Pyrex tubing with a vacuum stopcock attached. 
-Infrared-transparent windows are clamped agains O-rings at the ends of the cell or are sealed on the ends with Glyptal resin. 
-For studies concentrating on the region \SIrange{4000}{500}{\wn}, \ch{NaCl} windows will suffice. 
-When the spectrum of interest extends down to \qty{\sim400}{\wn}, \ch{KBr} windows are necessary. 
-Both types of salt windows become ``foggy'' on prolonged exposure to a moist atmosphere and should be protected\sidenote{e.g., stored in a desiccator} when not in use. 
+Infrared-transparent windows are clamped agains O-rings at the ends of the cell. 
 In the present experiment, inert sapphire windows with transmission down to \qty{1600}{\wn} are particularly convenient and relatively inexpensive. 
+When the spectrum of interest extends much below \qty{\sim 2000}{\wn}, other materials are necessary (\emph{e.g.,} \ch{KBr}, \ch{NaCl}, or \ch{ZnSe}). 
+Most of the salt windows become ``foggy'' on prolonged exposure to a moist atmosphere and should be protected\sidenote{e.g., stored in a desiccator} when not in use. 
+The majority of the semiconductor windows are relatively soft and are therefore easily scratched. 
+
+\subsection{Required Equipment} % (fold)
+\label{sub:required_equipment}
+
+\begin{itemize}
+	\item \qty{10}{\mL} two-neck flask (conical or round-bottom) 
+	\item \qtyrange{200}{400}{\mL} beaker
+	\item small vacuum filtration flask or side-arm test tube
+	\item Tygon tubing
+	\item disposable pipettes
+	\item ring stands and clamps
+	\item (4) one-hole rubber stoppers
+	\item \qty{10}{\cm} glass spectroscopy cell
+	\item dry nitrogen gas cylinder
+\end{itemize}
+
+% subsection required_equipment (end)
 
 \subsection{Filling the Cell and Recording the Spectra} % (fold)
 \label{sub:filling_the_cell}
 
-Before beginning the synthesis, power on the FTIR. 
 % A 50-mL two-neck round-bottom flask and a 10-cm air condenser should be washed thoroughly with soap and water followed by several rinses with distilled water.
 % Then, the glassware  should be dried in an oven for approximately \qty{10}{\minute} at a temperature near \qty{110}{\celsius}.
+
+% By this time, the glassware in the oven should be dry. Remove the dry glassware and place on a piece of paper towel to cool for another \qty{10}{\minute} (or until cool to the touch).
+
+% Mix \qty{\sim5}{\mL} of \ch{D2O} with \qty{\sim5}{\mL} concentrated \ch{HCl},\sidenote{this is easiest to do in a small beaker}, then pour the mixture into the round-bottom flask via the second neck.
+% Finally, insert another stopper with a hole into the second neck of the flask.
+%
+% Suspend the round-bottom flask in a water bath held around \qty{80}{\celsius}. 
+% Gaseous \ch{HCl} will slowly evolve from the solution and bubble through the indicator solution. 
+% This procedure should take \qty{\sim20}{\min}. 
+
+Before beginning the synthesis, power on the FTIR. 
 Prior to starting, purge the 10-cm gas cell (Thorlabs) with nitrogen gas to clean out the cell.
 This can be accomplished by attaching the tubing from the nitrogen tank regulator to one of the glass ports on the gas cell. 
 Open both stopcocks on the gas cell and slowly open the needle valve on the nitrogen tank\sidenote{Ask the instructor if you are unfamiliar with the use of a regulator.} until a steady stream of gas is exiting the open port of the gas cell. 
@@ -292,44 +316,40 @@ Immediately close the knob above the regulator nozzle, then close the needle val
 Remove the tubing from the gas cell port and take the gas cell to the FTIR to obtain a background spectrum. 
 Return the gas cell to the fume hood for the gas synthesis. 
 
-% By this time, the glassware in the oven should be dry. Remove the dry glassware and place on a piece of paper towel to cool for another \qty{10}{\minute} (or until cool to the touch).
-Prepare an indicator solution by dissolving \numrange{2}{4} drops of bromcresol green in \qty{150}{\mL} of DI water in a \qty{200}{\mL} beaker. 
+Prepare an indicator solution by dissolving \numrange{2}{4} drops of bromcresol green in DI water in a medium beaker.
+There should be enough liquid in the beaker to submerge the end of the tubing.  
 Attach Tygon tubing to the two stems of the gas cell, lubricating with glycerin to help the tubing slide on the glass. 
 Take the end of one tube and connect it to your water trap. The tubing exiting your water trap should be submerged in your indicator solution.\sidenote{This will fill two roles: as a bubbler, it will prevent atmospheric gases from diffusing back into the cell; and as an indicator, it will show when sufficient \ch{HCl} has passed through the cell. \ch{HCl} is highly soluble in water, so the gaseous \ch{HCl} will quickly acidify the water.} 
 
-To set up the rest of the apparatus, clamp a \qty{50}{\mL} round-bottom flask to a ring stand. 
+To set up the rest of the apparatus, clamp a \qty{50}{\mL} two-neck flask to a ring stand. 
 Place \qty{\sim5}{\mL} of \ch{D2O} with \qty{\sim5}{\mL} concentrated \ch{HCl} in the round-bottom flask.
-Prepare an air condenser (\qty{10}{\cm}) by placing a plug of glass wool at the bottom and filling the rest with \ch{CaCl2} (approximately \qty{12}{mesh}). 
+Prepare a gas dryer (\qty{10}{\cm}) by placing a small plug of glass wool at the bottom of an air condenser and filling the bulb and tube of the condenser with \ch{CaCl2} (approximately \qty{12}{mesh}). 
 Insert the stem of the condenser into a stopper, again using glycerin for lubrication, and insert the stopper into the neck of the round-bottom flask. 
 Insert the end of the second tube (attached to the gas cell) into another stopper with a hole, then insert that stopper into the top of the air condenser. 
-% Mix \qty{\sim5}{\mL} of \ch{D2O} with \qty{\sim5}{\mL} concentrated \ch{HCl},\sidenote{this is easiest to do in a small beaker}, then pour the mixture into the round-bottom flask via the second neck.
-% Finally, insert another stopper with a hole into the second neck of the flask.
-%
 With a disposable plastic pipette, obtain \qty{\sim 2}{\mL} of concentrated \ch{H2SO4}.
 Insert the pipette (\textbf{carefully} so as not to prematurely inject it) into the hole of the second stopper in the round-bottom flask.
 Once you have verified that all of the holes are plugged, squeeze \numrange{1}{2} drops of sulfuric acid into the solution.
 You should see vigorous bubbling in the flask.
 At this point, open the stoppers on the gas cell.
-Continue to \emph{slowly} add sulfuric acid drop-wise to the flask, watching the bubbles evolving in the indicator.
-% Suspend the round-bottom flask in a water bath held around \qty{80}{\celsius}. 
-% Gaseous \ch{HCl} will slowly evolve from the solution and bubble through the indicator solution. 
-When the indicator changes color from blue to green/yellow, close the stopcocks on the gas cell and remove the tubing. % This procedure should take \qty{\sim20}{\min}. 
-While the cell is still in the hood, briefly vent the cell to decrease the pressure inside the cell (we want to let out the excess \ch{HCl} vapor, but not let atmospheric gases diffuse in). 
+Continue to \emph{slowly} add sulfuric acid drop-wise to the flask, watching the bubbles evolving in the indicator. 
+You will probably need to add the entire pipette. 
+When the indicator changes color from blue to green/yellow, close the stopcocks on the gas cell and remove the tubing. 
+While the cell is still in the hood, \emph{briefly} vent the cell to decrease the pressure inside the cell (we want to let out the excess \ch{HCl} vapor, but not let atmospheric gases diffuse in). 
 Lower gas pressure in the cell will result in narrower spectral lines due to decreased collision broadening. 
 Carefully remove the tubes from the gas cell and proceed to the spectrometer for analysis. 
+
+An arrangement for filling the cell is shown in \cref{fig:cell_filling}.
+
+\begin{marginfigure}%[ht!]
+  \centering
+	\includegraphics[width=.9\textwidth]{images/new_exp_portrait.png}
+  \caption{Experimental apparatus. (1) Two-neck flask containing a mixture of \ch{D2O} and concentrated (\qty{12}{\molar}) hydrochloric acid. (2) Condenser containing a drying agent. (3) Gas spectrometry cell. (4) Trap preventing indicator from sucking back into gas cell. (5) Beaker containing indicator solution. Tygon tubes are indicated in blue, red, and green. Blue tube leads from the condenser to the gas cell. Red tube runs from the cell to the trap. Green tube runs from the trap to the indicator.}
+  \label{fig:cell_filling}
+\end{marginfigure}
 
 Make sure the experimental settings in the FTIR software are appropriate. 
 The most important change to make is changing the resolution to the smallest possible value. 
 This will allow you to distinguish the individual rotational transitions in the spectrum. 
-
-An arrangement for filling the cell is shown in \cref{fig:cell_filling}.
-
-\begin{figure}[htb]
-  \centering
-    \includegraphics[width=.9\textwidth]{images/exp_setup_diagram.png}
-  \caption{Experimental apparatus. (1) Water bath heating a round-bottom flask containing a mixture of \ch{HCl_{(aq)}} and \ch{DCl_{(aq)}}. (2) Condenser containing a drying agent. (3) Tygon tubing leading to and from the gas cell. (4) Beaker containing indicator solution. A trap should be put in place to prevent indicator solution from being sucked back in to the gas cell.}
-  \label{fig:cell_filling}
-\end{figure}
 
 
 % subsection filling_the_cell (end)
@@ -341,15 +361,13 @@ The following work will be done during the second week of this lab.
 You will need to calculate the physical properties of \ch{HCl} and \ch{DCl} using Psi4~\autocite{psi42012}, including the potential energy, equilibrium bond length, and the predicted vibrational and rotational energies for the molecule.
 
 Using Psi4, calculate the potential well for the \ch{HCl} molecule. 
-Because of the methods used for calculation, the mass of the nuclei doesn't influence geometry, so results will be the same for the four isotopologues. 
 We performed a nearly identical calculation when doing the bond scan exercise on \ch{HF}. 
-% A number of files are available for your use in the \Verb{hcl-dcl_lab} folder in JupyterLab. 
-% These files should be available for you in the \Verb|PChem_Lab| folder on the desktop, but a copy is also available on Blackboard.
-You will need to modify the scan parameters for the Python input printed below.
-The selected basis set and level of theory make this a quick calculation, so you can set the scan parameters quite large. 
+Because of the methods used for calculation, the mass of the nuclei doesn't influence geometry, so results will be the same for each of the four isotopologues. 
+You will need to modify the scan parameters in \cref{lst:bond_calc} for the Python input printed below (\Verb{start}, \Verb{stop}, and \Verb{step-size}).
+The selected basis set and levels of theory make this a quick calculation, so you can set the scan parameters quite large. 
 I recommend scanning from \qtyrange{0.6}{3.5}{\angstrom} in steps less than \qty{0.05}{\angstrom}. 
-With this resolution, you should obtain a plot that gives good fidelity around the minimum while showing realistic behavior at long bond lengths. 
-% \gaussfileinput[title=Contents of \Verb{hcl_bond.com}]{Gaussian_simulations/hcl_bond.com}
+With this resolution, you should obtain a plot that gives good fidelity around the minimum while allowing you to see the behavior at large bond lengths. 
+\begin{figure}
 \begin{pyinput}
 method_list = ['hf', 'remp2', 'pbe0']
 basis = '6-311+g(d,p)'
@@ -359,7 +377,7 @@ H
 Cl  1  r
 """)
 
-r_vals = np.arange(0.6, 3.5, 0.05)
+r_vals = np.arange(start, stop, step-size)
 hcl_bond = dict()
 
 for method in method_list:
@@ -370,34 +388,39 @@ for method in method_list:
         e = psi4.energy(method+'/'+basis)
         energies.append(e)
     hcl_bond[method] = np.array(energies)
-
 \end{pyinput}
+	\label{lst:bond_calc}
+	\caption{Python/Psi4 code to calculate potential energy curves for the \ch{H-Cl} bond.}
+\end{figure}
 
 Once you have calculated the potential energy surface for the molecule, you'll need to perform a frequency analysis of the \ch{HCl} molecule. 
 You can use the \Verb{psi4.diatomic.anharmonicity()} function to calculate all the required constants for the molecule. 
 The function takes a list of bond lengths and a list of energies as inputs, and outputs a dictionary of constants. 
-Optionally, you can define the molecule used for computation. 
-In the example shown below, if you leave \Verb{mol=} blank (in other words, accepting the default value), Psi4 will use the last defined molecule.
+The function takes an optional argument, \Verb{mol=}, which allows you to define a specific molecule used for computation. 
+In the example shown below, if you leave \Verb{mol=} blank (in other words, accepting the default value), Psi4 will use the most recently defined molecule in your code.
 This can sometimes lead to unexpected results… better to explicitly define your molecule.   
-For your lists of bond lengths and energies, use the \Verb{'pbe0'} data from the bond analysis performed previously so you don't need to recalculate the potential energy curve for each isotopologue (the values won't change anyway, since Psi4 doesn't account for isotopic differences in energy calculations). 
+For your lists of bond lengths and energies, use the \Verb{'pbe0'} data from the bond analysis performed previously so you don't need to recalculate the potential energy curve for each isotopologue (the values wouldn't change anyway, since Psi4 doesn't account for isotopic differences in energy calculations). 
 You need to get anharmonicity constants for \ch{H^{35}Cl}, \ch{H^{37}Cl}, \ch{D^{35}Cl}, and \ch{D^{37}Cl}, so setting up a loop and saving the results in a dictionary will reduce the amount of repetition in your code.
-Here is an example of the calculation for \ch{H^{35}Cl}:
+\Cref{lst:anharm_calc} shows an example of the calculation for \ch{H^{35}Cl}; use this as a starting point for the calculations in your loop.
 
+Notice how isotopes are defined in Psi4. 
+You'll need to look up appropriate isotopic masses for your four atoms and use that data to define the four required molecules. 
+Notice that the \(z\)-matrix for the isotope has the separation between the two atoms set to \num{1.0}. There is no need to create this molecule in its equilibrium geometry, as the anharmonicity calculation will calculated it and return the equilibrium value as one of the dictionary entries. 
+Note that the units are not given with the constants. In general, Psi4 provides energies in hartrees, bond lengths in Ångstroms, vibrational constants in wavenumbers, and rotational constants in hertz. 
+\begin{figure}
 \begin{pyinput}
 h35cl = psi4.geometry("""
 Cl@34.968852682
 H@1.0078 1 1.0
 """)
 
-# The next step would be a good place to wrap your loop around to calculate all four 
+# The next step might be a good place to wrap your loop to calculate your four molecules 
 hcl_consts['h35cl'] = psi4.diatomic.anharmonicity(r_vals, hcl_bond['pbe0'], mol=h35cl)
 \end{pyinput}
+	\label{lst:anharm_calc}
+	\caption{Python code for calculating anharmonicity parameters for a diatomic molecule.}
+\end{figure}
 
-Notice how isotopes are defined in Psi4. 
-You'll need to look up appropriate isotopic masses for your four atoms and use that data to define the four required molecules. 
-Notice that the \(z\)-matrix for the isotope has the separation between the two atoms set to \num{1.0}. There is no need to create this molecule in its equilibrium geometry, as the anharmonicity calculation will return the equilibrium value as one of the dictionary entries. 
-
-Note that the units are not given with the constants. In general, Psi4 provides energies in hartrees, bond lengths in Ångstroms, vibrational constants in wavenumbers, and rotational constants are in hertz. 
 % subsection theoretical_calculations (end)
 
 % section procedure (end)
