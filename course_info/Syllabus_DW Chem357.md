@@ -2,13 +2,13 @@
 title: Course Syllabus
 course: Chemistry 357
 author: Dustin Wheeler
-semester: Spring 2024
-left-foot: Chem 357, Spring 2024
+semester: Spring 2025
+left-foot: Chem 357, Spring 2025
 ---
 
 # Physical Chemistry Laboratory II #
 
-### Chemistry 357, Spring 2024 ###
+### Chemistry 357, Spring 2025 ###
 
 Course Information
 : 
