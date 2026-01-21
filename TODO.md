@@ -10,8 +10,7 @@
 
 ## Lab reports
 
-- Transition to Jupyter-Book?
-- Or learn proper LaTeX?
+- Transition to mystmd
 - How to write math (in-line and display equations)
 	- Greek and special characters (reference chart?)
 - References
@@ -66,5 +65,14 @@
   - QTS3 for reactant, product, transition state calculations
 - Use Jupyter to analyze and display data with `nmrglue` package
   - Need to work out how to implement the `peakpick` function in a reasonable manner. 
+  
+  ## SP 2026 updates
+  
+  - [ ] Syllabus update
+  - [ ] Lab manual proofreading
+  - [ ] Jupyter environment testing
+  - [ ] Hub user creation
+  - [ ] Submission workflow (checklist?)
+  - [ ] Calendar
 
 
