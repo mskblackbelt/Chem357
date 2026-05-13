@@ -1,0 +1,8 @@
+[doc]
+name = "Error_analysis_HW"
+bundle = "https://data1.fullyjustified.net/tlextras-2022.0r0.tar"
+
+[[output]]
+name = "Error_analysis_HW"
+type = "pdf"
+shell_escape = true
