@@ -283,8 +283,11 @@ TSWLatexianTemp*
 # Ignore student work for a given semester
 Submitted work/*
 
-# Jupyter notebook checkpoints
+# Marimo/Jupyter temp files
+__marimo__
 *.ipynb_checkpoints
 
 # Emacs autosave files
 .#*
+
+
