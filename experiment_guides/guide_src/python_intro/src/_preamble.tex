@@ -12,20 +12,10 @@
   sorting=none,%
   defernumbers=true,%
   hyperref,
-  backend=biber,
+  backend=bibtex,
 	]{biblatex}
 	\addbibresource{pchem_bib.bib}
 
-	% Filter bibliography file to only include entries matching keyword.
-	\DeclareSourcemap{%
-	  \maps[datatype=bibtex]{%
-	    \map{%
-	      \step[nocited, final]%
-	      \step[fieldsource=keywords, notmatch=python, final]%
-	      \step[entrynull]%
-	    }%
-	  }%
-	}
 
 	% Add a section for cited bibliography entries.
   % At the end, create a second bibliography for uncited items (Further Reading).
