@@ -356,107 +356,108 @@ def _(
                          arrowprops=dict(color=color_r, **_arrowprop_kwargs),
                          **_arrow_kwargs)
 
-    plt.savefig('./rot_energy_levels.pgf', bbox_inches='tight')
+    plt.savefig('./vibrot_energy_diagram.pgf', bbox_inches='tight', pad_inches=0.02)
     plt.show()
     return ConnectionPatch, gridspec
 
 
-@app.cell
-def _(
-    ConnectionPatch,
-    Pbranch_spectrum,
-    Pbranch_vals,
-    Rbranch_spectrum,
-    Rbranch_vals,
-    e,
-    gridspec,
-    j_max_1,
-    j_vals,
-    leveldiagram_lines,
-    mpl,
-    np,
-    plt,
-    pop,
-    rovibEnergy,
-    wn_vals,
-):
-    mpl.use('pgf')
-    mpl.rcParams.update({'pgf.texsystem': 'pdflatex', 'font.family': 'serif', 'font.serif': ['STIX Two Text', 'Palatino'], 'text.usetex': True, 'pgf.rcfonts': False, 'axes.titlesize': 8, 'axes.labelsize': 8, 'xtick.labelsize': 6, 'ytick.labelsize': 6})
-    _fig = plt.figure(figsize=(4.318, 6))
-    _plotted_js = np.arange(10)
-    _xmin, _xmax = (wn_vals(298).min() - 15, wn_vals(298).max() + 45)
-    _gs0 = gridspec.GridSpec(2, 1, figure=_fig, hspace=0.06, height_ratios=[4, 1])
-    _gs00 = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=_gs0[0], hspace=0.03)
-    ax_lvl1 = _fig.add_subplot(_gs00[0])
-    ax_lvl0 = _fig.add_subplot(_gs00[1])
-    _gs01 = gridspec.GridSpecFromSubplotSpec(1, 1, subplot_spec=_gs0[1])
-    ax_spec = _fig.add_subplot(_gs01[0])
-    for _v, ax in [(0, ax_lvl0), (1, ax_lvl1)]:
-        ax.hlines(rovibEnergy(_v, _plotted_js) / e, Pbranch_vals(0, 9) - 15, Rbranch_vals(0, 8) + 15)
-        ax.set_xlim(_xmin, _xmax)
-    ax_lvl1.set_ylim(0.53, 0.66)
-    ax_lvl0.set_ylim(0.172, 0.315)
-    _d = 0.025
-    _kwargs = dict(transform=ax_lvl1.transAxes, color='k', clip_on=False)
-    ax_lvl1.plot((-_d, +_d), (-_d, +_d), **_kwargs)
-    _kwargs.update(transform=ax_lvl0.transAxes)
-    ax_lvl0.plot((-_d, +_d), (1 - _d, 1 + _d), **_kwargs)
-    for ax in [ax_lvl0, ax_lvl1, ax_spec]:
-        for _side in ['right', 'top']:
-            ax.spines[_side].set_visible(False)
-    ax_lvl1.spines['bottom'].set_visible(False)
-    _xtick_params = dict(axis='x', which='both', bottom=False, top=False, labelbottom=False)
-    ax_lvl1.tick_params(**_xtick_params)
-    ax_lvl0.tick_params(**_xtick_params)
-    ax_lvl0.tick_params(pad=2)
-    ax_lvl1.tick_params(pad=2)
-    _energies = [[''], ['']]
-    _levels = [[], []]
-    for _v in [0, 1]:
-        _levels[_v] = np.arange(j_max_1)
-        for _j in leveldiagram_lines[_v][1:]:
-            _energies[_v].append(f'{_j:0.3f}')
-    for _v, ax in [(0, ax_lvl0), (1, ax_lvl1)]:
-        ax.set_yticks(ticks=leveldiagram_lines[_v])
-        ax.set_yticklabels(_energies[_v])
-        ax.annotate(f'{leveldiagram_lines[_v][0]:0.3f}', xy=(wn_vals(298).min() - 27, leveldiagram_lines[_v][0]), xytext=(-19, -2), textcoords='offset points', arrowprops=dict(arrowstyle='-', fc='k', ec='k', shrinkA=0), fontsize=6, annotation_clip=False, verticalalignment='top', bbox=dict(boxstyle='square,pad=-0.1', fc='w', ec='w'))
-    _jlbl_kwargs = dict(fontsize=6)
-    for _v, ax, _scale in [(0, ax_lvl0, 1.015), (1, ax_lvl1, 1.005)]:
-        ax.text(3095, leveldiagram_lines[_v][0] * _scale - 0.01, str(_levels[_v][0]), **_jlbl_kwargs)
-        for _j in _levels[_v][1:]:
-            ax.text(3095, leveldiagram_lines[_v][_j] * _scale - 0.005, str(_levels[_v][_j]), **_jlbl_kwargs)
-    ax_lvl0.text(3064, leveldiagram_lines[0][9] * 1.015 - 0.005, "$J\\,''\\!=$", **_jlbl_kwargs)
-    ax_lvl1.text(3066, leveldiagram_lines[1][9] * 1.005 - 0.005, "$J\\,'\\!=$", **_jlbl_kwargs)
-    _trans_kwargs = dict(coordsA='data', coordsB='data', axesA=ax_lvl0, axesB=ax_lvl1, arrowstyle='-|>', linewidth=1.25)
-    for _j in _levels[0][1:]:
-        _x = Pbranch_vals(0, _j)
-        _con = ConnectionPatch(xyA=(_x, leveldiagram_lines[0][_j]), xyB=(_x, leveldiagram_lines[1][_j - 1]), fc='b', ec='b', **_trans_kwargs)
-        ax_lvl0.add_artist(_con)
-    for _j in _levels[1][:-1]:
-        _x = Rbranch_vals(0, _j)
-        _con = ConnectionPatch(xyA=(_x, leveldiagram_lines[0][_j]), xyB=(_x, leveldiagram_lines[1][_j + 1]), fc='g', ec='g', **_trans_kwargs)
-        ax_lvl0.add_artist(_con)
-    ax_lvl0.text(2645, leveldiagram_lines[0][5], "$v\\,''\\!=0$", rotation='vertical', fontsize=6)
-    ax_lvl1.text(2645, leveldiagram_lines[1][5], "$v\\,'\\!=1$", rotation='vertical', fontsize=6)
-    _fig.text(0.05, 0.6, 'Energy (eV)', rotation='vertical', ha='center', va='center', fontsize=8)
-    ax_spec.plot(wn_vals(298), np.sum([Pbranch_spectrum(0, 298), Rbranch_spectrum(0, 298)], axis=0), 'k-')
-    ax_spec.set_ylim(-0.005, 0.2)
-    ax_spec.set_xlim(_xmin, _xmax)
-    ax_spec.set_ylabel('Absorbance')
-    ax_spec.set_xlabel('Wavenumber (cm$^{-1}$)')
-    ax_spec.tick_params(pad=2)
-    ax_spec.yaxis.set_label_coords(-0.16, 0.5)
-    _length = 0.05
-    _shrink = 3
-    _arrow_kwargs = dict(va='bottom', ha='center', rotation='vertical', fontsize=6, bbox=dict(boxstyle='square,pad=-0.1', fc='w', ec='w'))
-    for _j in _levels[0][1:]:
-        _x, _y = (Pbranch_vals(0, _j), j_vals[_j] * pop(0, j_vals[_j], 298))
-        ax_spec.annotate(f'P({_j})', xy=(_x, _y), xytext=(_x, _y + _length), xycoords='data', textcoords='data', arrowprops=dict(arrowstyle='-|>', linewidth=1.25, shrinkA=_shrink, fc='b', ec='b'), **_arrow_kwargs)
-    for _j in _levels[1][:-1]:
-        _x, _y = (Rbranch_vals(0, _j), (j_vals[_j] + 1) * pop(0, j_vals[_j], 298))
-        ax_spec.annotate(f'R({_j})', xy=(_x, _y), xytext=(_x, _y + _length), xycoords='data', textcoords='data', arrowprops=dict(arrowstyle='-|>', linewidth=1.25, shrinkA=_shrink, fc='g', ec='g'), **_arrow_kwargs)
-    plt.savefig('./vibrot_energy_diagram.pgf')
-    return
+# @app.cell
+# def _(
+#     Pbranch_spectrum,
+#     Pbranch_vals,
+#     Rbranch_spectrum,
+#     Rbranch_vals,
+#     e,
+#     j_max,
+#     j_vals,
+#     leveldiagram_lines,
+#     mpl,
+#     np,
+#     plt,
+#     pop,
+#     rovibEnergy,
+#     wn_vals,
+# ):
+#     from matplotlib import gridspec
+#     from matplotlib.patches import ConnectionPatch
+#
+#     mpl.use('pgf')
+#     mpl.rcParams.update({'pgf.texsystem': 'pdflatex', 'font.family': 'serif', 'font.serif': ['STIX Two Text', 'Palatino'], 'text.usetex': True, 'pgf.rcfonts': False, 'axes.titlesize': 8, 'axes.labelsize': 8, 'xtick.labelsize': 6, 'ytick.labelsize': 6})
+#     _fig = plt.figure(figsize=(4.318, 6))
+#     _plotted_js = np.arange(10)
+#     _xmin, _xmax = (wn_vals(298).min() - 15, wn_vals(298).max() + 45)
+#     _gs0 = gridspec.GridSpec(2, 1, figure=_fig, hspace=0.06, height_ratios=[4, 1])
+#     _gs00 = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=_gs0[0], hspace=0.03)
+#     ax_lvl1 = _fig.add_subplot(_gs00[0])
+#     ax_lvl0 = _fig.add_subplot(_gs00[1])
+#     _gs01 = gridspec.GridSpecFromSubplotSpec(1, 1, subplot_spec=_gs0[1])
+#     ax_spec = _fig.add_subplot(_gs01[0])
+#     for _v, ax in [(0, ax_lvl0), (1, ax_lvl1)]:
+#         ax.hlines(rovibEnergy(_v, _plotted_js) / e, Pbranch_vals(0, 9) - 15, Rbranch_vals(0, 8) + 15)
+#         ax.set_xlim(_xmin, _xmax)
+#     ax_lvl1.set_ylim(0.53, 0.66)
+#     ax_lvl0.set_ylim(0.172, 0.315)
+#     _d = 0.025
+#     _kwargs = dict(transform=ax_lvl1.transAxes, color='k', clip_on=False)
+#     ax_lvl1.plot((-_d, +_d), (-_d, +_d), **_kwargs)
+#     _kwargs.update(transform=ax_lvl0.transAxes)
+#     ax_lvl0.plot((-_d, +_d), (1 - _d, 1 + _d), **_kwargs)
+#     for ax in [ax_lvl0, ax_lvl1, ax_spec]:
+#         for _side in ['right', 'top']:
+#             ax.spines[_side].set_visible(False)
+#     ax_lvl1.spines['bottom'].set_visible(False)
+#     _xtick_params = dict(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+#     ax_lvl1.tick_params(**_xtick_params)
+#     ax_lvl0.tick_params(**_xtick_params)
+#     ax_lvl0.tick_params(pad=2)
+#     ax_lvl1.tick_params(pad=2)
+#     _energies = [[''], ['']]
+#     _levels = [[], []]
+#     for _v in [0, 1]:
+#         _levels[_v] = np.arange(j_max)
+#         for _j in leveldiagram_lines[_v][1:]:
+#             _energies[_v].append(f'{_j:0.3f}')
+#     for _v, ax in [(0, ax_lvl0), (1, ax_lvl1)]:
+#         ax.set_yticks(ticks=leveldiagram_lines[_v])
+#         ax.set_yticklabels(_energies[_v])
+#         ax.annotate(f'{leveldiagram_lines[_v][0]:0.3f}', xy=(wn_vals(298).min() - 27, leveldiagram_lines[_v][0]), xytext=(-19, -2), textcoords='offset points', arrowprops=dict(arrowstyle='-', fc='k', ec='k', shrinkA=0), fontsize=6, annotation_clip=False, verticalalignment='top', bbox=dict(boxstyle='square,pad=-0.1', fc='w', ec='w'))
+#     _jlbl_kwargs = dict(fontsize=6)
+#     for _v, ax, _scale in [(0, ax_lvl0, 1.015), (1, ax_lvl1, 1.005)]:
+#         ax.text(3095, leveldiagram_lines[_v][0] * _scale - 0.01, str(_levels[_v][0]), **_jlbl_kwargs)
+#         for _j in _levels[_v][1:]:
+#             ax.text(3095, leveldiagram_lines[_v][_j] * _scale - 0.005, str(_levels[_v][_j]), **_jlbl_kwargs)
+#     ax_lvl0.text(3064, leveldiagram_lines[0][9] * 1.015 - 0.005, "$J\\,''\\!=$", **_jlbl_kwargs)
+#     ax_lvl1.text(3066, leveldiagram_lines[1][9] * 1.005 - 0.005, "$J\\,'\\!=$", **_jlbl_kwargs)
+#     _trans_kwargs = dict(coordsA='data', coordsB='data', axesA=ax_lvl0, axesB=ax_lvl1, arrowstyle='-|>', linewidth=1.25)
+#     for _j in _levels[0][1:]:
+#         _x = Pbranch_vals(0, _j)
+#         _con = ConnectionPatch(xyA=(_x, leveldiagram_lines[0][_j]), xyB=(_x, leveldiagram_lines[1][_j - 1]), fc='b', ec='b', **_trans_kwargs)
+#         ax_lvl0.add_artist(_con)
+#     for _j in _levels[1][:-1]:
+#         _x = Rbranch_vals(0, _j)
+#         _con = ConnectionPatch(xyA=(_x, leveldiagram_lines[0][_j]), xyB=(_x, leveldiagram_lines[1][_j + 1]), fc='g', ec='g', **_trans_kwargs)
+#         ax_lvl0.add_artist(_con)
+#     ax_lvl0.text(2645, leveldiagram_lines[0][5], "$v\\,''\\!=0$", rotation='vertical', fontsize=6)
+#     ax_lvl1.text(2645, leveldiagram_lines[1][5], "$v\\,'\\!=1$", rotation='vertical', fontsize=6)
+#     _fig.text(0.05, 0.6, 'Energy (eV)', rotation='vertical', ha='center', va='center', fontsize=8)
+#     ax_spec.plot(wn_vals(298), np.sum([Pbranch_spectrum(0, 298), Rbranch_spectrum(0, 298)], axis=0), 'k-')
+#     ax_spec.set_ylim(-0.005, 0.2)
+#     ax_spec.set_xlim(_xmin, _xmax)
+#     ax_spec.set_ylabel('Absorbance')
+#     ax_spec.set_xlabel('Wavenumber (cm$^{-1}$)')
+#     ax_spec.tick_params(pad=2)
+#     ax_spec.yaxis.set_label_coords(-0.16, 0.5)
+#     _length = 0.05
+#     _shrink = 3
+#     _arrow_kwargs = dict(va='bottom', ha='center', rotation='vertical', fontsize=6, bbox=dict(boxstyle='square,pad=-0.1', fc='w', ec='w'))
+#     for _j in _levels[0][1:]:
+#         _x, _y = (Pbranch_vals(0, _j), j_vals[_j] * pop(0, j_vals[_j], 298))
+#         ax_spec.annotate(f'P({_j})', xy=(_x, _y), xytext=(_x, _y + _length), xycoords='data', textcoords='data', arrowprops=dict(arrowstyle='-|>', linewidth=1.25, shrinkA=_shrink, fc='b', ec='b'), **_arrow_kwargs)
+#     for _j in _levels[1][:-1]:
+#         _x, _y = (Rbranch_vals(0, _j), (j_vals[_j] + 1) * pop(0, j_vals[_j], 298))
+#         ax_spec.annotate(f'R({_j})', xy=(_x, _y), xytext=(_x, _y + _length), xycoords='data', textcoords='data', arrowprops=dict(arrowstyle='-|>', linewidth=1.25, shrinkA=_shrink, fc='g', ec='g'), **_arrow_kwargs)
+#     plt.savefig('./vibrot_energy_diagram.pgf', bbox_inches='tight', pad_inches=0.02)
+#     return
 
 
 @app.cell
