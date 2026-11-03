@@ -1,8 +1,14 @@
 [doc]
-name = 'HCl:DCl'
-bundle = 'https://data1.fullyjustified.net/tlextras-2022.0r0.tar'
+name = 'HCl_DCl'
+# bundle = 'https://arthomnix.dev/tectonic/texlive2025-0308.ttb' 
+bundle =  'https://data1.fullyjustified.net/tlextras-2022.0r0.tar'
 
 [[output]]
 name = 'HCl_DCl'
 type = 'pdf'
 shell_escape = true
+inputs = [
+	"_preamble.tex",
+	"index.tex",
+	"_postamble.tex",
+]
