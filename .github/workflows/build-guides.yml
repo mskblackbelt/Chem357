@@ -1,0 +1,58 @@
+# Build every experiment guide with Tectonic (via experiment_guides/build.py)
+# and attach the PDFs to the run.
+name: Build experiment guides
+
+on:
+  push:
+    paths:
+      - "experiment_guides/**"
+      - ".github/workflows/build-guides.yml"
+  pull_request:
+    paths:
+      - "experiment_guides/**"
+      - ".github/workflows/build-guides.yml"
+  workflow_dispatch:
+
+env:
+  TECTONIC_VERSION: "0.17.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # build.py dates each PDF from git history (SOURCE_DATE_EPOCH)
+
+      - uses: astral-sh/setup-uv@v10
+
+      - name: Install Tectonic
+        run: |
+          url="https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40${TECTONIC_VERSION}/tectonic-${TECTONIC_VERSION}-x86_64-unknown-linux-musl.tar.gz"
+          curl -fsSL "$url" | tar -xz -C /usr/local/bin tectonic
+          tectonic --version
+
+      - name: Cache Tectonic bundle files
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/Tectonic
+          key: tectonic-${{ env.TECTONIC_VERSION }}-tlextras-2022.0r0
+
+      - name: Build guides
+        run: uv run experiment_guides/build.py --force --jobs 2
+
+      - name: Check committed PDFs are up to date
+        run: |
+          changed=$(git status --porcelain -- 'experiment_guides/*.pdf' | awk '{print $2}' | tr '\n' ' ')
+          if [ -n "$changed" ]; then
+            echo "::warning::These PDFs differ from the committed versions (rebuild and commit them?): $changed"
+          fi
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: experiment-guides
+          path: |
+            experiment_guides/*.pdf
+            experiment_guides/guide_src/python_intro/Python_Intro.pdf
+            experiment_guides/guide_src/error_analysis/Error_Analysis.pdf
+            experiment_guides/guide_src/error_analysis/Error_Analysis_HW.pdf

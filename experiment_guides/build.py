@@ -11,6 +11,11 @@ stand-alone guides listed in STANDALONE are built with `tectonic -X compile`
 and keep their PDF next to the .tex file.  Shared files (header.tex,
 pchem_bib.bib) live in guide_src/shared/.
 
+Builds are reproducible: each PDF is dated (SOURCE_DATE_EPOCH, which also
+sets the date printed under the title) by the day of the last git commit
+touching that guide, or today if it has uncommitted changes.  Rebuilding an
+unchanged guide therefore gives an identical file.
+
 Requires uv and tectonic.  Pygments (used by minted) is installed by uv.
 
 Examples:
@@ -18,11 +23,13 @@ Examples:
     uv run build.py hcl             # build one guide (matches names loosely)
     uv run build.py hcl --watch     # rebuild it whenever a source file changes
     uv run build.py --force         # rebuild everything
+    uv run build.py hcl --figures   # regenerate the guide's figure data first
     uv run build.py --list          # show the guides and whether they're current
     uv run build.py --clean         # delete the build/ folders
 """
 
 import argparse
+import datetime
 import os
 import re
 import shutil
@@ -49,6 +56,11 @@ STANDALONE = [
 ]
 STANDALONE_BUNDLE = "https://data1b.fullyjustified.net/tlextras-2022.0r0.tar"
 
+# Notebooks that compute figure data for a guide; run by --figures (paths relative to SRC)
+FIGURE_SCRIPTS = [
+    "HCl_DCl/src/images/vibrot_energy_diagram.py",
+]
+
 # Log warnings worth reporting (the rest are routine)
 WARNING_PATTERNS = [
     re.compile(r"LaTeX Warning: (Reference|Citation) `[^']+' .*undefined"),
@@ -59,7 +71,7 @@ WARNING_PATTERNS = [
 
 @dataclass
 class Guide:
-    name: str  # folder relative to SRC, e.g. "HCl:DCl" or "python_intro/Python_Intro.tex"
+    name: str  # folder relative to SRC, e.g. "HCl_DCl" or "python_intro/Python_Intro.tex"
     kind: str  # "project" or "standalone"
     path: Path  # project folder, or the .tex file
     output: str  # PDF file name
@@ -121,11 +133,44 @@ def select(guides, patterns):
     return chosen
 
 
-def tool_env():
-    """PATH with this environment's scripts (pygmentize) first."""
+def source_date_epoch(guide):
+    """Noon UTC on the day of the last commit touching the guide or shared/
+    (in the committer's time zone), or on today's date if either has
+    uncommitted changes.  Whole days keep a PDF built just before committing
+    identical to one rebuilt from the commit."""
+    def git(*args):
+        result = subprocess.run(["git", *args, "--", guide.path, SHARED],
+                                cwd=ROOT, capture_output=True, text=True)
+        return result.stdout.strip() if result.returncode == 0 else None
+
+    day = datetime.date.today()
+    if git("status", "--porcelain") == "":
+        if committed := git("log", "-1", "--format=%cd", "--date=format:%Y-%m-%d"):
+            day = datetime.date.fromisoformat(committed)
+    noon = datetime.datetime.combine(day, datetime.time(12), tzinfo=datetime.timezone.utc)
+    return str(int(noon.timestamp()))
+
+
+def tool_env(guide):
+    """PATH with this environment's scripts (pygmentize) first, plus a fixed
+    SOURCE_DATE_EPOCH so the PDF only changes when its content does."""
     env = dict(os.environ)
     env["PATH"] = sysconfig.get_path("scripts") + os.pathsep + env.get("PATH", "")
+    env.setdefault("SOURCE_DATE_EPOCH", source_date_epoch(guide))
     return env
+
+
+def run_figure_scripts(guides):
+    """Run the figure-data notebooks belonging to the given guides."""
+    scripts = [SRC / s for s in FIGURE_SCRIPTS
+               if any((SRC / s).is_relative_to(g.path) for g in guides if g.kind == "project")]
+    for script in scripts:
+        print(f"  figures: {script.relative_to(SRC)}")
+        result = subprocess.run(["uv", "run", "--quiet", script], cwd=script.parent,
+                                capture_output=True, text=True)
+        if result.returncode != 0:
+            print(result.stdout + result.stderr)
+            sys.exit(f"Figure script failed: {script.relative_to(SRC)}")
 
 
 def warnings_in(log):
@@ -142,7 +187,7 @@ def warnings_in(log):
 def build(guide):
     """Build one guide; return (ok, seconds, warnings, output text)."""
     start = time.monotonic()
-    env = tool_env()
+    env = tool_env(guide)
     if guide.kind == "project":
         result = subprocess.run(["tectonic", "-X", "build", "--keep-logs"], cwd=guide.path,
                                 env=env, capture_output=True, text=True)
@@ -219,6 +264,8 @@ def main():
                         help="rebuild even if the PDF is up to date")
     parser.add_argument("-w", "--watch", action="store_true",
                         help="rebuild the selected guides whenever their sources change")
+    parser.add_argument("--figures", action="store_true",
+                        help="regenerate figure data (FIGURE_SCRIPTS) for the selected guides first")
     parser.add_argument("-j", "--jobs", type=int, default=1,
                         help="number of guides to build at once (default 1)")
     parser.add_argument("-l", "--list", action="store_true", help="list guides and exit")
@@ -245,6 +292,9 @@ def main():
     if shutil.which("tectonic") is None:
         sys.exit("tectonic not found: install it with `brew install tectonic` "
                  "(see https://tectonic-typesetting.github.io).")
+
+    if args.figures:
+        run_figure_scripts(selected)
 
     if args.watch:
         if not args.guides:
