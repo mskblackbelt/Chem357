@@ -1,6 +1,7 @@
 [doc]
 name = 'Data and Plotting Intro'
 bundle = 'https://data1b.fullyjustified.net/tlextras-2022.0r0.tar'
+extra_paths = ["../shared"]
 
 [[output]]
 name = 'Plot_Intro'

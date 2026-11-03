@@ -2,6 +2,7 @@
 name = 'HCl_DCl'
 # bundle = 'https://arthomnix.dev/tectonic/texlive2025-0308.ttb' 
 bundle =  'https://data1b.fullyjustified.net/tlextras-2022.0r0.tar'
+extra_paths = ["../shared"]
 
 [[output]]
 name = 'HCl_DCl'

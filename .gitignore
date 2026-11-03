@@ -291,3 +291,7 @@ __marimo__
 .#*
 
 
+
+# Tectonic build folders for the experiment guides; build.py copies the
+# finished PDFs to experiment_guides/
+experiment_guides/guide_src/**/build/
