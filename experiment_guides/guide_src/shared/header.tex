@@ -52,9 +52,16 @@
 \usepackage{fontspec}
 \usepackage[math-style=ISO,mathrm=sym]{unicode-math} 
 \ifdraft{}{
+	% Fonts are named by file so Tectonic loads them from its bundle,
+	% not from fonts installed on the computer.
 	\setmainfont{XCharter}
-	\setmathfont{STIX Two Math}
-	\setmonofont{Fira Code}
+	\setmathfont{STIXTwoMath-Regular.otf}
+	\setmonofont{FiraMono}[
+		Extension      = .otf,
+		UprightFont    = *-Regular,
+		BoldFont       = *-Medium,
+		ItalicFont     = *-Oblique,
+		BoldItalicFont = *-MediumOblique]
 }
 
 
