@@ -1,0 +1,137 @@
+% Rotational levels of the v'' = 0 and v' = 1 states with the allowed P- and
+% R-branch transitions, above the simulated spectrum they produce.
+% Data are computed and exported by vibrot_energy_diagram.py (vibrot_data/).
+% Paths are relative to src/, where the document is compiled.
+
+\input{images/vibrot_data/params.tex}% defines \vrXmin, \vrXmax
+\pgfplotstableread[col sep=comma]{images/vibrot_data/transitions.csv}\vrTransitions
+\pgfplotstableread[col sep=comma]{images/vibrot_data/level_labels.csv}\vrLevelLabels
+\pgfplotstablegetrowsof{\vrTransitions}
+\pgfmathtruncatemacro{\vrLastTransition}{\pgfplotsretval - 1}
+\pgfplotstablegetrowsof{\vrLevelLabels}
+\pgfmathtruncatemacro{\vrLastLevel}{\pgfplotsretval - 1}
+
+\definecolor{vrPcolor}{rgb}{0.24, 0.35, 0.67}
+\definecolor{vrRcolor}{rgb}{0.19, 0.50, 0.08}
+
+%%%%%%% Layout (inches) %%%%%%%
+% Two level panels of equal height separated by a small gap (the y-axis break),
+% drawn as one axis.  The y coord trafo maps the v'' = 0 range onto [0, 1] and
+% the v' = 1 range onto [1 + gap, 2 + gap], in units of the panel height.
+\pgfmathsetmacro{\vrPanelGap}{0.03}% fraction of panel height
+\pgfmathsetmacro{\vrBreakLow}{1 / (2 + \vrPanelGap)}% top of v'' = 0 panel (rel axis)
+\pgfmathsetmacro{\vrBreakHigh}{(1 + \vrPanelGap) / (2 + \vrPanelGap)}% bottom of v' = 1 panel
+
+\begin{tikzpicture}[
+	font=\fontsize{6}{7}\selectfont,
+	label font/.style={font=\fontsize{8}{9.6}\selectfont},
+	spine/.style={line width=0.8pt},
+	transition/.style={line width=1.25pt, -{Triangle[length=5pt, width=6pt, round]}},
+	callout/.style={line width=1.25pt, -{Triangle[length=3.5pt, width=4pt, round]},
+		shorten <=3pt, shorten >=2pt},
+	branch P/.style={vrPcolor},
+	branch R/.style={vrRcolor},
+	]
+
+	%%%%%%% Energy-level diagram %%%%%%%
+	\begin{axis}[
+		name=levels,
+		scale only axis,
+		width=3.1in,
+		height=3.588in,
+		axis lines=none,
+		clip=false,
+		xmin=\vrXmin, xmax=\vrXmax,
+		ymin=0.172, ymax=0.66,
+		y coord trafo/.code={%
+			\pgfmathparse{(#1 > 0.42) ? (1 + \vrPanelGap + (#1 - 0.53) / 0.13) : ((#1 - 0.172) / 0.143)}%
+		},
+		unbounded coords=jump,
+		]
+		% Levels
+		\addplot[black, line width=0.75pt] table[col sep=comma, x=x, y=E] {images/vibrot_data/levels.csv};
+
+		% Transitions between levels
+		\pgfplotsforeachungrouped \i in {0, ..., \vrLastTransition}{
+			\pgfplotstablegetelem{\i}{branch}\of\vrTransitions \let\vrBranch=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{wn}\of\vrTransitions \let\vrX=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{Elow}\of\vrTransitions \let\vrElow=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{Ehigh}\of\vrTransitions \let\vrEhigh=\pgfplotsretval
+			\edef\vrCmd{\noexpand\draw[transition, branch \vrBranch]
+				(axis cs:\vrX, \vrElow) -- (axis cs:\vrX, \vrEhigh);}
+			\vrCmd
+		}
+
+		% J labels to the right of each level (J = 0 nudged down, clear of J = 1)
+		\pgfplotsforeachungrouped \i in {0, ..., \vrLastLevel}{
+			\pgfplotstablegetelem{\i}{J}\of\vrLevelLabels \let\vrJ=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{E}\of\vrLevelLabels \let\vrE=\pgfplotsretval
+			\ifnum\vrJ=0 \def\vrShift{-3.6pt}\else\def\vrShift{0pt}\fi
+			\edef\vrCmd{\noexpand\node[anchor=west, inner sep=0pt, yshift=\vrShift]
+				at (axis cs:3095, \vrE) {\vrJ};}
+			\vrCmd
+		}
+		\pgfplotstablegetelem{9}{E}\of\vrLevelLabels \let\vrElowNine=\pgfplotsretval
+		\pgfplotstablegetelem{19}{E}\of\vrLevelLabels \let\vrEhighNine=\pgfplotsretval
+		\pgfplotstablegetelem{5}{E}\of\vrLevelLabels \let\vrElowFive=\pgfplotsretval
+		\pgfplotstablegetelem{15}{E}\of\vrLevelLabels \let\vrEhighFive=\pgfplotsretval
+		\node[anchor=west, inner sep=0pt] at (axis cs:3064, \vrElowNine) {$J\,''\!=$};
+		\node[anchor=west, inner sep=0pt] at (axis cs:3066, \vrEhighNine) {$J\,'\!=$};
+
+		% Vibrational state labels
+		\node[rotate=90, anchor=north west, inner sep=0pt] at (axis cs:2645, \vrElowFive) {$v\,''\!=0$};
+		\node[rotate=90, anchor=north west, inner sep=0pt] at (axis cs:2645, \vrEhighFive) {$v\,'\!=1$};
+
+		% Left spine with a break between the panels, and bottom spine
+		\draw[spine] (rel axis cs:1, 0) -- (rel axis cs:0, 0) -- (rel axis cs:0, \vrBreakLow);
+		\draw[spine] (rel axis cs:0, \vrBreakHigh) -- (rel axis cs:0, 1);
+		\draw[line width=1.5pt] (rel axis cs:0, \vrBreakLow) ++(-0.0775in, -0.0442in) -- ++(0.155in, 0.0884in);
+		\draw[line width=1.5pt] (rel axis cs:0, \vrBreakHigh) ++(-0.0775in, -0.0442in) -- ++(0.155in, 0.0884in);
+
+		\node[label font, rotate=90] at ([xshift=-0.3in] rel axis cs:0, 0.5) {Energy (eV)};
+	\end{axis}
+
+	%%%%%%% Simulated spectrum %%%%%%%
+	\begin{axis}[
+		at={(levels.south west)},
+		anchor=north west,
+		yshift=-0.135in,
+		scale only axis,
+		width=3.1in,
+		height=0.897in,
+		clip=false,
+		xmin=\vrXmin, xmax=\vrXmax,
+		ymin=-0.002, ymax=0.2,
+		axis x line*=bottom,
+		axis y line*=left,
+		axis line style={line width=0.8pt},
+		ytick=\empty,
+		xtick={2700, 2800, ..., 3100},
+		tick align=outside,
+		major tick length=3.5pt,
+		tick style={black, line width=0.8pt},
+		x tick label style={/pgf/number format/1000 sep={}},
+		xticklabel shift=-1pt,
+		xlabel={Wavenumber (cm$^{-1}$)},
+		ylabel={Absorbance},
+		label style={label font},
+		every axis y label/.style={at={(rel axis cs:-0.081, 0.5)}, rotate=90, anchor=south, label font},
+		]
+		\addplot[black, line width=1pt] table[col sep=comma, x=wn, y=A] {images/vibrot_data/spectrum.csv};
+
+		% P(J) and R(J) callouts above each line
+		\pgfplotsforeachungrouped \i in {0, ..., \vrLastTransition}{
+			\pgfplotstablegetelem{\i}{branch}\of\vrTransitions \let\vrBranch=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{J}\of\vrTransitions \let\vrJ=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{wn}\of\vrTransitions \let\vrX=\pgfplotsretval
+			\pgfplotstablegetelem{\i}{height}\of\vrTransitions \let\vrH=\pgfplotsretval
+			\pgfmathsetmacro{\vrTop}{\vrH + 0.07}
+			\edef\vrCmd{%
+				\noexpand\draw[callout, branch \vrBranch]
+					(axis cs:\vrX, \vrTop) -- (axis cs:\vrX, \vrH);
+				\noexpand\node[rotate=90, anchor=west, inner sep=0pt]
+					at (axis cs:\vrX, \vrTop) {\vrBranch(\vrJ)};}
+			\vrCmd
+		}
+	\end{axis}
+\end{tikzpicture}
