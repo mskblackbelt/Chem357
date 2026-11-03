@@ -6,3 +6,8 @@ bundle = "https://data1.fullyjustified.net/tlextras-2022.0r0.tar"
 name = "Intro_to_CC"
 type = "pdf"
 shell_escape = true
+inputs = [
+	"_preamble.tex",
+	"index.tex",
+	"_postamble.tex",
+]
