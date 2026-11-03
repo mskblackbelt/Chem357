@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0 # build.py dates each PDF from git history (SOURCE_DATE_EPOCH)
 
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.3 # only exact version tags are published
 
       - name: Install Tectonic
         run: |
