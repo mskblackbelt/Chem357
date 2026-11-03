@@ -88,7 +88,7 @@
 		\draw[line width=1.5pt] (rel axis cs:0, \vrBreakLow) ++(-0.0775in, -0.0442in) -- ++(0.155in, 0.0884in);
 		\draw[line width=1.5pt] (rel axis cs:0, \vrBreakHigh) ++(-0.0775in, -0.0442in) -- ++(0.155in, 0.0884in);
 
-		\node[label font, rotate=90] at ([xshift=-0.3in] rel axis cs:0, 0.5) {Energy (eV)};
+		\node[label font, rotate=90, anchor=base] at ([xshift=-0.25in] rel axis cs:0, 0.5) {Energy (eV)};
 	\end{axis}
 
 	%%%%%%% Simulated spectrum %%%%%%%
@@ -115,7 +115,7 @@
 		xlabel={Wavenumber (cm$^{-1}$)},
 		ylabel={Absorbance},
 		label style={label font},
-		every axis y label/.style={at={(rel axis cs:-0.081, 0.5)}, rotate=90, anchor=south, label font},
+		every axis y label/.style={at={([xshift=-0.25in] rel axis cs:0, 0.5)}, rotate=90, anchor=base, label font},
 		]
 		\addplot[black, line width=1pt] table[col sep=comma, x=wn, y=A] {images/vibrot_data/spectrum.csv};
 

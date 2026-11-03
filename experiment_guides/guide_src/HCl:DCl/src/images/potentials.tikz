@@ -128,9 +128,9 @@
 		\draw[dashed] (axis cs: {-0.25},{energyho(0)}) -- (axis cs: {rminho( energyho(0)},{energyho(0)});
 		\node	(De)	at	(axis cs: {-0.75},{-\De/2})	{$D_e$};
 		\node	(Do)	at	(axis cs: {-0.25},{energyho(0)/2})	{$D_0$};
-		\draw[<-]	(axis cs: {-0.75},{-\De}) -- (De);
-		\draw[->]	(De) -- (axis cs: {-0.75},{0});
-		\draw[<-]	(axis cs: {-0.25},{energyho(0)}) -- (Do);
-		\draw[->]	(Do) -- (axis cs: {-0.25},{0});
+		\draw[{Triangle[round]}-]	(axis cs: {-0.75},{-\De}) -- (De);
+		\draw[-{Triangle[round]}]	(De) -- (axis cs: {-0.75},{0});
+		\draw[{Triangle[round]}-]	(axis cs: {-0.25},{energyho(0)}) -- (Do);
+		\draw[-{Triangle[round]}]	(Do) -- (axis cs: {-0.25},{0});
 	\end{axis}
 \end{tikzpicture}
