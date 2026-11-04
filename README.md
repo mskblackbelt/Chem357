@@ -1,7 +1,7 @@
 # Chem357
 Course materials for Chem357 - P. Chem II lab
 
-For information on setting up a JupyterHub server to accompany the code in these labs, see the instructions [in the Jupyter Server setup repo](https://github.com/mskblackbelt/tljh_server_setup).
+The JupyterHub server that accompanies these labs is set up from the [tljh_server_setup](https://github.com/mskblackbelt/tljh_server_setup) repo. It has the setup guide (`docs/server_setup.md`), the install scripts, the course conda environments, and the lab report template.
 
 
 ## Building the experiment guides

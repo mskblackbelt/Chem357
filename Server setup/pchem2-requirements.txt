@@ -1,7 +1,0 @@
-ipykernel
-ruff
-jupyterlab-latex
-jupyterlab_templates
-jupyterlab-spellchecker
-jupyterlab-myst
-jupyterlab-git
