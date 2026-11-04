@@ -59,6 +59,7 @@ STANDALONE_BUNDLE = "https://data1b.fullyjustified.net/tlextras-2022.0r0.tar"
 # Notebooks that compute figure data for a guide; run by --figures (paths relative to SRC)
 FIGURE_SCRIPTS = [
     "HCl_DCl/src/images/vibrot_energy_diagram.py",
+    "NMR/src/figures/lineshape.py",
 ]
 
 # Log warnings worth reporting (the rest are routine)

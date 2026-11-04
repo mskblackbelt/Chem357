@@ -1,5 +1,16 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "matplotlib>=3.10.9",
+#     "numpy>=2.4.6",
+# ]
+# ///
 
+# Writes the *_spec.csv and *_int.csv data for lineshapes.tex.
+# Pass --plot to preview each lineshape.
+
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -38,11 +49,12 @@ for tau, name in params:
 
     xint, yint = find_intersections(xdata, ydata, C)
 
-    plt.figure()
-    plt.plot(xdata, ydata)
-    plt.plot(xint, yint, 'ro')
-    plt.title(name.capitalize())
-    plt.show()
+    if "--plot" in sys.argv:
+        plt.figure()
+        plt.plot(xdata, ydata)
+        plt.plot(xint, yint, 'ro')
+        plt.title(name.capitalize())
+        plt.show()
 
     specdata = np.c_[xdata,ydata]
     intdata = np.c_[xint,yint]
