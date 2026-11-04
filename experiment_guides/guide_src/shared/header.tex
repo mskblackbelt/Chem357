@@ -64,6 +64,52 @@
 		BoldItalicFont = *-MediumOblique]
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BEGIN WORKAROUND: Tectonic on macOS reports zero slant for italic fonts
+%%
+%% Tectonic 0.17 on macOS sets \fontdimen1 (slant) to 0pt for every OpenType
+%% font, while Tectonic on Linux and TeX Live's XeTeX read the font's real
+%% italic angle.  LaTeX uses the slant for the italic correction after \emph
+%% and \textit, so Mac-built PDFs come out slightly different from Linux ones
+%% (and occasionally break lines differently).  Here the slant of each italic
+%% or slanted font is restored, to the value Linux reports, whenever a font
+%% is selected with a zero slant.  On Linux this does nothing.
+%%
+%% Remove this whole section once Tectonic is fixed: build a guide on a Mac
+%% with the section deleted and check that `\the\fontdimen1\font` inside
+%% \itshape is 0.19438pt.
+\ExplSyntaxOn
+\prop_const_from_keyval:Nn \c__chem_font_slant_prop
+	{
+		XCharter-Italic          = 0.19438pt ,
+		XCharter-BoldItalic      = 0.19438pt ,
+		XCharter-Slanted         = 0.19438pt ,
+		XCharter-BoldSlanted     = 0.19438pt ,
+		FiraMono-Oblique         = 0.17633pt ,
+		FiraMono-MediumOblique   = 0.17633pt ,
+		lmsans10-oblique         = 0.21255pt ,
+		lmsans10-boldoblique     = 0.21255pt ,
+	}
+\str_new:N \l__chem_font_name_str
+\AddToHook { selectfont }
+	{
+		\dim_compare:nNnT { \fontdimen 1 \font } = { \c_zero_dim }
+			{
+				\str_set:Nx \l__chem_font_name_str { \fontname \font }
+				\prop_map_inline:Nn \c__chem_font_slant_prop
+					{
+						\str_if_in:NnT \l__chem_font_name_str { [#1 }
+							{
+								\fontdimen 1 \font = #2 \scan_stop:
+								\prop_map_break:
+							}
+					}
+			}
+	}
+\ExplSyntaxOff
+%% END WORKAROUND: Tectonic on macOS reports zero slant for italic fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 % standard and structural packages
 
