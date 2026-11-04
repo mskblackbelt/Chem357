@@ -39,6 +39,7 @@ import sysconfig
 import tempfile
 import time
 import tomllib
+import zlib
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -55,6 +56,9 @@ STANDALONE = [
     "error_analysis/Error_Analysis_HW.tex",
 ]
 STANDALONE_BUNDLE = "https://data1b.fullyjustified.net/tlextras-2022.0r0.tar"
+# Their .tex and PDF files, which aren't sources of a project guide sharing the folder
+STANDALONE_FILES = {SRC / rel for rel in STANDALONE} | {(SRC / rel).with_suffix(".pdf")
+                                                         for rel in STANDALONE}
 
 # Notebooks that compute figure data for a guide; run by --figures (paths relative to SRC)
 FIGURE_SCRIPTS = [
@@ -83,7 +87,8 @@ class Guide:
         """Files whose changes should trigger a rebuild."""
         if self.kind == "project":
             files = [p for p in self.path.rglob("*")
-                     if p.is_file() and "build" not in p.relative_to(self.path).parts]
+                     if p.is_file() and "build" not in p.relative_to(self.path).parts
+                     and p not in STANDALONE_FILES]
         else:
             files = [self.path]
         return files + [p for p in SHARED.rglob("*") if p.is_file()]
@@ -91,8 +96,20 @@ class Guide:
     def newest_source(self):
         return max(p.stat().st_mtime for p in self.sources())
 
+    def stale_reason(self):
+        """Why the PDF needs rebuilding, or None if it is current.  Besides
+        edited sources, this catches a PDF whose date no longer matches the
+        guide's last commit (e.g. after committing a non-source file)."""
+        if not self.dest.exists():
+            return "no PDF"
+        if self.dest.stat().st_mtime < self.newest_source():
+            return "sources changed"
+        if (dated := pdf_date(self.dest)) != (due := source_date(self)):
+            return f"dated {dated}, should be {due}"
+        return None
+
     def is_current(self):
-        return self.dest.exists() and self.dest.stat().st_mtime >= self.newest_source()
+        return self.stale_reason() is None
 
 
 def discover():
@@ -134,11 +151,9 @@ def select(guides, patterns):
     return chosen
 
 
-def source_date_epoch(guide):
-    """Noon UTC on the day of the last commit touching the guide or shared/
-    (in the committer's time zone), or on today's date if either has
-    uncommitted changes.  Whole days keep a PDF built just before committing
-    identical to one rebuilt from the commit."""
+def source_date(guide):
+    """The day of the last commit touching the guide or shared/ (in the
+    committer's time zone), or today if either has uncommitted changes."""
     def git(*args):
         result = subprocess.run(["git", *args, "--", guide.path, SHARED],
                                 cwd=ROOT, capture_output=True, text=True)
@@ -148,8 +163,29 @@ def source_date_epoch(guide):
     if git("status", "--porcelain") == "":
         if committed := git("log", "-1", "--format=%cd", "--date=format:%Y-%m-%d"):
             day = datetime.date.fromisoformat(committed)
-    noon = datetime.datetime.combine(day, datetime.time(12), tzinfo=datetime.timezone.utc)
+    return day
+
+
+def source_date_epoch(guide):
+    """Noon UTC on the guide's source_date.  Whole days keep a PDF built just
+    before committing identical to one rebuilt from the commit."""
+    noon = datetime.datetime.combine(source_date(guide), datetime.time(12),
+                                     tzinfo=datetime.timezone.utc)
     return str(int(noon.timestamp()))
+
+
+def pdf_date(pdf):
+    """The CreationDate day of a PDF built by Tectonic, or None.  Tectonic
+    keeps the document info in a compressed object stream."""
+    data = pdf.read_bytes()
+    for m in re.finditer(rb"/Type\s*/ObjStm.*?stream\r?\n", data, re.S):
+        try:
+            text = zlib.decompressobj().decompress(data[m.end():])
+        except zlib.error:
+            continue
+        if found := re.search(rb"/CreationDate\s*\(D:(\d{4})(\d\d)(\d\d)", text):
+            return datetime.date(*map(int, found.groups()))
+    return None
 
 
 def tool_env(guide):
@@ -279,7 +315,8 @@ def main():
 
     if args.list:
         for g in selected:
-            state = "current" if g.is_current() else "needs build"
+            reason = g.stale_reason()
+            state = f"needs build ({reason})" if reason else "current"
             print(f"  {g.name:<40} {g.output:<26} {state}")
         return
 
